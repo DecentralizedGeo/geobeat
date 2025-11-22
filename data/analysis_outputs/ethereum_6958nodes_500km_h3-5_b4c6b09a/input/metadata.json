@@ -2,7 +2,7 @@
   "network": "ethereum",
   "num_nodes": 6958,
   "num_nodes_with_coords": 6958,
-  "timestamp": "20251122_225938",
+  "timestamp": "2025-11-22T23:06:23.609024",
   "source_file": "data/raw/2025-11-22-ethereum-ips.csv",
   "bounding_box": {
     "min_lat": -43.579,

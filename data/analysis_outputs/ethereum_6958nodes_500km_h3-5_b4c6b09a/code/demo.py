@@ -37,11 +37,38 @@ def main():
 
     logger.info("Starting spatial analysis demo")
 
-    # Create timestamped output directory
+    # Load sample data first to get input characteristics
+    logger.info("Loading sample data...")
+    gdf = load_sample_data(network="ethereum")
+    logger.info(f"Loaded {len(gdf)} nodes")
+
+    # Define analysis parameters
+    params = {
+        "threshold_km": 500.0,
+        "h3_resolution": 5,
+        "permutations": 999
+    }
+
+    # Create deterministic run name based on inputs and parameters
+    import hashlib
     from datetime import datetime
-    timestamp = datetime.utcnow().strftime("%Y%m%d_%H%M%S")
+
+    # Hash input characteristics + parameters
+    input_hash_data = f"ethereum_{len(gdf)}nodes_{params['threshold_km']}km_h3res{params['h3_resolution']}"
+    run_hash = hashlib.md5(input_hash_data.encode()).hexdigest()[:8]
+
+    # Use descriptive name with hash to prevent duplicates
+    run_name = f"ethereum_{len(gdf)}nodes_500km_h3-5_{run_hash}"
+
     output_base = Path(__file__).parent.parent.parent / "data" / "analysis_outputs"
-    output_dir = output_base / f"run_{timestamp}_ethereum"
+    output_dir = output_base / run_name
+
+    # Check if this exact analysis already exists
+    if output_dir.exists():
+        logger.warning(f"Analysis already exists at {output_dir}")
+        logger.warning("Skipping duplicate analysis. Delete directory to re-run.")
+        return
+
     output_dir.mkdir(parents=True, exist_ok=True)
 
     # Create subdirectories
@@ -49,10 +76,7 @@ def main():
     (output_dir / "code").mkdir(exist_ok=True)
     (output_dir / "output").mkdir(exist_ok=True)
 
-    # Load sample data
-    logger.info("Loading sample data...")
-    gdf = load_sample_data(network="ethereum")
-    logger.info(f"Loaded {len(gdf)} nodes")
+    timestamp = datetime.utcnow().isoformat()
 
     # Save input metadata
     input_metadata = {
@@ -106,13 +130,11 @@ def main():
 
     # Save run configuration
     run_config = {
+        "run_name": run_name,
+        "run_hash": run_hash,
         "timestamp": timestamp,
         "network": "ethereum",
-        "parameters": {
-            "threshold_km": 500.0,
-            "h3_resolution": 5,
-            "permutations": 999
-        },
+        "parameters": params,
         "code_files": code_files
     }
 
@@ -122,8 +144,8 @@ def main():
     # Compute all metrics
     logger.info("Computing spatial metrics...")
     results = analyzer.compute_all_metrics(
-        threshold_km=run_config["parameters"]["threshold_km"],
-        h3_resolution=run_config["parameters"]["h3_resolution"]
+        threshold_km=params["threshold_km"],
+        h3_resolution=params["h3_resolution"]
     )
 
     # Print results
@@ -192,7 +214,12 @@ def main():
     logger.info(f"Saved: {output_dir / 'output' / 'metadata.json'}")
 
     # Create README for this run
-    readme_content = f"""# Spatial Analysis Run: {timestamp}
+    readme_content = f"""# Spatial Analysis: {run_name}
+
+## Run Identification
+- **Run Hash**: `{run_hash}`
+- **Created**: {timestamp}
+- **Reproducible**: Yes (deterministic hash prevents duplicates)
 
 ## Input Data
 - **Network**: Ethereum
@@ -201,9 +228,9 @@ def main():
 - **Bounding Box**: {input_metadata['bounding_box']}
 
 ## Parameters
-- **Spatial Weights Threshold**: {run_config['parameters']['threshold_km']} km
-- **H3 Resolution**: {run_config['parameters']['h3_resolution']} (metro-level)
-- **Permutations**: {run_config['parameters']['permutations']}
+- **Spatial Weights Threshold**: {params['threshold_km']} km
+- **H3 Resolution**: {params['h3_resolution']} (metro-level)
+- **Permutations**: {params['permutations']}
 
 ## Results Summary
 
@@ -221,7 +248,7 @@ def main():
 
 ## Directory Structure
 ```
-{output_dir.name}/
+{run_name}/
 ├── input/
 │   ├── metadata.json          # Input data statistics
 │   └── sample_nodes.geojson   # First 100 nodes sample

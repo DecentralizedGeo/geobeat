@@ -1,4 +1,9 @@
-# Spatial Analysis Run: 20251122_225938
+# Spatial Analysis: ethereum_6958nodes_500km_h3-5_b4c6b09a
+
+## Run Identification
+- **Run Hash**: `b4c6b09a`
+- **Created**: 2025-11-22T23:06:23.609024
+- **Reproducible**: Yes (deterministic hash prevents duplicates)
 
 ## Input Data
 - **Network**: Ethereum
@@ -27,7 +32,7 @@ Significant clustering (ANN=0.073, p<0.01)
 
 ## Directory Structure
 ```
-run_20251122_225938_ethereum/
+ethereum_6958nodes_500km_h3-5_b4c6b09a/
 ├── input/
 │   ├── metadata.json          # Input data statistics
 │   └── sample_nodes.geojson   # First 100 nodes sample
