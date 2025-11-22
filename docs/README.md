@@ -1,19 +1,50 @@
-# Documentation
+# GeoBeat Documentation
 
-This directory contains project documentation.
+This directory contains the source files for GeoBeat's documentation site, built with [Docusaurus](https://docusaurus.io/).
 
 ## Structure
 
-- **architecture/**: System architecture and design decisions
-- **api/**: API documentation and specifications
-- **guides/**: How-to guides and tutorials
-- **research-notes/**: Summaries of research findings
-- **meeting-notes/**: Team meeting notes and decisions
+```
+docs/
+├── docs/              # Documentation pages (Markdown)
+│   ├── intro.md       # Introduction/landing page
+│   ├── methodology.md # Index calculation methodology
+│   ├── data-sources.md # Data source overview
+│   └── api.md         # API reference (to be added)
+├── blog/              # Blog posts (optional)
+├── static/            # Static assets (images, etc.)
+│   └── img/
+└── README.md          # This file
+```
 
-## Documentation Guidelines
+## Setup (when ready to deploy)
 
-- Keep documentation close to the code it describes
-- Update docs when changing functionality
-- Use clear, concise language
-- Include diagrams where helpful
-- Date-stamp important documents
+```bash
+cd docs
+npm install
+npm start  # Development server
+npm run build  # Production build
+```
+
+## Writing Docs
+
+All documentation pages are written in Markdown with frontmatter:
+
+```markdown
+---
+sidebar_position: 1
+title: Page Title
+---
+
+# Content here
+```
+
+Docusaurus will automatically generate sidebar navigation based on the file structure and `sidebar_position` values.
+
+## Deployment
+
+When ready to deploy, Docusaurus can be hosted on:
+- GitHub Pages
+- Vercel
+- Netlify
+- Any static site host
