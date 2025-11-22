@@ -27,6 +27,7 @@
 - ethPandaOps
   - contributoors voluntarily run xatu sidecar on their nodes
     https://lab.ethpandaops.io/xatu/geographical-checklist
+  - xatu uses GeoIP
   - https://lab.ethpandaops.io/ethereum/entities shows "affiliations"
     of nodes
   - https://ethpandaops.io/docs/tooling/cbt/
@@ -36,3 +37,8 @@
     - Public Data: Powers the public datasets available to the community
 
 - https://ethernodes.org/
+  - Seems like a black box
+
+- https://etherscan.io/nodetracker
+  - Exactly the data we want but only 5000 rows available for CSV export
+  - No API
