@@ -6,7 +6,7 @@ sidebar_position: 2
 
 This document proposes a simple, coherent structure for measuring geographic decentralization across decentralized networks. It draws on a large and fragmented research landscape—academic measurements, Flashbots research, open Internet topology datasets, validator telemetry, cloud attribution methods, and jurisdictional analyses—and distills them into three interpretable dimensions. This is a proposal, not a completed framework, and it is intended to evolve through community review and iterative refinement.
 
-The aim is to establish a foundation that is rigorous enough for researchers, operationally meaningful for protocol and infrastructure teams, and understandable for a broader technical audience.
+The aim is to establish a foundation that is rigorous enough for researchers, operationally meaningful for protocol and infrastructure teams, and understandable for a broader technical audience. We should note, this is aspirational — some of these metrics may be difficult to measure.
 
 ---
 
@@ -84,19 +84,47 @@ This is inherently a proposal. It is not presented as the final, definitive mode
 
 ---
 
-## 5. Open Questions and Areas of Uncertainty
+# 5. Open Questions and Areas of Uncertainty
 
-Key uncertainties remain and must be addressed collaboratively:
+The most important open question is structural:
+**Does this index design capture the right dimensions of geographic decentralization, or is there a more accurate or more defensible way to conceptualize the problem?**
 
-* **How should each sub-index be normalized across networks with very different sizes?**
-* **What should the default geographic taxonomy be (continents, subregions, metros)?**
-* **How should correlation between jurisdictions be modeled and weighted?**
-* **How should uncertainty in cloud detection or IP geolocation be incorporated into scoring?**
-* **Should the composite index be equally weighted, or should empirical risk models inform weighting?**
-* **How should operator-level data be included when available, and excluded when not?**
-* **What error bounds are acceptable for public reporting?**
+This includes examining whether the proposed three-pillar structure (physical, jurisdictional, infrastructural) is the most appropriate abstraction, whether any dimensions are missing, and whether different decompositions might better align with empirical risk or real-world failure modes.
 
-These are questions the research community, protocol teams, and infra operators should critique and help refine.
+Beyond that foundational concern, several additional uncertainties remain:
+
+1. **Normalization across heterogeneous networks:**
+   How should networks of very different size, architecture, and visibility be compared?
+   Should normalization occur relative to theoretical maximums, empirical distributions, or some other benchmark?
+
+2. **Geographic taxonomy:**
+    What is the appropriate unit of geographic analysis (continents, regions, countries, metros)? Should other domains be considered—such as energy-grid regions, telecom infrastructure zones, or data-sovereignty blocs—if they better reflect real correlated failure modes?
+
+3. **Modeling jurisdictional correlation:**
+   What constitutes a legally independent jurisdiction?
+   How should treaty blocs, regulatory alliances, and shared enforcement regimes be incorporated?
+
+4. **Accuracy of location inference:**
+   How should uncertainty from IP geolocation, cloud fingerprinting, VPN masking, and ASN ambiguity be reflected in the index?
+   Should low-confidence signals be downweighted or excluded?
+
+5. **Infrastructure attribution uncertainty:**
+   Datacenter-level data is often incomplete.
+   How should shared cloud infrastructure, colocation, and overlapping ASNs be treated?
+
+6. **Operator-level information:**
+   When operator metadata is available (e.g., Filecoin SPs, Lido operators), should it feed into the index directly, or remain diagnostic?
+   How should the index behave for networks without this data?
+
+7. **Composite weighting:**
+   Should PDI, JDI, and IHI be equally weighted, or should empirical evidence (e.g., historical failures) justify differential weighting in later versions?
+
+8. **Temporal stability and versioning:**
+   What constitutes meaningful change in the index over time, and how should updates be versioned so that the methodology remains transparent and auditable?
+
+These questions reflect uncertainties that cannot be resolved unilaterally.
+
+They require community critique, data contributions, and methodological challenge. The index design is therefore explicitly provisional and open to revision as the research community engages with the framework.
 
 ---
 
@@ -111,6 +139,8 @@ The GDI is intentionally open. The methodology, data sources, and scoring choice
 * and ultimately converge on a shared standard for geographic decentralization assessment.
 
 The initial version will be deliberately conservative, prioritizing interpretability and methodological honesty over false precision.
+
+For now, we'll coordinate the discussion about methodology, data sources etc here on Github (github.com/DecentralizedGeo/geobeat), and in our [telegram group](https://t.me/+PeM33inLfaM2OThk).
 
 ---
 
