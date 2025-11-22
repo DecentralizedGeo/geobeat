@@ -1,0 +1,17 @@
+{
+  "timestamp": "20251122_225938",
+  "network": "ethereum",
+  "parameters": {
+    "threshold_km": 500.0,
+    "h3_resolution": 5,
+    "permutations": 999
+  },
+  "code_files": [
+    "data_ingestion.py",
+    "spatial_metrics.py",
+    "visualization.py",
+    "models.py",
+    "demo.py",
+    "requirements.txt"
+  ]
+}
