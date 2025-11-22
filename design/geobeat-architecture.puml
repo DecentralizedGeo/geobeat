@@ -6,102 +6,64 @@ skinparam ArrowColor #2C3E50
 skinparam ArrowThickness 2
 skinparam rectangleBackgroundColor #3498DB
 skinparam rectangleBorderColor #2980B9
-skinparam packageBackgroundColor #ECF0F1
-skinparam packageBorderColor #BDC3C7
-skinparam noteBackgroundColor #F39C12
-skinparam noteBorderColor #E67E22
+skinparam packageBorderColor #34495E
+skinparam packageFontSize 14
+skinparam packageFontStyle bold
 left to right direction
 
 title GeoBeat: Geographic Decentralization Index\nSystem Architecture Flow
 
-' Data Sources Layer
-package "Data Sources" #E8F8F5 {
+' Define all layers as thin vertical columns
+rectangle "Data Sources" <<layer>> #E8F8F5 {
   rectangle "Blockchain\nNodes" as nodes #58D68D
-  rectangle "Public APIs\n(Etherscan, etc)" as apis #58D68D
-  rectangle "P2P Network\nCrawlers" as p2p #58D68D
+  rectangle "Public APIs" as apis #58D68D
+  rectangle "P2P Crawlers" as p2p #58D68D
   rectangle "Staking\nProviders" as staking #58D68D
-
-  nodes -[hidden]down- apis
-  apis -[hidden]down- p2p
-  p2p -[hidden]down- staking
 }
 
-note bottom of staking
-  **Supported Networks:**
-  Bitcoin, Ethereum, Solana
-  Polkadot, Cosmos, Avalanche
-  Cardano, Algorand, ATProto
-  EAS, IPFS, Filecoin
-end note
-
-' Collection Layer
-package "Data Collection" #EBF5FB {
-  rectangle "Network Scrapers\n• Node discovery\n• IP collection\n• Metadata extraction" as scrapers #5DADE2
-  rectangle "Geolocation\nEnrichment\n• GeoIP databases\n• ASN/ISP data" as geolocation #5DADE2
-
-  scrapers -[hidden]down- geolocation
+rectangle "Collection" <<layer>> #EBF5FB {
+  rectangle "Network\nScrapers" as scrapers #5DADE2
+  rectangle "Geolocation\nEnrichment" as geolocation #5DADE2
 }
 
-' Storage Layer
-package "Data Storage" #FEF9E7 {
-  database "Raw Data\n(S3/Blob)" as raw #F4D03F
-  database "Onchain / IPFS\n(EAS/Filecoin)" as onchain #F4D03F
-  database "PostgreSQL\n(Relational)" as postgres #F4D03F
-  database "TimescaleDB\n(Time-series)" as timeseries #F4D03F
-
-  raw -[hidden]down- onchain
-  onchain -[hidden]down- postgres
-  postgres -[hidden]down- timeseries
+rectangle "Storage" <<layer>> #FEF9E7 {
+  database "Raw Data\n(S3)" as raw #F4D03F
+  database "Onchain\n(EAS/IPFS)" as onchain #F4D03F
+  database "PostgreSQL" as postgres #F4D03F
+  database "TimescaleDB" as timeseries #F4D03F
 }
 
-' Processing Layer
-package "Processing Pipeline" #FDF2E9 {
-  rectangle "Data Cleaning\n& Validation" as cleaning #EB984E
-  rectangle "Aggregation\n& Grouping\n• By Country/Region\n• By ASN/ISP" as aggregation #EB984E
-  rectangle "GDI Metric Engine\n\n**Core Metrics:**\n• Nakamoto Coefficient\n• Gini Coefficient\n• HHI Index\n• Shannon Entropy\n• Regional Risk Score\n\n→ Composite GDI Score" as metrics #E67E22
-
-  cleaning -[hidden]down- aggregation
-  aggregation -[hidden]down- metrics
+rectangle "Processing" <<layer>> #FDF2E9 {
+  rectangle "Cleaning &\nValidation" as cleaning #EB984E
+  rectangle "Aggregation\n(Geo/ASN)" as aggregation #EB984E
+  rectangle "GDI Metrics" as metrics #E67E22
 }
 
-' Analytics Layer
-package "Analytics" #F4ECF7 {
-  rectangle "Comparative\nAnalysis\n• Cross-network\n• Temporal trends" as comparison #AF7AC5
-  rectangle "Risk\nAssessment\n• Single points of failure\n• Regional scenarios" as risk #AF7AC5
-
-  comparison -[hidden]down- risk
+rectangle "Analytics" <<layer>> #F4ECF7 {
+  rectangle "Comparative\nAnalysis" as comparison #AF7AC5
+  rectangle "Risk\nAssessment" as risk #AF7AC5
 }
 
-' API Layer
-package "API Layer" #E8F6F3 {
-  rectangle "REST API" as rest #48C9B0
+rectangle "API" <<layer>> #E8F6F3 {
+  rectangle "REST" as rest #48C9B0
   rectangle "GraphQL" as graphql #48C9B0
-  rectangle "WebSocket\n(Real-time)" as websocket #48C9B0
-
-  rest -[hidden]down- graphql
-  graphql -[hidden]down- websocket
+  rectangle "WebSocket" as websocket #48C9B0
 }
 
-' Visualization Layer
-package "GeoBeat Dashboard" #FEF5E7 {
-  rectangle "Interactive Maps\n• 3D Globe\n• Heatmaps\n• Choropleth" as maps #F8C471
-  rectangle "Metric Visualizations\n• GDI Scores\n• Trend Lines\n• Distributions" as charts #F8C471
-  rectangle "Network Selection\n& Filtering" as filters #F8C471
-  rectangle "Detailed Views\n• Drill-downs\n• Reports\n• Exports" as details #F8C471
-
-  maps -[hidden]down- charts
-  charts -[hidden]down- filters
-  filters -[hidden]down- details
+rectangle "Dashboard" <<layer>> #FEF5E7 {
+  rectangle "Interactive\nMaps" as maps #F8C471
+  rectangle "Metric\nVisuals" as charts #F8C471
+  rectangle "Filters" as filters #F8C471
+  rectangle "Reports" as details #F8C471
 }
 
-' Horizontal Data Flow (left to right)
+' Data flow connections
 nodes -right-> scrapers
 apis -right-> scrapers
 p2p -right-> scrapers
 staking -right-> scrapers
 
-scrapers -right-> geolocation
-geolocation -right-> raw
+scrapers -right-> raw
 geolocation -right-> onchain
 
 raw -right-> postgres
@@ -116,8 +78,9 @@ metrics -right-> comparison
 metrics -right-> risk
 
 comparison -right-> rest
+risk -right-> rest
 comparison -right-> graphql
-risk -right-> websocket
+risk -right-> graphql
 
 rest -right-> maps
 graphql -right-> charts
@@ -126,5 +89,21 @@ websocket -right-> maps
 maps -right-> filters
 charts -right-> filters
 filters -right-> details
+
+note bottom of staking
+**Supported Networks:**
+Bitcoin, Ethereum, Solana, Polkadot
+Cosmos, Avalanche, Cardano, Algorand
+ATProto, EAS, IPFS, Filecoin
+end note
+
+note bottom of metrics
+**Core Metrics:**
+• Nakamoto Coefficient
+• Gini Coefficient
+• HHI Index
+• Shannon Entropy
+• Regional Risk Score
+end note
 
 @enduml
