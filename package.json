@@ -1,0 +1,30 @@
+{
+  "name": "geobeat",
+  "version": "1.0.0",
+  "description": "A geographic decentralization index and dashboard for analyzing the distribution and concentration of blockchain networks, communities, and digital ecosystems.",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs",
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prepare": "husky"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DecentralizedGeo/geobeat.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DecentralizedGeo/geobeat/issues"
+  },
+  "homepage": "https://github.com/DecentralizedGeo/geobeat#readme",
+  "devDependencies": {
+    "@commitlint/cli": "^20.1.0",
+    "@commitlint/config-conventional": "^20.0.0",
+    "husky": "^9.1.7"
+  }
+}
