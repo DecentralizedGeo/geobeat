@@ -22,9 +22,14 @@ from sklearn.neighbors import KernelDensity
 import h3
 import logging
 
-from .models import (
-    MoranIResult, SpatialHHIResult, ENLResult, ANNResult
-)
+try:
+    from .models import (
+        MoranIResult, SpatialHHIResult, ENLResult, ANNResult
+    )
+except ImportError:
+    from models import (
+        MoranIResult, SpatialHHIResult, ENLResult, ANNResult
+    )
 
 logger = logging.getLogger(__name__)
 
@@ -117,8 +122,8 @@ class SpatialAnalyzer:
             spatial_weights_type="distance_band",
             threshold_km=threshold_km,
             metadata={
-                "n_neighbors_mean": w.cardinalities.mean(),
-                "n_neighbors_std": w.cardinalities.std(),
+                "n_neighbors_mean": np.mean(list(w.cardinalities.values())),
+                "n_neighbors_std": np.std(list(w.cardinalities.values())),
                 "attribute_analyzed": attribute
             }
         )
@@ -315,6 +320,7 @@ class SpatialAnalyzer:
             z_score=z_score,
             observed_distance_km=observed_mean_km,
             expected_distance_km=expected_mean_km,
+            nearest_neighbor_index=nn_index,
             interpretation=interpretation,
             metadata={
                 "n_nodes": len(self.gdf_projected),

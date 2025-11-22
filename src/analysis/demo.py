@@ -11,6 +11,10 @@ Demonstrates the complete workflow:
 import logging
 from pathlib import Path
 import json
+import sys
+
+# Add parent directory to path for imports
+sys.path.insert(0, str(Path(__file__).parent))
 
 from data_ingestion import load_sample_data
 from spatial_metrics import SpatialAnalyzer
@@ -68,30 +72,16 @@ def main():
     # Generate visualizations
     logger.info("\nGenerating visualizations...")
 
-    # Node distribution map
-    fig1 = plot_node_distribution_map(
-        gdf,
-        title="Ethereum Node Distribution (Sample Data)",
-        save_path=str(output_dir / "node_distribution.png")
-    )
-    logger.info(f"Saved: {output_dir / 'node_distribution.png'}")
-
-    # H3 heatmap
-    fig2 = plot_h3_heatmap(
-        gdf,
-        resolution=5,
-        title="Node Density Heatmap (H3 Resolution 5)",
-        save_path=str(output_dir / "h3_heatmap.png")
-    )
-    logger.info(f"Saved: {output_dir / 'h3_heatmap.png'}")
-
-    # Metric summary dashboard
+    # Metric summary dashboard (doesn't need world map)
     fig3 = plot_metric_summary(
         results,
         network="ethereum",
         save_path=str(output_dir / "metric_summary.png")
     )
     logger.info(f"Saved: {output_dir / 'metric_summary.png'}")
+
+    # Skip world map visualizations for now (naturalearth_lowres deprecated)
+    logger.info("Skipping map visualizations (world basemap unavailable)")
 
     # Export results as JSON
     results_json = {

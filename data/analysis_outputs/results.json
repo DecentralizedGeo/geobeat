@@ -1,0 +1,48 @@
+{
+  "morans_i": {
+    "value": 0.4043088409153839,
+    "p_value": 0.001,
+    "interpretation": "Significant clustering (I=0.404, p<0.01)",
+    "metadata": {
+      "n_neighbors_mean": 584.7226214429434,
+      "n_neighbors_std": 519.3517855807223,
+      "attribute_analyzed": "density"
+    }
+  },
+  "spatial_hhi": {
+    "value": 0.018428395693423052,
+    "p_value": null,
+    "interpretation": "Low concentration across 1410 cells (HHI=0.018)",
+    "metadata": {
+      "top_5_cells": {
+        "852aaa87fffffff": 480,
+        "851e34d3fffffff": 432,
+        "851126d3fffffff": 396,
+        "856520dbfffffff": 269,
+        "851faeabfffffff": 264
+      },
+      "min_hhi_theoretical": 0.00014371945961483184,
+      "concentration_ratio": 128.2247772348376
+    }
+  },
+  "enl": {
+    "value": 237.46398686932278,
+    "p_value": null,
+    "interpretation": "Uneven distribution (ENL=237.5 of 1410 cells)",
+    "metadata": {
+      "evenness": 0.16841417508462608,
+      "max_entropy_possible": 7.251344983372214,
+      "normalized_entropy": 0.7543450201701505
+    }
+  },
+  "ann": {
+    "value": 0.07300660790872704,
+    "p_value": 0.0,
+    "interpretation": "Significant clustering (ANN=0.073, p<0.01)",
+    "metadata": {
+      "n_nodes": 6958,
+      "study_area_km2": 393065505.1877231,
+      "density_per_km2": 1.7701884057917897e-05
+    }
+  }
+}

@@ -5,7 +5,7 @@ Defines Pydantic models for node data, geographic coordinates,
 and spatial analysis results.
 """
 
-from typing import Optional, List, Dict, Any
+from typing import Optional, List, Dict, Any, Tuple
 from datetime import datetime
 from pydantic import BaseModel, Field, field_validator
 import numpy as np
@@ -42,7 +42,7 @@ class SpatialMetricResult(BaseModel):
     network: str
     value: float
     p_value: Optional[float] = None
-    confidence_interval: Optional[tuple[float, float]] = None
+    confidence_interval: Optional[Tuple[float, float]] = None
     interpretation: str
     metadata: Dict[str, Any] = Field(default_factory=dict)
     timestamp: datetime = Field(default_factory=datetime.utcnow)

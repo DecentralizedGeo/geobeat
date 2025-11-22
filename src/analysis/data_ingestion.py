@@ -13,7 +13,10 @@ import geopandas as gpd
 from shapely.geometry import Point
 import pandas as pd
 
-from .models import NodeLocation, NetworkSnapshot
+try:
+    from .models import NodeLocation, NetworkSnapshot
+except ImportError:
+    from models import NodeLocation, NetworkSnapshot
 
 logger = logging.getLogger(__name__)
 
@@ -172,16 +175,77 @@ def snapshot_to_geodataframe(snapshot: NetworkSnapshot) -> gpd.GeoDataFrame:
     return gdf
 
 
-def load_sample_data(network: str = "ethereum") -> gpd.GeoDataFrame:
+def load_from_csv(csv_path: str, network: str = "ethereum") -> gpd.GeoDataFrame:
+    """
+    Load node data from CSV file
+
+    Args:
+        csv_path: Path to CSV file with columns: ip, lat, lon, country, city, isp, etc.
+        network: Network name
+
+    Returns:
+        GeoDataFrame with node locations
+    """
+    from pathlib import Path
+
+    df = pd.read_csv(csv_path)
+
+    # Filter out rows without coordinates
+    df = df.dropna(subset=['lat', 'lon'])
+
+    # Convert to NodeLocation objects
+    nodes = []
+    for idx, row in df.iterrows():
+        nodes.append(NodeLocation(
+            node_id=f"{network}_node_{idx}",
+            network=network,
+            latitude=float(row['lat']),
+            longitude=float(row['lon']),
+            country=row.get('country') if pd.notna(row.get('country')) else None,
+            city=row.get('city') if pd.notna(row.get('city')) else None,
+            isp=row.get('isp') if pd.notna(row.get('isp')) else None,
+            cloud_provider=row.get('org') if pd.notna(row.get('org')) else None,
+            timestamp=datetime.utcnow()
+        ))
+
+    snapshot = NetworkSnapshot(
+        network=network,
+        timestamp=datetime.utcnow(),
+        nodes=nodes
+    )
+
+    return snapshot_to_geodataframe(snapshot)
+
+
+def load_sample_data(network: str = "ethereum", use_real_data: bool = True) -> gpd.GeoDataFrame:
     """
     Load sample data for development/testing
 
     Args:
         network: Network to generate sample data for
+        use_real_data: If True, try to load from data/raw/, else generate mock data
 
     Returns:
         GeoDataFrame with sample node data
     """
+    from pathlib import Path
+
+    if use_real_data:
+        # Try to find real data files
+        project_root = Path(__file__).parent.parent.parent
+        data_dir = project_root / "data" / "raw"
+
+        # Look for network-specific CSV files
+        pattern = f"*{network}*.csv"
+        csv_files = list(data_dir.glob(pattern))
+
+        if csv_files:
+            logger.info(f"Loading real data from {csv_files[0]}")
+            return load_from_csv(str(csv_files[0]), network=network)
+        else:
+            logger.warning(f"No real data found for {network}, generating mock data")
+
+    # Fallback to mock data
     generator = MockDataGenerator()
     snapshot = generator.generate_clustered_nodes(
         network=network,
