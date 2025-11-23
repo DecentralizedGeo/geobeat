@@ -7,6 +7,10 @@ import { Badge } from "@/components/ui/badge"
 import { TriangleChart } from "@/components/triangle-chart"
 import { TrendingUp, TrendingDown, Minus } from "lucide-react"
 import type { Network } from "@/lib/mock-data"
+import { IndexTooltip } from "@/components/index-tooltip"
+import { generateMockNodeData } from "@/lib/mock-node-data"
+import { calculateOrgBreakdown, calculateCountryBreakdown, calculateIspBreakdown } from "@/lib/breakdown-utils"
+import { useMemo } from "react"
 
 interface NetworkCardProps {
   network: Network
@@ -16,6 +20,12 @@ export function NetworkCard({ network }: NetworkCardProps) {
   const TrendIcon = network.trend === "up" ? TrendingUp : network.trend === "down" ? TrendingDown : Minus
   const trendColor =
     network.trend === "up" ? "text-jdi" : network.trend === "down" ? "text-destructive" : "text-muted-foreground"
+  
+  // Calculate breakdowns for tooltips
+  const nodeData = useMemo(() => generateMockNodeData(network.id), [network.id])
+  const orgBreakdown = useMemo(() => calculateOrgBreakdown(nodeData), [nodeData])
+  const countryBreakdown = useMemo(() => calculateCountryBreakdown(nodeData), [nodeData])
+  const ispBreakdown = useMemo(() => calculateIspBreakdown(nodeData), [nodeData])
 
   return (
     <Link href={`/network/${network.id}`}>
@@ -52,21 +62,27 @@ export function NetworkCard({ network }: NetworkCardProps) {
           <div className="grid grid-cols-3 gap-3 pt-2 border-t border-border">
             <div>
               <div className="text-xs text-muted-foreground mb-0.5">PDI</div>
-              <div className="font-mono text-sm font-medium" style={{ color: "oklch(0.60 0.18 240)" }}>
-                {network.pdi.toFixed(2)}
-              </div>
+              <IndexTooltip type="pdi" breakdown={orgBreakdown} score={network.pdi}>
+                <div className="font-mono text-sm font-medium" style={{ color: "oklch(0.60 0.18 240)" }}>
+                  {network.pdi.toFixed(2)}
+                </div>
+              </IndexTooltip>
             </div>
             <div>
               <div className="text-xs text-muted-foreground mb-0.5">JDI</div>
-              <div className="font-mono text-sm font-medium" style={{ color: "oklch(0.65 0.15 150)" }}>
-                {network.jdi.toFixed(2)}
-              </div>
+              <IndexTooltip type="jdi" breakdown={countryBreakdown} score={network.jdi}>
+                <div className="font-mono text-sm font-medium" style={{ color: "oklch(0.65 0.15 150)" }}>
+                  {network.jdi.toFixed(2)}
+                </div>
+              </IndexTooltip>
             </div>
             <div>
               <div className="text-xs text-muted-foreground mb-0.5">IHI</div>
-              <div className="font-mono text-sm font-medium" style={{ color: "oklch(0.63 0.20 290)" }}>
-                {network.ihi.toFixed(2)}
-              </div>
+              <IndexTooltip type="ihi" breakdown={ispBreakdown} score={network.ihi}>
+                <div className="font-mono text-sm font-medium" style={{ color: "oklch(0.63 0.20 290)" }}>
+                  {network.ihi.toFixed(2)}
+                </div>
+              </IndexTooltip>
             </div>
           </div>
 

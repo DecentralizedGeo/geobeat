@@ -5,6 +5,9 @@ import { ChevronLeft } from "lucide-react";
 import { networks } from "@/lib/mock-data";
 import { NetworkMap } from "@/components/network-map";
 import { ScrollToTop } from "@/components/scroll-to-top";
+import { IndexTooltip } from "@/components/index-tooltip";
+import { generateMockNodeData } from "@/lib/mock-node-data";
+import { calculateOrgBreakdown, calculateCountryBreakdown, calculateIspBreakdown } from "@/lib/breakdown-utils";
 
 export async function generateStaticParams() {
   return networks.map((network) => ({
@@ -59,6 +62,12 @@ export default async function NetworkDetailPage({
     if (score >= 60) return "Moderate dispersion";
     return "Low dispersion";
   };
+
+  // Calculate breakdowns for tooltips
+  const nodeData = generateMockNodeData(network.id);
+  const orgBreakdown = calculateOrgBreakdown(nodeData);
+  const countryBreakdown = calculateCountryBreakdown(nodeData);
+  const ispBreakdown = calculateIspBreakdown(nodeData);
 
   return (
     <div className="min-h-screen bg-background">
@@ -120,60 +129,66 @@ export default async function NetworkDetailPage({
               <div className="text-[12px] font-medium text-muted-foreground/70 uppercase tracking-wide">
                 PDI
               </div>
-              <div className="flex items-center gap-2.5">
-                <span className="text-xl font-semibold w-10">
-                  {Math.round(network.pdi)}
-                </span>
-                <div className="flex-1 h-2 bg-muted rounded-sm overflow-hidden">
-                  <div
-                    className="h-full rounded-sm"
-                    style={{
-                      width: `${network.pdi}%`,
-                      background: "oklch(0.60 0.14 240)",
-                    }}
-                  />
+              <IndexTooltip type="pdi" breakdown={orgBreakdown} score={network.pdi}>
+                <div className="flex items-center gap-2.5">
+                  <span className="text-xl font-semibold w-10">
+                    {Math.round(network.pdi)}
+                  </span>
+                  <div className="flex-1 h-2 bg-muted rounded-sm overflow-hidden">
+                    <div
+                      className="h-full rounded-sm"
+                      style={{
+                        width: `${network.pdi}%`,
+                        background: "oklch(0.60 0.14 240)",
+                      }}
+                    />
+                  </div>
                 </div>
-              </div>
+              </IndexTooltip>
             </div>
 
             <div className="space-y-2">
               <div className="text-[12px] font-medium text-muted-foreground/70 uppercase tracking-wide">
                 JDI
               </div>
-              <div className="flex items-center gap-2.5">
-                <span className="text-xl font-semibold w-10">
-                  {Math.round(network.jdi)}
-                </span>
-                <div className="flex-1 h-2 bg-muted rounded-sm overflow-hidden">
-                  <div
-                    className="h-full rounded-sm"
-                    style={{
-                      width: `${network.jdi}%`,
-                      background: "oklch(0.65 0.12 150)",
-                    }}
-                  />
+              <IndexTooltip type="jdi" breakdown={countryBreakdown} score={network.jdi}>
+                <div className="flex items-center gap-2.5">
+                  <span className="text-xl font-semibold w-10">
+                    {Math.round(network.jdi)}
+                  </span>
+                  <div className="flex-1 h-2 bg-muted rounded-sm overflow-hidden">
+                    <div
+                      className="h-full rounded-sm"
+                      style={{
+                        width: `${network.jdi}%`,
+                        background: "oklch(0.65 0.12 150)",
+                      }}
+                    />
+                  </div>
                 </div>
-              </div>
+              </IndexTooltip>
             </div>
 
             <div className="space-y-2">
               <div className="text-[12px] font-medium text-muted-foreground/70 uppercase tracking-wide">
                 IHI
               </div>
-              <div className="flex items-center gap-2.5">
-                <span className="text-xl font-semibold w-10">
-                  {Math.round(network.ihi)}
-                </span>
-                <div className="flex-1 h-2 bg-muted rounded-sm overflow-hidden">
-                  <div
-                    className="h-full rounded-sm"
-                    style={{
-                      width: `${network.ihi}%`,
-                      background: "oklch(0.63 0.15 290)",
-                    }}
-                  />
+              <IndexTooltip type="ihi" breakdown={ispBreakdown} score={network.ihi}>
+                <div className="flex items-center gap-2.5">
+                  <span className="text-xl font-semibold w-10">
+                    {Math.round(network.ihi)}
+                  </span>
+                  <div className="flex-1 h-2 bg-muted rounded-sm overflow-hidden">
+                    <div
+                      className="h-full rounded-sm"
+                      style={{
+                        width: `${network.ihi}%`,
+                        background: "oklch(0.63 0.15 290)",
+                      }}
+                    />
+                  </div>
                 </div>
-              </div>
+              </IndexTooltip>
             </div>
           </div>
         </div>
