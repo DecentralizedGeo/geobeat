@@ -1,3 +1,6 @@
+"use client"
+
+import { useEffect } from "react"
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -5,19 +8,17 @@ import { ChevronLeft } from "lucide-react";
 import { networks } from "@/lib/mock-data";
 import { NetworkMap } from "@/components/network-map";
 
-export async function generateStaticParams() {
-  return networks.map((network) => ({
-    id: network.id,
-  }));
-}
-
-export default async function NetworkDetailPage({
+export default function NetworkDetailPage({
   params,
 }: {
-  params: Promise<{ id: string }>;
+  params: { id: string };
 }) {
-  const { id } = await params;
+  const { id } = params;
   const network = networks.find((n) => n.id === id);
+
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
 
   if (!network) {
     notFound();

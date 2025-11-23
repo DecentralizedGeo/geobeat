@@ -31,8 +31,8 @@ export function NetworkMap({ networkId }: NetworkMapProps) {
       map.current = new mapboxgl.Map({
         container: mapContainer.current,
         style: 'mapbox://styles/mapbox/light-v11', // Light theme
-        center: [0, 20], // Centered on global view
-        zoom: 1.5,
+        center: [0, 30], // Centered to show whole world
+        zoom: 1.0,
         projection: { name: 'mercator' }
       })
 

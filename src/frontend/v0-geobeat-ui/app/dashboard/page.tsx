@@ -1,8 +1,15 @@
+"use client"
+
+import { useEffect } from "react"
 import { Header } from "@/components/header"
 import { NetworkList } from "@/components/network-list"
 import { IndexPill } from "@/components/index-pill"
 
 export default function DashboardPage() {
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
+
   return (
     <div className="min-h-screen flex flex-col">
       <Header />

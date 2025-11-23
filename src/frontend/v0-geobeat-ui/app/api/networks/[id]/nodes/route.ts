@@ -15,8 +15,15 @@ export async function GET(
     const format = searchParams.get('format') || 'hexbins'
     const resolution = parseInt(searchParams.get('resolution') || '3', 10)
 
-    // For Ethereum, load real data from CSV
-    if (networkId === 'ethereum') {
+    // Load real data from CSV for supported networks
+    const csvFileMap: Record<string, string> = {
+      'ethereum': '2025-11-22-ethereum-ips.csv',
+      'polygon': '2025-11-22-polygon-ips.csv'
+    }
+
+    const csvFileName = csvFileMap[networkId]
+
+    if (csvFileName) {
       try {
         const csvPath = join(
           process.cwd(),
@@ -25,7 +32,7 @@ export async function GET(
           '..',
           'data',
           'raw',
-          '2025-11-22-ethereum-ips.csv'
+          csvFileName
         )
 
         const csvData = await readFile(csvPath, 'utf-8')
@@ -56,12 +63,12 @@ export async function GET(
           return NextResponse.json(hexbins)
         }
       } catch (csvError) {
-        console.error('Failed to load Ethereum CSV:', csvError)
+        console.error(`Failed to load ${networkId} CSV:`, csvError)
         // Fall through to return empty data
       }
     }
 
-    // For other networks, return empty for now
+    // For unsupported networks, return empty data
     return NextResponse.json({
       type: 'FeatureCollection',
       features: []
