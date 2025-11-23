@@ -279,7 +279,7 @@ export function HeroGeofunnel() {
 
       <section
         ref={sectionRef}
-        className="relative w-full flex items-center justify-start px-6 md:px-12"
+        className="relative w-full flex items-start justify-start px-6 md:px-12 pt-32"
         style={{ height: "150vh" }}
       >
 
@@ -294,9 +294,9 @@ export function HeroGeofunnel() {
           physical, jurisdictional, and infrastructural lenses.
         </p>
         <Link href="/dashboard">
-          <Button size="lg" className="rounded-sm group border-2 border-foreground">
+          <Button size="lg" className="rounded-sm group bg-foreground text-background hover:bg-foreground/90 border-2 border-foreground text-lg px-8 py-6 h-auto">
             Explore the Index
-            <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+            <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
           </Button>
         </Link>
       </div>
