@@ -55,9 +55,9 @@ export function IndexTooltip({
     <TooltipProvider delayDuration={200}>
       <Tooltip>
         <TooltipTrigger asChild>
-          <span className={cn("cursor-help", className)}>
+          <div className="contents cursor-help">
             {children}
-          </span>
+          </div>
         </TooltipTrigger>
         <TooltipContent 
           side="top" 
