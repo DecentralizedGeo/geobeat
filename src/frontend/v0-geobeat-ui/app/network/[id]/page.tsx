@@ -23,7 +23,8 @@ export default async function NetworkDetailPage({
     notFound();
   }
 
-  const gdi = Math.round((network.pdi + network.jdi + network.ihi) / 3);
+  // GDI calculation - only use PDI for now (JDI/IHI coming soon)
+  const gdi = Math.round(network.pdi);
 
   // Mock detailed data
   const detailData = {
@@ -133,42 +134,40 @@ export default async function NetworkDetailPage({
               </div>
             </div>
 
-            <div className="space-y-2">
-              <div className="text-[12px] font-medium text-muted-foreground/70 uppercase tracking-wide">
-                JDI
+            <div className="space-y-2 opacity-40">
+              <div className="flex items-center gap-2">
+                <div className="text-[12px] font-medium text-muted-foreground/70 uppercase tracking-wide">
+                  JDI
+                </div>
+                <span className="text-[10px] px-2 py-0.5 rounded-full bg-muted text-muted-foreground">
+                  Coming Soon
+                </span>
               </div>
               <div className="flex items-center gap-2.5">
                 <span className="text-xl font-semibold w-10">
-                  {Math.round(network.jdi)}
+                  —
                 </span>
                 <div className="flex-1 h-2 bg-muted rounded-sm overflow-hidden">
-                  <div
-                    className="h-full rounded-sm"
-                    style={{
-                      width: `${network.jdi}%`,
-                      background: "oklch(0.65 0.12 150)",
-                    }}
-                  />
+                  <div className="h-full rounded-sm bg-muted" />
                 </div>
               </div>
             </div>
 
-            <div className="space-y-2">
-              <div className="text-[12px] font-medium text-muted-foreground/70 uppercase tracking-wide">
-                IHI
+            <div className="space-y-2 opacity-40">
+              <div className="flex items-center gap-2">
+                <div className="text-[12px] font-medium text-muted-foreground/70 uppercase tracking-wide">
+                  IHI
+                </div>
+                <span className="text-[10px] px-2 py-0.5 rounded-full bg-muted text-muted-foreground">
+                  Coming Soon
+                </span>
               </div>
               <div className="flex items-center gap-2.5">
                 <span className="text-xl font-semibold w-10">
-                  {Math.round(network.ihi)}
+                  —
                 </span>
                 <div className="flex-1 h-2 bg-muted rounded-sm overflow-hidden">
-                  <div
-                    className="h-full rounded-sm"
-                    style={{
-                      width: `${network.ihi}%`,
-                      background: "oklch(0.63 0.15 290)",
-                    }}
-                  />
+                  <div className="h-full rounded-sm bg-muted" />
                 </div>
               </div>
             </div>
@@ -208,39 +207,40 @@ export default async function NetworkDetailPage({
               <div className="space-y-4 pt-2">
                 <div>
                   <div className="text-[13px] font-medium mb-1">
-                    Spatial Entropy
+                    Moran&apos;s I
                   </div>
                   <div className="text-[13px] text-muted-foreground">
-                    {detailData.spatialEntropy}
+                    {network.moransI?.toFixed(3) || "N/A"}
+                  </div>
+                  <div className="text-[12px] text-muted-foreground/70 mt-1">
+                    Measures spatial autocorrelation; higher values indicate
+                    stronger geographic clustering
                   </div>
                 </div>
 
                 <div>
                   <div className="text-[13px] font-medium mb-1">
-                    Effective Number of Regions (ENR)
+                    Spatial HHI
                   </div>
                   <div className="text-[13px] text-muted-foreground">
-                    {detailData.effectiveRegions} (equivalent to{" "}
-                    {detailData.effectiveRegions} evenly populated regions)
+                    {network.spatialHHI?.toFixed(3) || "N/A"}
+                  </div>
+                  <div className="text-[12px] text-muted-foreground/70 mt-1">
+                    Herfindahl index for geographic concentration; lower values
+                    indicate better distribution
                   </div>
                 </div>
 
                 <div>
                   <div className="text-[13px] font-medium mb-1">
-                    Cluster Intensity
+                    Effective Number of Locations (ENL)
                   </div>
                   <div className="text-[13px] text-muted-foreground">
-                    {detailData.clusterIntensity}
+                    {network.enl || "N/A"}
                   </div>
-                </div>
-
-                <div>
-                  <div className="text-[13px] font-medium mb-1">
-                    Footprint Radius
-                  </div>
-                  <div className="text-[13px] text-muted-foreground">
-                    Average pairwise distance between nodes:{" "}
-                    {detailData.footprintRadius}
+                  <div className="text-[12px] text-muted-foreground/70 mt-1">
+                    Equivalent number of evenly distributed regions; higher
+                    values indicate better dispersion
                   </div>
                 </div>
               </div>
