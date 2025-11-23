@@ -121,17 +121,18 @@ export function NetworkMap({ networkId }: NetworkMapProps) {
                 3, 1.2,
                 6, 0.8
               ],
-              // Use viridis-inspired color ramp
+              // Intuitive heatmap: cool (blue) → warm (red/yellow)
               'heatmap-color': [
                 'interpolate',
                 ['linear'],
                 ['heatmap-density'],
-                0, 'rgba(68, 1, 84, 0)',      // Transparent purple
-                0.2, 'rgb(68, 1, 84)',         // Dark purple
-                0.4, 'rgb(59, 82, 139)',       // Blue
-                0.6, 'rgb(33, 145, 140)',      // Teal/cyan
-                0.8, 'rgb(94, 201, 98)',       // Green
-                1, 'rgb(253, 231, 37)'         // Yellow
+                0, 'rgba(0, 0, 255, 0)',       // Transparent
+                0.1, 'rgb(65, 105, 225)',      // Royal blue (low density)
+                0.3, 'rgb(0, 191, 255)',       // Deep sky blue
+                0.5, 'rgb(0, 255, 127)',       // Spring green
+                0.7, 'rgb(255, 255, 0)',       // Yellow
+                0.85, 'rgb(255, 140, 0)',      // Dark orange
+                1, 'rgb(255, 0, 0)'            // Red (high density)
               ],
               // Tighter radius for sharper visualization
               'heatmap-radius': [
