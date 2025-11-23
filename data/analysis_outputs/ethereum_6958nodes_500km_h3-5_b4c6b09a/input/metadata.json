@@ -1,0 +1,25 @@
+{
+  "network": "ethereum",
+  "num_nodes": 6958,
+  "num_nodes_with_coords": 6958,
+  "timestamp": "2025-11-22T23:06:23.609024",
+  "source_file": "data/raw/2025-11-22-ethereum-ips.csv",
+  "bounding_box": {
+    "min_lat": -43.579,
+    "max_lat": 69.638,
+    "min_lon": -157.8444,
+    "max_lon": 176.083
+  },
+  "columns": [
+    "node_id",
+    "network",
+    "latitude",
+    "longitude",
+    "country",
+    "city",
+    "asn",
+    "isp",
+    "cloud_provider",
+    "geometry"
+  ]
+}

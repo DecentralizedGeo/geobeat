@@ -6,6 +6,24 @@ This directory contains research notes, analysis, and findings.
 
 Document the research process, insights, and decision-making that informs the project design and development.
 
+---
+
+## Current Research Files
+
+### Active Research (Primary Deliverables)
+
+**None yet** - See [Issue #1](https://github.com/DecentralizedGeo/geobeat/issues/1) for current task.
+
+**To be created:**
+- `../data-sources/INVENTORY.md` - Catalog of blockchain node geographic datasets/APIs for 6 priority networks
+
+### Background Research (Completed)
+
+- **`METRICS.md`** - Core decentralization metrics (HHI, Gini, Shannon entropy, Nakamoto coefficient)
+- **`RESOURCES.md`** - Academic papers, blockchain research, measurement frameworks
+
+---
+
 ## Guidelines
 
 - **Date your research**: Include timestamps on notes and findings
@@ -31,3 +49,16 @@ Organize research by topic or theme. Consider using:
 3. Capture findings and insights
 4. Identify implications for design
 5. Update design docs with research outcomes
+
+---
+
+## Quick Navigation
+
+**Looking for blockchain node data sources?**
+- See [../data-sources/](../data-sources/) directory for catalog and evaluation methodology
+
+**Want to understand decentralization metrics?**
+- Read `METRICS.md` for formulas and explanations (HHI, Gini, Shannon entropy)
+
+**Looking for academic sources?**
+- Check `RESOURCES.md` for peer-reviewed papers and research threads

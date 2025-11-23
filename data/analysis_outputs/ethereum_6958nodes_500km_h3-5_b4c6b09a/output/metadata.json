@@ -1,0 +1,33 @@
+{
+  "timestamp": "2025-11-22T23:06:23.609024",
+  "network": "ethereum",
+  "num_nodes_analyzed": 6958,
+  "metrics_computed": [
+    "morans_i",
+    "spatial_hhi",
+    "enl",
+    "ann"
+  ],
+  "summary": {
+    "morans_i": {
+      "value": 0.4043088409153839,
+      "interpretation": "Significant clustering (I=0.404, p<0.01)"
+    },
+    "spatial_hhi": {
+      "value": 0.018428395693423052,
+      "interpretation": "Low concentration across 1410 cells (HHI=0.018)"
+    },
+    "enl": {
+      "value": 237.46398686932278,
+      "interpretation": "Uneven distribution (ENL=237.5 of 1410 cells)"
+    },
+    "ann": {
+      "value": 0.07300660790872704,
+      "interpretation": "Significant clustering (ANN=0.073, p<0.01)"
+    }
+  },
+  "files_generated": [
+    "results.json",
+    "metric_summary.png"
+  ]
+}

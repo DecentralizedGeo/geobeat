@@ -1,0 +1,82 @@
+{
+  "ethereum": {
+    "gdi": 61.3,
+    "pdi": {
+      "pdi": 98.2,
+      "spatial_hhi": 0.018,
+      "num_cells": 1410,
+      "max_cell_share": 6.9,
+      "interpretation": "Highly dispersed"
+    },
+    "jdi": {
+      "jdi": 20.4,
+      "num_countries": 82,
+      "effective_countries": 16.7,
+      "entropy": 2.815,
+      "top_3_countries": {
+        "United States": 2134,
+        "Germany": 1011,
+        "Finland": 401
+      },
+      "interpretation": "Low diversity"
+    },
+    "ihi": {
+      "ihi": 59.6,
+      "provider_hhi": 0.404,
+      "num_providers": 8,
+      "top_3_providers": {
+        "Other Cloud": 59.9,
+        "AWS": 14.6,
+        "Hetzner": 12.2
+      },
+      "interpretation": "Moderate concentration"
+    },
+    "weights": {
+      "pdi": 0.4,
+      "jdi": 0.35,
+      "ihi": 0.25
+    },
+    "interpretation": "Moderately decentralized",
+    "total_nodes": 6958
+  },
+  "polygon": {
+    "gdi": 61.8,
+    "pdi": {
+      "pdi": 96.8,
+      "spatial_hhi": 0.032,
+      "num_cells": 860,
+      "max_cell_share": 8.5,
+      "interpretation": "Highly dispersed"
+    },
+    "jdi": {
+      "jdi": 18.4,
+      "num_countries": 72,
+      "effective_countries": 13.2,
+      "entropy": 2.583,
+      "top_3_countries": {
+        "United States": 2112,
+        "Germany": 1186,
+        "China": 553
+      },
+      "interpretation": "Low diversity"
+    },
+    "ihi": {
+      "ihi": 66.5,
+      "provider_hhi": 0.335,
+      "num_providers": 8,
+      "top_3_providers": {
+        "Other Cloud": 51.8,
+        "AWS": 19.1,
+        "Hetzner": 13.1
+      },
+      "interpretation": "Moderate concentration"
+    },
+    "weights": {
+      "pdi": 0.4,
+      "jdi": 0.35,
+      "ihi": 0.25
+    },
+    "interpretation": "Moderately decentralized",
+    "total_nodes": 6678
+  }
+}

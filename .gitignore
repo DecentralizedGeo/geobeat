@@ -25,6 +25,7 @@ venv/
 env/
 ENV/
 .venv
+.venv-analysis/
 
 # IDE
 .vscode/
@@ -64,3 +65,4 @@ node_modules/
 
 # Research (keep private/in-progress research out of commits)
 private/
+.worktrees

@@ -145,20 +145,27 @@ How has this been tested?
 We use Husky to enforce code quality and commit conventions:
 
 ```bash
-# Install dependencies (Husky will be set up automatically)
-npm install
+# Install pre-commit
+pip install pre-commit
+
+# Install hooks
+pre-commit install
+pre-commit install --hook-type commit-msg
+
+# Run manually on all files
+pre-commit run --all-files
 ```
 
-### What the hooks enforce:
-- **commit-msg**: Validates commit messages follow Conventional Commits format
-- Future hooks may include:
-  - Code formatting (Prettier for TS/JS, Black for Python)
-  - Linting (ESLint, Flake8)
-  - Test execution
-
-### Commit Message Validation
-
-Husky uses commitlint to enforce conventional commit format. Invalid commit messages will be rejected with helpful error messages.
+### What the hooks check:
+- Trailing whitespace
+- End-of-file fixes
+- YAML/JSON syntax
+- Large file prevention
+- Merge conflict markers
+- Conventional commit message format
+- Code formatting (Black for Python, Prettier for TS/JS)
+- Linting (Flake8 for Python)
+- Markdown formatting
 
 ## Documentation Standards
 

@@ -1,0 +1,19 @@
+{
+  "run_name": "ethereum_6958nodes_500km_h3-5_b4c6b09a",
+  "run_hash": "b4c6b09a",
+  "timestamp": "2025-11-22T23:06:23.609024",
+  "network": "ethereum",
+  "parameters": {
+    "threshold_km": 500.0,
+    "h3_resolution": 5,
+    "permutations": 999
+  },
+  "code_files": [
+    "data_ingestion.py",
+    "spatial_metrics.py",
+    "visualization.py",
+    "models.py",
+    "demo.py",
+    "requirements.txt"
+  ]
+}

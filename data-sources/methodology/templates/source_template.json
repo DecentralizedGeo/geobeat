@@ -1,0 +1,170 @@
+{
+  "$schema": "https://json-schema.org/draft-07/schema#",
+  "id": "unique-kebab-case-identifier",
+  "name": "Human-Readable Source Name",
+  "description": "Brief description of what this data source provides",
+  "url": "https://primary-access-url.example.com",
+  "urls": {
+    "api": "https://api.example.com/v1",
+    "docs": "https://docs.example.com",
+    "github": "https://github.com/org/repo",
+    "paper": "https://arxiv.org/abs/XXXX.XXXXX"
+  },
+  "networks": [
+    "ethereum",
+    "bitcoin"
+  ],
+  "type": "api-rest",
+  "_type_options": [
+    "api-rest",
+    "api-graphql",
+    "api-websocket",
+    "dataset-static",
+    "dataset-timeseries",
+    "code-only",
+    "explorer-only"
+  ],
+  "signals": {
+    "ip_addresses": true,
+    "geographic_fields": [
+      "country_code",
+      "city",
+      "latitude",
+      "longitude"
+    ],
+    "asn": true,
+    "cloud_provider": false,
+    "client_version": true,
+    "uptime": false,
+    "peer_count": false
+  },
+  "temporal": {
+    "type": "timeseries",
+    "_type_options": [
+      "snapshot",
+      "timeseries",
+      "streaming"
+    ],
+    "time_range": {
+      "start": "2023-01-01",
+      "end": "2025-01-01"
+    },
+    "last_updated": "2025-01-15",
+    "update_frequency": "daily",
+    "staleness_assessment": "current | acceptable | stale | very-stale"
+  },
+  "license": {
+    "type": "MIT",
+    "_type_examples": [
+      "MIT",
+      "Apache-2.0",
+      "CC-BY-4.0",
+      "CC-BY-SA-4.0",
+      "CC-BY-NC-4.0",
+      "CC0-1.0",
+      "GPL-3.0",
+      "proprietary",
+      "unknown"
+    ],
+    "url": "https://example.com/license",
+    "commercial_use": true,
+    "attribution_required": true,
+    "redistribution_allowed": true,
+    "share_alike": false,
+    "restrictions": [
+      "Rate limited to 100 req/min",
+      "Must attribute in documentation"
+    ],
+    "notes": "Additional licensing context or clarifications"
+  },
+  "data_provenance": {
+    "collection_method": "Active P2P crawling using getaddr messages",
+    "vantage_points": 5,
+    "vantage_locations": [
+      "us-east-1",
+      "eu-west-1",
+      "ap-southeast-1"
+    ],
+    "geoip_provider": "MaxMind GeoLite2",
+    "geoip_version": "2024-12-15",
+    "asn_source": "CAIDA AS Relationships",
+    "derived_from": [
+      "source-id-1",
+      "source-id-2"
+    ],
+    "creator": "Organization or Individual Name",
+    "published_date": "2024-06-01"
+  },
+  "api_details": {
+    "authentication": "API key in header",
+    "rate_limits": {
+      "requests_per_second": 10,
+      "requests_per_minute": 100,
+      "requests_per_day": 10000
+    },
+    "pagination": true,
+    "bulk_export": false,
+    "websocket_available": false,
+    "response_format": [
+      "json",
+      "csv"
+    ],
+    "average_response_time_ms": 150
+  },
+  "quality_metrics": {
+    "coverage_estimate_percent": 85,
+    "coverage_notes": "Estimates 85% of reachable nodes; NAT/firewall nodes excluded",
+    "accuracy": {
+      "country_level": "99%",
+      "city_level": "~65% within 50km",
+      "asn_level": "95%"
+    },
+    "validation_method": "Cross-referenced with ethernodes.org and academic papers",
+    "known_outliers": "Single nodes in unusual locations manually verified"
+  },
+  "limitations": [
+    "Only captures publicly reachable nodes (NAT/firewall bias)",
+    "Single vantage point in US East may undercount Asia-Pacific nodes",
+    "GeoIP city-level accuracy limited (~65% within 50km)",
+    "IPv6 nodes underrepresented (<5% of dataset)",
+    "Does not detect VPN/proxy usage"
+  ],
+  "biases": [
+    "reachability-bias",
+    "single-vantage-point",
+    "client-diversity-unknown",
+    "temporal-sampling (daily snapshots may miss high-churn nodes)"
+  ],
+  "integration": {
+    "complexity": "medium",
+    "_complexity_options": [
+      "low",
+      "medium",
+      "high"
+    ],
+    "dependencies": [
+      "requests library",
+      "pandas for processing"
+    ],
+    "sample_code_url": "https://github.com/org/repo/examples/fetch_data.py",
+    "notes": "Requires API key registration; 24-hour approval process"
+  },
+  "priority": "high",
+  "_priority_options": [
+    "high",
+    "medium",
+    "low"
+  ],
+  "status": "evaluated",
+  "_status_options": [
+    "identified",
+    "evaluating",
+    "evaluated",
+    "integrated",
+    "rejected"
+  ],
+  "v0_candidate": true,
+  "notes": "Additional context, observations, or decisions about this source",
+  "assessment_date": "2025-01-22",
+  "assessed_by": "Team member or researcher name"
+}
