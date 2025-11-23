@@ -212,7 +212,7 @@ function NetworkRow({
         {/* PDI with horizontal bar */}
         <IndexTooltip type="pdi" breakdown={orgBreakdown} score={network.pdi}>
           <span className={cn("font-semibold text-[15px] w-7", isLowScore(network.pdi) && "text-red-500/90")}>
-            {network.pdi}
+            {Math.round(network.pdi)}
           </span>
           <div className="flex-1 h-1.5 bg-muted rounded-full overflow-hidden">
             <div
