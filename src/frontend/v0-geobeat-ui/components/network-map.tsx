@@ -4,6 +4,7 @@ import { useRef, useEffect, useState } from 'react'
 import mapboxgl from 'mapbox-gl'
 import 'mapbox-gl/dist/mapbox-gl.css'
 import type { NetworkGeoJSON } from '@/lib/types'
+import { getMapboxHeatmapColorStops } from '@/lib/color-scales'
 
 interface NetworkMapProps {
   networkId: string
@@ -121,17 +122,12 @@ export function NetworkMap({ networkId }: NetworkMapProps) {
                 3, 1.2,
                 6, 0.8
               ],
-              // Warm heatmap: yellow → orange → red → purple
+              // Traditional heatmap: yellow → orange → red → dark red/brown
               'heatmap-color': [
                 'interpolate',
                 ['linear'],
                 ['heatmap-density'],
-                0, 'rgba(255, 255, 0, 0)',     // Transparent
-                0.2, 'rgb(255, 255, 0)',       // Yellow (low density)
-                0.4, 'rgb(255, 180, 0)',       // Orange-yellow
-                0.6, 'rgb(255, 100, 0)',       // Orange
-                0.8, 'rgb(255, 0, 0)',         // Red
-                1, 'rgb(139, 0, 139)'          // Dark purple (high density)
+                ...getMapboxHeatmapColorStops()
               ],
               // Tighter radius for sharper visualization
               'heatmap-radius': [

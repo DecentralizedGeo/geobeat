@@ -1,6 +1,6 @@
 "use client"
 
-import { networks } from "@/lib/mock-data"
+import { networks } from "@/lib/network-data"
 import { TrendingUp, Globe, Activity, Network } from "lucide-react"
 import { cn } from "@/lib/utils"
 

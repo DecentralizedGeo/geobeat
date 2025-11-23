@@ -13,7 +13,9 @@ from scipy import stats
 import h3
 
 
-def calculate_pdi(df: pd.DataFrame, threshold_km: float = 500.0, h3_resolution: int = 5) -> Dict:
+def calculate_pdi(
+    df: pd.DataFrame, threshold_km: float = 500.0, h3_resolution: int = 5
+) -> Dict:
     """
     Physical Distribution Index - Composite spatial metric
 
@@ -22,11 +24,11 @@ def calculate_pdi(df: pd.DataFrame, threshold_km: float = 500.0, h3_resolution: 
     Higher = more dispersed, less clustered
     """
     # Create GeoDataFrame
-    geometry = [Point(xy) for xy in zip(df['lon'], df['lat'])]
-    gdf = gpd.GeoDataFrame(df, geometry=geometry, crs='EPSG:4326')
+    geometry = [Point(xy) for xy in zip(df["lon"], df["lat"])]
+    gdf = gpd.GeoDataFrame(df, geometry=geometry, crs="EPSG:4326")
 
     # Reproject to equal-area for distance calculations (World Mollweide)
-    gdf_proj = gdf.to_crs('ESRI:54009')
+    gdf_proj = gdf.to_crs("ESRI:54009")
 
     # 1. Calculate Moran's I
     morans_i, morans_p = _calculate_morans_i(gdf_proj, threshold_km)
@@ -39,24 +41,26 @@ def calculate_pdi(df: pd.DataFrame, threshold_km: float = 500.0, h3_resolution: 
 
     # Normalize and composite
     morans_norm = max(0, min(1, (1 - morans_i)))  # Invert: high clustering = low score
-    enl_norm = min(1.0, enl / 2000)  # Absolute ENL capped at 2000 locations (extreme threshold)
+    enl_norm = min(
+        1.0, enl / 2000
+    )  # Absolute ENL capped at 2000 locations (extreme threshold)
     hhi_norm = 1 - spatial_hhi
 
     pdi = 100 * (0.4 * morans_norm + 0.3 * enl_norm + 0.3 * hhi_norm)
 
     return {
-        'pdi': round(pdi, 1),
-        'morans_i': round(morans_i, 3),
-        'morans_p_value': round(morans_p, 4),
-        'spatial_hhi': round(spatial_hhi, 3),
-        'enl': round(enl, 1),
-        'total_cells': num_cells,
-        'interpretation': _interpret_pdi(pdi),
-        'components': {
-            'morans_contribution': round(0.4 * morans_norm * 100, 1),
-            'enl_contribution': round(0.3 * enl_norm * 100, 1),
-            'hhi_contribution': round(0.3 * hhi_norm * 100, 1)
-        }
+        "pdi": round(pdi, 1),
+        "morans_i": round(morans_i, 3),
+        "morans_p_value": round(morans_p, 4),
+        "spatial_hhi": round(spatial_hhi, 3),
+        "enl": round(enl, 1),
+        "total_cells": num_cells,
+        "interpretation": _interpret_pdi(pdi),
+        "components": {
+            "morans_contribution": round(0.4 * morans_norm * 100, 1),
+            "enl_contribution": round(0.3 * enl_norm * 100, 1),
+            "hhi_contribution": round(0.3 * hhi_norm * 100, 1),
+        },
     }
 
 
@@ -87,7 +91,7 @@ def _calculate_morans_i(gdf_proj, threshold_km: float) -> tuple:
 
     # Moran's I = (N/W) * Σ Σ w_ij * (x_i - x̄)(x_j - x̄) / Σ(x_i - x̄)²
     numerator = np.sum(W * np.outer(x, x))
-    denominator = np.sum(x ** 2)
+    denominator = np.sum(x**2)
 
     I = (n / W.sum()) * (numerator / denominator) if denominator > 0 else 0
 
@@ -118,8 +122,7 @@ def _calculate_spatial_hhi(df: pd.DataFrame, resolution: int) -> tuple:
     """Calculate Spatial HHI across H3 grid"""
     # Convert to H3 cells
     cells = df.apply(
-        lambda row: h3.latlng_to_cell(row['lat'], row['lon'], resolution),
-        axis=1
+        lambda row: h3.latlng_to_cell(row["lat"], row["lon"], resolution), axis=1
     )
 
     # Count nodes per cell
@@ -129,7 +132,7 @@ def _calculate_spatial_hhi(df: pd.DataFrame, resolution: int) -> tuple:
 
     # Calculate shares and HHI
     shares = cell_counts / total_nodes
-    hhi = (shares ** 2).sum()
+    hhi = (shares**2).sum()
 
     return hhi, num_cells
 
@@ -138,8 +141,7 @@ def _calculate_enl(df: pd.DataFrame, resolution: int, num_cells: int) -> float:
     """Calculate Effective Number of Locations via entropy"""
     # Convert to H3 cells
     cells = df.apply(
-        lambda row: h3.latlng_to_cell(row['lat'], row['lon'], resolution),
-        axis=1
+        lambda row: h3.latlng_to_cell(row["lat"], row["lon"], resolution), axis=1
     )
 
     # Count nodes per cell
@@ -166,12 +168,12 @@ def calculate_jdi(df: pd.DataFrame) -> Dict:
 
     Rewards both even distribution AND absolute diversity
     """
-    country_counts = df['country'].value_counts()
+    country_counts = df["country"].value_counts()
     total_nodes = len(df)
     num_countries = len(country_counts)
 
     shares = country_counts / total_nodes
-    country_hhi = (shares ** 2).sum()
+    country_hhi = (shares**2).sum()
 
     # HHI component (30%)
     hhi_component = 0.3 * (1 - country_hhi)
@@ -182,24 +184,30 @@ def calculate_jdi(df: pd.DataFrame) -> Dict:
 
     # Top concentration penalty (35%)
     # Penalize if top country has > 15% of nodes
-    top_country_share = country_counts.iloc[0] / total_nodes if len(country_counts) > 0 else 0
-    concentration_penalty = 0.35 * max(0, (top_country_share - 0.15) / 0.35)  # Linear from 15% to 50%
+    top_country_share = (
+        country_counts.iloc[0] / total_nodes if len(country_counts) > 0 else 0
+    )
+    concentration_penalty = 0.35 * max(
+        0, (top_country_share - 0.15) / 0.35
+    )  # Linear from 15% to 50%
 
     jdi = 100 * (hhi_component + diversity_bonus - concentration_penalty)
 
-    top_3 = {k: {'count': v, 'share': round(v/total_nodes*100, 1)}
-             for k, v in country_counts.head(3).items()}
+    top_3 = {
+        k: {"count": v, "share": round(v / total_nodes * 100, 1)}
+        for k, v in country_counts.head(3).items()
+    }
 
     return {
-        'jdi': round(jdi, 1),
-        'country_hhi': round(country_hhi, 3),
-        'num_countries': num_countries,
-        'top_3_countries': top_3,
-        'interpretation': _interpret_hhi_based(jdi),
-        'components': {
-            'hhi_contribution': round(hhi_component * 100, 1),
-            'diversity_contribution': round(diversity_bonus * 100, 1)
-        }
+        "jdi": round(jdi, 1),
+        "country_hhi": round(country_hhi, 3),
+        "num_countries": num_countries,
+        "top_3_countries": top_3,
+        "interpretation": _interpret_hhi_based(jdi),
+        "components": {
+            "hhi_contribution": round(hhi_component * 100, 1),
+            "diversity_contribution": round(diversity_bonus * 100, 1),
+        },
     }
 
 
@@ -211,12 +219,12 @@ def calculate_ihi(df: pd.DataFrame) -> Dict:
 
     Rewards both even distribution AND absolute diversity
     """
-    org_counts = df['org'].value_counts()
+    org_counts = df["org"].value_counts()
     total_nodes = len(df)
     num_orgs = len(org_counts)
 
     shares = org_counts / total_nodes
-    org_hhi = (shares ** 2).sum()
+    org_hhi = (shares**2).sum()
 
     # HHI component (30%)
     hhi_component = 0.3 * (1 - org_hhi)
@@ -228,29 +236,33 @@ def calculate_ihi(df: pd.DataFrame) -> Dict:
     # Top concentration penalty (35%)
     # Penalize if top org has > 3% of nodes
     top_org_share = org_counts.iloc[0] / total_nodes if len(org_counts) > 0 else 0
-    concentration_penalty = 0.35 * max(0, (top_org_share - 0.03) / 0.17)  # Linear from 3% to 20%
+    concentration_penalty = 0.35 * max(
+        0, (top_org_share - 0.03) / 0.17
+    )  # Linear from 3% to 20%
 
     ihi = 100 * (hhi_component + diversity_bonus - concentration_penalty)
 
-    top_3 = {k: {'count': v, 'share': round(v/total_nodes*100, 1)}
-             for k, v in org_counts.head(3).items()}
+    top_3 = {
+        k: {"count": v, "share": round(v / total_nodes * 100, 1)}
+        for k, v in org_counts.head(3).items()
+    }
 
     return {
-        'ihi': round(ihi, 1),
-        'org_hhi': round(org_hhi, 3),
-        'num_orgs': num_orgs,
-        'top_3_orgs': top_3,
-        'interpretation': _interpret_hhi_based(ihi),
-        'components': {
-            'hhi_contribution': round(hhi_component * 100, 1),
-            'diversity_contribution': round(diversity_bonus * 100, 1)
-        }
+        "ihi": round(ihi, 1),
+        "org_hhi": round(org_hhi, 3),
+        "num_orgs": num_orgs,
+        "top_3_orgs": top_3,
+        "interpretation": _interpret_hhi_based(ihi),
+        "components": {
+            "hhi_contribution": round(hhi_component * 100, 1),
+            "diversity_contribution": round(diversity_bonus * 100, 1),
+        },
     }
 
 
 def calculate_gdi(df: pd.DataFrame, weights: tuple = (0.35, 0.2, 0.1, 0.35)) -> Dict:
     """Composite GDI score with network size bonus (35% weight)"""
-    df = df.dropna(subset=['lat', 'lon', 'country', 'org'])
+    df = df.dropna(subset=["lat", "lon", "country", "org"])
 
     pdi_result = calculate_pdi(df)
     jdi_result = calculate_jdi(df)
@@ -263,20 +275,22 @@ def calculate_gdi(df: pd.DataFrame, weights: tuple = (0.35, 0.2, 0.1, 0.35)) -> 
     network_size_score = 100 * min(1.0, (total_nodes / 50000) ** 0.5)
 
     w_pdi, w_jdi, w_ihi, w_size = weights
-    gdi = (w_pdi * pdi_result['pdi'] +
-           w_jdi * jdi_result['jdi'] +
-           w_ihi * ihi_result['ihi'] +
-           w_size * network_size_score)
+    gdi = (
+        w_pdi * pdi_result["pdi"]
+        + w_jdi * jdi_result["jdi"]
+        + w_ihi * ihi_result["ihi"]
+        + w_size * network_size_score
+    )
 
     return {
-        'gdi': round(gdi, 1),
-        'pdi': pdi_result,
-        'jdi': jdi_result,
-        'ihi': ihi_result,
-        'network_size_score': round(network_size_score, 1),
-        'weights': {'pdi': w_pdi, 'jdi': w_jdi, 'ihi': w_ihi, 'size': w_size},
-        'interpretation': _interpret_gdi(gdi),
-        'total_nodes': len(df)
+        "gdi": round(gdi, 1),
+        "pdi": pdi_result,
+        "jdi": jdi_result,
+        "ihi": ihi_result,
+        "network_size_score": round(network_size_score, 1),
+        "weights": {"pdi": w_pdi, "jdi": w_jdi, "ihi": w_ihi, "size": w_size},
+        "interpretation": _interpret_gdi(gdi),
+        "total_nodes": len(df),
     }
 
 
@@ -311,11 +325,98 @@ def _interpret_gdi(gdi: float) -> str:
         return "Centralized"
 
 
-if __name__ == '__main__':
+def transform_to_network_format(results: Dict) -> list:
+    """
+    Transform results dictionary to Network[] array format for frontend
+
+    Args:
+        results: Dictionary with network_id as keys and GDI results as values
+
+    Returns:
+        List of Network objects in frontend format
+    """
+    # Network metadata mapping
+    network_metadata = {
+        "ethereum": {
+            "name": "Ethereum",
+            "symbol": "ETH",
+            "logoUrl": "https://cryptologos.cc/logos/ethereum-eth-logo.svg",
+            "type": "L1",
+        },
+        "polygon": {
+            "name": "Polygon",
+            "symbol": "MATIC",
+            "logoUrl": "https://cryptologos.cc/logos/polygon-matic-logo.svg",
+            "type": "L2",
+        },
+        "filecoin": {
+            "name": "Filecoin",
+            "symbol": "FIL",
+            "logoUrl": "https://cryptologos.cc/logos/filecoin-fil-logo.svg",
+            "type": "L1",
+        },
+        "celo": {
+            "name": "Celo",
+            "symbol": "CELO",
+            "logoUrl": "https://cryptologos.cc/logos/celo-celo-logo.svg",
+            "type": "L2",
+        },
+    }
+
+    networks_array = []
+
+    for network_id, result in results.items():
+        # Get metadata or use defaults
+        metadata = network_metadata.get(
+            network_id,
+            {
+                "name": network_id.title(),
+                "symbol": network_id.upper(),
+                "logoUrl": "",
+                "type": "L1",
+            },
+        )
+
+        # Extract nested values
+        pdi_data = result["pdi"]
+        jdi_data = result["jdi"]
+        ihi_data = result["ihi"]
+
+        # Build Network object
+        network = {
+            "id": network_id,
+            "name": metadata["name"],
+            "symbol": metadata["symbol"],
+            "logoUrl": metadata["logoUrl"],
+            "type": metadata["type"],
+            # Flatten nested scores
+            "pdi": pdi_data["pdi"],
+            "jdi": jdi_data["jdi"],
+            "ihi": ihi_data["ihi"],
+            # Trend fields (defaults)
+            "trend": "neutral",
+            "trendValue": "N/A",
+            # Convert snake_case to camelCase
+            "nodeCount": result["total_nodes"],
+            "moransI": pdi_data["morans_i"],
+            "spatialHHI": pdi_data["spatial_hhi"],
+            "enl": pdi_data["enl"],
+            "countryHHI": jdi_data["country_hhi"],
+            "numCountries": jdi_data["num_countries"],
+            "orgHHI": ihi_data["org_hhi"],
+            "numOrgs": ihi_data["num_orgs"],
+        }
+
+        networks_array.append(network)
+
+    return networks_array
+
+
+if __name__ == "__main__":
     networks = {
-        'ethereum': '../../data/raw/2025-11-22-ethereum-ips.csv',
-        'polygon': '../../data/raw/2025-11-22-polygon-ips.csv',
-        'filecoin': '../../data/raw/2025-11-22-filecoin-ips.csv',
+        "ethereum": "../../data/raw/2025-11-22-ethereum-ips.csv",
+        "polygon": "../../data/raw/2025-11-22-polygon-ips.csv",
+        "filecoin": "../../data/raw/2025-11-22-filecoin-ips.csv",
     }
 
     results = {}
@@ -328,47 +429,70 @@ if __name__ == '__main__':
             result = calculate_gdi(df)
             results[network_name] = result
 
-            print(f"\n{'='*60}")
+            print(f"\n{'=' * 60}")
             print(f"GDI v0 Final - {network_name.title()}")
-            print(f"{'='*60}")
+            print(f"{'=' * 60}")
             print(f"\n🎯 Overall GDI: {result['gdi']}/100 - {result['interpretation']}")
             print(f"   Total Nodes: {result['total_nodes']:,}")
 
             print(f"\n{'Physical Distribution (PDI)':-^60}")
-            pdi = result['pdi']
+            pdi = result["pdi"]
             print(f"  Score: {pdi['pdi']}/100 - {pdi['interpretation']}")
             print(f"  Components:")
-            print(f"    • Moran's I: {pdi['morans_i']} → {pdi['components']['morans_contribution']}/40")
-            print(f"    • ENL: {pdi['enl']}/{pdi['total_cells']} → {pdi['components']['enl_contribution']}/30")
-            print(f"    • Spatial HHI: {pdi['spatial_hhi']} → {pdi['components']['hhi_contribution']}/30")
+            print(
+                f"    • Moran's I: {pdi['morans_i']} → {pdi['components']['morans_contribution']}/40"
+            )
+            print(
+                f"    • ENL: {pdi['enl']}/{pdi['total_cells']} → {pdi['components']['enl_contribution']}/30"
+            )
+            print(
+                f"    • Spatial HHI: {pdi['spatial_hhi']} → {pdi['components']['hhi_contribution']}/30"
+            )
 
             print(f"\n{'Jurisdictional Diversity (JDI)':-^60}")
-            jdi = result['jdi']
+            jdi = result["jdi"]
             print(f"  Score: {jdi['jdi']}/100 - {jdi['interpretation']}")
-            print(f"  Country HHI: {jdi['country_hhi']} ({jdi['num_countries']} countries)")
+            print(
+                f"  Country HHI: {jdi['country_hhi']} ({jdi['num_countries']} countries)"
+            )
             print(f"  Top 3:")
-            for country, data in list(jdi['top_3_countries'].items())[:3]:
+            for country, data in list(jdi["top_3_countries"].items())[:3]:
                 print(f"    • {country}: {data['share']}%")
 
             print(f"\n{'Infrastructure Heterogeneity (IHI)':-^60}")
-            ihi = result['ihi']
+            ihi = result["ihi"]
             print(f"  Score: {ihi['ihi']}/100 - {ihi['interpretation']}")
             print(f"  Org HHI: {ihi['org_hhi']} ({ihi['num_orgs']} orgs)")
             print(f"  Top 3:")
-            for org, data in list(ihi['top_3_orgs'].items())[:3]:
-                org_short = org[:35] + '...' if len(org) > 35 else org
+            for org, data in list(ihi["top_3_orgs"].items())[:3]:
+                org_short = org[:35] + "..." if len(org) > 35 else org
                 print(f"    • {org_short}: {data['share']}%")
 
-            print(f"\n{'='*60}\n")
+            print(f"\n{'=' * 60}\n")
 
         except Exception as e:
             print(f"\n❌ Error: {e}")
             import traceback
+
             traceback.print_exc()
 
-    # Save
+    # Transform to Network[] format and save
     if results:
         import json
-        with open('../../data/gdi_v0_final.json', 'w') as f:
-            json.dump(results, f, indent=2)
-        print(f"\n✅ Saved to data/gdi_v0_final.json\n")
+        import shutil
+
+        networks_array = transform_to_network_format(results)
+
+        # Save to data directory
+        data_path = "../../data/gdi_v0_final.json"
+        with open(data_path, "w") as f:
+            json.dump(networks_array, f, indent=2)
+        print(f"\n✅ Saved to {data_path} (Network[] format)")
+
+        # Also copy to frontend location for direct import
+        frontend_path = "../../src/frontend/v0-geobeat-ui/lib/data/gdi_v0_final.json"
+        import os
+
+        os.makedirs(os.path.dirname(frontend_path), exist_ok=True)
+        shutil.copy(data_path, frontend_path)
+        print(f"✅ Copied to {frontend_path}\n")

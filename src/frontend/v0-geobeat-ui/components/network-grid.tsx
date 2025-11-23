@@ -1,5 +1,5 @@
 import { NetworkCard } from "@/components/network-card"
-import { networks } from "@/lib/mock-data"
+import { networks } from "@/lib/network-data"
 
 export function NetworkGrid() {
   return (

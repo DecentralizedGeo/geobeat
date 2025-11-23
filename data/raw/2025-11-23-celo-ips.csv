@@ -1,0 +1,28 @@
+validator_name,validator_address,domain,ip,lat,lon,country,city,isp,org,source
+"syncnode_group",0x82f8Bcf96f24BA60Ef041D192c7CE04C907E2fb8,syncnode.ro,104.21.21.56,40.7357,-74.1724,"United States","Newark","Cloudflare, Inc.","Cloudflare, Inc.",validator-metadata
+"Kytzu Group",0xc64DF5Be250264bf2888591D87cdeB13BFADC501,kytzu.com,104.21.84.122,40.7357,-74.1724,"United States","Newark","Cloudflare, Inc.","Cloudflare, Inc.",validator-metadata
+"Kytzu Group",0xc64DF5Be250264bf2888591D87cdeB13BFADC501,kytzu.com,172.67.192.108,43.6532,-79.3832,"Canada","Toronto","Cloudflare, Inc.","Cloudflare, Inc.",validator-metadata
+"ChainLayer",0x7194DFE766a92308880A943fD70F31c8E7c50e66,chainlayer.io,104.21.0.112,40.7357,-74.1724,"United States","Newark","Cloudflare, Inc.","Cloudflare, Inc.",validator-metadata
+"ChainLayer",0x7194DFE766a92308880A943fD70F31c8E7c50e66,chainlayer.io,172.67.150.232,43.6532,-79.3832,"Canada","Toronto","Cloudflare, Inc.","Cloudflare, Inc.",validator-metadata
+"chainvibes",0xD72Ed2e3db984bAC3bB351FE652200dE527eFfcf,chainvibes.com,31.43.160.6,52.3719,4.8829,"The Netherlands","Amsterdam","Framer B.V","Framer B.V",validator-metadata
+"DSRV",0xF83C93ea360B66DDCD532960304948B1c10786a1,dsrvlabs.com,13.125.200.100,37.5665,126.978,"South Korea","Seoul","Amazon Technologies Inc.","AWS EC2 (ap-northeast-2)",validator-metadata
+"DSRV",0xF83C93ea360B66DDCD532960304948B1c10786a1,celowhale.com,18.207.243.213,39.0438,-77.4874,"United States","Ashburn","Amazon.com, Inc.","AWS EC2 (us-east-1)",validator-metadata
+"moonli.me",0xc8A81D473992c7c6D3F469A8263F24914625709d,moonli.me,104.21.2.96,40.7357,-74.1724,"United States","Newark","Cloudflare, Inc.","Cloudflare, Inc.",validator-metadata
+"moonli.me",0xc8A81D473992c7c6D3F469A8263F24914625709d,moonli.me,172.67.129.13,43.6532,-79.3832,"Canada","Toronto","Cloudflare, Inc.","Cloudflare, Inc.",validator-metadata
+"The Celo Group",0x81AE1C73A326325216E25ff1af9EA3871195036E,TheCelo.group,172.67.172.207,43.6532,-79.3832,"Canada","Toronto","Cloudflare, Inc.","Cloudflare, Inc.",validator-metadata
+"Stakely.io",0xe92B7BA8497486e94bb59C51F595b590c4a5f894,stakely.io,104.21.26.66,40.7357,-74.1724,"United States","Newark","Cloudflare, Inc.","Cloudflare, Inc.",validator-metadata
+"Stakely.io",0xe92B7BA8497486e94bb59C51F595b590c4a5f894,stakely.io,172.67.135.150,43.6532,-79.3832,"Canada","Toronto","Cloudflare, Inc.","Cloudflare, Inc.",validator-metadata
+"Validator.Capital",0xB33e9e01E561a1Da60f7Cb42508500e571afb6Eb,Validator.Capital,198.49.23.145,40.7292,-74.0055,"United States","New York","Squarespace, Inc.","Squarespace, Inc.",validator-metadata
+"Tessellated Geometry Alliance",0x0339Df3FE4f5ccC864EAE8491E5c8AEc4611A631,tessellatedgeometry.com,3.163.139.33,-34.6037,-58.3816,"Argentina","Buenos Aires","Amazon.com, Inc.","AWS CloudFront (GLOBAL)",validator-metadata
+"Tessellated Geometry Alliance",0x0339Df3FE4f5ccC864EAE8491E5c8AEc4611A631,tessellatedgeometry.com,3.163.139.43,-34.6037,-58.3816,"Argentina","Buenos Aires","Amazon.com, Inc.","AWS CloudFront (GLOBAL)",validator-metadata
+"Tessellated Geometry Alliance",0x0339Df3FE4f5ccC864EAE8491E5c8AEc4611A631,tessellatedgeometry.com,3.163.139.91,-34.6037,-58.3816,"Argentina","Buenos Aires","Amazon.com, Inc.","AWS CloudFront (GLOBAL)",validator-metadata
+"Tessellated Geometry Alliance",0x0339Df3FE4f5ccC864EAE8491E5c8AEc4611A631,tessellatedgeometry.com,3.163.139.13,-34.6037,-58.3816,"Argentina","Buenos Aires","Amazon.com, Inc.","AWS CloudFront (GLOBAL)",validator-metadata
+"ZKV",0x2AF540161Cbeb58FdC99b159c76E390598860510,zkvalidator.com,104.21.54.230,40.7357,-74.1724,"United States","Newark","Cloudflare, Inc.","Cloudflare, Inc.",validator-metadata
+"ZKV",0x2AF540161Cbeb58FdC99b159c76E390598860510,zkvalidator.com,172.67.143.31,43.6532,-79.3832,"Canada","Toronto","Cloudflare, Inc.","Cloudflare, Inc.",validator-metadata
+"ZKV",0x2AF540161Cbeb58FdC99b159c76E390598860510,zkv.xyz,172.67.177.16,43.6532,-79.3832,"Canada","Toronto","Cloudflare, Inc.","Cloudflare, Inc.",validator-metadata
+"ZKV",0x2AF540161Cbeb58FdC99b159c76E390598860510,zkv.xyz,104.21.31.139,40.7357,-74.1724,"United States","Newark","Cloudflare, Inc.","Cloudflare, Inc.",validator-metadata
+"HappyCelo",0x481EAdE762d6D0b49580189B78709c9347b395bf,HappyCelo.com,172.67.178.42,43.6532,-79.3832,"Canada","Toronto","Cloudflare, Inc.","Cloudflare, Inc.",validator-metadata
+"atweb3",0xb434FeB47D6154B4B4058DF5C9fCeD123dB9aBF6,atweb3.io,172.67.153.200,43.6532,-79.3832,"Canada","Toronto","Cloudflare, Inc.","Cloudflare, Inc.",validator-metadata
+"atweb3",0xb434FeB47D6154B4B4058DF5C9fCeD123dB9aBF6,atweb3.io,104.21.80.203,40.7357,-74.1724,"United States","Newark","Cloudflare, Inc.","Cloudflare, Inc.",validator-metadata
+"keyko.io",0x2fd49E97262D505Fd76BB6E0e06eC10e1fd54589,keyko.io,5.134.14.110,51.5072,-0.127586,"United Kingdom","London","Team Blue Carrier Limited","Guru GRH",validator-metadata
+"atalma.io",0x70FC0b021dFdBb9A106D1Ed8F35f59D3f23eCb7B,atalma.io,198.202.211.1,37.7708,-122.413,"United States","San Francisco","Cloudflare London, LLC","Webflow, Inc",validator-metadata

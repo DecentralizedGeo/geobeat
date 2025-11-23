@@ -2,6 +2,7 @@
 import { latLngToCell, cellToBoundary } from 'h3-js'
 import { scaleSequential } from 'd3-scale'
 import { interpolateViridis } from 'd3-scale-chromatic'
+import { heatmapColorScale } from './color-scales'
 
 export interface NodeData {
   ip: string
@@ -87,27 +88,6 @@ export function aggregateToHexbins(
   // Find max count for color scaling
   const maxCount = Math.max(...Array.from(hexCounts.values()))
 
-  // Create custom yellow → orange → red → purple scale
-  const customColorScale = (t: number): string => {
-    if (t <= 0.25) {
-      // Yellow to orange-yellow
-      const ratio = t / 0.25
-      return `rgb(255, ${Math.floor(255 - ratio * 75)}, 0)`
-    } else if (t <= 0.5) {
-      // Orange-yellow to orange
-      const ratio = (t - 0.25) / 0.25
-      return `rgb(255, ${Math.floor(180 - ratio * 80)}, 0)`
-    } else if (t <= 0.75) {
-      // Orange to red
-      const ratio = (t - 0.5) / 0.25
-      return `rgb(255, ${Math.floor(100 - ratio * 100)}, 0)`
-    } else {
-      // Red to purple
-      const ratio = (t - 0.75) / 0.25
-      return `rgb(${Math.floor(255 - ratio * 116)}, 0, ${Math.floor(ratio * 139)})`
-    }
-  }
-
   // Use log scale for better distribution
   const logScale = (count: number) => Math.log(count + 1) / Math.log(maxCount + 1)
 
@@ -118,8 +98,8 @@ export function aggregateToHexbins(
     // Close the polygon by adding first point at the end
     const coordinates = [...boundary, boundary[0]]
 
-    // Color based on log scale
-    const color = customColorScale(logScale(count))
+    // Color based on log scale using shared color scale
+    const color = heatmapColorScale(logScale(count))
 
     return {
       type: 'Feature',
