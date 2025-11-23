@@ -1,0 +1,150 @@
+{
+  "ethereum": {
+    "gdi": 51.4,
+    "pdi": {
+      "pdi": 62.8,
+      "morans_i": 0.254,
+      "morans_p_value": 0.0,
+      "spatial_hhi": 0.02,
+      "enl": 236.9,
+      "total_cells": 1956,
+      "interpretation": "Moderately dispersed",
+      "components": {
+        "morans_contribution": 29.8,
+        "enl_contribution": 3.6,
+        "hhi_contribution": 29.4
+      }
+    },
+    "jdi": {
+      "jdi": 34.9,
+      "country_hhi": 0.145,
+      "num_countries": 92,
+      "top_3_countries": {
+        "United States": {
+          "count": 4206,
+          "share": 33.2
+        },
+        "Germany": {
+          "count": 1757,
+          "share": 13.9
+        },
+        "Finland": {
+          "count": 715,
+          "share": 5.6
+        }
+      },
+      "interpretation": "High concentration",
+      "components": {
+        "hhi_contribution": 25.6,
+        "diversity_contribution": 27.5
+      }
+    },
+    "ihi": {
+      "ihi": 48.2,
+      "org_hhi": 0.016,
+      "num_orgs": 2070,
+      "top_3_orgs": {
+        "Hetzner": {
+          "count": 816,
+          "share": 6.4
+        },
+        "AWS EC2 (us-east-1)": {
+          "count": 769,
+          "share": 6.1
+        },
+        "Hetzner Online GmbH": {
+          "count": 556,
+          "share": 4.4
+        }
+      },
+      "interpretation": "High concentration",
+      "components": {
+        "hhi_contribution": 29.5,
+        "diversity_contribution": 25.8
+      }
+    },
+    "network_size_score": 50.3,
+    "weights": {
+      "pdi": 0.35,
+      "jdi": 0.2,
+      "ihi": 0.1,
+      "size": 0.35
+    },
+    "interpretation": "Weakly decentralized",
+    "total_nodes": 12664
+  },
+  "polygon": {
+    "gdi": 43.4,
+    "pdi": {
+      "pdi": 57.7,
+      "morans_i": 0.323,
+      "morans_p_value": 0.0,
+      "spatial_hhi": 0.03,
+      "enl": 98.2,
+      "total_cells": 779,
+      "interpretation": "Concentrated",
+      "components": {
+        "morans_contribution": 27.1,
+        "enl_contribution": 1.5,
+        "hhi_contribution": 29.1
+      }
+    },
+    "jdi": {
+      "jdi": 33.2,
+      "country_hhi": 0.156,
+      "num_countries": 69,
+      "top_3_countries": {
+        "United States": {
+          "count": 1891,
+          "share": 32.9
+        },
+        "Germany": {
+          "count": 961,
+          "share": 16.7
+        },
+        "China": {
+          "count": 532,
+          "share": 9.3
+        }
+      },
+      "interpretation": "High concentration",
+      "components": {
+        "hhi_contribution": 25.3,
+        "diversity_contribution": 25.7
+      }
+    },
+    "ihi": {
+      "ihi": 46.5,
+      "org_hhi": 0.018,
+      "num_orgs": 944,
+      "top_3_orgs": {
+        "AWS EC2 (us-east-1)": {
+          "count": 343,
+          "share": 6.0
+        },
+        "Hetzner": {
+          "count": 339,
+          "share": 5.9
+        },
+        "Hetzner Online GmbH": {
+          "count": 240,
+          "share": 4.2
+        }
+      },
+      "interpretation": "High concentration",
+      "components": {
+        "hhi_contribution": 29.5,
+        "diversity_contribution": 23.1
+      }
+    },
+    "network_size_score": 33.9,
+    "weights": {
+      "pdi": 0.35,
+      "jdi": 0.2,
+      "ihi": 0.1,
+      "size": 0.35
+    },
+    "interpretation": "Weakly decentralized",
+    "total_nodes": 5747
+  }
+}
