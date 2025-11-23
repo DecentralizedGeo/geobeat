@@ -58,9 +58,9 @@ export function NetworkList() {
         <p className="text-[15px] text-foreground/75 font-medium">Compare networks across any dimension</p>
       </div>
 
-      <div className="border-2 border-foreground rounded-sm overflow-hidden bg-background">
+      <div className="border-2 border-foreground rounded-sm overflow-hidden bg-white">
         {/* Column Headers */}
-        <div className="grid grid-cols-[50px_2fr_1fr_70px_1fr_1fr_1fr] gap-4 px-5 py-3 border-b-2 border-foreground bg-muted/30">
+        <div className="grid grid-cols-[50px_2fr_1fr_70px_1fr_1fr_1fr] gap-4 px-5 py-3 border-b-2 border-foreground bg-white">
           <div className="text-[12px] font-bold text-foreground uppercase tracking-wide">#</div>
           <div className="text-[12px] font-bold text-foreground uppercase tracking-wide">Network</div>
           <button
@@ -136,11 +136,11 @@ function NetworkRow({
   const isLowScore = (score: number) => score < 50
 
   return (
-    <div className={cn("border-b border-foreground/20", isEven && "bg-muted/5")}>
+    <div className="border-b border-foreground/20">
       <button
         onClick={onToggle}
         className={cn(
-          "w-full grid grid-cols-[50px_2fr_1fr_70px_1fr_1fr_1fr] gap-4 px-5 hover:bg-muted/30 transition-colors group text-left",
+          "w-full grid grid-cols-[50px_2fr_1fr_70px_1fr_1fr_1fr] gap-4 px-5 transition-colors group text-left",
           rank === 1 ? "py-4" : "py-3.5",
         )}
       >

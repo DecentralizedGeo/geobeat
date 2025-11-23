@@ -1,10 +1,15 @@
 import type React from "react"
 import type { Metadata } from "next"
-import { Geist, Geist_Mono } from "next/font/google"
+import { Geist, Geist_Mono, Averia_Serif_Libre } from "next/font/google"
 import "./globals.css"
 
 const _geist = Geist({ subsets: ["latin"] })
 const _geistMono = Geist_Mono({ subsets: ["latin"] })
+const averiaSerifLibre = Averia_Serif_Libre({
+  subsets: ["latin"],
+  weight: ["300", "400", "700"],
+  variable: "--font-averia-serif"
+})
 
 // Updated metadata for GeoBeat
 export const metadata: Metadata = {
@@ -37,7 +42,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`font-sans antialiased`}>{children}</body>
+      <body className={`font-sans antialiased ${averiaSerifLibre.variable}`}>{children}</body>
     </html>
   )
 }

@@ -2,42 +2,18 @@ import Link from "next/link"
 import { ArrowRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { IndexPill } from "@/components/index-pill"
+import { HeroGeofunnel } from "@/components/hero-geofunnel"
 
 export default function LandingPage() {
   return (
-    <div className="min-h-screen bg-white">
-      {/* Screen 1 - Hero */}
-      <section className="min-h-screen flex items-center justify-center px-6 py-20 bg-white">
-        <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-16 items-start">
-          {/* Left - Black Hole Graphic */}
-          <div className="relative flex items-start justify-center p-4 pt-0">
-            <img
-              src="/images/black-hole.png"
-              alt="Abstract network distribution visualization"
-              className="w-full h-auto object-contain rounded-sm max-w-lg"
-            />
-          </div>
-
-          {/* Right - Headline */}
-          <div className="space-y-10">
-            <div className="space-y-6">
-              <h1 className="font-serif text-5xl md:text-6xl tracking-tight text-balance leading-[1.15] text-foreground font-normal">
-                Most "decentralized" networks aren't{" "}
-                <span className="font-semibold">geographically decentralized.</span>
-              </h1>
-              <p className="text-xl text-foreground/75 leading-relaxed max-w-xl">
-                <span className="font-semibold">GEOBEAT</span> measures where networks <em>actually</em> run — through
-                physical, jurisdictional, and infrastructural lenses.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
+    <div className="min-h-screen">
+      {/* Screen 1 - Hero with Funnel Animation */}
+      <HeroGeofunnel />
 
       {/* Screen 2 - What GEOBEAT Measures */}
-      <section id="what-we-measure" className="min-h-screen flex items-center justify-center px-6 py-20 bg-muted/20">
+      <section id="what-we-measure" className="relative z-10 min-h-screen flex items-center justify-center px-6 py-20">
         <div className="max-w-5xl mx-auto">
-          <div className="border border-border/50 rounded-sm p-12 bg-background">
+          <div className="border-2 border-foreground rounded-sm p-12 bg-white">
             <h2 className="font-serif text-4xl font-normal mb-10">What GEOBEAT Measures</h2>
 
             <div className="grid md:grid-cols-2 gap-12">
@@ -89,9 +65,9 @@ export default function LandingPage() {
       </section>
 
       {/* Screen 3 - Why This Matters */}
-      <section className="min-h-screen flex items-center justify-center px-6 py-20 bg-muted/20">
+      <section className="relative z-10 min-h-screen flex items-center justify-center px-6 py-20">
         <div className="max-w-5xl mx-auto">
-          <div className="border border-border/50 rounded-sm p-12 bg-background">
+          <div className="border-2 border-foreground rounded-sm p-12 bg-white">
             <h2 className="font-serif text-4xl font-normal mb-12">Why Geographic Decentralization Matters</h2>
 
             <div className="grid md:grid-cols-2 gap-x-14 gap-y-10">
@@ -160,31 +136,31 @@ export default function LandingPage() {
       </section>
 
       {/* Screen 4 - Entry Into App */}
-      <section className="min-h-screen flex items-center justify-center px-6 py-20">
+      <section className="relative z-10 min-h-screen flex items-center justify-center px-6 py-20">
         <div className="max-w-4xl mx-auto text-center">
-          <div className="border border-border/50 rounded-sm p-12 bg-background">
+          <div className="border-2 border-foreground rounded-sm p-12 bg-white">
             <h2 className="font-serif text-4xl font-normal mb-10">Explore the Data</h2>
 
             <div className="flex flex-wrap justify-center gap-4 mb-10">
               <Link href="/dashboard">
-                <Button variant="outline" size="lg" className="rounded-sm bg-transparent">
+                <Button variant="outline" size="lg" className="rounded-sm bg-white border-2 border-foreground">
                   Ethereum
                 </Button>
               </Link>
               <Link href="/dashboard">
-                <Button variant="outline" size="lg" className="rounded-sm bg-transparent">
+                <Button variant="outline" size="lg" className="rounded-sm bg-white border-2 border-foreground">
                   Polygon
                 </Button>
               </Link>
               <Link href="/dashboard">
-                <Button variant="outline" size="lg" className="rounded-sm bg-transparent">
+                <Button variant="outline" size="lg" className="rounded-sm bg-white border-2 border-foreground">
                   Filecoin
                 </Button>
               </Link>
             </div>
 
             <Link href="/dashboard">
-              <Button size="lg" className="rounded-sm group">
+              <Button size="lg" className="rounded-sm group border-2 border-foreground">
                 Open Dashboard
                 <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
               </Button>
@@ -194,7 +170,7 @@ export default function LandingPage() {
       </section>
 
       {/* Footer */}
-      <footer className="py-12 px-6 bg-white border-t border-border/30">
+      <footer className="relative z-10 py-12 px-6 border-t-2 border-foreground">
         <div className="max-w-7xl mx-auto">
           <div className="flex items-center justify-center gap-3 text-muted-foreground/70">
             <span className="text-sm">Built by</span>

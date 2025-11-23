@@ -6,7 +6,7 @@ import { StatsCards } from "@/components/stats-cards"
 
 export default function DashboardPage() {
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-screen flex flex-col bg-white">
       <ScrollToTop />
       <Header />
       <main className="flex-1 container mx-auto px-4 py-4 max-w-7xl">

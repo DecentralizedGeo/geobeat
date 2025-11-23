@@ -59,7 +59,7 @@ export function StatsCards() {
         return (
           <div
             key={index}
-            className="border-2 border-foreground rounded-sm bg-background p-5 hover:bg-muted/30 transition-colors"
+            className="border-2 border-foreground rounded-sm bg-white p-5 transition-colors"
           >
             <div className="flex items-start justify-between mb-3">
               <div

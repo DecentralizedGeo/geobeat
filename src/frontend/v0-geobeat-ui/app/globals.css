@@ -126,6 +126,18 @@
   --color-sidebar-ring: var(--sidebar-ring);
 }
 
+/* Theme transition for hero funnel */
+body.theme-light {
+  --background: oklch(0.98 0 0);
+  --foreground: oklch(0.145 0 0);
+}
+
+body {
+  background-color: oklch(var(--background));
+  color: oklch(var(--foreground));
+  transition: background-color 400ms ease, color 400ms ease;
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;

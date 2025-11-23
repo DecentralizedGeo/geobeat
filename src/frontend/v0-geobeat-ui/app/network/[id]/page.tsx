@@ -61,7 +61,7 @@ export default async function NetworkDetailPage({
   };
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-white">
       <ScrollToTop />
       <div className="max-w-7xl mx-auto px-6 py-8">
         {/* Back button */}
@@ -193,7 +193,7 @@ export default async function NetworkDetailPage({
             {/* Left: Map */}
             <div className="space-y-4">
               {/* PDI Score - above map */}
-              <div className="border-2 border-foreground rounded-sm bg-background p-5">
+              <div className="border-2 border-foreground rounded-sm bg-white p-5">
                 <div className="space-y-1">
                   <div className="text-[12px] font-bold text-foreground uppercase tracking-wide mb-3">
                     PDI Score
@@ -217,7 +217,7 @@ export default async function NetworkDetailPage({
 
             {/* Right: Component Metrics - aligned with map */}
             <div className="flex flex-col gap-4 h-full">
-              <div className="border-2 border-foreground rounded-sm bg-background p-5 flex-1">
+              <div className="border-2 border-foreground rounded-sm bg-white p-5 flex-1">
                 <div className="text-[11px] font-bold text-foreground uppercase tracking-wide mb-2">
                   Moran&apos;s I
                 </div>
@@ -229,7 +229,7 @@ export default async function NetworkDetailPage({
                 </div>
               </div>
 
-              <div className="border-2 border-foreground rounded-sm bg-background p-5 flex-1">
+              <div className="border-2 border-foreground rounded-sm bg-white p-5 flex-1">
                 <div className="text-[11px] font-bold text-foreground uppercase tracking-wide mb-2">
                   Spatial HHI
                 </div>
@@ -241,7 +241,7 @@ export default async function NetworkDetailPage({
                 </div>
               </div>
 
-              <div className="border-2 border-foreground rounded-sm bg-background p-5 flex-1">
+              <div className="border-2 border-foreground rounded-sm bg-white p-5 flex-1">
                 <div className="text-[11px] font-bold text-foreground uppercase tracking-wide mb-2">
                   ENL
                 </div>
@@ -263,7 +263,7 @@ export default async function NetworkDetailPage({
           </h2>
 
           <div className="grid md:grid-cols-3 gap-4 max-w-4xl">
-            <div className="border-2 border-foreground rounded-sm bg-background p-5">
+            <div className="border-2 border-foreground rounded-sm bg-white p-5">
               <div className="text-[12px] font-bold text-foreground uppercase tracking-wide mb-3">
                 JDI Score
               </div>
@@ -277,7 +277,7 @@ export default async function NetworkDetailPage({
               </div>
             </div>
 
-            <div className="border-2 border-foreground rounded-sm bg-background p-5">
+            <div className="border-2 border-foreground rounded-sm bg-white p-5">
               <div className="text-[11px] font-bold text-foreground uppercase tracking-wide mb-2">
                 Country HHI
               </div>
@@ -289,7 +289,7 @@ export default async function NetworkDetailPage({
               </div>
             </div>
 
-            <div className="border-2 border-foreground rounded-sm bg-background p-5">
+            <div className="border-2 border-foreground rounded-sm bg-white p-5">
               <div className="text-[11px] font-bold text-foreground uppercase tracking-wide mb-2">
                 Total Countries
               </div>
@@ -310,7 +310,7 @@ export default async function NetworkDetailPage({
           </h2>
 
           <div className="grid md:grid-cols-3 gap-4 max-w-4xl">
-            <div className="border-2 border-foreground rounded-sm bg-background p-5">
+            <div className="border-2 border-foreground rounded-sm bg-white p-5">
               <div className="text-[12px] font-bold text-foreground uppercase tracking-wide mb-3">
                 IHI Score
               </div>
@@ -324,7 +324,7 @@ export default async function NetworkDetailPage({
               </div>
             </div>
 
-            <div className="border-2 border-foreground rounded-sm bg-background p-5">
+            <div className="border-2 border-foreground rounded-sm bg-white p-5">
               <div className="text-[11px] font-bold text-foreground uppercase tracking-wide mb-2">
                 Org HHI
               </div>
@@ -336,7 +336,7 @@ export default async function NetworkDetailPage({
               </div>
             </div>
 
-            <div className="border-2 border-foreground rounded-sm bg-background p-5">
+            <div className="border-2 border-foreground rounded-sm bg-white p-5">
               <div className="text-[11px] font-bold text-foreground uppercase tracking-wide mb-2">
                 Total Organizations
               </div>
