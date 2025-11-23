@@ -133,15 +133,15 @@ export function NetworkMap({ networkId }: NetworkMapProps) {
                 0.8, 'rgb(94, 201, 98)',       // Green
                 1, 'rgb(253, 231, 37)'         // Yellow
               ],
-              // Larger radius at lower zoom (zoomed out)
+              // Tighter radius for sharper visualization
               'heatmap-radius': [
                 'interpolate',
                 ['linear'],
                 ['zoom'],
-                0, 15,      // Big radius when zoomed out
-                3, 12,
-                5, 8,
-                6, 5        // Small radius when zoomed in
+                0, 4,       // Tight radius when zoomed out
+                2, 6,
+                4, 8,
+                6, 10       // Slightly larger when zoomed in
               ],
               // Visible at LOW zoom, fades out as you zoom IN
               'heatmap-opacity': [
