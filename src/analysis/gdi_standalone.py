@@ -179,8 +179,9 @@ def calculate_jdi(df: pd.DataFrame) -> Dict:
     hhi_component = 0.3 * (1 - country_hhi)
 
     # Absolute diversity bonus (35%) - reward networks with more countries
-    # log10(300) = 2.48, so this maxes out at 300+ countries (extreme threshold)
-    diversity_bonus = 0.35 * min(1.0, np.log10(num_countries) / 2.5)
+    # log10(200) = 2.30, so this maxes out at 200+ countries (extreme threshold)
+    # Changed from /2.5 to /2.0 for better differentiation between networks
+    diversity_bonus = 0.35 * min(1.0, np.log10(num_countries) / 2.0)
 
     # Top concentration penalty (35%)
     # Penalize if top country has > 15% of nodes
@@ -230,8 +231,9 @@ def calculate_ihi(df: pd.DataFrame) -> Dict:
     hhi_component = 0.3 * (1 - org_hhi)
 
     # Absolute diversity bonus (35%) - reward networks with more orgs
-    # log10(30000) = 4.48, so this maxes out at 30000+ orgs (extreme threshold)
-    diversity_bonus = 0.35 * min(1.0, np.log10(num_orgs) / 4.5)
+    # log10(10000) = 4.0, so this maxes out at 10000+ orgs (extreme threshold)
+    # Changed from /4.5 to /3.5 for better differentiation between networks
+    diversity_bonus = 0.35 * min(1.0, np.log10(num_orgs) / 3.5)
 
     # Top concentration penalty (35%)
     # Penalize if top org has > 3% of nodes
