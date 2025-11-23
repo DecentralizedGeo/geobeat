@@ -62,8 +62,8 @@ export function NetworkMap({ networkId }: NetworkMapProps) {
 
     const loadVisualizationData = async () => {
       try {
-        // Load hexbins (bigger resolution 3 for continental view)
-        const hexbinResponse = await fetch(`/api/networks/${networkId}/nodes?resolution=3`)
+        // Load hexbins (resolution 4 for better detail)
+        const hexbinResponse = await fetch(`/api/networks/${networkId}/nodes?resolution=4`)
         if (!hexbinResponse.ok) {
           console.warn(`No node data available for ${networkId}`)
           return
@@ -149,14 +149,14 @@ export function NetworkMap({ networkId }: NetworkMapProps) {
                 ['linear'],
                 ['zoom'],
                 0, 0.8,     // Visible when zoomed out
-                3, 0.7,
-                5, 0.4,     // Start fading
-                6, 0        // Invisible when zoomed in
+                2, 0.6,
+                3, 0.3,     // Start fading earlier
+                4, 0        // Invisible at zoom 4
               ]
             }
           })
 
-          // Hexbin fill layer (visible at HIGH zoom - zoomed in/regional)
+          // Hexbin fill layer (visible earlier, full opacity)
           map.current?.addLayer({
             id: 'hexbin-fill',
             type: 'fill',
@@ -168,9 +168,9 @@ export function NetworkMap({ networkId }: NetworkMapProps) {
                 ['linear'],
                 ['zoom'],
                 0, 0,       // Invisible when zoomed out
-                5, 0.3,     // Start fading in
-                6, 0.7,     // Solid when zoomed in
-                15, 0.7
+                3, 0.5,     // Start fading in earlier
+                4, 0.9,     // Full opacity at zoom 4
+                15, 0.9
               ]
             }
           })
@@ -188,9 +188,9 @@ export function NetworkMap({ networkId }: NetworkMapProps) {
                 ['linear'],
                 ['zoom'],
                 0, 0,
-                5, 0.2,
-                6, 0.5,
-                15, 0.5
+                3, 0.3,
+                4, 0.6,     // Full outline at zoom 4
+                15, 0.6
               ]
             }
           })
