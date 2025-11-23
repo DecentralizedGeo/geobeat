@@ -87,9 +87,29 @@ export function aggregateToHexbins(
   // Find max count for color scaling
   const maxCount = Math.max(...Array.from(hexCounts.values()))
 
-  // Create viridis color scale
-  const colorScale = scaleSequential(interpolateViridis)
-    .domain([0, Math.log(maxCount + 1)]) // Log scale for better distribution
+  // Create custom yellow → orange → red → purple scale
+  const customColorScale = (t: number): string => {
+    if (t <= 0.25) {
+      // Yellow to orange-yellow
+      const ratio = t / 0.25
+      return `rgb(255, ${Math.floor(255 - ratio * 75)}, 0)`
+    } else if (t <= 0.5) {
+      // Orange-yellow to orange
+      const ratio = (t - 0.25) / 0.25
+      return `rgb(255, ${Math.floor(180 - ratio * 80)}, 0)`
+    } else if (t <= 0.75) {
+      // Orange to red
+      const ratio = (t - 0.5) / 0.25
+      return `rgb(255, ${Math.floor(100 - ratio * 100)}, 0)`
+    } else {
+      // Red to purple
+      const ratio = (t - 0.75) / 0.25
+      return `rgb(${Math.floor(255 - ratio * 116)}, 0, ${Math.floor(ratio * 139)})`
+    }
+  }
+
+  // Use log scale for better distribution
+  const logScale = (count: number) => Math.log(count + 1) / Math.log(maxCount + 1)
 
   // Convert to GeoJSON features
   const features: HexbinFeature[] = Array.from(hexCounts.entries()).map(([hex, count]) => {
@@ -99,7 +119,7 @@ export function aggregateToHexbins(
     const coordinates = [...boundary, boundary[0]]
 
     // Color based on log scale
-    const color = colorScale(Math.log(count + 1))
+    const color = customColorScale(logScale(count))
 
     return {
       type: 'Feature',
