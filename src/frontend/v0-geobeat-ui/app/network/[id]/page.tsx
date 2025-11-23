@@ -23,8 +23,8 @@ export default async function NetworkDetailPage({
     notFound();
   }
 
-  // GDI calculation - only use PDI for now (JDI/IHI coming soon)
-  const gdi = Math.round(network.pdi);
+  // GDI calculation - composite score
+  const gdi = Math.round(0.4 * network.pdi + 0.35 * network.jdi + 0.25 * network.ihi);
 
   // Mock detailed data
   const detailData = {
@@ -134,40 +134,42 @@ export default async function NetworkDetailPage({
               </div>
             </div>
 
-            <div className="space-y-2 opacity-40">
-              <div className="flex items-center gap-2">
-                <div className="text-[12px] font-medium text-muted-foreground/70 uppercase tracking-wide">
-                  JDI
-                </div>
-                <span className="text-[10px] px-2 py-0.5 rounded-full bg-muted text-muted-foreground">
-                  Coming Soon
-                </span>
+            <div className="space-y-2">
+              <div className="text-[12px] font-medium text-muted-foreground/70 uppercase tracking-wide">
+                JDI
               </div>
               <div className="flex items-center gap-2.5">
                 <span className="text-xl font-semibold w-10">
-                  —
+                  {Math.round(network.jdi)}
                 </span>
                 <div className="flex-1 h-2 bg-muted rounded-sm overflow-hidden">
-                  <div className="h-full rounded-sm bg-muted" />
+                  <div
+                    className="h-full rounded-sm"
+                    style={{
+                      width: `${network.jdi}%`,
+                      background: "oklch(0.65 0.12 150)",
+                    }}
+                  />
                 </div>
               </div>
             </div>
 
-            <div className="space-y-2 opacity-40">
-              <div className="flex items-center gap-2">
-                <div className="text-[12px] font-medium text-muted-foreground/70 uppercase tracking-wide">
-                  IHI
-                </div>
-                <span className="text-[10px] px-2 py-0.5 rounded-full bg-muted text-muted-foreground">
-                  Coming Soon
-                </span>
+            <div className="space-y-2">
+              <div className="text-[12px] font-medium text-muted-foreground/70 uppercase tracking-wide">
+                IHI
               </div>
               <div className="flex items-center gap-2.5">
                 <span className="text-xl font-semibold w-10">
-                  —
+                  {Math.round(network.ihi)}
                 </span>
                 <div className="flex-1 h-2 bg-muted rounded-sm overflow-hidden">
-                  <div className="h-full rounded-sm bg-muted" />
+                  <div
+                    className="h-full rounded-sm"
+                    style={{
+                      width: `${network.ihi}%`,
+                      background: "oklch(0.63 0.15 290)",
+                    }}
+                  />
                 </div>
               </div>
             </div>
@@ -264,56 +266,25 @@ export default async function NetworkDetailPage({
               </span>
             </div>
 
-            <div>
-              <div className="text-[13px] font-medium mb-3">
-                Top Jurisdictions by Share
-              </div>
-              <div className="space-y-2.5">
-                {detailData.topJurisdictions.map((jurisdiction, index) => (
-                  <div key={index} className="flex items-center gap-3">
-                    <span className="text-[13px] text-muted-foreground/60 w-4">
-                      {index + 1}.
-                    </span>
-                    <span className="text-[13px] flex-1">
-                      {jurisdiction.name}
-                    </span>
-                    <span className="text-[13px] font-medium">
-                      {jurisdiction.share}%
-                    </span>
-                    <div className="w-24 h-1.5 bg-muted rounded-full overflow-hidden">
-                      <div
-                        className="h-full rounded-full"
-                        style={{
-                          width: `${jurisdiction.share}%`,
-                          background:
-                            index === 0
-                              ? "oklch(0.65 0.12 150)"
-                              : index === 1
-                                ? "oklch(0.63 0.15 290)"
-                                : index === 2
-                                  ? "oklch(0.60 0.14 240)"
-                                  : "oklch(0.57 0.10 270)",
-                        }}
-                      />
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-
             <div className="pt-4 space-y-3">
               <div>
                 <span className="text-[13px] font-medium">
-                  Effective Number of Jurisdictions (ENJ):{" "}
+                  Country HHI:{" "}
                 </span>
                 <span className="text-[13px] text-muted-foreground">
-                  {detailData.effectiveJurisdictions}
+                  {network.countryHHI?.toFixed(3) || "N/A"}
+                </span>
+              </div>
+              <div>
+                <span className="text-[13px] font-medium">
+                  Total Countries:{" "}
+                </span>
+                <span className="text-[13px] text-muted-foreground">
+                  {network.numCountries || "N/A"}
                 </span>
               </div>
               <div className="text-[13px] text-muted-foreground">
-                Largest jurisdiction hosts{" "}
-                {detailData.topJurisdictions[0].share}% of observed
-                infrastructure
+                Lower HHI indicates more even distribution across countries
               </div>
             </div>
           </div>
@@ -335,67 +306,26 @@ export default async function NetworkDetailPage({
               </span>
             </div>
 
-            <div>
-              <div className="text-[13px] font-medium mb-3">
-                Provider Distribution
-              </div>
-              <div className="h-8 bg-muted rounded-sm overflow-hidden flex">
-                {detailData.providers.map((provider, index) => (
-                  <div
-                    key={index}
-                    className="flex items-center justify-center text-[11px] font-medium text-white"
-                    style={{
-                      width: `${provider.share}%`,
-                      background:
-                        index === 0
-                          ? "oklch(0.63 0.15 290)"
-                          : index === 1
-                            ? "oklch(0.60 0.12 280)"
-                            : index === 2
-                              ? "oklch(0.57 0.10 270)"
-                              : "oklch(0.54 0.08 260)",
-                    }}
-                  >
-                    {provider.share > 10 &&
-                      `${provider.name} ${provider.share}%`}
-                  </div>
-                ))}
-              </div>
-            </div>
-
             <div className="grid grid-cols-2 gap-x-8 gap-y-4 pt-3">
               <div>
-                <div className="text-[13px] font-medium mb-1">Provider HHI</div>
+                <div className="text-[13px] font-medium mb-1">Org HHI</div>
                 <div className="text-[13px] text-muted-foreground">
-                  {detailData.providerHHI}
+                  {network.orgHHI?.toFixed(3) || "N/A"}
                 </div>
               </div>
 
               <div>
                 <div className="text-[13px] font-medium mb-1">
-                  Effective Number of Providers
+                  Total Organizations
                 </div>
                 <div className="text-[13px] text-muted-foreground">
-                  {detailData.effectiveProviders}
+                  {network.numOrgs?.toLocaleString() || "N/A"}
                 </div>
               </div>
 
-              <div>
-                <div className="text-[13px] font-medium mb-1">
-                  Bare Metal Share
-                </div>
+              <div className="col-span-2">
                 <div className="text-[13px] text-muted-foreground">
-                  {detailData.bareMetalShare}%
-                </div>
-              </div>
-
-              <div>
-                <div className="text-[13px] font-medium mb-1">
-                  Top Provider Concentration
-                </div>
-                <div className="text-[13px] text-muted-foreground">
-                  {detailData.providers[0].name} hosts{" "}
-                  {detailData.providers[0].share}% of nodes
+                  Lower HHI indicates more even distribution across hosting providers/organizations
                 </div>
               </div>
             </div>

@@ -39,7 +39,7 @@ def calculate_pdi(df: pd.DataFrame, threshold_km: float = 500.0, h3_resolution: 
 
     # Normalize and composite
     morans_norm = max(0, min(1, (1 - morans_i)))  # Invert: high clustering = low score
-    enl_norm = enl / num_cells
+    enl_norm = min(1.0, enl / 2000)  # Absolute ENL capped at 2000 locations (extreme threshold)
     hhi_norm = 1 - spatial_hhi
 
     pdi = 100 * (0.4 * morans_norm + 0.3 * enl_norm + 0.3 * hhi_norm)
@@ -160,9 +160,11 @@ def _calculate_enl(df: pd.DataFrame, resolution: int, num_cells: int) -> float:
 
 def calculate_jdi(df: pd.DataFrame) -> Dict:
     """
-    Jurisdictional Diversity Index - Country HHI
+    Jurisdictional Diversity Index - Country HHI + Absolute Diversity
 
-    Formula: JDI = 100 × (1 - Country_HHI)
+    Formula: JDI = 100 × [0.7×(1-Country_HHI) + 0.3×min(1, log10(num_countries)/2)]
+
+    Rewards both even distribution AND absolute diversity
     """
     country_counts = df['country'].value_counts()
     total_nodes = len(df)
@@ -171,7 +173,19 @@ def calculate_jdi(df: pd.DataFrame) -> Dict:
     shares = country_counts / total_nodes
     country_hhi = (shares ** 2).sum()
 
-    jdi = 100 * (1 - country_hhi)
+    # HHI component (30%)
+    hhi_component = 0.3 * (1 - country_hhi)
+
+    # Absolute diversity bonus (35%) - reward networks with more countries
+    # log10(300) = 2.48, so this maxes out at 300+ countries (extreme threshold)
+    diversity_bonus = 0.35 * min(1.0, np.log10(num_countries) / 2.5)
+
+    # Top concentration penalty (35%)
+    # Penalize if top country has > 15% of nodes
+    top_country_share = country_counts.iloc[0] / total_nodes if len(country_counts) > 0 else 0
+    concentration_penalty = 0.35 * max(0, (top_country_share - 0.15) / 0.35)  # Linear from 15% to 50%
+
+    jdi = 100 * (hhi_component + diversity_bonus - concentration_penalty)
 
     top_3 = {k: {'count': v, 'share': round(v/total_nodes*100, 1)}
              for k, v in country_counts.head(3).items()}
@@ -181,15 +195,21 @@ def calculate_jdi(df: pd.DataFrame) -> Dict:
         'country_hhi': round(country_hhi, 3),
         'num_countries': num_countries,
         'top_3_countries': top_3,
-        'interpretation': _interpret_hhi_based(jdi)
+        'interpretation': _interpret_hhi_based(jdi),
+        'components': {
+            'hhi_contribution': round(hhi_component * 100, 1),
+            'diversity_contribution': round(diversity_bonus * 100, 1)
+        }
     }
 
 
 def calculate_ihi(df: pd.DataFrame) -> Dict:
     """
-    Infrastructure Heterogeneity Index - Org HHI
+    Infrastructure Heterogeneity Index - Org HHI + Absolute Diversity
 
-    Formula: IHI = 100 × (1 - Org_HHI)
+    Formula: IHI = 100 × [0.7×(1-Org_HHI) + 0.3×min(1, log10(num_orgs)/3)]
+
+    Rewards both even distribution AND absolute diversity
     """
     org_counts = df['org'].value_counts()
     total_nodes = len(df)
@@ -198,7 +218,19 @@ def calculate_ihi(df: pd.DataFrame) -> Dict:
     shares = org_counts / total_nodes
     org_hhi = (shares ** 2).sum()
 
-    ihi = 100 * (1 - org_hhi)
+    # HHI component (30%)
+    hhi_component = 0.3 * (1 - org_hhi)
+
+    # Absolute diversity bonus (35%) - reward networks with more orgs
+    # log10(30000) = 4.48, so this maxes out at 30000+ orgs (extreme threshold)
+    diversity_bonus = 0.35 * min(1.0, np.log10(num_orgs) / 4.5)
+
+    # Top concentration penalty (35%)
+    # Penalize if top org has > 3% of nodes
+    top_org_share = org_counts.iloc[0] / total_nodes if len(org_counts) > 0 else 0
+    concentration_penalty = 0.35 * max(0, (top_org_share - 0.03) / 0.17)  # Linear from 3% to 20%
+
+    ihi = 100 * (hhi_component + diversity_bonus - concentration_penalty)
 
     top_3 = {k: {'count': v, 'share': round(v/total_nodes*100, 1)}
              for k, v in org_counts.head(3).items()}
@@ -208,29 +240,41 @@ def calculate_ihi(df: pd.DataFrame) -> Dict:
         'org_hhi': round(org_hhi, 3),
         'num_orgs': num_orgs,
         'top_3_orgs': top_3,
-        'interpretation': _interpret_hhi_based(ihi)
+        'interpretation': _interpret_hhi_based(ihi),
+        'components': {
+            'hhi_contribution': round(hhi_component * 100, 1),
+            'diversity_contribution': round(diversity_bonus * 100, 1)
+        }
     }
 
 
-def calculate_gdi(df: pd.DataFrame, weights: tuple = (0.4, 0.35, 0.25)) -> Dict:
-    """Composite GDI score"""
+def calculate_gdi(df: pd.DataFrame, weights: tuple = (0.35, 0.2, 0.1, 0.35)) -> Dict:
+    """Composite GDI score with network size bonus (35% weight)"""
     df = df.dropna(subset=['lat', 'lon', 'country', 'org'])
 
     pdi_result = calculate_pdi(df)
     jdi_result = calculate_jdi(df)
     ihi_result = calculate_ihi(df)
 
-    w_pdi, w_jdi, w_ihi = weights
+    # Network size score - rewards absolute node count
+    # Uses sqrt scaling: sqrt(nodes / 50000) capped at 1.0
+    # This gives large networks a boost while preventing runaway scores
+    total_nodes = len(df)
+    network_size_score = 100 * min(1.0, (total_nodes / 50000) ** 0.5)
+
+    w_pdi, w_jdi, w_ihi, w_size = weights
     gdi = (w_pdi * pdi_result['pdi'] +
            w_jdi * jdi_result['jdi'] +
-           w_ihi * ihi_result['ihi'])
+           w_ihi * ihi_result['ihi'] +
+           w_size * network_size_score)
 
     return {
         'gdi': round(gdi, 1),
         'pdi': pdi_result,
         'jdi': jdi_result,
         'ihi': ihi_result,
-        'weights': {'pdi': w_pdi, 'jdi': w_jdi, 'ihi': w_ihi},
+        'network_size_score': round(network_size_score, 1),
+        'weights': {'pdi': w_pdi, 'jdi': w_jdi, 'ihi': w_ihi, 'size': w_size},
         'interpretation': _interpret_gdi(gdi),
         'total_nodes': len(df)
     }

@@ -40,8 +40,8 @@ export function NetworkList() {
 
   const networksWithGDI = networks.map((network) => ({
     ...network,
-    // GDI calculation - only use PDI for now (JDI/IHI coming soon)
-    gdi: Math.round(network.pdi),
+    // GDI calculation - composite score
+    gdi: Math.round(0.4 * network.pdi + 0.35 * network.jdi + 0.25 * network.ihi),
   }))
 
   const sortedNetworks = [...networksWithGDI].sort((a, b) => {
@@ -233,22 +233,34 @@ function NetworkRow({
         </div>
 
         {/* JDI with horizontal bar */}
-        <div className="flex items-center gap-2.5 opacity-40">
-          <span className="font-semibold text-[15px] w-7">
-            —
+        <div className="flex items-center gap-2.5">
+          <span className={cn("font-semibold text-[15px] w-7", isLowScore(network.jdi) && "text-red-500/90")}>
+            {Math.round(network.jdi)}
           </span>
           <div className="flex-1 h-1.5 bg-muted rounded-full overflow-hidden">
-            <div className="h-full rounded-full bg-muted" />
+            <div
+              className="h-full rounded-full transition-all duration-300"
+              style={{
+                width: `${network.jdi}%`,
+                background: "oklch(0.65 0.12 150)",
+              }}
+            />
           </div>
         </div>
 
         {/* IHI with horizontal bar */}
-        <div className="flex items-center gap-2.5 opacity-40">
-          <span className="font-semibold text-[15px] w-7">
-            —
+        <div className="flex items-center gap-2.5">
+          <span className={cn("font-semibold text-[15px] w-7", isLowScore(network.ihi) && "text-red-500/90")}>
+            {Math.round(network.ihi)}
           </span>
           <div className="flex-1 h-1.5 bg-muted rounded-full overflow-hidden">
-            <div className="h-full rounded-full bg-muted" />
+            <div
+              className="h-full rounded-full transition-all duration-300"
+              style={{
+                width: `${network.ihi}%`,
+                background: "oklch(0.63 0.15 290)",
+              }}
+            />
           </div>
         </div>
       </button>
@@ -297,29 +309,43 @@ function NetworkRow({
                   </div>
                 </div>
 
-                {/* JDI Details - Coming Soon */}
-                <div className="space-y-2 opacity-40">
-                  <div className="flex items-center gap-2">
-                    <span className="text-[13px] font-semibold">JDI: —</span>
-                    <span className="text-[10px] px-2 py-0.5 rounded-full bg-muted text-muted-foreground">
-                      Coming Soon
-                    </span>
+                {/* JDI Details */}
+                <div className="space-y-2">
+                  <div className="flex items-center justify-between">
+                    <span className="text-[13px] font-semibold">JDI: {Math.round(network.jdi)}</span>
+                    <div className="flex-1 mx-3 h-1.5 bg-muted rounded-full overflow-hidden">
+                      <div
+                        className="h-full rounded-full"
+                        style={{
+                          width: `${network.jdi}%`,
+                          background: "oklch(0.65 0.12 150)",
+                        }}
+                      />
+                    </div>
                   </div>
                   <div className="text-[12px] text-muted-foreground/70 space-y-1 pl-1">
-                    <div>• Jurisdictional diversity metrics</div>
+                    <div>• Country HHI: {network.countryHHI?.toFixed(3) || 'N/A'}</div>
+                    <div>• Total countries: {network.numCountries || 'N/A'}</div>
                   </div>
                 </div>
 
-                {/* IHI Details - Coming Soon */}
-                <div className="space-y-2 opacity-40">
-                  <div className="flex items-center gap-2">
-                    <span className="text-[13px] font-semibold">IHI: —</span>
-                    <span className="text-[10px] px-2 py-0.5 rounded-full bg-muted text-muted-foreground">
-                      Coming Soon
-                    </span>
+                {/* IHI Details */}
+                <div className="space-y-2">
+                  <div className="flex items-center justify-between">
+                    <span className="text-[13px] font-semibold">IHI: {Math.round(network.ihi)}</span>
+                    <div className="flex-1 mx-3 h-1.5 bg-muted rounded-full overflow-hidden">
+                      <div
+                        className="h-full rounded-full"
+                        style={{
+                          width: `${network.ihi}%`,
+                          background: "oklch(0.63 0.15 290)",
+                        }}
+                      />
+                    </div>
                   </div>
                   <div className="text-[12px] text-muted-foreground/70 space-y-1 pl-1">
-                    <div>• Infrastructure heterogeneity metrics</div>
+                    <div>• Org HHI: {network.orgHHI?.toFixed(3) || 'N/A'}</div>
+                    <div>• Total orgs: {network.numOrgs || 'N/A'}</div>
                   </div>
                 </div>
 

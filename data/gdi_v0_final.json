@@ -1,72 +1,82 @@
 {
   "ethereum": {
-    "gdi": 79.7,
+    "gdi": 51.4,
     "pdi": {
-      "pdi": 63.3,
-      "morans_i": 0.274,
+      "pdi": 62.8,
+      "morans_i": 0.254,
       "morans_p_value": 0.0,
-      "spatial_hhi": 0.021,
-      "enl": 205.9,
-      "total_cells": 1272,
+      "spatial_hhi": 0.02,
+      "enl": 236.9,
+      "total_cells": 1956,
       "interpretation": "Moderately dispersed",
       "components": {
-        "morans_contribution": 29.1,
-        "enl_contribution": 4.9,
+        "morans_contribution": 29.8,
+        "enl_contribution": 3.6,
         "hhi_contribution": 29.4
       }
     },
     "jdi": {
-      "jdi": 85.2,
-      "country_hhi": 0.148,
-      "num_countries": 77,
+      "jdi": 34.9,
+      "country_hhi": 0.145,
+      "num_countries": 92,
       "top_3_countries": {
         "United States": {
-          "count": 2116,
-          "share": 32.9
+          "count": 4206,
+          "share": 33.2
         },
         "Germany": {
-          "count": 992,
-          "share": 15.4
+          "count": 1757,
+          "share": 13.9
         },
         "Finland": {
-          "count": 399,
-          "share": 6.2
+          "count": 715,
+          "share": 5.6
         }
       },
-      "interpretation": "Low concentration"
+      "interpretation": "High concentration",
+      "components": {
+        "hhi_contribution": 25.6,
+        "diversity_contribution": 27.5
+      }
     },
     "ihi": {
-      "ihi": 98.3,
-      "org_hhi": 0.017,
-      "num_orgs": 1320,
+      "ihi": 48.2,
+      "org_hhi": 0.016,
+      "num_orgs": 2070,
       "top_3_orgs": {
         "Hetzner": {
-          "count": 482,
-          "share": 7.5
+          "count": 816,
+          "share": 6.4
         },
         "AWS EC2 (us-east-1)": {
-          "count": 360,
-          "share": 5.6
+          "count": 769,
+          "share": 6.1
         },
         "Hetzner Online GmbH": {
-          "count": 307,
-          "share": 4.8
+          "count": 556,
+          "share": 4.4
         }
       },
-      "interpretation": "Low concentration"
+      "interpretation": "High concentration",
+      "components": {
+        "hhi_contribution": 29.5,
+        "diversity_contribution": 25.8
+      }
     },
+    "network_size_score": 50.3,
     "weights": {
-      "pdi": 0.4,
-      "jdi": 0.35,
-      "ihi": 0.25
+      "pdi": 0.35,
+      "jdi": 0.2,
+      "ihi": 0.1,
+      "size": 0.35
     },
-    "interpretation": "Moderately decentralized",
-    "total_nodes": 6429
+    "interpretation": "Weakly decentralized",
+    "total_nodes": 12664
   },
   "polygon": {
-    "gdi": 78.1,
+    "gdi": 43.4,
     "pdi": {
-      "pdi": 60.0,
+      "pdi": 57.7,
       "morans_i": 0.323,
       "morans_p_value": 0.0,
       "spatial_hhi": 0.03,
@@ -75,12 +85,12 @@
       "interpretation": "Concentrated",
       "components": {
         "morans_contribution": 27.1,
-        "enl_contribution": 3.8,
+        "enl_contribution": 1.5,
         "hhi_contribution": 29.1
       }
     },
     "jdi": {
-      "jdi": 84.4,
+      "jdi": 33.2,
       "country_hhi": 0.156,
       "num_countries": 69,
       "top_3_countries": {
@@ -97,10 +107,14 @@
           "share": 9.3
         }
       },
-      "interpretation": "Low concentration"
+      "interpretation": "High concentration",
+      "components": {
+        "hhi_contribution": 25.3,
+        "diversity_contribution": 25.7
+      }
     },
     "ihi": {
-      "ihi": 98.2,
+      "ihi": 46.5,
       "org_hhi": 0.018,
       "num_orgs": 944,
       "top_3_orgs": {
@@ -117,14 +131,20 @@
           "share": 4.2
         }
       },
-      "interpretation": "Low concentration"
+      "interpretation": "High concentration",
+      "components": {
+        "hhi_contribution": 29.5,
+        "diversity_contribution": 23.1
+      }
     },
+    "network_size_score": 33.9,
     "weights": {
-      "pdi": 0.4,
-      "jdi": 0.35,
-      "ihi": 0.25
+      "pdi": 0.35,
+      "jdi": 0.2,
+      "ihi": 0.1,
+      "size": 0.35
     },
-    "interpretation": "Moderately decentralized",
+    "interpretation": "Weakly decentralized",
     "total_nodes": 5747
   }
 }
