@@ -30,7 +30,7 @@ export function NetworkMap({ networkId }: NetworkMapProps) {
     try {
       map.current = new mapboxgl.Map({
         container: mapContainer.current,
-        style: 'mapbox://styles/mapbox/dark-v11',
+        style: 'mapbox://styles/mapbox/light-v11', // Light theme
         center: [0, 20], // Centered on global view
         zoom: 1.5,
         projection: { name: 'mercator' }
@@ -56,159 +56,101 @@ export function NetworkMap({ networkId }: NetworkMapProps) {
     }
   }, [])
 
-  // Load and display node data
+  // Load and display hexbin data
   useEffect(() => {
     if (!map.current || !mapLoaded) return
 
-    const loadNodeData = async () => {
+    const loadHexbinData = async () => {
       try {
-        const response = await fetch(`/api/networks/${networkId}/nodes`)
+        const response = await fetch(`/api/networks/${networkId}/nodes?resolution=4`)
         if (!response.ok) {
           console.warn(`No node data available for ${networkId}`)
           return
         }
 
-        const nodeData: NetworkGeoJSON = await response.json()
+        const hexbinData: NetworkGeoJSON = await response.json()
 
         // Add data source
-        if (map.current?.getSource('nodes')) {
+        if (map.current?.getSource('hexbins')) {
           // Update existing source
-          (map.current.getSource('nodes') as mapboxgl.GeoJSONSource).setData(nodeData)
+          (map.current.getSource('hexbins') as mapboxgl.GeoJSONSource).setData(hexbinData)
         } else {
-          // Add new source with clustering
-          map.current?.addSource('nodes', {
+          // Add new source for hexbins
+          map.current?.addSource('hexbins', {
             type: 'geojson',
-            data: nodeData,
-            cluster: true,
-            clusterMaxZoom: 10,
-            clusterRadius: 50
+            data: hexbinData
           })
 
-          // Cluster circles
+          // Hexbin fill layer with viridis colors
           map.current?.addLayer({
-            id: 'clusters',
-            type: 'circle',
-            source: 'nodes',
-            filter: ['has', 'point_count'],
+            id: 'hexbin-fill',
+            type: 'fill',
+            source: 'hexbins',
             paint: {
-              'circle-color': [
-                'step',
-                ['get', 'point_count'],
-                'oklch(0.6 0.18 240)', // PDI blue for small clusters
-                100,
-                'oklch(0.65 0.15 150)', // JDI green for medium
-                750,
-                'oklch(0.63 0.2 290)' // IHI purple for large
-              ],
-              'circle-radius': [
-                'step',
-                ['get', 'point_count'],
-                20,
-                100,
-                30,
-                750,
-                40
-              ],
-              'circle-opacity': 0.8
+              'fill-color': ['get', 'color'],
+              'fill-opacity': 0.7
             }
           })
 
-          // Cluster count labels
+          // Hexbin outline layer
           map.current?.addLayer({
-            id: 'cluster-count',
-            type: 'symbol',
-            source: 'nodes',
-            filter: ['has', 'point_count'],
-            layout: {
-              'text-field': '{point_count_abbreviated}',
-              'text-font': ['DIN Offc Pro Medium', 'Arial Unicode MS Bold'],
-              'text-size': 12
-            },
+            id: 'hexbin-outline',
+            type: 'line',
+            source: 'hexbins',
             paint: {
-              'text-color': '#ffffff'
+              'line-color': '#ffffff',
+              'line-width': 0.5,
+              'line-opacity': 0.5
             }
           })
 
-          // Individual unclustered points
-          map.current?.addLayer({
-            id: 'unclustered-point',
-            type: 'circle',
-            source: 'nodes',
-            filter: ['!', ['has', 'point_count']],
-            paint: {
-              'circle-color': 'oklch(0.6 0.18 240)',
-              'circle-radius': 6,
-              'circle-stroke-width': 1,
-              'circle-stroke-color': '#fff',
-              'circle-opacity': 0.9
-            }
-          })
+          // Tooltip on hover
+          let popup: mapboxgl.Popup | null = null
 
-          // Click handler for clusters - zoom in
-          map.current?.on('click', 'clusters', (e) => {
-            if (!map.current) return
-            const features = map.current.queryRenderedFeatures(e.point, {
-              layers: ['clusters']
-            })
-            const clusterId = features[0].properties?.cluster_id
-            const source = map.current.getSource('nodes') as mapboxgl.GeoJSONSource
-
-            source.getClusterExpansionZoom(clusterId, (err, zoom) => {
-              if (err || !map.current) return
-
-              map.current.easeTo({
-                center: (features[0].geometry as any).coordinates,
-                zoom: zoom
-              })
-            })
-          })
-
-          // Click handler for individual points - show popup
-          map.current?.on('click', 'unclustered-point', (e) => {
+          map.current?.on('mousemove', 'hexbin-fill', (e) => {
             if (!map.current || !e.features || !e.features[0]) return
 
-            const coordinates = (e.features[0].geometry as any).coordinates.slice()
-            const { node_id, city, country, cloud_provider } = e.features[0].properties || {}
+            // Change cursor
+            map.current.getCanvas().style.cursor = 'pointer'
 
-            // Ensure popup appears over the point
-            while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
-              coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360
-            }
+            const feature = e.features[0]
+            const count = feature.properties?.count || 0
 
-            new mapboxgl.Popup()
-              .setLngLat(coordinates)
+            // Remove existing popup
+            if (popup) popup.remove()
+
+            // Create new popup
+            popup = new mapboxgl.Popup({
+              closeButton: false,
+              closeOnClick: false,
+              offset: 10
+            })
+              .setLngLat(e.lngLat)
               .setHTML(`
-                <div style="padding: 8px; min-width: 150px;">
-                  <h3 style="font-weight: 600; margin-bottom: 4px;">${networkId} Node</h3>
-                  <p style="font-size: 12px; margin: 2px 0;">ID: ${node_id}</p>
-                  ${city ? `<p style="font-size: 12px; margin: 2px 0;">${city}, ${country}</p>` : ''}
-                  ${cloud_provider ? `<p style="font-size: 12px; margin: 2px 0;">Provider: ${cloud_provider}</p>` : ''}
+                <div style="padding: 6px 10px; font-size: 13px; font-weight: 500;">
+                  ${count} node${count !== 1 ? 's' : ''}
                 </div>
               `)
               .addTo(map.current)
           })
 
-          // Change cursor on hover
-          map.current?.on('mouseenter', 'clusters', () => {
-            if (map.current) map.current.getCanvas().style.cursor = 'pointer'
-          })
-          map.current?.on('mouseleave', 'clusters', () => {
-            if (map.current) map.current.getCanvas().style.cursor = ''
-          })
-          map.current?.on('mouseenter', 'unclustered-point', () => {
-            if (map.current) map.current.getCanvas().style.cursor = 'pointer'
-          })
-          map.current?.on('mouseleave', 'unclustered-point', () => {
-            if (map.current) map.current.getCanvas().style.cursor = ''
+          map.current?.on('mouseleave', 'hexbin-fill', () => {
+            if (map.current) {
+              map.current.getCanvas().style.cursor = ''
+            }
+            if (popup) {
+              popup.remove()
+              popup = null
+            }
           })
         }
 
       } catch (err) {
-        console.error('Failed to load node data:', err)
+        console.error('Failed to load hexbin data:', err)
       }
     }
 
-    loadNodeData()
+    loadHexbinData()
   }, [mapLoaded, networkId])
 
   if (error) {
