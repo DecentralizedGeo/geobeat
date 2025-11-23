@@ -233,11 +233,11 @@ export function NetworkMap({ networkId }: NetworkMapProps) {
         }
 
       } catch (err) {
-        console.error('Failed to load hexbin data:', err)
+        console.error('Failed to load visualization data:', err)
       }
     }
 
-    loadHexbinData()
+    loadVisualizationData()
   }, [mapLoaded, networkId])
 
   if (error) {
