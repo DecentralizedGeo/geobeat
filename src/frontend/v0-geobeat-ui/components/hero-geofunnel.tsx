@@ -289,9 +289,8 @@ export function HeroGeofunnel() {
           Most "decentralized" networks aren't{" "}
           <span className="font-semibold">geographically decentralized.</span>
         </h1>
-        <p className="text-lg md:text-xl text-foreground/75 leading-relaxed mb-8 max-w-xl">
-          <span className="font-semibold">GEOBEAT</span> measures where networks <em>actually</em> run — through
-          physical, jurisdictional, and infrastructural lenses.
+        <p className="text-xlg md:text-xl text-foreground/75 leading-relaxed mb-8 max-w-xl">
+          <span className="font-semibold">GEOBEAT</span> is a real-time geographic observatory<br /> for decentralized networks.
         </p>
         <Link href="/dashboard">
           <Button size="lg" className="rounded-sm group bg-foreground text-background hover:bg-foreground/90 border-2 border-foreground text-lg px-8 py-6 h-auto">
