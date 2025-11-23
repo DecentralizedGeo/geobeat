@@ -55,7 +55,7 @@ export function IndexTooltip({
     <TooltipProvider delayDuration={200}>
       <Tooltip>
         <TooltipTrigger asChild>
-          <div className="contents cursor-help">
+          <div className="cursor-help flex items-center gap-2.5 w-full">
             {children}
           </div>
         </TooltipTrigger>

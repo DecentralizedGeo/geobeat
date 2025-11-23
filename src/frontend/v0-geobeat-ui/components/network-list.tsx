@@ -211,55 +211,49 @@ function NetworkRow({
 
         {/* PDI with horizontal bar */}
         <IndexTooltip type="pdi" breakdown={orgBreakdown} score={network.pdi}>
-          <div className="flex items-center gap-2.5">
-            <span className={cn("font-semibold text-[15px] w-7", isLowScore(network.pdi) && "text-red-500/90")}>
-              {network.pdi}
-            </span>
-            <div className="flex-1 h-1.5 bg-muted rounded-full overflow-hidden">
-              <div
-                className="h-full rounded-full transition-all duration-300"
-                style={{
-                  width: `${network.pdi}%`,
-                  background: "oklch(0.60 0.14 240)",
-                }}
-              />
-            </div>
+          <span className={cn("font-semibold text-[15px] w-7", isLowScore(network.pdi) && "text-red-500/90")}>
+            {network.pdi}
+          </span>
+          <div className="flex-1 h-1.5 bg-muted rounded-full overflow-hidden">
+            <div
+              className="h-full rounded-full transition-all duration-300"
+              style={{
+                width: `${network.pdi}%`,
+                background: "oklch(0.60 0.14 240)",
+              }}
+            />
           </div>
         </IndexTooltip>
 
         {/* JDI with horizontal bar */}
         <IndexTooltip type="jdi" breakdown={countryBreakdown} score={network.jdi}>
-          <div className="flex items-center gap-2.5">
-            <span className={cn("font-semibold text-[15px] w-7", isLowScore(network.jdi) && "text-red-500/90")}>
-              {Math.round(network.jdi)}
-            </span>
-            <div className="flex-1 h-1.5 bg-muted rounded-full overflow-hidden">
-              <div
-                className="h-full rounded-full transition-all duration-300"
-                style={{
-                  width: `${network.jdi}%`,
-                  background: "oklch(0.65 0.12 150)",
-                }}
-              />
-            </div>
+          <span className={cn("font-semibold text-[15px] w-7", isLowScore(network.jdi) && "text-red-500/90")}>
+            {Math.round(network.jdi)}
+          </span>
+          <div className="flex-1 h-1.5 bg-muted rounded-full overflow-hidden">
+            <div
+              className="h-full rounded-full transition-all duration-300"
+              style={{
+                width: `${network.jdi}%`,
+                background: "oklch(0.65 0.12 150)",
+              }}
+            />
           </div>
         </IndexTooltip>
 
         {/* IHI with horizontal bar */}
         <IndexTooltip type="ihi" breakdown={ispBreakdown} score={network.ihi}>
-          <div className="flex items-center gap-2.5">
-            <span className={cn("font-semibold text-[15px] w-7", isLowScore(network.ihi) && "text-red-500/90")}>
-              {Math.round(network.ihi)}
-            </span>
-            <div className="flex-1 h-1.5 bg-muted rounded-full overflow-hidden">
-              <div
-                className="h-full rounded-full transition-all duration-300"
-                style={{
-                  width: `${network.ihi}%`,
-                  background: "oklch(0.63 0.15 290)",
-                }}
-              />
-            </div>
+          <span className={cn("font-semibold text-[15px] w-7", isLowScore(network.ihi) && "text-red-500/90")}>
+            {Math.round(network.ihi)}
+          </span>
+          <div className="flex-1 h-1.5 bg-muted rounded-full overflow-hidden">
+            <div
+              className="h-full rounded-full transition-all duration-300"
+              style={{
+                width: `${network.ihi}%`,
+                background: "oklch(0.63 0.15 290)",
+              }}
+            />
           </div>
         </IndexTooltip>
       </button>
