@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ChevronLeft } from "lucide-react";
-import { networks } from "@/lib/mock-data";
+import { networks } from "@/lib/network-data";
 import { NetworkMap } from "@/components/network-map";
 import { ScrollToTop } from "@/components/scroll-to-top";
 import { IndexTooltip } from "@/components/index-tooltip";

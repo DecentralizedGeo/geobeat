@@ -311,6 +311,90 @@ def _interpret_gdi(gdi: float) -> str:
         return "Centralized"
 
 
+def transform_to_network_format(results: Dict) -> list:
+    """
+    Transform results dictionary to Network[] array format for frontend
+    
+    Args:
+        results: Dictionary with network_id as keys and GDI results as values
+        
+    Returns:
+        List of Network objects in frontend format
+    """
+    # Network metadata mapping
+    network_metadata = {
+        'ethereum': {
+            'name': 'Ethereum',
+            'symbol': 'ETH',
+            'logoUrl': 'https://cryptologos.cc/logos/ethereum-eth-logo.svg',
+            'type': 'L1'
+        },
+        'polygon': {
+            'name': 'Polygon',
+            'symbol': 'MATIC',
+            'logoUrl': 'https://cryptologos.cc/logos/polygon-matic-logo.svg',
+            'type': 'L2'
+        },
+        'filecoin': {
+            'name': 'Filecoin',
+            'symbol': 'FIL',
+            'logoUrl': 'https://cryptologos.cc/logos/filecoin-fil-logo.svg',
+            'type': 'L1'
+        },
+        'celo': {
+            'name': 'Celo',
+            'symbol': 'CELO',
+            'logoUrl': 'https://cryptologos.cc/logos/celo-celo-logo.svg',
+            'type': 'L2'
+        }
+    }
+    
+    networks_array = []
+    
+    for network_id, result in results.items():
+        # Get metadata or use defaults
+        metadata = network_metadata.get(network_id, {
+            'name': network_id.title(),
+            'symbol': network_id.upper(),
+            'logoUrl': '',
+            'type': 'L1'
+        })
+        
+        # Extract nested values
+        pdi_data = result['pdi']
+        jdi_data = result['jdi']
+        ihi_data = result['ihi']
+        
+        # Build Network object
+        network = {
+            'id': network_id,
+            'name': metadata['name'],
+            'symbol': metadata['symbol'],
+            'logoUrl': metadata['logoUrl'],
+            'type': metadata['type'],
+            # Flatten nested scores
+            'pdi': pdi_data['pdi'],
+            'jdi': jdi_data['jdi'],
+            'ihi': ihi_data['ihi'],
+            # Trend fields (defaults)
+            'trend': 'neutral',
+            'trendValue': 'N/A',
+            # Convert snake_case to camelCase
+            'nodeCount': result['total_nodes'],
+            'moransI': pdi_data['morans_i'],
+            'spatialHHI': pdi_data['spatial_hhi'],
+            'enl': pdi_data['enl'],
+            'countryHHI': jdi_data['country_hhi'],
+            'numCountries': jdi_data['num_countries'],
+            'orgHHI': ihi_data['org_hhi'],
+            'numOrgs': ihi_data['num_orgs']
+        }
+        
+        networks_array.append(network)
+    
+    return networks_array
+
+
 if __name__ == '__main__':
     networks = {
         'ethereum': '../../data/raw/2025-11-22-ethereum-ips.csv',
@@ -366,9 +450,21 @@ if __name__ == '__main__':
             import traceback
             traceback.print_exc()
 
-    # Save
+    # Transform to Network[] format and save
     if results:
         import json
-        with open('../../data/gdi_v0_final.json', 'w') as f:
-            json.dump(results, f, indent=2)
-        print(f"\n✅ Saved to data/gdi_v0_final.json\n")
+        import shutil
+        networks_array = transform_to_network_format(results)
+        
+        # Save to data directory
+        data_path = '../../data/gdi_v0_final.json'
+        with open(data_path, 'w') as f:
+            json.dump(networks_array, f, indent=2)
+        print(f"\n✅ Saved to {data_path} (Network[] format)")
+        
+        # Also copy to frontend location for direct import
+        frontend_path = '../../src/frontend/v0-geobeat-ui/lib/data/gdi_v0_final.json'
+        import os
+        os.makedirs(os.path.dirname(frontend_path), exist_ok=True)
+        shutil.copy(data_path, frontend_path)
+        print(f"✅ Copied to {frontend_path}\n")
