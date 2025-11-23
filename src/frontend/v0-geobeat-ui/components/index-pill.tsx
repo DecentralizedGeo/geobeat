@@ -51,12 +51,11 @@ export function IndexPill({
   const pill = (
     <span
       className={cn(
-        "inline-flex items-center px-2 py-0.5 rounded-sm text-[11px] font-semibold tracking-wide",
+        "inline-flex items-center px-2 py-0.5 rounded-sm text-[11px] font-bold tracking-wide border border-foreground text-foreground",
         showTooltip && "cursor-help",
         className,
       )}
       style={{
-        color: config.color,
         backgroundColor: config.bgColor,
       }}
     >

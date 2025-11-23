@@ -13,7 +13,7 @@ export function Header() {
               <div className="w-7 h-7 rounded bg-primary flex items-center justify-center">
                 <span className="text-primary-foreground font-bold text-[13px]">GB</span>
               </div>
-              <span className="font-semibold text-base">GeoBeat</span>
+              <span className="font-semibold text-base">GEOBEAT</span>
             </Link>
             <nav className="hidden md:flex items-center gap-7">
               <Link href="/" className="text-[13px] font-normal hover:text-foreground/80 transition-colors">
