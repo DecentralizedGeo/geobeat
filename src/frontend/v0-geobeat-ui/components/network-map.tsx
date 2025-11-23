@@ -56,39 +56,119 @@ export function NetworkMap({ networkId }: NetworkMapProps) {
     }
   }, [])
 
-  // Load and display hexbin data
+  // Load and display hexbin + heatmap data
   useEffect(() => {
     if (!map.current || !mapLoaded) return
 
-    const loadHexbinData = async () => {
+    const loadVisualizationData = async () => {
       try {
-        const response = await fetch(`/api/networks/${networkId}/nodes?resolution=4`)
-        if (!response.ok) {
+        // Load hexbins (bigger resolution 3 for continental view)
+        const hexbinResponse = await fetch(`/api/networks/${networkId}/nodes?resolution=3`)
+        if (!hexbinResponse.ok) {
           console.warn(`No node data available for ${networkId}`)
           return
         }
 
-        const hexbinData: NetworkGeoJSON = await response.json()
+        const hexbinData: NetworkGeoJSON = await hexbinResponse.json()
 
-        // Add data source
-        if (map.current?.getSource('hexbins')) {
-          // Update existing source
-          (map.current.getSource('hexbins') as mapboxgl.GeoJSONSource).setData(hexbinData)
-        } else {
-          // Add new source for hexbins
+        // Load point data for heatmap
+        const pointsResponse = await fetch(`/api/networks/${networkId}/nodes?format=points`)
+        const pointsData: NetworkGeoJSON = await pointsResponse.json()
+
+        // Add data sources
+        if (!map.current?.getSource('hexbins')) {
           map.current?.addSource('hexbins', {
             type: 'geojson',
             data: hexbinData
           })
+        } else {
+          (map.current.getSource('hexbins') as mapboxgl.GeoJSONSource).setData(hexbinData)
+        }
 
-          // Hexbin fill layer with viridis colors
+        if (!map.current?.getSource('heatmap-points')) {
+          map.current?.addSource('heatmap-points', {
+            type: 'geojson',
+            data: pointsData
+          })
+        } else {
+          (map.current.getSource('heatmap-points') as mapboxgl.GeoJSONSource).setData(pointsData)
+        }
+
+        // Add layers if they don't exist
+        if (!map.current?.getLayer('heatmap-layer')) {
+          // Heatmap layer (visible at zoom >= 5)
+          map.current?.addLayer({
+            id: 'heatmap-layer',
+            type: 'heatmap',
+            source: 'heatmap-points',
+            maxzoom: 15,
+            paint: {
+              // Increase weight as zoom increases
+              'heatmap-weight': [
+                'interpolate',
+                ['linear'],
+                ['zoom'],
+                0, 0,
+                15, 1
+              ],
+              // Increase intensity as zoom increases
+              'heatmap-intensity': [
+                'interpolate',
+                ['linear'],
+                ['zoom'],
+                0, 0.5,
+                15, 1.5
+              ],
+              // Use viridis-inspired color ramp
+              'heatmap-color': [
+                'interpolate',
+                ['linear'],
+                ['heatmap-density'],
+                0, 'rgba(68, 1, 84, 0)',      // Transparent purple
+                0.2, 'rgb(68, 1, 84)',         // Dark purple
+                0.4, 'rgb(59, 82, 139)',       // Blue
+                0.6, 'rgb(33, 145, 140)',      // Teal/cyan
+                0.8, 'rgb(94, 201, 98)',       // Green
+                1, 'rgb(253, 231, 37)'         // Yellow
+              ],
+              // Adjust radius by zoom level
+              'heatmap-radius': [
+                'interpolate',
+                ['linear'],
+                ['zoom'],
+                0, 2,
+                5, 10,
+                15, 30
+              ],
+              // Transition from heatmap to circle layer at higher zoom
+              'heatmap-opacity': [
+                'interpolate',
+                ['linear'],
+                ['zoom'],
+                5, 0,      // Invisible at low zoom
+                6, 0.8,    // Fade in
+                10, 0.6,   // Full opacity
+                12, 0.3,   // Start fading out
+                15, 0      // Invisible at high zoom
+              ]
+            }
+          })
+
+          // Hexbin fill layer (visible at zoom < 6)
           map.current?.addLayer({
             id: 'hexbin-fill',
             type: 'fill',
             source: 'hexbins',
             paint: {
               'fill-color': ['get', 'color'],
-              'fill-opacity': 0.7
+              'fill-opacity': [
+                'interpolate',
+                ['linear'],
+                ['zoom'],
+                0, 0.7,    // Solid at low zoom
+                5, 0.6,    // Start fading
+                6, 0       // Invisible at zoom >= 6
+              ]
             }
           })
 
@@ -100,11 +180,18 @@ export function NetworkMap({ networkId }: NetworkMapProps) {
             paint: {
               'line-color': '#ffffff',
               'line-width': 0.5,
-              'line-opacity': 0.5
+              'line-opacity': [
+                'interpolate',
+                ['linear'],
+                ['zoom'],
+                0, 0.5,
+                5, 0.3,
+                6, 0
+              ]
             }
           })
 
-          // Tooltip on hover
+          // Tooltip on hover (hexbins only)
           let popup: mapboxgl.Popup | null = null
 
           map.current?.on('mousemove', 'hexbin-fill', (e) => {

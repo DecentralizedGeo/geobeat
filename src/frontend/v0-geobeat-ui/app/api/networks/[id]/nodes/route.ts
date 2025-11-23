@@ -10,9 +10,10 @@ export async function GET(
   try {
     const { id: networkId } = await params
 
-    // Get resolution from query params (default to 4)
+    // Get query params
     const { searchParams } = new URL(request.url)
-    const resolution = parseInt(searchParams.get('resolution') || '4', 10)
+    const format = searchParams.get('format') || 'hexbins'
+    const resolution = parseInt(searchParams.get('resolution') || '3', 10)
 
     // For Ethereum, load real data from CSV
     if (networkId === 'ethereum') {
@@ -29,9 +30,31 @@ export async function GET(
 
         const csvData = await readFile(csvPath, 'utf-8')
         const nodes = parseNodeCSV(csvData)
-        const hexbins = aggregateToHexbins(nodes, resolution)
 
-        return NextResponse.json(hexbins)
+        if (format === 'points') {
+          // Return point GeoJSON for heatmap
+          const pointFeatures = nodes.map(node => ({
+            type: 'Feature' as const,
+            geometry: {
+              type: 'Point' as const,
+              coordinates: [node.lon, node.lat]
+            },
+            properties: {
+              ip: node.ip,
+              country: node.country,
+              city: node.city
+            }
+          }))
+
+          return NextResponse.json({
+            type: 'FeatureCollection',
+            features: pointFeatures
+          })
+        } else {
+          // Return hexbins
+          const hexbins = aggregateToHexbins(nodes, resolution)
+          return NextResponse.json(hexbins)
+        }
       } catch (csvError) {
         console.error('Failed to load Ethereum CSV:', csvError)
         // Fall through to return empty data
