@@ -1,24 +1,24 @@
-"use client"
-
-import { useEffect } from "react"
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ChevronLeft } from "lucide-react";
 import { networks } from "@/lib/mock-data";
 import { NetworkMap } from "@/components/network-map";
+import { ScrollToTop } from "@/components/scroll-to-top";
 
-export default function NetworkDetailPage({
+export async function generateStaticParams() {
+  return networks.map((network) => ({
+    id: network.id,
+  }));
+}
+
+export default async function NetworkDetailPage({
   params,
 }: {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 }) {
-  const { id } = params;
+  const { id } = await params;
   const network = networks.find((n) => n.id === id);
-
-  useEffect(() => {
-    window.scrollTo(0, 0)
-  }, [])
 
   if (!network) {
     notFound();
@@ -62,6 +62,7 @@ export default function NetworkDetailPage({
 
   return (
     <div className="min-h-screen bg-background">
+      <ScrollToTop />
       <div className="max-w-7xl mx-auto px-6 py-8">
         {/* Back button */}
         <Link

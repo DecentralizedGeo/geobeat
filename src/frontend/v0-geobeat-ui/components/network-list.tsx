@@ -65,31 +65,31 @@ export function NetworkList() {
           <div className="text-[11px] font-medium text-muted-foreground/70 uppercase tracking-wide">Network</div>
           <button
             onClick={() => handleSort("gdi")}
-            className="text-[11px] font-medium text-muted-foreground/70 uppercase tracking-wide hover:text-foreground transition-colors flex items-center gap-1.5 justify-start"
+            className="text-[11px] font-medium text-muted-foreground/75 uppercase tracking-wide hover:text-foreground transition-colors flex items-center gap-1.5 justify-start"
           >
-            <IndexPill type="gdi" />
+            <IndexPill type="gdi" showTooltip />
             {sortField === "gdi" && <span className="text-[9px]">{sortDirection === "desc" ? "↓" : "↑"}</span>}
           </button>
-          <div className="text-[11px] font-medium text-muted-foreground/70 uppercase tracking-wide">Trend</div>
+          <div className="text-[11px] font-medium text-muted-foreground/75 uppercase tracking-wide">Trend</div>
           <button
             onClick={() => handleSort("pdi")}
-            className="text-[11px] font-medium text-muted-foreground/70 uppercase tracking-wide hover:text-foreground transition-colors flex items-center gap-1.5 justify-start"
+            className="text-[11px] font-medium text-muted-foreground/75 uppercase tracking-wide hover:text-foreground transition-colors flex items-center gap-1.5 justify-start"
           >
-            <IndexPill type="pdi" />
+            <IndexPill type="pdi" showTooltip />
             {sortField === "pdi" && <span className="text-[9px]">{sortDirection === "desc" ? "↓" : "↑"}</span>}
           </button>
           <button
             onClick={() => handleSort("jdi")}
-            className="text-[11px] font-medium text-muted-foreground/70 uppercase tracking-wide hover:text-foreground transition-colors flex items-center gap-1.5 justify-start"
+            className="text-[11px] font-medium text-muted-foreground/75 uppercase tracking-wide hover:text-foreground transition-colors flex items-center gap-1.5 justify-start"
           >
-            <IndexPill type="jdi" />
+            <IndexPill type="jdi" showTooltip />
             {sortField === "jdi" && <span className="text-[9px]">{sortDirection === "desc" ? "↓" : "↑"}</span>}
           </button>
           <button
             onClick={() => handleSort("ihi")}
-            className="text-[11px] font-medium text-muted-foreground/70 uppercase tracking-wide hover:text-foreground transition-colors flex items-center gap-1.5 justify-start"
+            className="text-[11px] font-medium text-muted-foreground/75 uppercase tracking-wide hover:text-foreground transition-colors flex items-center gap-1.5 justify-start"
           >
-            <IndexPill type="ihi" />
+            <IndexPill type="ihi" showTooltip />
             {sortField === "ihi" && <span className="text-[9px]">{sortDirection === "desc" ? "↓" : "↑"}</span>}
           </button>
         </div>
@@ -106,22 +106,6 @@ export function NetworkList() {
               onToggle={() => toggleExpanded(network.id)}
             />
           ))}
-        </div>
-      </div>
-
-      {/* Legend */}
-      <div className="flex items-center gap-6 px-5 py-3 border border-border/60 rounded-sm bg-muted/10 text-[12px]">
-        <div className="flex items-center gap-1.5">
-          <IndexPill type="pdi" />
-          <span className="text-muted-foreground/70">Physical Distribution Index</span>
-        </div>
-        <div className="flex items-center gap-1.5">
-          <IndexPill type="jdi" />
-          <span className="text-muted-foreground/70">Jurisdictional Diversity Index</span>
-        </div>
-        <div className="flex items-center gap-1.5">
-          <IndexPill type="ihi" />
-          <span className="text-muted-foreground/70">Infrastructure Heterogeneity Index</span>
         </div>
       </div>
     </div>
@@ -291,7 +275,7 @@ function NetworkRow({
                 {/* PDI Details */}
                 <div className="space-y-2">
                   <div className="flex items-center justify-between">
-                    <span className="text-[13px] font-semibold">PDI: {network.pdi}</span>
+                    <span className="text-base font-semibold">PDI: {Math.round(network.pdi)}</span>
                     <div className="flex-1 mx-3 h-1.5 bg-muted rounded-full overflow-hidden">
                       <div
                         className="h-full rounded-full"
@@ -302,17 +286,17 @@ function NetworkRow({
                       />
                     </div>
                   </div>
-                  <div className="text-[12px] text-muted-foreground/70 space-y-1 pl-1">
-                    <div>• Entropy: 3.45</div>
-                    <div>• Effective Regions: 12</div>
-                    <div>• N.America: 38%, W.Europe: 31%</div>
+                  <div className="text-[13px] text-muted-foreground/80 space-y-1 pl-1">
+                    <div>• Moran's I: {network.moransI?.toFixed(3) || 'N/A'}</div>
+                    <div>• ENL: {network.enl?.toFixed(1) || 'N/A'}</div>
+                    <div>• Spatial HHI: {network.spatialHHI?.toFixed(3) || 'N/A'}</div>
                   </div>
                 </div>
 
                 {/* JDI Details */}
                 <div className="space-y-2">
                   <div className="flex items-center justify-between">
-                    <span className="text-[13px] font-semibold">JDI: {Math.round(network.jdi)}</span>
+                    <span className="text-base font-semibold">JDI: {Math.round(network.jdi)}</span>
                     <div className="flex-1 mx-3 h-1.5 bg-muted rounded-full overflow-hidden">
                       <div
                         className="h-full rounded-full"
@@ -323,7 +307,7 @@ function NetworkRow({
                       />
                     </div>
                   </div>
-                  <div className="text-[12px] text-muted-foreground/70 space-y-1 pl-1">
+                  <div className="text-[13px] text-muted-foreground/80 space-y-1 pl-1">
                     <div>• Country HHI: {network.countryHHI?.toFixed(3) || 'N/A'}</div>
                     <div>• Total countries: {network.numCountries || 'N/A'}</div>
                   </div>
@@ -332,7 +316,7 @@ function NetworkRow({
                 {/* IHI Details */}
                 <div className="space-y-2">
                   <div className="flex items-center justify-between">
-                    <span className="text-[13px] font-semibold">IHI: {Math.round(network.ihi)}</span>
+                    <span className="text-base font-semibold">IHI: {Math.round(network.ihi)}</span>
                     <div className="flex-1 mx-3 h-1.5 bg-muted rounded-full overflow-hidden">
                       <div
                         className="h-full rounded-full"
@@ -343,9 +327,9 @@ function NetworkRow({
                       />
                     </div>
                   </div>
-                  <div className="text-[12px] text-muted-foreground/70 space-y-1 pl-1">
+                  <div className="text-[13px] text-muted-foreground/80 space-y-1 pl-1">
                     <div>• Org HHI: {network.orgHHI?.toFixed(3) || 'N/A'}</div>
-                    <div>• Total orgs: {network.numOrgs || 'N/A'}</div>
+                    <div>• Total orgs: {network.numOrgs?.toLocaleString() || 'N/A'}</div>
                   </div>
                 </div>
 

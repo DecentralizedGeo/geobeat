@@ -18,7 +18,8 @@ export async function GET(
     // Load real data from CSV for supported networks
     const csvFileMap: Record<string, string> = {
       'ethereum': '2025-11-22-ethereum-ips.csv',
-      'polygon': '2025-11-22-polygon-ips.csv'
+      'polygon': '2025-11-22-polygon-ips.csv',
+      'filecoin': '2025-11-22-filecoin-ips.csv'
     }
 
     const csvFileName = csvFileMap[networkId]

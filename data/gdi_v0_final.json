@@ -1,69 +1,143 @@
 {
   "ethereum": {
-    "gdi": 51.4,
+    "gdi": 53.7,
     "pdi": {
-      "pdi": 62.8,
-      "morans_i": 0.254,
+      "pdi": 62.5,
+      "morans_i": 0.25,
       "morans_p_value": 0.0,
-      "spatial_hhi": 0.02,
-      "enl": 236.9,
-      "total_cells": 1956,
+      "spatial_hhi": 0.021,
+      "enl": 207.6,
+      "total_cells": 2073,
       "interpretation": "Moderately dispersed",
       "components": {
-        "morans_contribution": 29.8,
-        "enl_contribution": 3.6,
+        "morans_contribution": 30.0,
+        "enl_contribution": 3.1,
         "hhi_contribution": 29.4
       }
     },
     "jdi": {
-      "jdi": 34.9,
-      "country_hhi": 0.145,
-      "num_countries": 92,
+      "jdi": 36.0,
+      "country_hhi": 0.143,
+      "num_countries": 95,
       "top_3_countries": {
         "United States": {
-          "count": 4206,
-          "share": 33.2
+          "count": 5216,
+          "share": 32.4
         },
         "Germany": {
-          "count": 1757,
-          "share": 13.9
+          "count": 2397,
+          "share": 14.9
         },
         "Finland": {
-          "count": 715,
-          "share": 5.6
+          "count": 924,
+          "share": 5.7
+        }
+      },
+      "interpretation": "High concentration",
+      "components": {
+        "hhi_contribution": 25.7,
+        "diversity_contribution": 27.7
+      }
+    },
+    "ihi": {
+      "ihi": 47.7,
+      "org_hhi": 0.016,
+      "num_orgs": 2274,
+      "top_3_orgs": {
+        "Hetzner": {
+          "count": 1104,
+          "share": 6.9
+        },
+        "AWS EC2 (us-east-1)": {
+          "count": 932,
+          "share": 5.8
+        },
+        "Hetzner Online GmbH": {
+          "count": 738,
+          "share": 4.6
+        }
+      },
+      "interpretation": "High concentration",
+      "components": {
+        "hhi_contribution": 29.5,
+        "diversity_contribution": 26.1
+      }
+    },
+    "network_size_score": 56.7,
+    "weights": {
+      "pdi": 0.35,
+      "jdi": 0.2,
+      "ihi": 0.1,
+      "size": 0.35
+    },
+    "interpretation": "Weakly decentralized",
+    "total_nodes": 16086
+  },
+  "polygon": {
+    "gdi": 48.2,
+    "pdi": {
+      "pdi": 59.3,
+      "morans_i": 0.29,
+      "morans_p_value": 0.0,
+      "spatial_hhi": 0.026,
+      "enl": 112.4,
+      "total_cells": 1110,
+      "interpretation": "Concentrated",
+      "components": {
+        "morans_contribution": 28.4,
+        "enl_contribution": 1.7,
+        "hhi_contribution": 29.2
+      }
+    },
+    "jdi": {
+      "jdi": 36.2,
+      "country_hhi": 0.145,
+      "num_countries": 76,
+      "top_3_countries": {
+        "United States": {
+          "count": 2986,
+          "share": 30.8
+        },
+        "Germany": {
+          "count": 1541,
+          "share": 15.9
+        },
+        "China": {
+          "count": 1133,
+          "share": 11.7
         }
       },
       "interpretation": "High concentration",
       "components": {
         "hhi_contribution": 25.6,
-        "diversity_contribution": 27.5
+        "diversity_contribution": 26.3
       }
     },
     "ihi": {
-      "ihi": 48.2,
-      "org_hhi": 0.016,
-      "num_orgs": 2070,
+      "ihi": 47.9,
+      "org_hhi": 0.017,
+      "num_orgs": 1346,
       "top_3_orgs": {
         "Hetzner": {
-          "count": 816,
-          "share": 6.4
+          "count": 571,
+          "share": 5.9
         },
         "AWS EC2 (us-east-1)": {
-          "count": 769,
-          "share": 6.1
+          "count": 471,
+          "share": 4.9
         },
         "Hetzner Online GmbH": {
-          "count": 556,
-          "share": 4.4
+          "count": 392,
+          "share": 4.0
         }
       },
       "interpretation": "High concentration",
       "components": {
         "hhi_contribution": 29.5,
-        "diversity_contribution": 25.8
+        "diversity_contribution": 24.3
       }
     },
-    "network_size_score": 50.3,
+    "network_size_score": 44.0,
     "weights": {
       "pdi": 0.35,
       "jdi": 0.2,
@@ -71,80 +145,80 @@
       "size": 0.35
     },
     "interpretation": "Weakly decentralized",
-    "total_nodes": 12664
+    "total_nodes": 9688
   },
-  "polygon": {
-    "gdi": 43.4,
+  "filecoin": {
+    "gdi": 33.5,
     "pdi": {
-      "pdi": 57.7,
-      "morans_i": 0.323,
+      "pdi": 58.2,
+      "morans_i": 0.3,
       "morans_p_value": 0.0,
-      "spatial_hhi": 0.03,
-      "enl": 98.2,
-      "total_cells": 779,
+      "spatial_hhi": 0.025,
+      "enl": 61.6,
+      "total_cells": 93,
       "interpretation": "Concentrated",
       "components": {
-        "morans_contribution": 27.1,
-        "enl_contribution": 1.5,
-        "hhi_contribution": 29.1
+        "morans_contribution": 28.0,
+        "enl_contribution": 0.9,
+        "hhi_contribution": 29.3
       }
     },
     "jdi": {
-      "jdi": 33.2,
-      "country_hhi": 0.156,
-      "num_countries": 69,
+      "jdi": 36.0,
+      "country_hhi": 0.137,
+      "num_countries": 24,
       "top_3_countries": {
-        "United States": {
-          "count": 1891,
-          "share": 32.9
-        },
-        "Germany": {
-          "count": 961,
-          "share": 16.7
+        "South Korea": {
+          "count": 54,
+          "share": 24.2
         },
         "China": {
-          "count": 532,
-          "share": 9.3
+          "count": 47,
+          "share": 21.1
+        },
+        "Hong Kong": {
+          "count": 27,
+          "share": 12.1
         }
       },
       "interpretation": "High concentration",
       "components": {
-        "hhi_contribution": 25.3,
-        "diversity_contribution": 25.7
+        "hhi_contribution": 25.9,
+        "diversity_contribution": 19.3
       }
     },
     "ihi": {
-      "ihi": 46.5,
-      "org_hhi": 0.018,
-      "num_orgs": 944,
+      "ihi": 35.8,
+      "org_hhi": 0.024,
+      "num_orgs": 116,
       "top_3_orgs": {
-        "AWS EC2 (us-east-1)": {
-          "count": 343,
-          "share": 6.0
+        "Chinanet GD": {
+          "count": 17,
+          "share": 7.6
         },
-        "Hetzner": {
-          "count": 339,
-          "share": 5.9
+        "Korea Telecom": {
+          "count": 16,
+          "share": 7.2
         },
-        "Hetzner Online GmbH": {
-          "count": 240,
-          "share": 4.2
+        "Kornet": {
+          "count": 14,
+          "share": 6.3
         }
       },
       "interpretation": "High concentration",
       "components": {
-        "hhi_contribution": 29.5,
-        "diversity_contribution": 23.1
+        "hhi_contribution": 29.3,
+        "diversity_contribution": 16.1
       }
     },
-    "network_size_score": 33.9,
+    "network_size_score": 6.7,
     "weights": {
       "pdi": 0.35,
       "jdi": 0.2,
       "ihi": 0.1,
       "size": 0.35
     },
-    "interpretation": "Weakly decentralized",
-    "total_nodes": 5747
+    "interpretation": "Centralized",
+    "total_nodes": 223
   }
 }

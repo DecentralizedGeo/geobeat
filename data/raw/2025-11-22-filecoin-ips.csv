@@ -1,0 +1,257 @@
+ip,country,country_code,city,region_name,lat,lon,isp,org,as_raw,asname,hosting,proxy,mobile
+14.202.202.92,Australia,AU,Sydney,New South Wales,-33.9158,151.0348,TPG Internet Pty Ltd,TPG Internet Pty Ltd,AS7545 TPG Telecom Limited,TPG-INTERNET-AP,f,f,f
+58.111.97.208,Australia,AU,Sydney,New South Wales,-33.7266,150.8074,SingTel Optus Pty Ltd,Optus Internet Pty Ltd,AS4804 Microplex PTY LTD,MPX-AS,f,f,f
+154.42.3.133,Belgium,BE,Antwerp,Flanders,51.2192,4.3917,Cogent Communications,Syntax Bvba,"AS174 Cogent Communications, LLC",COGENT-174,f,f,f
+154.42.3.140,Belgium,BE,Antwerp,Flanders,51.2192,4.3917,Cogent Communications,Syntax Bvba,"AS174 Cogent Communications, LLC",COGENT-174,f,f,f
+209.121.206.37,Canada,CA,Maple Ridge,British Columbia,49.222,-122.6181,TELUS Communications Inc,Kernelogic Software Inc,AS852 TELUS Communications Inc.,ASN852,f,f,f
+148.113.193.139,Canada,CA,Montreal,Quebec,45.5029,-73.5723,OVH SAS,"OVH Hosting, Inc",AS16276 OVH SAS,OVH,t,f,f
+15.235.86.6,Canada,CA,Montreal,Quebec,45.5029,-73.5723,OVH SAS,"OVH Hosting, Inc",AS16276 OVH SAS,OVH,t,f,f
+15.235.86.73,Canada,CA,Montreal,Quebec,45.5029,-73.5723,OVH SAS,"OVH Hosting, Inc",AS16276 OVH SAS,OVH,t,f,f
+38.140.46.58,Canada,CA,Montreal,Quebec,45.5075,-73.5887,Cogent Communications,VexxHost Web Hosting,"AS174 Cogent Communications, LLC",COGENT-174,f,f,f
+38.80.81.243,Canada,CA,Montreal,Quebec,45.5075,-73.5887,Cogent Communications,Nebula Portal Inc,"AS174 Cogent Communications, LLC",COGENT-174,f,f,f
+103.90.153.243,China,CN,Beijing,Beijing,39.9042,116.407,Cloud Computing Corporation,"Guangdong Guangshu Network Technology Co., Ltd",AS58519 Cloud Computing Corporation,CHINATELECOM-Ctcloud,t,f,f
+103.90.153.245,China,CN,Beijing,Beijing,39.9042,116.407,Cloud Computing Corporation,"Guangdong Guangshu Network Technology Co., Ltd",AS58519 Cloud Computing Corporation,CHINATELECOM-Ctcloud,t,f,f
+121.46.232.238,China,CN,Beijing,Beijing,39.9042,116.407,ZHAOONE,shanghai wexchange network technology Co. Ltd.,AS4811 China Telecom (Group),CHINANET-SHANGHAI-MAN,f,f,f
+42.123.105.130,China,CN,Beijing,Beijing,39.9042,116.407,Cloud Computing Corporation,Cloud Computing Branch Corporation,AS58519 Cloud Computing Corporation,CHINATELECOM-Ctcloud,t,f,f
+101.207.144.150,China,CN,Chengdu,Sichuan,30.6667,104.0667,China Unicom Sichuan Province Network,"",AS4837 CHINA UNICOM China169 Backbone,CHINA169-Backbone,f,f,f
+175.155.245.4,China,CN,Chengdu,Sichuan,30.5723,104.067,China Unicom Sichuan Province Network,"",AS4837 CHINA UNICOM China169 Backbone,CHINA169-Backbone,f,f,f
+183.220.37.235,China,CN,Chengdu,Sichuan,30.6667,104.0667,China Mobile,China Mobile Communications Corporation,"AS9808 China Mobile Communications Group Co., Ltd.",CHINAMOBILE-CN,f,f,t
+183.220.37.236,China,CN,Chengdu,Sichuan,30.6667,104.0667,China Mobile,China Mobile Communications Corporation,"AS9808 China Mobile Communications Group Co., Ltd.",CHINAMOBILE-CN,f,f,t
+125.64.33.5,China,CN,Deyang,Sichuan,31.1268,104.398,China Telecom,"",AS139220 Sichuan Chuanxn IDC,CHINANET-Sichuan-Chuanxi-IDC,f,f,f
+125.64.78.30,China,CN,Deyang,Sichuan,31.1268,104.398,Chinanet,Chinanet SC,AS4134 CHINANET-BACKBONE,CHINANET-BACKBONE,f,f,f
+222.213.119.135,China,CN,Deyang,Sichuan,31.1268,104.398,Chinanet,Chinanet SC,AS4134 CHINANET-BACKBONE,CHINANET-BACKBONE,f,f,f
+58.22.103.100,China,CN,Fuzhou,Fujian,26.0614,119.3061,CNCGroup CHINA169 FuJian province network,"",AS4837 CHINA UNICOM China169 Backbone,CHINA169-Backbone,f,f,f
+183.61.189.187,China,CN,Gangxia,Guangdong,22.5403,114.061,Chinanet,Chinanet GD,AS4134 CHINANET-BACKBONE,CHINANET-BACKBONE,f,f,f
+111.48.247.130,China,CN,Guangzhou,Guangdong,23.1181,113.2539,China Mobile communications corporation,China Mobile,"AS9808 China Mobile Communications Group Co., Ltd.",CHINAMOBILE-CN,f,f,t
+111.48.247.131,China,CN,Guangzhou,Guangdong,23.1181,113.2539,China Mobile communications corporation,China Mobile,"AS9808 China Mobile Communications Group Co., Ltd.",CHINAMOBILE-CN,f,f,t
+14.17.101.101,China,CN,Guangzhou,Guangdong,23.1317,113.266,Chinanet,Chinanet GD,AS4134 CHINANET-BACKBONE,CHINANET-BACKBONE,f,f,f
+14.17.101.99,China,CN,Guangzhou,Guangdong,23.1317,113.266,Chinanet,Chinanet GD,AS4134 CHINANET-BACKBONE,CHINANET-BACKBONE,f,f,f
+14.17.107.52,China,CN,Guangzhou,Guangdong,23.1317,113.266,Chinanet,Chinanet GD,AS4134 CHINANET-BACKBONE,CHINANET-BACKBONE,f,f,f
+14.17.107.53,China,CN,Guangzhou,Guangdong,23.1317,113.266,Chinanet,Chinanet GD,AS4134 CHINANET-BACKBONE,CHINANET-BACKBONE,f,f,f
+14.17.107.55,China,CN,Guangzhou,Guangdong,23.1317,113.266,Chinanet,Chinanet GD,AS4134 CHINANET-BACKBONE,CHINANET-BACKBONE,f,f,f
+14.18.247.59,China,CN,Guangzhou,Guangdong,23.1317,113.266,Chinanet,Chinanet GD,AS4134 CHINANET-BACKBONE,CHINANET-BACKBONE,f,f,f
+183.60.174.134,China,CN,Guangzhou,Guangdong,23.1317,113.266,Chinanet,Chinanet GD,AS4134 CHINANET-BACKBONE,CHINANET-BACKBONE,f,f,f
+183.60.174.144,China,CN,Guangzhou,Guangdong,23.1317,113.266,Chinanet,Chinanet GD,AS4134 CHINANET-BACKBONE,CHINANET-BACKBONE,f,f,f
+183.60.174.145,China,CN,Guangzhou,Guangdong,23.1317,113.266,Chinanet,Chinanet GD,AS4134 CHINANET-BACKBONE,CHINANET-BACKBONE,f,f,f
+183.60.174.146,China,CN,Guangzhou,Guangdong,23.1317,113.266,Chinanet,Chinanet GD,AS4134 CHINANET-BACKBONE,CHINANET-BACKBONE,f,f,f
+36.189.234.221,China,CN,Guangzhou,Guangdong,23.1317,113.266,China Mobile,China Mobile Communications Corporation,"AS9808 China Mobile Communications Group Co., Ltd.",CHINAMOBILE-CN,f,f,t
+36.189.234.235,China,CN,Guangzhou,Guangdong,23.1317,113.266,China Mobile,China Mobile Communications Corporation,"AS9808 China Mobile Communications Group Co., Ltd.",CHINAMOBILE-CN,f,f,t
+122.224.147.246,China,CN,Hangzhou,Zhejiang,30.2674,120.171,Chinanet,"",AS58461 CT-HangZhou-IDC,CT-HangZhou-IDC,f,f,f
+113.83.154.55,China,CN,Huizhou,Guangdong,23.1115,114.4152,Chinanet,Chinanet GD,AS4134 CHINANET-BACKBONE,CHINANET-BACKBONE,f,f,f
+119.167.194.243,China,CN,Jinan,Shandong,36.6518,117.12,CNC Group CHINA169 Shandong Province Network,"",AS4837 CHINA UNICOM China169 Backbone,CHINA169-Backbone,f,f,f
+2408:8226:7e02:8790:21b:21ff:fec2:c204,China,CN,Jincheng,Shanxi,35.4963,112.831,CHINA UNICOM China169 Backbone,Chinanet,AS4837 CHINA UNICOM China169 Backbone,CHINA169-Backbone,f,f,f
+116.142.250.114,China,CN,Jinrongjie,Beijing,39.9072,116.357,China Unicom CHINA169 Network,China United Network Communications Corporation Limited,AS4837 CHINA UNICOM China169 Backbone,CHINA169-Backbone,f,f,f
+110.186.66.250,China,CN,Muping,Sichuan,30.2638,102.805,Chinanet,Chinanet SC,AS4134 CHINANET-BACKBONE,CHINANET-BACKBONE,f,f,f
+180.103.181.130,China,CN,Nanjing,Jiangsu,32.0607,118.763,China Telecom,Chinanet JS,AS140292 CHINATELECOM Jiangsu province Suzhou 5G network,CHINATELECOM-JIANGSU-SUZHOU-5G-NETWORK,f,f,f
+180.97.68.154,China,CN,Nanjing,Jiangsu,32.0607,118.763,China Telecom,Chinanet JS,AS140292 CHINATELECOM Jiangsu province Suzhou 5G network,CHINATELECOM-JIANGSU-SUZHOU-5G-NETWORK,f,f,f
+61.155.145.29,China,CN,Nanjing,Jiangsu,32.0607,118.763,China Telecom,Chinanet JS,AS140292 CHINATELECOM Jiangsu province Suzhou 5G network,CHINATELECOM-JIANGSU-SUZHOU-5G-NETWORK,f,f,f
+61.155.145.6,China,CN,Nanjing,Jiangsu,32.0607,118.763,China Telecom,Chinanet JS,AS140292 CHINATELECOM Jiangsu province Suzhou 5G network,CHINATELECOM-JIANGSU-SUZHOU-5G-NETWORK,f,f,f
+61.155.145.7,China,CN,Nanjing,Jiangsu,32.0607,118.763,China Telecom,Chinanet JS,AS140292 CHINATELECOM Jiangsu province Suzhou 5G network,CHINATELECOM-JIANGSU-SUZHOU-5G-NETWORK,f,f,f
+183.129.161.12,China,CN,Nanshi,Zhejiang,29.1455,120.237,Chinanet,"",AS58461 CT-HangZhou-IDC,CT-HangZhou-IDC,f,f,f
+122.246.21.187,China,CN,Ningbo,Zhejiang,29.9302,121.561,China Telecom,"","AS136188 NINGBO, ZHEJIANG Province, P.R.China.",CHINATELECOM-ZHEJIANG-NINGBO-IDC,f,f,f
+122.246.21.189,China,CN,Ningbo,Zhejiang,29.9302,121.561,China Telecom,"","AS136188 NINGBO, ZHEJIANG Province, P.R.China.",CHINATELECOM-ZHEJIANG-NINGBO-IDC,f,f,f
+47.104.225.153,China,CN,Qingdao,Shandong,36.061,120.3814,Hangzhou Alibaba Advertising Co,"Aliyun Computing Co., LTD","AS37963 Hangzhou Alibaba Advertising Co.,Ltd.",ALIBABA-CN-NET,t,f,f
+101.228.105.41,China,CN,Shanghai,Shanghai,31.2222,121.4581,China Telecom (Group),Chinanet SH,AS4812 China Telecom (Group),CHINANET-SH-AP,f,f,f
+113.219.198.22,China,CN,Shanghai,Shanghai,31.2222,121.4581,"No.293, Wanbao Avenue",Chinanet HN,AS63835 CT-HuNan-Changsha-IDC,CT-HuNan-Changsha-IDC,f,f,f
+113.219.198.28,China,CN,Shanghai,Shanghai,31.2222,121.4581,"No.293, Wanbao Avenue",Chinanet HN,AS63835 CT-HuNan-Changsha-IDC,CT-HuNan-Changsha-IDC,f,f,f
+113.219.198.5,China,CN,Shanghai,Shanghai,31.2222,121.4581,"No.293, Wanbao Avenue",Chinanet HN,AS63835 CT-HuNan-Changsha-IDC,CT-HuNan-Changsha-IDC,f,f,f
+113.219.198.6,China,CN,Shanghai,Shanghai,31.2222,121.4581,"No.293, Wanbao Avenue",Chinanet HN,AS63835 CT-HuNan-Changsha-IDC,CT-HuNan-Changsha-IDC,f,f,f
+59.37.81.243,China,CN,Shanghai,Shanghai,31.2222,121.4581,Chinanet,Chinanet GD,AS4134 CHINANET-BACKBONE,CHINANET-BACKBONE,f,f,f
+59.37.81.245,China,CN,Shanghai,Shanghai,31.2222,121.4581,Chinanet,Chinanet GD,AS4134 CHINANET-BACKBONE,CHINANET-BACKBONE,f,f,f
+14.155.221.241,China,CN,Shenzhen,Guangdong,22.5455,114.0683,Chinanet,Chinanet GD,AS4134 CHINANET-BACKBONE,CHINANET-BACKBONE,f,f,f
+183.11.237.59,China,CN,Shenzhen,Guangdong,22.5455,114.0683,Chinanet,Chinanet GD,AS4134 CHINANET-BACKBONE,CHINANET-BACKBONE,f,f,f
+183.14.30.82,China,CN,Shenzhen,Guangdong,22.5455,114.0683,Chinanet,Chinanet GD,AS4134 CHINANET-BACKBONE,CHINANET-BACKBONE,f,f,f
+113.24.193.2,China,CN,Taiyuan,Shanxi,37.8389,112.564,Chinanet,Sxczbas,AS4134 CHINANET-BACKBONE,CHINANET-BACKBONE,f,f,f
+124.88.124.147,China,CN,Ürümqi,Xinjiang,43.8006,87.6012,CNC Group CHINA169 Xinjiang Province Network,"",AS4837 CHINA UNICOM China169 Backbone,CHINA169-Backbone,f,f,f
+113.132.177.236,China,CN,Xi'an,Shaanxi,34.2635,108.9246,Chinanet,Chinanet SN,AS4134 CHINANET-BACKBONE,CHINANET-BACKBONE,f,f,f
+113.200.98.50,China,CN,Xi'an,Shaanxi,34.2635,108.9246,CNC Group CHINA169 Shannxi Province Network,"",AS4837 CHINA UNICOM China169 Backbone,CHINA169-Backbone,f,f,f
+120.71.76.122,China,CN,Xingfulu,Xinjiang,43.7934,87.6271,Chinanet,Chinanet XJ,AS4134 CHINANET-BACKBONE,CHINANET-BACKBONE,f,f,f
+123.151.192.62,China,CN,Youyilu,Tianjin,39.0851,117.199,China Telecom Tianjin network,"",AS17638 ASN for TIANJIN Provincial Net of CT,CHINATELECOM-TJ-AS-AP,f,f,f
+182.18.83.106,China,CN,Zhangjiakou,Hebei,40.2962,115.822,China Telecom,"Huailai Cloud Exchange Network Technology Co., Ltd",AS141771 China Telecom,CHINANET-HEBEI-ZHANGJIAKOU-MAN,f,f,f
+37.27.238.36,Finland,FI,Helsinki,Uusimaa,60.1719,24.9347,Hetzner Online GmbH,Hetzner Online GmbH,AS24940 Hetzner Online GmbH,HETZNER-AS,t,f,f
+65.109.147.178,Finland,FI,Helsinki,Uusimaa,60.1719,24.9347,Hetzner Online GmbH,Hetzner Online GmbH,AS24940 Hetzner Online GmbH,HETZNER-AS,t,f,f
+65.21.124.221,Finland,FI,Helsinki,Uusimaa,60.1719,24.9347,Hetzner Online GmbH,Hetzner,AS24940 Hetzner Online GmbH,HETZNER-AS,t,f,f
+188.165.77.211,France,FR,Gravelines,Hauts-de-France,50.9871,2.12554,OVH SAS,OVH,AS16276 OVH SAS,OVH,t,f,f
+62.171.188.221,France,FR,Lauterbourg,Grand Est,48.9742,8.1851,Contabo GmbH,Contabo GmbH,AS51167 Contabo GmbH,CONTABO,t,f,f
+212.106.124.229,France,FR,Paris,Île-de-France,48.8558,2.3494,Celeste SAS,CELESTE,AS34177 CELESTE SAS,CELESTE-AS,f,f,f
+212.106.124.245,France,FR,Paris,Île-de-France,48.8558,2.3494,Celeste SAS,CELESTE,AS34177 CELESTE SAS,CELESTE-AS,f,f,f
+80.11.137.92,France,FR,Verdun,Grand Est,49.1596,5.3829,France Telecom,"",AS3215 Orange S.A.,AS3215,f,f,f
+57.128.92.30,France,FR,Wattrelos,Hauts-de-France,50.7012,3.21501,OVH SAS,OVH,AS16276 OVH SAS,OVH,t,f,f
+141.76.94.16,Germany,DE,Dresden,Saxony,51.0295,13.6997,Verein zur Foerderung eines Deutschen Forschungsnetzes e.V.,TUD Netd Measurement,AS680 Verein zur Foerderung eines Deutschen Forschungsnetzes e.V.,DFN,f,f,f
+116.202.108.0,Germany,DE,Falkenstein,Saxony,50.4777,12.3649,Hetzner Online GmbH,Hetzner Online GmbH,AS24940 Hetzner Online GmbH,HETZNER-AS,t,f,f
+23.88.3.90,Germany,DE,Falkenstein,Saxony,50.4777,12.3649,Hetzner Online GmbH,Hetzner,AS24940 Hetzner Online GmbH,HETZNER-AS,t,f,f
+2a01:4f8:c010:17fa::3,Germany,DE,Falkenstein,Saxony,50.4777,12.3649,Hetzner Online GmbH,Hetzner Online GmbH,AS24940 Hetzner Online GmbH,HETZNER-AS,t,f,f
+46.4.123.21,Germany,DE,Falkenstein,Saxony,50.4777,12.3649,Hetzner Online GmbH,Hetzner,AS24940 Hetzner Online GmbH,HETZNER-AS,t,f,f
+88.198.6.254,Germany,DE,Falkenstein,Saxony,50.4777,12.3649,Hetzner Online GmbH,Hetzner,AS24940 Hetzner Online GmbH,HETZNER-AS,t,f,f
+207.154.200.131,Germany,DE,Frankfurt am Main,Hesse,50.1169,8.6837,"DigitalOcean, LLC","DigitalOcean, LLC","AS14061 DigitalOcean, LLC",DIGITALOCEAN-ASN,t,f,f
+212.95.39.97,Germany,DE,Frankfurt am Main,Hesse,50.1109,8.68213,Leaseweb Deutschland GmbH,Leaseweb Deutschland GmbH,AS28753 Leaseweb Deutschland GmbH,LEASEWEB-DE-FRA-10,t,f,f
+31.172.68.77,Germany,DE,Frankfurt am Main,Hesse,50.1169,8.6837,Fornex Hosting S.L.,FORNEX,AS44051 Fornex Hosting S.L.,FORNEX-AS,f,f,f
+64.226.95.214,Germany,DE,Frankfurt am Main,Hesse,50.1169,8.6837,"DigitalOcean, LLC","DigitalOcean, LLC","AS14061 DigitalOcean, LLC",DIGITALOCEAN-ASN,t,f,f
+2a03:4000:5f:db1:e8ad:1cff:fef2:cfe2,Germany,DE,Nuremberg,Bavaria,49.4423,11.0191,netcup GmbH,NETCUP-GMBH,AS197540 netcup GmbH,netcup-AS,t,f,f
+194.45.196.180,Germany,DE,Waldbrunn,Bavaria,49.7581,9.80693,Michael Sebastian Schinzel trading as IP-Projects GmbH & Co. KG,IP-Projects Verwaltungs GmbH,AS48314 Michael Sebastian Schinzel trading as IP-Projects GmbH & Co. KG,IP-PROJECTS,f,f,f
+194.45.36.154,Germany,DE,Waldbrunn,Bavaria,49.7582,9.8069,IP- www.ip-projects.de,IP-Projects GmbH & Co.,AS48314 Michael Sebastian Schinzel trading as IP-Projects GmbH & Co. KG,IP-PROJECTS,f,f,f
+210.209.77.162,Hong Kong,HK,Central,Central and Western District,22.283,114.158,NWT,"",AS10103 HK Broadband Network Ltd.,HKBN-AS-AP,f,f,f
+210.209.77.163,Hong Kong,HK,Central,Central and Western District,22.283,114.158,NWT,"",AS10103 HK Broadband Network Ltd.,HKBN-AS-AP,f,f,f
+210.209.77.164,Hong Kong,HK,Central,Central and Western District,22.283,114.158,NWT,"",AS10103 HK Broadband Network Ltd.,HKBN-AS-AP,f,f,f
+103.122.95.143,Hong Kong,HK,Ha Kwai Chung,Kwai Tsing,22.3549,114.125,Teleglobal Communication Services Limited,Menlo Robot Limited,AS133073 TELEGLOBAL COMMUNICATION SERVICES LIMITED,SZKF-AS-AP,f,f,f
+103.145.73.134,Hong Kong,HK,Hong Kong,Kowloon,22.3193,114.169,Kaopu Cloud HK Limited,Kaopu Cloud Inc,AS138915 Kaopu Cloud HK Limited,KAOPU-HK,f,f,f
+103.145.73.19,Hong Kong,HK,Hong Kong,Kowloon,22.3193,114.169,Kaopu Cloud HK Limited,Kaopu Cloud Inc,AS138915 Kaopu Cloud HK Limited,KAOPU-HK,f,f,f
+103.145.73.21,Hong Kong,HK,Hong Kong,Kowloon,22.3193,114.169,Kaopu Cloud HK Limited,Kaopu Cloud Inc,AS138915 Kaopu Cloud HK Limited,KAOPU-HK,f,f,f
+103.145.73.24,Hong Kong,HK,Hong Kong,Kowloon,22.3193,114.169,Kaopu Cloud HK Limited,Kaopu Cloud Inc,AS138915 Kaopu Cloud HK Limited,KAOPU-HK,f,f,f
+103.201.24.44,Hong Kong,HK,Hong Kong,Kowloon,22.3193,114.169,HK Kwaifong Group Limited,D.D.S TRADING LIMITED,AS133115 HK Kwaifong Group Limited,HKKFGL-AS-AP,t,f,f
+154.201.1.144,Hong Kong,HK,Hong Kong,Kowloon,22.3193,114.169,Suzhou Shuizhiyun Network Technology Co,"Suzhou Shuizhiyun Network Technology Co., Ltd.",AS21859 Zenlayer Inc,ZEN-ECN,t,f,f
+154.206.64.2,Hong Kong,HK,Hong Kong,Kowloon,22.3193,114.169,Kaopu Cloud HK Limited,Kaopu Cloud HK Limited,AS138915 Kaopu Cloud HK Limited,KAOPU-HK,f,f,f
+154.206.64.4,Hong Kong,HK,Hong Kong,Kowloon,22.3193,114.169,Kaopu Cloud HK Limited,Kaopu Cloud HK Limited,AS138915 Kaopu Cloud HK Limited,KAOPU-HK,f,f,f
+154.206.64.5,Hong Kong,HK,Hong Kong,Kowloon,22.3193,114.169,Kaopu Cloud HK Limited,Kaopu Cloud HK Limited,AS138915 Kaopu Cloud HK Limited,KAOPU-HK,f,f,f
+154.36.162.226,Hong Kong,HK,Hong Kong,Kowloon,22.3193,114.169,NetLab Global,NetLab Global,AS979 NetLab Global,NETLAB-SDN,f,f,f
+165.154.46.172,Hong Kong,HK,Hong Kong,Kowloon,22.3193,114.169,UCLOUD INFORMATION TECHNOLOGY (HK) LIMITED,Ucloud Information Technology (hk) Limited,AS135377 UCLOUD INFORMATION TECHNOLOGY (HK) LIMITED,UCLOUD-HK-AS-AP,t,f,f
+23.148.24.50,Hong Kong,HK,Hong Kong,Kowloon,22.3193,114.169,Liberally Network LLC,Radishcloud Technology LLC,AS152918 Liberally Network LLC,LNL-AS-AP,f,f,f
+39.109.70.73,Hong Kong,HK,Hong Kong,Kowloon,22.3193,114.169,Union FU WAH Digital Technology Limited,Hong Kong Bridge Info-tech Limited,AS149175 UNION FU WAH DIGITAL TECHNOLOGY LIMITED,UFWDTL-AS-AP,f,f,f
+203.176.227.188,Hong Kong,HK,Kowloon Bay,Kwun Tong,22.3215,114.211,NWT,"",AS10103 HK Broadband Network Ltd.,HKBN-AS-AP,f,f,f
+210.245.153.20,Hong Kong,HK,Kowloon Bay,Kwun Tong,22.3215,114.211,NWT,"",AS10103 HK Broadband Network Ltd.,HKBN-AS-AP,f,f,f
+210.245.153.25,Hong Kong,HK,Kowloon Bay,Kwun Tong,22.3215,114.211,NWT,"",AS10103 HK Broadband Network Ltd.,HKBN-AS-AP,f,f,f
+183.178.93.65,Hong Kong,HK,Kwai Chung,Kwai Tsing,22.3702,114.13,Hong Kong Broadband Network Ltd,Hong Kong Broadband Network Limited,AS9269 Hong Kong Broadband Network Ltd.,HKBN-AS-AP,f,f,f
+202.65.194.210,Hong Kong,HK,Kwun Tong,Kwun Tong,22.3139,114.22,Diyixian.com Limited,Diyixian.com Limited,AS9584 Diyixian.com Limited,GENESIS-AP,f,f,f
+38.135.29.253,Hong Kong,HK,Kwun Tong,Kwun Tong,22.3103,114.2227,Global Communication Network Limited,Global Communication Network Limited,AS152179 GLOBAL COMMUNICATION NETWORK LIMITED,GCNL-AS-AP,f,f,f
+39.109.125.172,Hong Kong,HK,Ngau Tau Kok,Kwun Tong,22.3152,114.217,Union FU WAH Digital Technology Limited,XUN HONG KONG LIMITED,AS149175 UNION FU WAH DIGITAL TECHNOLOGY LIMITED,UFWDTL-AS-AP,f,f,f
+39.109.125.174,Hong Kong,HK,Ngau Tau Kok,Kwun Tong,22.3152,114.217,Union FU WAH Digital Technology Limited,XUN HONG KONG LIMITED,AS149175 UNION FU WAH DIGITAL TECHNOLOGY LIMITED,UFWDTL-AS-AP,f,f,f
+39.109.125.175,Hong Kong,HK,Ngau Tau Kok,Kwun Tong,22.3152,114.217,Union FU WAH Digital Technology Limited,XUN HONG KONG LIMITED,AS149175 UNION FU WAH DIGITAL TECHNOLOGY LIMITED,UFWDTL-AS-AP,f,f,f
+39.109.125.189,Hong Kong,HK,Ngau Tau Kok,Kwun Tong,22.3152,114.217,Union FU WAH Digital Technology Limited,XUN HONG KONG LIMITED,AS149175 UNION FU WAH DIGITAL TECHNOLOGY LIMITED,UFWDTL-AS-AP,f,f,f
+39.109.125.190,Hong Kong,HK,Ngau Tau Kok,Kwun Tong,22.3152,114.217,Union FU WAH Digital Technology Limited,XUN HONG KONG LIMITED,AS149175 UNION FU WAH DIGITAL TECHNOLOGY LIMITED,UFWDTL-AS-AP,f,f,f
+103.214.65.32,Hong Kong,HK,Tsim Sha Tsui,Kowloon City,22.2995,114.168,China Unicom (Hong Kong) Operations Limited,China Unicom (Hong Kong) Operations Limited,AS10099 China Unicom Global,UNICOM-Global,f,f,f
+162.219.87.192,Hong Kong,HK,Tsim Sha Tsui,Kowloon City,22.3,114.1667,China Unicom (Hong Kong) Operations Limited,China Unicom Global IP Servcies,AS10099 China Unicom Global,UNICOM-Global,f,f,f
+202.77.20.251,Hong Kong,HK,Tsim Sha Tsui,Kowloon City,22.2995,114.168,China Unicom Global,"",AS10099 China Unicom Global,UNICOM-Global,f,f,f
+202.77.20.254,Hong Kong,HK,Tsim Sha Tsui,Kowloon City,22.2995,114.168,China Unicom Global,"",AS10099 China Unicom Global,UNICOM-Global,f,f,f
+116.92.243.3,Hong Kong,HK,Tsuen Wan,Tsuen Wan District,22.3638,114.1091,HKBN Enterprise Solutions HK Limited,HKBN Enterprise Solutions HK Limited,AS9381 HKBN Enterprise Solutions HK Limited,HKBNES-AS-AP,f,f,f
+116.92.243.4,Hong Kong,HK,Tsuen Wan,Tsuen Wan District,22.3638,114.1091,HKBN Enterprise Solutions HK Limited,HKBN Enterprise Solutions HK Limited,AS9381 HKBN Enterprise Solutions HK Limited,HKBNES-AS-AP,f,f,f
+116.92.243.5,Hong Kong,HK,Tsuen Wan,Tsuen Wan District,22.3638,114.1091,HKBN Enterprise Solutions HK Limited,HKBN Enterprise Solutions HK Limited,AS9381 HKBN Enterprise Solutions HK Limited,HKBNES-AS-AP,f,f,f
+2400:6180:100:d0::94a:5001,India,IN,Bengaluru,Karnataka,12.9753,77.591,"DigitalOcean, LLC",Digital Ocean,"AS14061 DigitalOcean, LLC",DIGITALOCEAN-ASN,t,f,f
+148.113.16.168,India,IN,Mumbai,Maharashtra,19.0748,72.8856,OVH SAS,OVHTECH R&D (INDIA) PRIVATE LIMITED,AS16276 OVH SAS,OVH,t,f,f
+103.100.158.191,Japan,JP,Chiyoda City,Tokyo,35.694,139.754,Rainbow Network Limited,Google LLC,AS51847 Nearoute Limited,NEAROUTE,f,f,f
+183.81.177.196,Japan,JP,Chiyoda City,Tokyo,35.6916,139.768,DOVA Corporation,DOVA Corporation,AS45680 DOVA Corporation,DOVA-NET,f,f,f
+42.125.245.71,Japan,JP,Chiyoda City,Tokyo,35.6916,139.768,TOKAI Communications Corporation,TOKAI,AS10010 TOKAI Communications Corporation,TOKAI,f,f,f
+64.176.58.245,Japan,JP,Osaka,Osaka,34.6834,135.5258,"The Constant Company, LLC","The Constant Company, LLC","AS20473 The Constant Company, LLC",AS-VULTR,t,f,f
+207.176.112.42,Japan,JP,Tokyo,Tokyo,35.7081,139.743,PCCW Global,263 Global,AS31713 Gateway Communications,GWCOMMS-MPLS,f,f,f
+57.182.91.173,Japan,JP,Tokyo,Tokyo,35.6895,139.692,"Amazon.com, Inc.",AWS EC2 (ap-northeast-1),"AS16509 Amazon.com, Inc.",AMAZON-02,t,f,f
+221.241.179.83,Japan,JP,Toyosu,Tokyo,35.6289,139.7915,ARTERIA Networks Corporation,Vectant,AS17506 ARTERIA Networks Corporation,usen,f,f,f
+217.28.56.152,Latvia,LV,Riga,Rīga,56.9473,24.0979,RETN Limited,Clnt56,AS28886 RETN Limited,RETN-LV,f,f,f
+80.232.244.29,Latvia,LV,Riga,Rīga,56.9473,24.0979,LATTELEKOM,Bridge Group,AS12578 SIA Tet,APOLLO-AS,f,f,f
+202.184.250.176,Malaysia,MY,Shah Alam,Selangor,3.08452,101.485,TT DOTCOM SDN BHD,TT DOTCOM SDN BHD,AS9930 TTNET-MY,TTNET-MY,f,f,f
+202.184.250.182,Malaysia,MY,Shah Alam,Selangor,3.08452,101.485,TT DOTCOM SDN BHD,TT DOTCOM SDN BHD,AS9930 TTNET-MY,TTNET-MY,f,f,f
+31.169.51.133,Norway,NO,Oslo,Oslo County,59.9139,10.7522,Blix Solutions,Portlane AB,AS50304 Blix Solutions AS,BLIX,t,f,f
+195.26.70.151,Norway,NO,Sandefjord,Vestfold,59.1313,10.2166,Aremark EDB,"",AS202311 Noki Eiendom AS,AEDB-AS-01,f,f,f
+195.26.70.152,Norway,NO,Sandefjord,Vestfold,59.1313,10.2166,Aremark EDB,"",AS202311 Noki Eiendom AS,AEDB-AS-01,f,f,f
+195.26.70.153,Norway,NO,Sandefjord,Vestfold,59.1313,10.2166,Aremark EDB,"",AS202311 Noki Eiendom AS,AEDB-AS-01,f,f,f
+109.247.200.138,Norway,NO,Sola,Rogaland,58.8858,5.6623,Lyse Tele AS,Altibox,AS29695 Altibox AS,Altibox_AS,f,f,f
+51.83.237.209,Poland,PL,Ożarów Mazowiecki,Mazovia,52.2143,20.8009,OVH SAS,OVH Sp. z o. o,AS16276 OVH SAS,OVH,t,f,f
+86.122.62.126,Romania,RO,Bucharest,București,44.4205,26.169,RCS & RDS,RCS & RDS Business,AS8708 RCS & RDS,RCS-RDS,f,f,f
+212.248.62.42,Russia,RU,Moscow,Moscow,55.7558,37.6173,MTS PJSC,Customers P2P 2021 41 WAN,AS8359 MTS PJSC,MTS,f,f,t
+79.104.211.73,Russia,RU,Moscow,Moscow,55.7569,37.7007,EDN SOVINTEL,"","AS3216 PJSC ""Vimpelcom""",SOVAM-AS,f,f,f
+194.190.216.153,Russia,RU,St Petersburg,St.-Petersburg,59.8929,30.3285,Comfortel Ltd.,Comfortel Ltd,AS56534 Comfortel Ltd.,Comfortel,t,f,f
+109.197.127.11,Russia,RU,Tomsk,Tomsk Oblast,56.4736,84.9754,"OOO ""T TELECOM""","OOO ""T TELECOM""","AS214325 OOO ""T TELECOM""",T-TELECOM-AS,f,f,f
+103.1.65.125,Singapore,SG,Singapore,Central Singapore,1.34129,103.778,China Unicom Global,"",AS10099 China Unicom Global,UNICOM-Global,f,f,f
+128.106.101.254,Singapore,SG,Singapore,Central Singapore,1.29229,103.808,"Singapore Telecommunications Ltd, Magix Services",Singtel Fibre,AS9506 Singtel Fibre Broadband,SINGTEL-FIBRE,f,f,f
+203.117.115.100,Singapore,SG,Singapore,Central Singapore,1.31697,103.844,STARHUBINTERNET,"",AS4657 StarHub Ltd,STARHUB-INTERNET,f,f,f
+43.134.14.238,Singapore,SG,Singapore,North West,1.352,103.8198,Shenzhen Tencent Computer Systems Company Limited,Tencent Cloud Computing,"AS132203 Tencent Building, Kejizhongyi Avenue",TENCENT-NET-AP-CN,t,f,f
+43.163.99.198,Singapore,SG,Singapore,North West,1.35208,103.82,Shenzhen Tencent Computer Systems Company Limited,"","AS132203 Tencent Building, Kejizhongyi Avenue",TENCENT-NET-AP-CN,t,f,f
+45.32.112.47,Singapore,SG,Singapore,South West,1.32123,103.695,The Constant Company,"Vultr Holdings, LLC","AS20473 The Constant Company, LLC",AS-VULTR,t,f,f
+47.236.31.236,Singapore,SG,Singapore,North West,1.35208,103.82,"Alibaba (US) Technology Co., Ltd.",Alibaba.com LLC,"AS45102 Alibaba (US) Technology Co., Ltd.",ALIBABA-CN-NET,t,f,f
+8.214.79.168,Singapore,SG,Singapore,North West,1.35208,103.82,"Alibaba (US) Technology Co., Ltd.",Alibaba.com Singapore E-Commerce Private Limited,"AS45102 Alibaba (US) Technology Co., Ltd.",ALIBABA-CN-NET,t,f,f
+106.254.228.34,South Korea,KR,Ansan-si,Gyeonggi-do,37.3253,126.8178,LG DACOM Corporation,Boranet,AS3786 LG DACOM Corporation,LGDACOM,f,f,f
+106.254.236.186,South Korea,KR,Ansan-si,Gyeonggi-do,37.3253,126.8178,LG DACOM Corporation,Boranet,AS3786 LG DACOM Corporation,LGDACOM,f,f,f
+106.254.237.122,South Korea,KR,Ansan-si,Gyeonggi-do,37.3253,126.8178,LG DACOM Corporation,Boranet,AS3786 LG DACOM Corporation,LGDACOM,f,f,f
+59.28.185.236,South Korea,KR,Changwon,Gyeongsangnam-do,35.2317,128.6822,Korea Telecom,Kornet,AS4766 Korea Telecom,KIXS-AS-KR,f,f,f
+121.189.19.226,South Korea,KR,Chuncheon,Gangwon-do,37.8738,127.727,Korea Telecom,Korea Telecom,AS4766 Korea Telecom,KIXS-AS-KR,f,f,f
+106.252.31.52,South Korea,KR,Eunpyeong-gu,Seoul,37.5681,126.8998,LG DACOM Corporation,Boranet,AS3786 LG DACOM Corporation,LGDACOM,f,f,f
+106.252.31.58,South Korea,KR,Eunpyeong-gu,Seoul,37.5681,126.8998,LG DACOM Corporation,Boranet,AS3786 LG DACOM Corporation,LGDACOM,f,f,f
+211.53.60.61,South Korea,KR,Gangnam-gu,Seoul,37.4909,127.0452,LG DACOM Corporation,Boranet,AS3786 LG DACOM Corporation,LGDACOM,f,f,f
+125.133.62.76,South Korea,KR,Geumcheon-gu,Seoul,37.4784,126.8982,Korea Telecom,Korea Telecom,AS4766 Korea Telecom,KIXS-AS-KR,f,f,f
+210.113.122.17,South Korea,KR,Geumcheon-gu,Seoul,37.4784,126.8982,KORNET,jogwangchulpaninswai,AS4766 Korea Telecom,KIXS-AS-KR,f,f,f
+119.195.69.167,South Korea,KR,Gimhae,Gyeongsangnam-do,35.2342,128.8777,Korea Telecom,"",AS4766 Korea Telecom,KIXS-AS-KR,f,f,f
+211.196.161.113,South Korea,KR,Gimhae,Gyeongsangnam-do,35.2619,128.867,Korea Telecom,Kornet,AS4766 Korea Telecom,KIXS-AS-KR,f,f,f
+106.248.228.178,South Korea,KR,Gwanak-gu,Seoul,37.4749,126.9571,LG DACOM Corporation,Boranet,AS3786 LG DACOM Corporation,LGDACOM,f,f,f
+61.75.3.193,South Korea,KR,Gwangmyeong,Gyeonggi-do,37.4796,126.8746,Korea Telecom,Korea Telecom,AS4766 Korea Telecom,KIXS-AS-KR,f,f,f
+61.75.3.201,South Korea,KR,Gwangmyeong,Gyeonggi-do,37.4796,126.8746,Korea Telecom,Korea Telecom,AS4766 Korea Telecom,KIXS-AS-KR,f,f,f
+61.75.3.202,South Korea,KR,Gwangmyeong,Gyeonggi-do,37.4796,126.8746,Korea Telecom,Korea Telecom,AS4766 Korea Telecom,KIXS-AS-KR,f,f,f
+61.75.3.203,South Korea,KR,Gwangmyeong,Gyeonggi-do,37.4796,126.8746,Korea Telecom,Korea Telecom,AS4766 Korea Telecom,KIXS-AS-KR,f,f,f
+61.75.3.204,South Korea,KR,Gwangmyeong,Gyeonggi-do,37.4796,126.8746,Korea Telecom,Korea Telecom,AS4766 Korea Telecom,KIXS-AS-KR,f,f,f
+210.97.12.179,South Korea,KR,Gyeongsan-si,Gyeongsangbuk-do,35.9079,128.821,Korea Telecom,Kornet,AS4766 Korea Telecom,KIXS-AS-KR,f,f,f
+210.97.12.181,South Korea,KR,Gyeongsan-si,Gyeongsangbuk-do,35.9079,128.821,Korea Telecom,Kornet,AS4766 Korea Telecom,KIXS-AS-KR,f,f,f
+210.97.12.182,South Korea,KR,Gyeongsan-si,Gyeongsangbuk-do,35.9079,128.821,Korea Telecom,Kornet,AS4766 Korea Telecom,KIXS-AS-KR,f,f,f
+210.97.12.183,South Korea,KR,Gyeongsan-si,Gyeongsangbuk-do,35.9079,128.821,Korea Telecom,Kornet,AS4766 Korea Telecom,KIXS-AS-KR,f,f,f
+210.97.12.185,South Korea,KR,Gyeongsan-si,Gyeongsangbuk-do,35.9079,128.821,Korea Telecom,Kornet,AS4766 Korea Telecom,KIXS-AS-KR,f,f,f
+210.97.12.188,South Korea,KR,Gyeongsan-si,Gyeongsangbuk-do,35.9079,128.821,Korea Telecom,Kornet,AS4766 Korea Telecom,KIXS-AS-KR,f,f,f
+106.240.230.122,South Korea,KR,Hwaseong-si,Gyeonggi-do,37.2072,126.8168,LG DACOM Corporation,Boranet,AS3786 LG DACOM Corporation,LGDACOM,f,f,f
+106.240.230.123,South Korea,KR,Hwaseong-si,Gyeonggi-do,37.2072,126.8168,LG DACOM Corporation,Boranet,AS3786 LG DACOM Corporation,LGDACOM,f,f,f
+61.77.175.5,South Korea,KR,Icheon-si,Gyeonggi-do,37.277,127.441,Korea Telecom,"",AS4766 Korea Telecom,KIXS-AS-KR,f,f,f
+61.80.167.200,South Korea,KR,Jeju City,Jeju-do,33.5109,126.5264,Korea Telecom,Kornet,AS4766 Korea Telecom,KIXS-AS-KR,f,f,f
+222.112.183.195,South Korea,KR,Seocho-gu,Seoul,37.4972,127.0076,Korea Telecom,(ju)bogo neteuseu,AS4766 Korea Telecom,KIXS-AS-KR,f,f,f
+222.112.183.198,South Korea,KR,Seocho-gu,Seoul,37.4972,127.0076,Korea Telecom,(ju)bogo neteuseu,AS4766 Korea Telecom,KIXS-AS-KR,f,f,f
+222.112.183.211,South Korea,KR,Seocho-gu,Seoul,37.4972,127.0076,Korea Telecom,(ju)bogo neteuseu,AS4766 Korea Telecom,KIXS-AS-KR,f,f,f
+222.100.166.16,South Korea,KR,Seo-gu,Incheon,37.5214,126.6251,Korea Telecom,Sudogwongangnambonbujang,AS4766 Korea Telecom,KIXS-AS-KR,f,f,f
+183.111.26.200,South Korea,KR,Seongnam-si,Gyeonggi-do,37.3668,127.108,Korea Telecom,Kornet,AS4766 Korea Telecom,KIXS-AS-KR,f,f,f
+210.119.240.2,South Korea,KR,Seongnam-si,Gyeonggi-do,37.3654,127.122,Korea Telecom,Kornet,AS4766 Korea Telecom,KIXS-AS-KR,f,f,f
+210.119.240.214,South Korea,KR,Seongnam-si,Gyeonggi-do,37.3654,127.122,Korea Telecom,Kornet,AS4766 Korea Telecom,KIXS-AS-KR,f,f,f
+221.150.233.3,South Korea,KR,Seongnam-si,Gyeonggi-do,37.4331,127.1377,Korea Telecom,Korea Telecom,AS4766 Korea Telecom,KIXS-AS-KR,f,f,f
+203.248.84.139,South Korea,KR,Seoul,Seoul,37.5658,126.978,Sejong Networks,Sejong,AS9848 SEJONG NETWORKS,SejongTelecom-AS-KR,f,f,f
+211.171.250.184,South Korea,KR,Seoul,Seoul,37.5658,126.978,LG DACOM Corporation,DACOM Corp.,AS3786 LG DACOM Corporation,LGDACOM,f,f,f
+121.166.5.2,South Korea,KR,Suwon,Gyeonggi-do,37.2506,127.0668,Korea Telecom,"",AS4766 Korea Telecom,KIXS-AS-KR,f,f,f
+218.148.6.12,South Korea,KR,Suwon,Gyeonggi-do,37.2506,127.0668,Korea Telecom,Korea Telecom,AS4766 Korea Telecom,KIXS-AS-KR,f,f,f
+218.148.6.3,South Korea,KR,Suwon,Gyeonggi-do,37.2506,127.0668,Korea Telecom,Korea Telecom,AS4766 Korea Telecom,KIXS-AS-KR,f,f,f
+218.148.6.4,South Korea,KR,Suwon,Gyeonggi-do,37.2506,127.0668,Korea Telecom,Korea Telecom,AS4766 Korea Telecom,KIXS-AS-KR,f,f,f
+218.148.6.5,South Korea,KR,Suwon,Gyeonggi-do,37.2506,127.0668,Korea Telecom,Korea Telecom,AS4766 Korea Telecom,KIXS-AS-KR,f,f,f
+218.148.6.6,South Korea,KR,Suwon,Gyeonggi-do,37.2506,127.0668,Korea Telecom,Korea Telecom,AS4766 Korea Telecom,KIXS-AS-KR,f,f,f
+218.148.6.7,South Korea,KR,Suwon,Gyeonggi-do,37.2506,127.0668,Korea Telecom,Korea Telecom,AS4766 Korea Telecom,KIXS-AS-KR,f,f,f
+218.148.6.9,South Korea,KR,Suwon,Gyeonggi-do,37.2506,127.0668,Korea Telecom,Korea Telecom,AS4766 Korea Telecom,KIXS-AS-KR,f,f,f
+221.163.91.162,South Korea,KR,Suwon,Gyeonggi-do,37.2963,127.0506,Korea Telecom,Kornet,AS4766 Korea Telecom,KIXS-AS-KR,f,f,f
+211.108.89.11,South Korea,KR,Yangcheon-gu,Seoul,37.5392,126.8605,SK Broadband Co Ltd,SK Broadband Co Ltd,AS9318 SK Broadband Co Ltd,SKB-AS,f,f,f
+211.108.89.12,South Korea,KR,Yangcheon-gu,Seoul,37.5392,126.8605,SK Broadband Co Ltd,SK Broadband Co Ltd,AS9318 SK Broadband Co Ltd,SKB-AS,f,f,f
+14.36.93.124,South Korea,KR,Yongin-si,Gyeonggi-do,37.298,127.0777,Korea Telecom,Kornet,AS4766 Korea Telecom,KIXS-AS-KR,f,f,f
+222.121.76.50,South Korea,KR,Yongin-si,Gyeonggi-do,37.298,127.0777,Korea Telecom,Korea Telecom,AS4766 Korea Telecom,KIXS-AS-KR,f,f,f
+117.52.250.21,South Korea,KR,Yongsan-dong,Seoul,37.5379,126.97,LG DACOM Corporation,Kidc,AS3786 LG DACOM Corporation,LGDACOM,f,f,f
+117.52.250.22,South Korea,KR,Yongsan-dong,Seoul,37.5379,126.97,LG DACOM Corporation,Kidc,AS3786 LG DACOM Corporation,LGDACOM,f,f,f
+182.162.8.20,South Korea,KR,Yongsan-dong,Seoul,37.5379,126.97,LG DACOM Corporation,Kidc,AS3786 LG DACOM Corporation,LGDACOM,f,f,f
+61.111.3.73,South Korea,KR,Yongsan-dong,Seoul,37.4999,127.038,LG DACOM KIDC,crystal,AS3786 LG DACOM Corporation,LGDACOM,f,f,f
+61.111.3.74,South Korea,KR,Yongsan-dong,Seoul,37.4999,127.038,LG DACOM KIDC,crystal,AS3786 LG DACOM Corporation,LGDACOM,f,f,f
+211.217.150.173,South Korea,KR,Yongsan-gu,Seoul,37.5332,126.9692,KORNET,jusighwyeusa keitisudogwongogaegsenteo,AS4766 Korea Telecom,KIXS-AS-KR,f,f,f
+103.208.87.35,Taiwan,TW,Taipei,Taiwan,25.033,121.565,Zappie Host LLC,"",AS138995 Antbox Networks Limited,ANTBOX1-AS-AP,f,t,f
+23.83.66.244,The Netherlands,NL,Amsterdam,North Holland,52.3403,4.87272,Servers.com B.V,Servers.com B.V,"AS7979 Servers.com, Inc.",SERVERS-COM,t,f,f
+212.6.53.183,The Netherlands,NL,Oudkarspel,North Holland,52.7143,4.80209,Wijnand Schouten trading as Speedium,Speedium,AS207551 Wijnand Schouten,as-speedium,f,f,f
+212.6.53.55,The Netherlands,NL,Oudkarspel,North Holland,52.7143,4.80209,Wijnand Schouten trading as Speedium,Speedium,AS207551 Wijnand Schouten,as-speedium,f,f,f
+212.6.53.56,The Netherlands,NL,Oudkarspel,North Holland,52.7143,4.80209,Wijnand Schouten trading as Speedium,Speedium,AS207551 Wijnand Schouten,as-speedium,f,f,f
+212.6.53.57,The Netherlands,NL,Oudkarspel,North Holland,52.7143,4.80209,Wijnand Schouten trading as Speedium,Speedium,AS207551 Wijnand Schouten,as-speedium,f,f,f
+212.6.53.9,The Netherlands,NL,Oudkarspel,North Holland,52.7143,4.80209,Wijnand Schouten trading as Speedium,Speedium,AS207551 Wijnand Schouten,as-speedium,f,f,f
+195.162.83.16,Ukraine,UA,Ivano-Frankivsk,Ivano-Frankivsk Oblast,48.9171,24.7158,"Branch Enterprise ""Netgroup-Service""","Branch Enterprise ""Netgroup-Service""","AS35004 Branch Enterprise ""Netgroup-Service""",NETGRUP,f,f,f
+5.107.98.254,United Arab Emirates,AE,Dubai,Dubai,25.0734,55.2979,Emirates Telecommunications Corporation,Etisalat,AS5384 Emirates Internet,EMIRATES-INTERNET,f,f,f
+185.17.173.124,United Kingdom,GB,London,England,51.5072,-0.127586,Netwise Hosting Ltd,FRC Cn776 On784,AS60800 Netwise Hosting Ltd,NHL-AS1,t,f,f
+198.244.182.198,United Kingdom,GB,London,England,51.5081,-0.1278,OVH SAS,OVH Ltd,AS16276 OVH SAS,OVH,t,f,f
+91.237.141.15,United Kingdom,GB,London,England,51.5072,-0.127586,VeloxServ Communications Ltd,Cube3 Technologies Ltd,AS3170 VeloxServ Communications Ltd,VELOXSERV,f,f,f
+2a03:b0c0:1:d0::d68:2001,United Kingdom,GB,Slough,England,51.5177,-0.6215,"DigitalOcean, LLC",Digital Ocean,"AS14061 DigitalOcean, LLC",DIGITALOCEAN-ASN,t,f,f
+90.254.124.179,United Kingdom,GB,Tower Hamlets,England,51.5064,-0.02,Vodafone Group PLC,Bigfella P11c-north,AS5378 Vodafone Limited,unspecified,f,f,f
+45.76.254.143,United States,US,Atlanta,Georgia,33.7838,-84.4455,The Constant Company,"Vultr Holdings, LLC","AS20473 The Constant Company, LLC",AS-VULTR,t,f,f
+185.8.107.195,United States,US,Chicago,Illinois,41.8835,-87.6305,Cherry Servers,"",AS204770 UAB Cherry Servers,CHERRYSERVERS3-AS,f,f,f
+47.145.215.228,United States,US,Chino Hills,California,33.9938,-117.7589,Frontier Communications Corporation,Frontier Communications Solutions,"AS5650 Frontier Communications of America, Inc.",FRONTIER-FRTR,f,f,f
+23.227.172.80,United States,US,Dallas,Texas,32.8137,-96.8704,"HIVELOCITY, Inc.","HIVELOCITY, Inc.","AS29802 HIVELOCITY, Inc.",HVC-AS,t,f,f
+71.162.113.240,United States,US,Danvers,Massachusetts,42.5751,-70.93,Verizon Business,Verizon Business,AS701 Verizon Business,UUNET,f,f,f
+65.183.191.226,United States,US,Detroit,Michigan,42.3888,-83.1895,"123.Net, Inc.","123.Net, Inc.","AS12129 123.Net, Inc.",123NET,f,f,f
+73.74.61.146,United States,US,Fox River Grove,Illinois,42.1912,-88.2201,"Comcast Cable Communications, LLC","Comcast IP Services, L.L.C.","AS7922 Comcast Cable Communications, LLC",COMCAST-7922,f,f,f
+24.170.52.84,United States,US,Grand Prairie,Texas,32.6609,-97.0342,Charter Communications Inc,Spectrum,AS11427 Charter Communications Inc,TWC-11427-TEXAS,f,f,f
+209.151.233.196,United States,US,La Palma,California,33.8608,-118.033,Krypt Technologies,"Evocative, Inc",AS4213 Krypt Technologies,EVOCATIVE-GLOBAL,t,f,f
+209.151.233.210,United States,US,La Palma,California,33.8608,-118.033,Krypt Technologies,"Evocative, Inc",AS4213 Krypt Technologies,EVOCATIVE-GLOBAL,t,f,f
+199.85.210.102,United States,US,Los Angeles,California,34.0356,-118.442,"Namecheap, Inc.","Namecheap, Inc.","AS22612 Namecheap, Inc.",NAMECHEAP-NET,t,f,f
+69.67.149.193,United States,US,Los Angeles,California,34.0544,-118.244,Latitude.sh,Latitude.sh,AS396356 Latitude.sh,LATITUDE-SH,f,f,f
+69.67.150.195,United States,US,Miami,Florida,25.7701,-80.1928,Maxihost LTDA,Latitude.sh,AS262287 Latitude.sh LTDA,Latitude.sh LTDA,t,f,f
+72.52.65.169,United States,US,Noblesville,Indiana,40.0036,-85.9958,Hurricane Electric LLC,IDSolutions,AS6939 Hurricane Electric LLC,HURRICANE,t,f,f
+72.52.65.170,United States,US,Noblesville,Indiana,40.0036,-85.9958,Hurricane Electric LLC,IDSolutions,AS6939 Hurricane Electric LLC,HURRICANE,t,f,f
+2604:a880:400:d0::1a66:4001,United States,US,North Bergen,New Jersey,40.7964,-74.0203,"DigitalOcean, LLC",Digital Ocean,"AS14061 DigitalOcean, LLC",DIGITALOCEAN-ASN,t,f,f
+174.49.69.141,United States,US,Powder Springs,Georgia,33.8607,-84.6884,"Comcast Cable Communications, LLC","Comcast Cable Communications, Inc.","AS7922 Comcast Cable Communications, LLC",COMCAST-7922,f,f,f
+40.160.22.19,United States,US,Reston,Virginia,38.958,-77.3592,OVH SAS,OVH US LLC,AS16276 OVH SAS,OVH,t,f,f
+170.205.62.66,United States,US,San Diego,California,32.9203,-117.216,PiKNiK & Company Inc.,PiKNiK & Company Inc,AS400302 PiKNiK & Company Inc.,AS-PIKNIK,f,f,f
+208.70.31.66,United States,US,San Francisco,California,37.7797,-122.4159,Internet Archive,Internet Archive,AS7941 Internet Archive,INTERNET-ARCHIVE,f,f,f
+184.169.211.225,United States,US,San Jose,California,37.3394,-121.895,"Amazon.com, Inc.",AWS EC2 (us-west-1),"AS16509 Amazon.com, Inc.",AMAZON-02,t,f,f
+45.207.224.5,United States,US,San Jose,California,37.3387,-121.885,Zillion Network Inc.,Zillion Network Inc,AS54801 Zillion Network Inc.,ZILLION-NETWORK,f,f,f
+32.219.195.43,United States,US,Shelton,Connecticut,41.3219,-73.0816,Frontier Communications Solutions,Trident-D VNG - Bridgeport CT,"AS46690 Southern New England Telephone Company and SNET America, Inc.",SNET-FCC,f,f,f
+205.198.104.10,United States,US,Washington,District of Columbia,38.894,-77.0365,Cogent Communications - IPENG,AGIS,"AS174 Cogent Communications, LLC",COGENT-174,f,f,f
+14.238.44.27,Vietnam,VN,Bắc Giang,Bắc Giang Province,21.2749,106.1933,VNPT,Vietnam Posts and Telecommunications Group,AS45899 VNPT Corp,VNPT-AS-VN,f,f,f
+14.238.44.28,Vietnam,VN,Bắc Giang,Bắc Giang Province,21.2749,106.1933,VNPT,Vietnam Posts and Telecommunications Group,AS45899 VNPT Corp,VNPT-AS-VN,f,f,f
+192.229.96.56,Vietnam,VN,Ho Chi Minh City,Ho Chi Minh,10.822,106.6257,Antbox Networks Limited,SpeedVM Network Group LLC,AS138995 Antbox Networks Limited,ANTBOX1-AS-AP,f,f,f

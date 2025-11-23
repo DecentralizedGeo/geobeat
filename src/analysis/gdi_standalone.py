@@ -315,6 +315,7 @@ if __name__ == '__main__':
     networks = {
         'ethereum': '../../data/raw/2025-11-22-ethereum-ips.csv',
         'polygon': '../../data/raw/2025-11-22-polygon-ips.csv',
+        'filecoin': '../../data/raw/2025-11-22-filecoin-ips.csv',
     }
 
     results = {}
