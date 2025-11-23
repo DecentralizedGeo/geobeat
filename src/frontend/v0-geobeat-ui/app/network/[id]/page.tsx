@@ -70,20 +70,20 @@ export default async function NetworkDetailPage({
   const ispBreakdown = calculateIspBreakdown(nodeData);
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-white">
       <ScrollToTop />
       <div className="max-w-7xl mx-auto px-6 py-8">
         {/* Back button */}
         <Link
-          href="/"
-          className="inline-flex items-center gap-2 text-[13px] text-muted-foreground hover:text-foreground transition-colors mb-6"
+          href="/dashboard"
+          className="inline-flex items-center gap-2 text-[14px] font-medium text-foreground/75 hover:text-foreground transition-colors mb-6"
         >
           <ChevronLeft className="w-4 h-4" />
           Back to Dashboard
         </Link>
 
         {/* Header Section */}
-        <div className="mb-10 pb-8 border-b border-border/60">
+        <div className="mb-10 pb-8 border-b border-foreground/20">
           <div className="flex items-start gap-4 mb-6">
             <div className="w-12 h-12 flex-shrink-0">
               <Image
@@ -95,10 +95,10 @@ export default async function NetworkDetailPage({
               />
             </div>
             <div>
-              <h1 className="text-3xl font-semibold tracking-tight mb-1">
+              <h1 className="text-3xl font-bold tracking-tight mb-1">
                 {network.name}
               </h1>
-              <p className="text-[13px] text-muted-foreground">
+              <p className="text-[15px] text-foreground/75 font-medium">
                 Geographic Decentralization Detail
               </p>
             </div>
@@ -107,17 +107,16 @@ export default async function NetworkDetailPage({
           {/* GDI Score */}
           <div className="mb-6">
             <div className="flex items-center gap-3 mb-2">
-              <span className="text-[13px] font-medium text-muted-foreground uppercase tracking-wide">
+              <span className="text-[13px] font-bold text-muted-foreground uppercase tracking-wide">
                 Overall GDI Score
               </span>
-              <span className="text-3xl font-semibold">{gdi}</span>
+              <span className="text-3xl font-bold">{gdi}</span>
             </div>
             <div className="h-3 bg-muted rounded-sm overflow-hidden max-w-2xl">
               <div
-                className="h-full rounded-sm transition-all duration-300"
+                className="h-full rounded-sm transition-all duration-300 bg-muted-foreground"
                 style={{
                   width: `${gdi}%`,
-                  background: "oklch(0.60 0.14 240)",
                 }}
               />
             </div>
@@ -126,12 +125,12 @@ export default async function NetworkDetailPage({
           {/* Three Pillar Scores */}
           <div className="grid grid-cols-3 gap-6 max-w-3xl">
             <div className="space-y-2">
-              <div className="text-[12px] font-medium text-muted-foreground/70 uppercase tracking-wide">
+              <div className="text-[12px] font-bold text-muted-foreground uppercase tracking-wide">
                 PDI
               </div>
               <IndexTooltip type="pdi" breakdown={orgBreakdown} score={network.pdi}>
                 <div className="flex items-center gap-2.5">
-                  <span className="text-xl font-semibold w-10">
+                  <span className="text-xl font-bold w-10 text-muted-foreground">
                     {Math.round(network.pdi)}
                   </span>
                   <div className="flex-1 h-2 bg-muted rounded-sm overflow-hidden">
@@ -148,12 +147,12 @@ export default async function NetworkDetailPage({
             </div>
 
             <div className="space-y-2">
-              <div className="text-[12px] font-medium text-muted-foreground/70 uppercase tracking-wide">
+              <div className="text-[12px] font-bold text-muted-foreground uppercase tracking-wide">
                 JDI
               </div>
               <IndexTooltip type="jdi" breakdown={countryBreakdown} score={network.jdi}>
                 <div className="flex items-center gap-2.5">
-                  <span className="text-xl font-semibold w-10">
+                  <span className="text-xl font-bold w-10 text-muted-foreground">
                     {Math.round(network.jdi)}
                   </span>
                   <div className="flex-1 h-2 bg-muted rounded-sm overflow-hidden">
@@ -170,12 +169,12 @@ export default async function NetworkDetailPage({
             </div>
 
             <div className="space-y-2">
-              <div className="text-[12px] font-medium text-muted-foreground/70 uppercase tracking-wide">
+              <div className="text-[12px] font-bold text-muted-foreground uppercase tracking-wide">
                 IHI
               </div>
               <IndexTooltip type="ihi" breakdown={ispBreakdown} score={network.ihi}>
                 <div className="flex items-center gap-2.5">
-                  <span className="text-xl font-semibold w-10">
+                  <span className="text-xl font-bold w-10 text-muted-foreground">
                     {Math.round(network.ihi)}
                   </span>
                   <div className="flex-1 h-2 bg-muted rounded-sm overflow-hidden">
@@ -195,72 +194,77 @@ export default async function NetworkDetailPage({
 
         {/* Section 1: Physical Distribution */}
         <div className="mb-12">
-          <div className="grid md:grid-cols-[60%_40%] gap-8">
+          <div>
+            <h2 className="text-xl font-bold mb-1">
+              Physical Distribution
+            </h2>
+            <p className="text-[15px] text-foreground/75 font-medium leading-relaxed mb-4">
+              How widely infrastructure is distributed across physical
+              geography
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-[60%_40%] gap-8 items-start">
             {/* Left: Map */}
             <div className="space-y-4">
-              <div>
-                <h2 className="text-xl font-semibold mb-1">
-                  Physical Distribution
-                </h2>
-                <p className="text-[13px] text-muted-foreground leading-relaxed">
-                  How widely infrastructure is distributed across physical
-                  geography
-                </p>
+              {/* PDI Score - above map */}
+              <div className="border-2 border-foreground rounded-sm bg-white p-5">
+                <div className="space-y-1">
+                  <div className="text-[12px] font-bold text-foreground uppercase tracking-wide mb-3">
+                    PDI Score
+                  </div>
+                  <div className="flex items-baseline gap-3">
+                    <span className="text-5xl font-bold">
+                      {Math.round(network.pdi)}
+                    </span>
+                    <span className="text-[14px] text-foreground/70 font-medium">
+                      {getBandLabel(network.pdi)}
+                    </span>
+                  </div>
+                </div>
               </div>
-              <NetworkMap networkId={network.id} />
+
+              {/* Map */}
+              <div className="border border-foreground/30 rounded-sm overflow-hidden">
+                <NetworkMap networkId={network.id} />
+              </div>
             </div>
 
-            {/* Right: Metrics Panel */}
-            <div className="space-y-6">
-              <div className="space-y-1">
-                <div className="flex items-baseline gap-3">
-                  <span className="text-3xl font-semibold">
-                    {Math.round(network.pdi)}
-                  </span>
-                  <span className="text-[13px] text-muted-foreground">
-                    {getBandLabel(network.pdi)}
-                  </span>
+            {/* Right: Component Metrics - aligned with map */}
+            <div className="flex flex-col gap-4 h-full">
+              <div className="border-2 border-foreground rounded-sm bg-white p-5 flex-1">
+                <div className="text-[11px] font-bold text-foreground uppercase tracking-wide mb-2">
+                  Moran&apos;s I
+                </div>
+                <div className="text-3xl font-bold mb-2">
+                  {network.moransI?.toFixed(3) || "N/A"}
+                </div>
+                <div className="text-[13px] text-foreground/70 font-medium">
+                  Measures spatial autocorrelation
                 </div>
               </div>
 
-              <div className="space-y-4 pt-2">
-                <div>
-                  <div className="text-[13px] font-medium mb-1">
-                    Moran&apos;s I
-                  </div>
-                  <div className="text-[13px] text-muted-foreground">
-                    {network.moransI?.toFixed(3) || "N/A"}
-                  </div>
-                  <div className="text-[12px] text-muted-foreground/70 mt-1">
-                    Measures spatial autocorrelation; higher values indicate
-                    stronger geographic clustering
-                  </div>
+              <div className="border-2 border-foreground rounded-sm bg-white p-5 flex-1">
+                <div className="text-[11px] font-bold text-foreground uppercase tracking-wide mb-2">
+                  Spatial HHI
                 </div>
-
-                <div>
-                  <div className="text-[13px] font-medium mb-1">
-                    Spatial HHI
-                  </div>
-                  <div className="text-[13px] text-muted-foreground">
-                    {network.spatialHHI?.toFixed(3) || "N/A"}
-                  </div>
-                  <div className="text-[12px] text-muted-foreground/70 mt-1">
-                    Herfindahl index for geographic concentration; lower values
-                    indicate better distribution
-                  </div>
+                <div className="text-3xl font-bold mb-2">
+                  {network.spatialHHI?.toFixed(3) || "N/A"}
                 </div>
+                <div className="text-[13px] text-foreground/70 font-medium">
+                  Geographic concentration index
+                </div>
+              </div>
 
-                <div>
-                  <div className="text-[13px] font-medium mb-1">
-                    Effective Number of Locations (ENL)
-                  </div>
-                  <div className="text-[13px] text-muted-foreground">
-                    {network.enl || "N/A"}
-                  </div>
-                  <div className="text-[12px] text-muted-foreground/70 mt-1">
-                    Equivalent number of evenly distributed regions; higher
-                    values indicate better dispersion
-                  </div>
+              <div className="border-2 border-foreground rounded-sm bg-white p-5 flex-1">
+                <div className="text-[11px] font-bold text-foreground uppercase tracking-wide mb-2">
+                  ENL
+                </div>
+                <div className="text-3xl font-bold mb-2">
+                  {network.enl || "N/A"}
+                </div>
+                <div className="text-[13px] text-foreground/70 font-medium">
+                  Effective number of locations
                 </div>
               </div>
             </div>
@@ -268,82 +272,94 @@ export default async function NetworkDetailPage({
         </div>
 
         {/* Section 2: Jurisdictional Diversity */}
-        <div className="mb-12 pb-12 border-b border-border/60">
-          <h2 className="text-xl font-semibold mb-5">
+        <div className="mb-12 pb-12 border-b border-foreground/20">
+          <h2 className="text-xl font-bold mb-5">
             Jurisdictional Diversity
           </h2>
 
-          <div className="max-w-2xl space-y-5">
-            <div className="flex items-baseline gap-3">
-              <span className="text-2xl font-semibold">
-                {Math.round(network.jdi)}
-              </span>
-              <span className="text-[13px] text-muted-foreground">
+          <div className="grid md:grid-cols-3 gap-4 max-w-4xl">
+            <div className="border-2 border-foreground rounded-sm bg-white p-5">
+              <div className="text-[12px] font-bold text-foreground uppercase tracking-wide mb-3">
+                JDI Score
+              </div>
+              <div className="flex items-baseline gap-3">
+                <span className="text-5xl font-bold">
+                  {Math.round(network.jdi)}
+                </span>
+              </div>
+              <div className="text-[14px] text-foreground/70 font-medium mt-2">
                 {getBandLabel(network.jdi)}
-              </span>
+              </div>
             </div>
 
-            <div className="pt-4 space-y-3">
-              <div>
-                <span className="text-[13px] font-medium">
-                  Country HHI:{" "}
-                </span>
-                <span className="text-[13px] text-muted-foreground">
-                  {network.countryHHI?.toFixed(3) || "N/A"}
-                </span>
+            <div className="border-2 border-foreground rounded-sm bg-white p-5">
+              <div className="text-[11px] font-bold text-foreground uppercase tracking-wide mb-2">
+                Country HHI
               </div>
-              <div>
-                <span className="text-[13px] font-medium">
-                  Total Countries:{" "}
-                </span>
-                <span className="text-[13px] text-muted-foreground">
-                  {network.numCountries || "N/A"}
-                </span>
+              <div className="text-3xl font-bold mb-2">
+                {network.countryHHI?.toFixed(3) || "N/A"}
               </div>
-              <div className="text-[13px] text-muted-foreground">
-                Lower HHI indicates more even distribution across countries
+              <div className="text-[13px] text-foreground/70 font-medium">
+                Concentration index
+              </div>
+            </div>
+
+            <div className="border-2 border-foreground rounded-sm bg-white p-5">
+              <div className="text-[11px] font-bold text-foreground uppercase tracking-wide mb-2">
+                Total Countries
+              </div>
+              <div className="text-3xl font-bold mb-2">
+                {network.numCountries || "N/A"}
+              </div>
+              <div className="text-[13px] text-foreground/70 font-medium">
+                Jurisdictions covered
               </div>
             </div>
           </div>
         </div>
 
         {/* Section 3: Infrastructure Heterogeneity */}
-        <div className="mb-12 pb-12 border-b border-border/60">
-          <h2 className="text-xl font-semibold mb-5">
+        <div className="mb-12 pb-12 border-b border-foreground/20">
+          <h2 className="text-xl font-bold mb-5">
             Infrastructure Heterogeneity
           </h2>
 
-          <div className="max-w-3xl space-y-5">
-            <div className="flex items-baseline gap-3">
-              <span className="text-2xl font-semibold">
-                {Math.round(network.ihi)}
-              </span>
-              <span className="text-[13px] text-muted-foreground">
+          <div className="grid md:grid-cols-3 gap-4 max-w-4xl">
+            <div className="border-2 border-foreground rounded-sm bg-white p-5">
+              <div className="text-[12px] font-bold text-foreground uppercase tracking-wide mb-3">
+                IHI Score
+              </div>
+              <div className="flex items-baseline gap-3">
+                <span className="text-5xl font-bold">
+                  {Math.round(network.ihi)}
+                </span>
+              </div>
+              <div className="text-[14px] text-foreground/70 font-medium mt-2">
                 {getBandLabel(network.ihi)}
-              </span>
+              </div>
             </div>
 
-            <div className="grid grid-cols-2 gap-x-8 gap-y-4 pt-3">
-              <div>
-                <div className="text-[13px] font-medium mb-1">Org HHI</div>
-                <div className="text-[13px] text-muted-foreground">
-                  {network.orgHHI?.toFixed(3) || "N/A"}
-                </div>
+            <div className="border-2 border-foreground rounded-sm bg-white p-5">
+              <div className="text-[11px] font-bold text-foreground uppercase tracking-wide mb-2">
+                Org HHI
               </div>
-
-              <div>
-                <div className="text-[13px] font-medium mb-1">
-                  Total Organizations
-                </div>
-                <div className="text-[13px] text-muted-foreground">
-                  {network.numOrgs?.toLocaleString() || "N/A"}
-                </div>
+              <div className="text-3xl font-bold mb-2">
+                {network.orgHHI?.toFixed(3) || "N/A"}
               </div>
+              <div className="text-[13px] text-foreground/70 font-medium">
+                Provider concentration
+              </div>
+            </div>
 
-              <div className="col-span-2">
-                <div className="text-[13px] text-muted-foreground">
-                  Lower HHI indicates more even distribution across hosting providers/organizations
-                </div>
+            <div className="border-2 border-foreground rounded-sm bg-white p-5">
+              <div className="text-[11px] font-bold text-foreground uppercase tracking-wide mb-2">
+                Total Organizations
+              </div>
+              <div className="text-3xl font-bold mb-2">
+                {network.numOrgs?.toLocaleString() || "N/A"}
+              </div>
+              <div className="text-[13px] text-foreground/70 font-medium">
+                Hosting providers
               </div>
             </div>
           </div>
@@ -351,9 +367,9 @@ export default async function NetworkDetailPage({
 
         {/* Section 4: Notes and Uncertainty */}
         <div className="max-w-3xl">
-          <h2 className="text-xl font-semibold mb-4">Notes and Uncertainty</h2>
+          <h2 className="text-xl font-bold mb-4">Notes and Uncertainty</h2>
 
-          <div className="space-y-4 text-[13px] text-muted-foreground leading-relaxed">
+          <div className="space-y-4 text-[14px] text-foreground/75 font-medium leading-relaxed">
             <p>
               All location and provider inferences are probabilistic and
               imperfect. Geographic decentralization metrics should be
@@ -362,7 +378,7 @@ export default async function NetworkDetailPage({
             </p>
 
             <div className="space-y-2">
-              <div className="font-medium text-foreground">
+              <div className="font-bold text-foreground">
                 Data Sources and Methodology
               </div>
               <ul className="space-y-1.5 list-disc list-inside">
@@ -374,7 +390,7 @@ export default async function NetworkDetailPage({
             </div>
 
             <div className="space-y-2">
-              <div className="font-medium text-foreground">
+              <div className="font-bold text-foreground">
                 Measurement Details
               </div>
               <ul className="space-y-1.5 list-disc list-inside">
@@ -385,7 +401,7 @@ export default async function NetworkDetailPage({
             </div>
 
             <div className="space-y-2">
-              <div className="font-medium text-foreground">
+              <div className="font-bold text-foreground">
                 Known Limitations
               </div>
               <ul className="space-y-1.5 list-disc list-inside">

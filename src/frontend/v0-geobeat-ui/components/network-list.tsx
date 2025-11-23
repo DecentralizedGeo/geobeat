@@ -57,43 +57,43 @@ export function NetworkList() {
   return (
     <div className="space-y-5">
       <div>
-        <h2 className="text-xl font-semibold tracking-tight mb-1.5">Network Comparison</h2>
-        <p className="text-[13px] text-muted-foreground/70">Compare networks across any dimension</p>
+        <h2 className="text-xl font-bold tracking-tight mb-1.5">Network Comparison</h2>
+        <p className="text-[15px] text-foreground/75 font-medium">Compare networks across any dimension</p>
       </div>
 
-      <div className="border border-border/80 rounded-sm overflow-hidden bg-card">
+      <div className="border-2 border-foreground rounded-sm overflow-hidden bg-white">
         {/* Column Headers */}
-        <div className="grid grid-cols-[50px_2fr_1fr_70px_1fr_1fr_1fr] gap-4 px-5 py-3 border-b border-border/60 bg-muted/20">
-          <div className="text-[11px] font-medium text-muted-foreground/70 uppercase tracking-wide">#</div>
-          <div className="text-[11px] font-medium text-muted-foreground/70 uppercase tracking-wide">Network</div>
+        <div className="grid grid-cols-[50px_2fr_1fr_70px_1fr_1fr_1fr] gap-4 px-5 py-3 border-b-2 border-foreground bg-white">
+          <div className="text-[12px] font-bold text-foreground uppercase tracking-wide">#</div>
+          <div className="text-[12px] font-bold text-foreground uppercase tracking-wide">Network</div>
           <button
             onClick={() => handleSort("gdi")}
-            className="text-[11px] font-medium text-muted-foreground/75 uppercase tracking-wide hover:text-foreground transition-colors flex items-center gap-1.5 justify-start"
+            className="text-[12px] font-bold text-foreground uppercase tracking-wide hover:opacity-70 transition-opacity flex items-center gap-1.5 justify-start"
           >
             <IndexPill type="gdi" showTooltip />
-            {sortField === "gdi" && <span className="text-[9px]">{sortDirection === "desc" ? "↓" : "↑"}</span>}
+            {sortField === "gdi" && <span className="text-[10px]">{sortDirection === "desc" ? "↓" : "↑"}</span>}
           </button>
-          <div className="text-[11px] font-medium text-muted-foreground/75 uppercase tracking-wide">Trend</div>
+          <div className="text-[12px] font-bold text-foreground uppercase tracking-wide">Trend</div>
           <button
             onClick={() => handleSort("pdi")}
-            className="text-[11px] font-medium text-muted-foreground/75 uppercase tracking-wide hover:text-foreground transition-colors flex items-center gap-1.5 justify-start"
+            className="text-[12px] font-bold text-foreground uppercase tracking-wide hover:opacity-70 transition-opacity flex items-center gap-1.5 justify-start"
           >
             <IndexPill type="pdi" showTooltip />
-            {sortField === "pdi" && <span className="text-[9px]">{sortDirection === "desc" ? "↓" : "↑"}</span>}
+            {sortField === "pdi" && <span className="text-[10px]">{sortDirection === "desc" ? "↓" : "↑"}</span>}
           </button>
           <button
             onClick={() => handleSort("jdi")}
-            className="text-[11px] font-medium text-muted-foreground/75 uppercase tracking-wide hover:text-foreground transition-colors flex items-center gap-1.5 justify-start"
+            className="text-[12px] font-bold text-foreground uppercase tracking-wide hover:opacity-70 transition-opacity flex items-center gap-1.5 justify-start"
           >
             <IndexPill type="jdi" showTooltip />
-            {sortField === "jdi" && <span className="text-[9px]">{sortDirection === "desc" ? "↓" : "↑"}</span>}
+            {sortField === "jdi" && <span className="text-[10px]">{sortDirection === "desc" ? "↓" : "↑"}</span>}
           </button>
           <button
             onClick={() => handleSort("ihi")}
-            className="text-[11px] font-medium text-muted-foreground/75 uppercase tracking-wide hover:text-foreground transition-colors flex items-center gap-1.5 justify-start"
+            className="text-[12px] font-bold text-foreground uppercase tracking-wide hover:opacity-70 transition-opacity flex items-center gap-1.5 justify-start"
           >
             <IndexPill type="ihi" showTooltip />
-            {sortField === "ihi" && <span className="text-[9px]">{sortDirection === "desc" ? "↓" : "↑"}</span>}
+            {sortField === "ihi" && <span className="text-[10px]">{sortDirection === "desc" ? "↓" : "↑"}</span>}
           </button>
         </div>
 
@@ -145,11 +145,11 @@ function NetworkRow({
   const ispBreakdown = useMemo(() => calculateIspBreakdown(nodeData), [nodeData])
 
   return (
-    <div className={cn(isEven && "bg-muted/5")}>
+    <div className="border-b border-foreground/20">
       <button
         onClick={onToggle}
         className={cn(
-          "w-full grid grid-cols-[50px_2fr_1fr_70px_1fr_1fr_1fr] gap-4 px-5 hover:bg-muted/30 transition-colors group text-left",
+          "w-full grid grid-cols-[50px_2fr_1fr_70px_1fr_1fr_1fr] gap-4 px-5 transition-colors group text-left",
           rank === 1 ? "py-4" : "py-3.5",
         )}
       >
