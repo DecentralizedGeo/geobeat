@@ -96,28 +96,30 @@ export function NetworkMap({ networkId }: NetworkMapProps) {
 
         // Add layers if they don't exist
         if (!map.current?.getLayer('heatmap-layer')) {
-          // Heatmap layer (visible at zoom >= 5)
+          // Heatmap layer (visible at LOW zoom - zoomed out/continental)
           map.current?.addLayer({
             id: 'heatmap-layer',
             type: 'heatmap',
             source: 'heatmap-points',
             maxzoom: 15,
             paint: {
-              // Increase weight as zoom increases
+              // Higher weight at lower zoom
               'heatmap-weight': [
                 'interpolate',
                 ['linear'],
                 ['zoom'],
-                0, 0,
-                15, 1
+                0, 1,
+                6, 0.5,
+                15, 0
               ],
-              // Increase intensity as zoom increases
+              // Higher intensity at lower zoom
               'heatmap-intensity': [
                 'interpolate',
                 ['linear'],
                 ['zoom'],
-                0, 0.5,
-                15, 1.5
+                0, 1.5,
+                3, 1.2,
+                6, 0.8
               ],
               // Use viridis-inspired color ramp
               'heatmap-color': [
@@ -131,30 +133,30 @@ export function NetworkMap({ networkId }: NetworkMapProps) {
                 0.8, 'rgb(94, 201, 98)',       // Green
                 1, 'rgb(253, 231, 37)'         // Yellow
               ],
-              // Adjust radius by zoom level
+              // Larger radius at lower zoom (zoomed out)
               'heatmap-radius': [
                 'interpolate',
                 ['linear'],
                 ['zoom'],
-                0, 2,
-                5, 10,
-                15, 30
+                0, 15,      // Big radius when zoomed out
+                3, 12,
+                5, 8,
+                6, 5        // Small radius when zoomed in
               ],
-              // Transition from heatmap to circle layer at higher zoom
+              // Visible at LOW zoom, fades out as you zoom IN
               'heatmap-opacity': [
                 'interpolate',
                 ['linear'],
                 ['zoom'],
-                5, 0,      // Invisible at low zoom
-                6, 0.8,    // Fade in
-                10, 0.6,   // Full opacity
-                12, 0.3,   // Start fading out
-                15, 0      // Invisible at high zoom
+                0, 0.8,     // Visible when zoomed out
+                3, 0.7,
+                5, 0.4,     // Start fading
+                6, 0        // Invisible when zoomed in
               ]
             }
           })
 
-          // Hexbin fill layer (visible at zoom < 6)
+          // Hexbin fill layer (visible at HIGH zoom - zoomed in/regional)
           map.current?.addLayer({
             id: 'hexbin-fill',
             type: 'fill',
@@ -165,9 +167,10 @@ export function NetworkMap({ networkId }: NetworkMapProps) {
                 'interpolate',
                 ['linear'],
                 ['zoom'],
-                0, 0.7,    // Solid at low zoom
-                5, 0.6,    // Start fading
-                6, 0       // Invisible at zoom >= 6
+                0, 0,       // Invisible when zoomed out
+                5, 0.3,     // Start fading in
+                6, 0.7,     // Solid when zoomed in
+                15, 0.7
               ]
             }
           })
@@ -184,9 +187,10 @@ export function NetworkMap({ networkId }: NetworkMapProps) {
                 'interpolate',
                 ['linear'],
                 ['zoom'],
-                0, 0.5,
-                5, 0.3,
-                6, 0
+                0, 0,
+                5, 0.2,
+                6, 0.5,
+                15, 0.5
               ]
             }
           })
