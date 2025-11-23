@@ -5,78 +5,81 @@ import { IndexPill } from "@/components/index-pill"
 
 export default function LandingPage() {
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-white">
       {/* Screen 1 - Hero */}
-      <section className="min-h-screen flex items-center justify-center px-6 py-20">
-        <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-16 items-center">
-          {/* Left - Abstract Map Graphic */}
-          <div className="relative aspect-square">
+      <section className="min-h-screen flex items-center justify-center px-6 py-20 bg-white">
+        <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-16 items-start">
+          {/* Left - Black Hole Graphic */}
+          <div className="relative flex items-start justify-center p-4 pt-0">
             <img
-              src="/images/image.png"
+              src="/images/black-hole.png"
               alt="Abstract network distribution visualization"
-              className="w-full h-full object-cover rounded-sm opacity-90"
+              className="w-full h-auto object-contain rounded-sm max-w-lg"
             />
           </div>
 
           {/* Right - Headline */}
-          <div className="space-y-8">
-            <div className="space-y-4">
-              <h1 className="text-5xl md:text-6xl tracking-tight text-balance leading-[1.1]">
+          <div className="space-y-10">
+            <div className="space-y-6">
+              <h1 className="font-serif text-5xl md:text-6xl tracking-tight text-balance leading-[1.15] text-foreground font-normal">
                 Most "decentralized" networks aren't{" "}
                 <span className="font-semibold">geographically decentralized.</span>
               </h1>
-              <p className="text-lg text-muted-foreground/80 leading-relaxed max-w-xl">
-                We measure where networks actually run — physically, legally, and infrastructurally.
+              <p className="text-xl text-foreground/75 leading-relaxed max-w-xl">
+                <span className="font-semibold">GEOBEAT</span> measures where networks <em>actually</em> run — through
+                physical, jurisdictional, and infrastructural lenses.
               </p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Screen 2 - What Geobeat Measures */}
+      {/* Screen 2 - What GEOBEAT Measures */}
       <section id="what-we-measure" className="min-h-screen flex items-center justify-center px-6 py-20 bg-muted/20">
         <div className="max-w-5xl mx-auto">
           <div className="border border-border/50 rounded-sm p-12 bg-background">
-            <h2 className="text-3xl font-semibold mb-8">What Geobeat Measures</h2>
+            <h2 className="font-serif text-4xl font-normal mb-10">What GEOBEAT Measures</h2>
 
             <div className="grid md:grid-cols-2 gap-12">
               {/* Left column - Description */}
               <div>
-                <p className="text-base text-foreground/90 leading-relaxed">
-                  Geobeat makes the geographic structure of decentralized networks visible. We evaluate three
-                  dimensions:
+                <p className="text-lg text-foreground/85 leading-relaxed">
+                  GEOBEAT quantifies geographic decentralization through a composite index across three dimensions:
                 </p>
               </div>
 
               {/* Right column - Three pillars */}
-              <div className="space-y-6">
-                <div className="space-y-2">
-                  <div className="flex items-center gap-2 mb-1">
+              <div className="space-y-7">
+                <div className="space-y-3">
+                  <div className="flex items-center gap-2 mb-2">
                     <h3 className="font-medium text-base">Physical Distribution</h3>
                     <IndexPill type="pdi" />
                   </div>
-                  <p className="text-sm text-muted-foreground/80 leading-relaxed">
-                    Measures spatial entropy and geographic spread of validator nodes across locations.
+                  <p className="text-sm text-muted-foreground/90 leading-relaxed">
+                    How spread out nodes are across physical geography. Combines spatial clustering detection,
+                    effective number of locations, and geographic concentration.
                   </p>
                 </div>
 
-                <div className="space-y-2">
-                  <div className="flex items-center gap-2 mb-1">
+                <div className="space-y-3">
+                  <div className="flex items-center gap-2 mb-2">
                     <h3 className="font-medium text-base">Jurisdictional Diversity</h3>
                     <IndexPill type="jdi" />
                   </div>
-                  <p className="text-sm text-muted-foreground/80 leading-relaxed">
-                    Evaluates distribution across legal jurisdictions and regulatory environments.
+                  <p className="text-sm text-muted-foreground/90 leading-relaxed">
+                    Distribution across countries and regulatory environments. Penalizes single-country dominance and
+                    rewards absolute jurisdictional diversity.
                   </p>
                 </div>
 
-                <div className="space-y-2">
-                  <div className="flex items-center gap-2 mb-1">
+                <div className="space-y-3">
+                  <div className="flex items-center gap-2 mb-2">
                     <h3 className="font-medium text-base">Infrastructure Heterogeneity</h3>
                     <IndexPill type="ihi" />
                   </div>
-                  <p className="text-sm text-muted-foreground/80 leading-relaxed">
-                    Assesses diversity of cloud providers and hosting infrastructure dependencies.
+                  <p className="text-sm text-muted-foreground/90 leading-relaxed">
+                    Diversity across hosting providers and organizations. Detects concentration risk from cloud
+                    provider dependencies.
                   </p>
                 </div>
               </div>
@@ -85,151 +88,82 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* Screen 3 - Evidence / Example */}
-      <section className="min-h-screen flex items-center justify-center px-6 py-20">
+      {/* Screen 3 - Why This Matters */}
+      <section className="min-h-screen flex items-center justify-center px-6 py-20 bg-muted/20">
         <div className="max-w-5xl mx-auto">
           <div className="border border-border/50 rounded-sm p-12 bg-background">
-            <div className="grid md:grid-cols-2 gap-12">
-              {/* Left - Example Network Card */}
-              <div className="space-y-6">
-                <div className="flex items-center gap-3 mb-6">
-                  <img src="https://cryptologos.cc/logos/ethereum-eth-logo.svg" alt="Ethereum" className="w-10 h-10" />
-                  <h3 className="text-2xl font-semibold">Ethereum</h3>
-                </div>
+            <h2 className="font-serif text-4xl font-normal mb-12">Why Geographic Decentralization Matters</h2>
 
-                <div className="space-y-4">
-                  <div>
-                    <div className="flex justify-between items-baseline mb-1.5">
-                      <span className="text-sm font-medium">Physical Distribution</span>
-                      <span className="text-lg font-semibold" style={{ color: "oklch(0.6 0.18 240)" }}>
-                        32
-                      </span>
-                    </div>
-                    <div className="h-2 bg-muted/50 rounded-full overflow-hidden">
-                      <div
-                        className="h-full rounded-full"
-                        style={{ width: "32%", backgroundColor: "oklch(0.6 0.18 240)" }}
-                      />
-                    </div>
-                  </div>
-
-                  <div>
-                    <div className="flex justify-between items-baseline mb-1.5">
-                      <span className="text-sm font-medium">Jurisdictional Diversity</span>
-                      <span className="text-lg font-semibold" style={{ color: "oklch(0.65 0.15 150)" }}>
-                        44
-                      </span>
-                    </div>
-                    <div className="h-2 bg-muted/50 rounded-full overflow-hidden">
-                      <div
-                        className="h-full rounded-full"
-                        style={{ width: "44%", backgroundColor: "oklch(0.65 0.15 150)" }}
-                      />
-                    </div>
-                  </div>
-
-                  <div>
-                    <div className="flex justify-between items-baseline mb-1.5">
-                      <span className="text-sm font-medium">Infrastructural Heterogeneity</span>
-                      <span className="text-lg font-semibold" style={{ color: "oklch(0.63 0.2 290)" }}>
-                        38
-                      </span>
-                    </div>
-                    <div className="h-2 bg-muted/50 rounded-full overflow-hidden">
-                      <div
-                        className="h-full rounded-full"
-                        style={{ width: "38%", backgroundColor: "oklch(0.63 0.2 290)" }}
-                      />
-                    </div>
-                  </div>
-                </div>
-
-                <div className="pt-4">
-                  <img
-                    src="/images/image.png"
-                    alt="Network distribution map"
-                    className="w-full h-32 object-cover rounded-sm opacity-80"
+            <div className="grid md:grid-cols-2 gap-x-14 gap-y-10">
+              <div className="space-y-4">
+                <div className="flex items-start gap-4">
+                  <div
+                    className="mt-1.5 w-2 h-2 rounded-full flex-shrink-0"
+                    style={{ backgroundColor: "oklch(0.6 0.18 240)" }}
                   />
+                  <div>
+                    <h3 className="font-medium text-lg mb-2">Correlated Failures</h3>
+                    <p className="text-sm text-muted-foreground/90 leading-relaxed">
+                      Regional outages create cascading failures when nodes cluster geographically
+                    </p>
+                  </div>
                 </div>
               </div>
 
-              {/* Right - Key Findings */}
-              <div className="flex flex-col justify-center space-y-6">
-                <h3 className="text-xl font-semibold mb-2">Key Findings:</h3>
-                <ul className="space-y-4 text-foreground/90">
-                  <li className="flex items-start gap-3">
-                    <span className="text-2xl font-bold" style={{ color: "oklch(0.55 0.15 40)" }}>
-                      41%
-                    </span>
-                    <span className="text-base leading-relaxed pt-1">
-                      <span style={{ color: "oklch(0.55 0.15 40)" }}>of</span> nodes{" "}
-                      <span style={{ color: "oklch(0.55 0.15 40)" }}>in</span> a single country
-                    </span>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <span className="text-2xl font-bold" style={{ color: "oklch(0.55 0.15 40)" }}>
-                      52%
-                    </span>
-                    <span className="text-base leading-relaxed pt-1">
-                      <span style={{ color: "oklch(0.55 0.15 40)" }}>on one</span> cloud provider
-                    </span>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <span className="text-base leading-relaxed">
-                      Effective jurisdictions:{" "}
-                      <span className="text-2xl font-bold" style={{ color: "oklch(0.55 0.15 40)" }}>
-                        2.7
-                      </span>
-                    </span>
-                  </li>
-                </ul>
+              <div className="space-y-4">
+                <div className="flex items-start gap-4">
+                  <div
+                    className="mt-1.5 w-2 h-2 rounded-full flex-shrink-0"
+                    style={{ backgroundColor: "oklch(0.65 0.15 150)" }}
+                  />
+                  <div>
+                    <h3 className="font-medium text-lg mb-2">Regulatory Risk</h3>
+                    <p className="text-sm text-muted-foreground/90 leading-relaxed">
+                      Jurisdictional concentration enables coordinated government action against networks
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="space-y-4">
+                <div className="flex items-start gap-4">
+                  <div
+                    className="mt-1.5 w-2 h-2 rounded-full flex-shrink-0"
+                    style={{ backgroundColor: "oklch(0.63 0.2 290)" }}
+                  />
+                  <div>
+                    <h3 className="font-medium text-lg mb-2">Infrastructure Dependencies</h3>
+                    <p className="text-sm text-muted-foreground/90 leading-relaxed">
+                      Cloud provider concentration hides critical single points of failure
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="space-y-4">
+                <div className="flex items-start gap-4">
+                  <div
+                    className="mt-1.5 w-2 h-2 rounded-full flex-shrink-0"
+                    style={{ backgroundColor: "oklch(0.7 0.1 60)" }}
+                  />
+                  <div>
+                    <h3 className="font-medium text-lg mb-2">Network Resilience</h3>
+                    <p className="text-sm text-muted-foreground/90 leading-relaxed">
+                      Geographic spread improves liveness, fault tolerance, and attack resistance
+                    </p>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Screen 4 - Why This Matters */}
-      <section className="min-h-screen flex items-center justify-center px-6 py-20 bg-muted/20">
-        <div className="max-w-5xl mx-auto">
-          <div className="border border-border/50 rounded-sm p-12 bg-background">
-            <h2 className="text-3xl font-semibold mb-8">Why Geographic Decentralization Matters</h2>
-
-            <ul className="space-y-6 text-base text-foreground/90">
-              <li className="flex items-start gap-3">
-                <span className="text-lg">•</span>
-                <span className="leading-relaxed">
-                  Regional outages <span style={{ color: "oklch(0.55 0.15 40)" }}>create</span> correlated failures
-                </span>
-              </li>
-              <li className="flex items-start gap-3">
-                <span className="text-lg">•</span>
-                <span className="leading-relaxed">
-                  Legal alignment amplifies central points <span style={{ color: "oklch(0.55 0.15 40)" }}>of</span>{" "}
-                  control
-                </span>
-              </li>
-              <li className="flex items-start gap-3">
-                <span className="text-lg">•</span>
-                <span className="leading-relaxed">Cloud dependence hides critical single-provider risk</span>
-              </li>
-              <li className="flex items-start gap-3">
-                <span className="text-lg">•</span>
-                <span className="leading-relaxed">
-                  Geographic spread improves liveness <span style={{ color: "oklch(0.55 0.15 40)" }}>and</span>{" "}
-                  resilience
-                </span>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </section>
-
-      {/* Screen 5 - Entry Into App */}
+      {/* Screen 4 - Entry Into App */}
       <section className="min-h-screen flex items-center justify-center px-6 py-20">
         <div className="max-w-4xl mx-auto text-center">
           <div className="border border-border/50 rounded-sm p-12 bg-background">
-            <h2 className="text-3xl font-semibold mb-8">Explore the Data</h2>
+            <h2 className="font-serif text-4xl font-normal mb-10">Explore the Data</h2>
 
             <div className="flex flex-wrap justify-center gap-4 mb-10">
               <Link href="/dashboard">
@@ -244,7 +178,7 @@ export default function LandingPage() {
               </Link>
               <Link href="/dashboard">
                 <Button variant="outline" size="lg" className="rounded-sm bg-transparent">
-                  Solana
+                  Filecoin
                 </Button>
               </Link>
             </div>
@@ -258,6 +192,23 @@ export default function LandingPage() {
           </div>
         </div>
       </section>
+
+      {/* Footer */}
+      <footer className="py-12 px-6 bg-white border-t border-border/30">
+        <div className="max-w-7xl mx-auto">
+          <div className="flex items-center justify-center gap-3 text-muted-foreground/70">
+            <span className="text-sm">Built by</span>
+            <a
+              href="https://astral.global"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 hover:opacity-80 transition-opacity"
+            >
+              <img src="/images/astral.svg" alt="Astral" className="h-5 w-auto" />
+            </a>
+          </div>
+        </div>
+      </footer>
     </div>
   )
 }
