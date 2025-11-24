@@ -15,7 +15,6 @@ const POINTS_PER_LINE = 64
 // Well configuration
 const WELL_CENTER_X = 0
 const WELL_CENTER_Y = 0.6
-const WELL_RADIUS = 0.8
 const WELL_DEPTH_MAX = 2.5
 
 // Projection parameters
@@ -72,17 +71,18 @@ export function HeroGeofunnel() {
     setGridData({ verticalLines, horizontalLines })
   }, [])
 
-  // Depth function
+  // Depth function - smooth Gaussian falloff for realistic spacetime curvature
   const depthAt = (x: number, y: number, t: number): number => {
     const dx = x - WELL_CENTER_X
     const dy = y - WELL_CENTER_Y
     const r = Math.sqrt(dx * dx + dy * dy)
 
-    if (r >= WELL_RADIUS) return 0
+    // Gaussian falloff - no hard boundaries, smooth everywhere
+    // Sigma controls the "width" of the gravitational well
+    const sigma = 0.5
+    const gaussian = Math.exp(-(r * r) / (2 * sigma * sigma))
 
-    const u = r / WELL_RADIUS
-    const shape = 1 - u * u
-
+    // Time-based depth scaling for scroll animation
     let depthScale: number
     if (t < 0.33) {
       depthScale = WELL_DEPTH_MAX * (t / 0.33) * 0.4
@@ -92,7 +92,7 @@ export function HeroGeofunnel() {
       depthScale = WELL_DEPTH_MAX * (0.8 + 0.2 * ((t - 0.66) / 0.34))
     }
 
-    return -depthScale * shape
+    return -depthScale * gaussian
   }
 
   // Projection function
