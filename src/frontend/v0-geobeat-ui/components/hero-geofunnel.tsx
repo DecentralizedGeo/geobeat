@@ -18,8 +18,8 @@ const WELL_CENTER_Y = 0.6
 const WELL_DEPTH_MAX = 2.5
 
 // Projection parameters
-const TILT_X = 0.25
-const TILT_Y = 1.2
+const TILT_X = 0.5
+const TILT_Y = 2.2
 const FORESHORTEN = 0.6
 
 type Point2D = [number, number]
@@ -160,9 +160,11 @@ export function HeroGeofunnel() {
       ctx.stroke()
     }
 
-    // Draw grid lines - theme-aware color
+    // Draw grid lines - theme-aware color with scroll-based fade-in
     const isDark = document.body.classList.contains("dark")
-    ctx.strokeStyle = isDark ? "rgba(160, 170, 190, 0.7)" : "rgba(120, 130, 150, 0.9)"
+    const baseOpacity = isDark ? 0.7 : 0.9
+    const opacity = baseOpacity * (0.2 + 0.8 * t) // Fade from 20% to 100% as user scrolls
+    ctx.strokeStyle = isDark ? `rgba(160, 170, 190, ${opacity})` : `rgba(120, 130, 150, ${opacity})`
     ctx.lineWidth = 1 * dpr
 
     const drawLine = (line: Line) => {
@@ -203,10 +205,10 @@ export function HeroGeofunnel() {
       targetTRef.current = t
 
       // Calculate canvas upward movement based on total page scroll
-      // Move up 30% of viewport height over the full page
+      // Move up 60% of viewport height over the full page to keep black hole in frame longer
       const maxScroll = document.documentElement.scrollHeight - window.innerHeight
       const scrollProgress = window.scrollY / Math.max(1, maxScroll)
-      const translateY = -scrollProgress * vh * 0.3
+      const translateY = -scrollProgress * vh * 0.6
       setCanvasTranslateY(translateY)
     }
 
@@ -287,7 +289,7 @@ export function HeroGeofunnel() {
       <div className="relative z-10 max-w-2xl">
         <h1 className="font-serif text-4xl md:text-6xl tracking-tight leading-[1.15] mb-6 text-foreground">
           Most "decentralized" networks aren't{" "}
-          <span className="font-semibold">geographically decentralized.</span>
+          <span className="font-bold">geographically decentralized.</span>
         </h1>
         <p className="text-xlg md:text-xl text-foreground/75 leading-relaxed mb-8 max-w-xl">
           <span className="font-semibold">GEOBEAT</span> is a real-time geographic observatory<br /> for decentralized networks.
