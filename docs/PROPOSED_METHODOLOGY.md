@@ -1,451 +1,180 @@
-# GEOBEAT Proposed Methodology
-## Geographic Decentralization Index (GDI)
+# Geographic Decentralization Index (GDI): A Proposal for a Synthesis Framework
 
-**Version**: 1.0 Proposal
-**Status**: Proposed Framework
-**Last Updated**: 2025-11-27
+This document proposes a simple, coherent structure for measuring geographic decentralization across decentralized networks. It draws on a large and fragmented research landscape—academic measurements, Flashbots research, open Internet topology datasets, validator telemetry, cloud attribution methods, and jurisdictional analyses—and distills them into three interpretable dimensions. This is a proposal, not a completed framework, and it is intended to evolve through community review and iterative refinement.
 
-## Executive Summary
-
-The Geographic Decentralization Index (GDI) quantifies how decentralized a blockchain network is across three critical dimensions: **Physical Distribution**, **Jurisdictional Diversity**, and **Infrastructure Heterogeneity**. Each sub-index incorporates geographic considerations to capture different facets of centralization risk.
-
-This document describes the **proposed** rigorous methodology for GDI v1.0, incorporating peer-reviewed spatial statistics and established economic concentration metrics.
-
-## Index Architecture
-
-```
-GDI (0-100) = 0.40 × PDI + 0.35 × JDI + 0.25 × IHI
-
-Where:
-- PDI: Physical Distribution Index
-- JDI: Jurisdictional Diversity Index
-- IHI: Infrastructure Heterogeneity Index
-```
+The aim is to establish a foundation that is rigorous enough for researchers, operationally meaningful for protocol and infrastructure teams, and understandable for a broader technical audience. We should note, this is aspirational — some of these metrics may be difficult to measure.
 
 ---
 
-## 1. Physical Distribution Index (PDI)
+## 1. Motivation
 
-### Objective
+Existing work on geographic decentralization is extensive but fragmented. There are:
 
-Measure whether nodes are geographically clustered or dispersed across physical space, capturing both global patterns and local concentration.
+* Empirical measurement techniques (traceroutes, BGP data, ASN mapping, cloud fingerprinting)
+* Ecosystem-specific snapshots (Ethereum, Solana, Cosmos, Filecoin, Bitcoin mining maps, etc)
+* Exploratory frameworks (Flashbots' geographic risk discussions)
+* Academic taxonomies (decentralization, network topology, correlated failures)
+* Industry decentralization reports with selective metrics
 
-### Why This Matters
+These contributions are individually valuable, but they do not form a single, unified evaluative framework. Most attempts to characterize geographic decentralization end up as either:
+(a) long lists of metrics without hierarchy, or
+(b) highly technical studies without a structured index.
 
-- **Disaster resilience**: Clustered nodes are vulnerable to regional power outages, natural disasters, or network disruptions
-- **Latency**: Geographic spread affects network propagation times
-- **Regulatory risk**: Physical concentration makes networks vulnerable to coordinated regulatory action
-- **Attack surface**: Geographic diversity increases the cost and complexity of physical attacks
-
-### Formula
-
-```python
-PDI = 100 × [
-    0.4 × (1 - Moran's I_normalized) +  # Anti-clustering (inverted)
-    0.3 × ENL_normalized +               # Entropy-based evenness
-    0.3 × (1 - Spatial_HHI)              # Anti-concentration
-]
-```
-
-### Components
-
-#### 1. Moran's I (40% weight) - Global Clustering Detection
-
-**What it measures**: Spatial autocorrelation - whether nearby locations have similar node densities
-
-**Range**: -1 (perfect dispersion) to +1 (perfect clustering)
-
-**Why it's essential**:
-- Statistically rigorous with hypothesis testing (p-values)
-- Captures clustering at multiple geographic scales simultaneously
-- Widely used in spatial epidemiology, ecology, urban planning
-- Detects patterns that simple counts miss
-
-**Implementation**: Distance-band spatial weights at 500km threshold
-
-**Inversion rationale**: High clustering = low decentralization, so we use `(1 - Moran's I)`
-
-**Example Interpretation**:
-- Moran's I = 0.6 → significant clustering → PDI component = 0.4 (40% of max)
-- Moran's I = 0.1 → random distribution → PDI component = 0.9 (90% of max)
-- Moran's I = -0.1 → slight dispersion → PDI component = 1.1 (capped at 1.0)
-
-**Academic foundation**: Moran (1948), "The Interpretation of Statistical Maps"
-
-#### 2. Effective Number of Locations (ENL) (30% weight) - Entropy-Based Evenness
-
-**What it measures**: How evenly nodes are distributed across geographic cells (not just how many cells)
-
-**Formula**: `ENL = exp(Shannon_Entropy)`
-
-**Why it's essential**:
-- Captures distribution evenness, not just location count
-- Sensitive to dominance by single location (e.g., 60% in US East Coast)
-- Used in biodiversity (Simpson's diversity) and economics (effective number of competitors)
-- Complements HHI by using logarithmic rather than quadratic weighting
-
-**Normalization**: `ENL / num_occupied_cells` (ranges 0-1, representing evenness)
-
-**Example**:
-- 1000 nodes in 100 cells, perfectly even (10 each) → ENL ≈ 100 → normalized = 1.0
-- 1000 nodes in 100 cells, 900 in one cell → ENL ≈ 1.5 → normalized = 0.015
-
-**Why better than raw cell count**: 100 nodes in 10 cells (50 in one) is less decentralized than 100 in 10 cells (10 each), even though both use 10 cells.
-
-**Academic foundation**: Shannon (1948), "A Mathematical Theory of Communication"; Hill (1973), "Diversity and Evenness"
-
-#### 3. Spatial HHI (30% weight) - Market Concentration Applied to Geography
-
-**What it measures**: Herfindahl-Hirschman Index applied to geographic cells (H3 hexagons)
-
-**Formula**: `HHI = Σ(share_i²)` where `share_i = nodes in cell i / total nodes`
-
-**Why it's essential**:
-- Standard antitrust/market concentration metric with 70+ years of regulatory use
-- Penalizes large geographic dominance through squaring (10% share = 0.01, 50% share = 0.25)
-- DOJ/FTC use HHI>0.25 as "highly concentrated" threshold
-- Simple, well-understood, defensible in regulatory contexts
-
-**Inversion rationale**: Low HHI = high competition/dispersion = high decentralization
-
-**Example**:
-- 100 nodes equally in 4 cells (25 each) → HHI = 4×(0.25²) = 0.25 (FTC threshold)
-- 100 nodes with 70 in one cell → HHI ≈ 0.52 (highly concentrated)
-- 100 nodes equally in 100 cells → HHI = 0.01 (highly competitive)
-
-**Why H3 hexagons**: Uniform cell area (lat/lon grids distort near poles), hierarchical resolution, industry standard (Uber, Foursquare, DoorDash)
-
-**Academic foundation**: Herfindahl (1950), "Concentration in the Steel Industry"; US DOJ/FTC (2010), "Horizontal Merger Guidelines"
-
-### Why This Three-Component Approach?
-
-Each metric captures a different aspect of geographic distribution:
-
-| Metric | What it detects | Example case |
-|--------|-----------------|--------------|
-| **Moran's I** | Global clustering patterns | Nodes concentrated in US + Germany (distant but still clustered) |
-| **ENL** | Evenness of distribution | 90% of nodes in one city vs evenly spread |
-| **Spatial HHI** | Market-style concentration | One metro area dominating network |
-
-Using all three provides robust measurement resistant to gaming and edge cases.
+This proposal aims to provide a simple, transparent architecture that "rolls up" the most important dimensions without collapsing the nuance or pretending to solve all open problems.
 
 ---
 
-## 2. Jurisdictional Diversity Index (JDI)
+## 2. Design Constraints and Principles
 
-### Objective
+This index faces several unavoidable constraints:
 
-Measure diversity across legal jurisdictions and organizational governance, capturing both country-level concentration and organizational concentration risks.
+1. **Geolocation inference is probabilistic**: IP-based inference, ASN mapping, cloud detection, and latency triangulation all carry uncertainty. The index must incorporate explicit confidence bounds.
 
-### Why This Matters
+2. **Jurisdiction is not a perfect proxy for legal independence**: Some nation-states share treaties or tightly aligned legal regimes. Any jurisdictional metric must include correlation adjustments.
 
-- **Regulatory risk**: Concentration in single jurisdiction enables coordinated shutdowns
-- **Legal risk**: Correlated legal frameworks reduce resilience
-- **Censorship resistance**: Geographic jurisdiction ≠ legal jurisdiction (AWS worldwide = US legal jurisdiction)
-- **Coordinated action**: Fewer distinct legal entities = easier collusion or coercion
+3. **Infrastructure attribution is incomplete**: Datacenter-level metadata is not always determinable; cloud providers may use ephemeral IP pools. The index must distinguish between high-confidence and low-confidence signals.
 
-### Formula
+4. **Different networks expose different amounts of metadata**: A universal index must accommodate networks with heterogeneous visibility.
 
-```python
-JDI = 100 × [
-    0.5 × Country_Diversity +
-    0.3 × Org_Diversity +
-    0.2 × (1 - Country_Org_Correlation)  # Bonus for uncorrelated diversity
-]
-```
-
-### Components
-
-#### 1. Country Diversity (50% weight) - Legal Jurisdiction Spread
-
-**Formula**: `Effective Number of Countries = exp(Shannon_Entropy(country_shares))`
-
-**Geographic overlay**: Weight countries by geographic distance to detect regional clustering
-- 50% EU is less diverse than 25% EU + 25% Asia (even if same number of countries)
-
-**Calculation**:
-```python
-# Step 1: Calculate country shares
-country_shares = nodes_per_country / total_nodes
-
-# Step 2: Shannon entropy
-entropy = -Σ(p_i * log(p_i))
-
-# Step 3: Effective number
-effective_countries = exp(entropy)
-
-# Step 4: Geographic penalty (if regionally clustered)
-geographic_factor = (1 - region_concentration_HHI)
-
-# Final score
-country_diversity = effective_countries * geographic_factor
-```
-
-**Example**:
-- 100 nodes: 40 US, 30 Germany, 30 Netherlands
-  - Raw effective countries ≈ 2.8
-  - But Germany + Netherlands are both EU → regional HHI high
-  - Geographic penalty reduces final score to ~2.4
-
-**Why entropy**: Rewards both number of countries AND evenness of distribution
-
-#### 2. Organization Diversity (30% weight) - Hosting Provider Spread
-
-**Formula**: `Effective Number of Organizations = exp(Shannon_Entropy(org_shares))`
-
-**Why it matters**: AWS outage takes down all AWS nodes globally, regardless of country
-
-**Data source**: `org` and `asname` columns from IP geolocation (WHOIS data)
-
-**Example**:
-- 100 nodes: 60 AWS, 25 Google Cloud, 10 Hetzner, 5 home ISPs
-- Effective orgs ≈ 2.5 (dominated by AWS)
-- JDI component score considers this low diversity
-
-#### 3. Country-Org Decorrelation Bonus (20% weight)
-
-**Why**: Ideally, countries and orgs should be independent (uncorrelated)
-
-**Bad example** (correlated):
-- All US nodes on AWS
-- All German nodes on Hetzner
-- Country determines org → low diversity
-
-**Good example** (decorrelated):
-- US has mix of AWS/GCP/home
-- Germany has different mix
-- Country doesn't predict org → high diversity
-
-**Calculation**: `1 - Cramér's V(country, org)` where Cramér's V ∈ [0,1] measures association strength
-
-This bonus rewards true multidimensional diversity where jurisdictional and organizational diversity are orthogonal.
+To handle these constraints, the index is structured around transparency, minimalism, and versionability. Every choice—metrics, weightings, normalization—needs to be documented and open to critique.
 
 ---
 
-## 3. Infrastructure Heterogeneity Index (IHI)
+## 3. A Three-Pillar Structure
 
-### Objective
+The proposal organizes the problem into three top-level sub-indices that reflect the real-world failure domains relevant to geographic decentralization:
 
-Measure diversity of underlying technical infrastructure, with emphasis on cloud provider monopoly risk and geographic infrastructure concentration.
+### **A. Physical Distribution Index (PDI)**
 
-### Why This Matters
+Measures the spread of infrastructure across physical space.
+Includes entropy across regions, effective number of regions, clustering analysis, and distance-weighted dispersion.
 
-- **Systemic failure risk**: Cloud provider outage cascades globally (AWS us-east-1 outages affect services worldwide)
-- **Economic pressure**: Providers can change ToS, pricing, or access policies
-- **Regulatory capture**: Governments can compel cloud providers to block/censor
-- **Geographic infrastructure**: Cloud regions are unevenly distributed globally (infrastructure colonialism)
+### **B. Jurisdictional Diversity Index (JDI)**
 
-### Formula
+Measures the independence of legal authorities governing infrastructure.
+Includes jurisdictional entropy, effective number of jurisdictions, and adjustments for legally aligned blocs.
 
-```python
-IHI = 100 × [
-    0.4 × (1 - Cloud_Provider_HHI) +
-    0.3 × Hosting_Type_Diversity +
-    0.3 × Infrastructure_Geography_Score
-]
-```
+### **C. Infrastructure Heterogeneity Index (IHI)**
 
-### Components
+Measures dependency on underlying providers.
+Includes cloud concentration (HHI/ENR), ASN/ISP diversity, and detection of colocation patterns.
 
-#### 1. Cloud Provider HHI (40% weight) - Economic Concentration
-
-**Formula**: `HHI = Σ(provider_share²)` across AWS, GCP, Azure, Hetzner, OVH, home/other
-
-**Thresholds** (DOJ antitrust guidelines):
-- HHI < 0.15: competitive market
-- HHI 0.15-0.25: moderate concentration
-- HHI > 0.25: high concentration (monopoly concerns)
-
-**Inversion**: Low HHI (competitive) → High IHI (decentralized)
-
-**Example**:
-- Network A: 45% AWS, 25% GCP, 15% home, 15% others
-  - HHI = 0.45² + 0.25² + 0.15² + 0.15² = 0.32 (concentrated)
-  - IHI component = (1 - 0.32) × 100 × 0.4 = 27.2 points
-
-#### 2. Hosting Type Diversity (30% weight) - Bare Metal vs Cloud
-
-**Categories**:
-1. **Cloud**: AWS, GCP, Azure, DigitalOcean (virtualized, shared control plane)
-2. **Dedicated hosting**: Hetzner bare metal, OVH dedicated servers
-3. **Home/ISP**: Residential connections, independent ISPs
-
-**Why it matters**:
-- Cloud providers share common attack vectors (APIs, control planes, hypervisors)
-- Home nodes increase censorship resistance (harder to identify and target)
-- Bare metal reduces dependency on cloud platform policies
-
-**Calculation**: `Shannon_Entropy(hosting_type_shares)` normalized
-
-**Target**: Higher entropy when mix includes 20%+ home nodes (Bitcoin's model)
-
-#### 3. Infrastructure Geography Score (30% weight) - Cloud Region Diversity
-
-**Key insight**: "AWS in 5 countries" ≠ truly independent infrastructure
-
-**Method**: Map infrastructure to actual datacenter locations:
-- AWS us-east-1 (Virginia, USA)
-- AWS eu-west-1 (Ireland)
-- GCP europe-west1 (Belgium)
-- Hetzner (Falkenstein, Germany)
-
-**Geographic analysis**: Calculate Moran's I on datacenter locations (not node IPs)
-
-**Calculation**:
-```python
-# Step 1: Map nodes to known datacenter coordinates (when hosting detected)
-# Step 2: Calculate Moran's I on datacenter locations
-# Step 3: Penalize if datacenters are geographically clustered
-
-infrastructure_geo_score = 1 - morans_i_of_datacenters
-```
-
-**Why this matters**: Even if nodes are globally distributed, underlying infrastructure might be clustered (e.g., all in Europe)
+These three dimensions align with the most important categories of prior work while avoiding overfitting to any one technique. Each encompasses multiple underlying signals, but the top-level structure remains stable and interpretable.
 
 ---
 
-## Composite GDI Score
+## 4. Relationship to Existing Work
 
-### Weighting Rationale
+The GDI is a synthesis of the landscape, not a replacement for existing research. It integrates:
 
-```python
-GDI = 0.40 × PDI + 0.35 × JDI + 0.25 × IHI
-```
+* Flashbots' multi-dimensional geographic risk analyses
+* Academic measurement methodologies (IP inference, AS modeling, spatial statistics)
+* CCAF's jurisdictional mining models
+* Ecosystem telemetry (Solana, Filecoin, Ethereum)
+* Internet topology datasets (CAIDA, RIPE)
+* Industry decentralization assessments (CoinMetrics, Lido working groups)
 
-**Justification**:
+However, it also does something new: it introduces a minimal, coherent framework that organizes these contributions into three structural pillars. Prior work provides techniques and observations; GDI provides the architecture for using them systematically.
 
-1. **PDI (40%)** - Physical geography is fundamental
-   - Most direct disaster/latency risk
-   - Hardest to change quickly (can't move nodes instantly)
-   - Affects all other properties (jurisdiction, infrastructure)
-
-2. **JDI (35%)** - Jurisdictional risk is critical
-   - Censorship resistance depends on legal diversity
-   - Coordinated regulatory action is realistic threat
-   - Historical precedent (China crypto ban, etc.)
-
-3. **IHI (25%)** - Infrastructure important but often correlates with geography
-   - Cloud regions follow economic geography
-   - Provider diversity often implied by geographic diversity
-   - Still essential to measure separately
-
-**Network-specific adjustments** (optional):
-- Privacy-focused chains (Monero, Zcash): increase JDI to 40%, reduce PDI to 35%
-- Performance-critical chains (Solana): increase PDI to 45%, reduce IHI to 20%
+This is inherently a proposal. It is not presented as the final, definitive model. It is the simplest version that captures what the community has treated—implicitly—as the key dimensions of geographic decentralization.
 
 ---
 
-## Interpretation Scale
+## 5. Open Questions and Areas of Uncertainty
 
-### PDI, JDI, IHI (0-100 each)
+The most important open question is structural:
+**Does this index design capture the right dimensions of geographic decentralization, or is there a more accurate or more defensible way to conceptualize the problem?**
 
-- **80-100**: Highly decentralized
-- **60-80**: Moderately decentralized
-- **40-60**: Weakly decentralized
-- **20-40**: Centralized
-- **0-20**: Highly centralized
+This includes examining whether the proposed three-pillar structure (physical, jurisdictional, infrastructural) is the most appropriate abstraction, whether any dimensions are missing, and whether different decompositions might better align with empirical risk or real-world failure modes.
 
-### Composite GDI (0-100)
+Beyond that foundational concern, several additional uncertainties remain:
 
-- **70-100**: Strong geographic decentralization
-- **50-70**: Moderate geographic decentralization
-- **30-50**: Weak geographic decentralization
-- **0-30**: Geographically centralized
+1. **Normalization across heterogeneous networks:**
+   How should networks of very different size, architecture, and visibility be compared?
+   Should normalization occur relative to theoretical maximums, empirical distributions, or some other benchmark?
 
----
+2. **Geographic taxonomy:**
+    What is the appropriate unit of geographic analysis (continents, regions, countries, metros)? Should other domains be considered—such as energy-grid regions, telecom infrastructure zones, or data-sovereignty blocs—if they better reflect real correlated failure modes?
 
-## Data Requirements
+3. **Modeling jurisdictional correlation:**
+   What constitutes a legally independent jurisdiction?
+   How should treaty blocs, regulatory alliances, and shared enforcement regimes be incorporated?
 
-**Required fields** (from IP geolocation + node discovery):
+4. **Accuracy of location inference:**
+   How should uncertainty from IP geolocation, cloud fingerprinting, VPN masking, and ASN ambiguity be reflected in the index?
+   Should low-confidence signals be downweighted or excluded?
 
-- ✅ `lat, lon` → Physical distribution (PDI)
-- ✅ `country` → Jurisdictional diversity (JDI)
-- ✅ `org, asname` → Infrastructure heterogeneity (IHI)
-- ✅ `hosting` flag → Hosting type classification (IHI)
-- ✅ `isp` → Home node detection (IHI)
+5. **Infrastructure attribution uncertainty:**
+   Datacenter-level data is often incomplete.
+   How should shared cloud infrastructure, colocation, and overlapping ASNs be treated?
 
-**Data sources**:
-- Node discovery: armiarma crawler, Bitnodes, Ethernodes
-- GeoIP: MaxMind GeoLite2, IP2Location
-- WHOIS: ASN/organization lookup
+6. **Operator-level information:**
+   When operator metadata is available (e.g., Filecoin SPs, Lido operators), should it feed into the index directly, or remain diagnostic?
+   How should the index behave for networks without this data?
 
----
+7. **Composite weighting:**
+   Should PDI, JDI, and IHI be equally weighted, or should empirical evidence (e.g., historical failures) justify differential weighting in later versions?
 
-## Validation & Benchmarking
+8. **Temporal stability and versioning:**
+   What constitutes meaningful change in the index over time, and how should updates be versioned so that the methodology remains transparent and auditable?
 
-### Expected Results
+These questions reflect uncertainties that cannot be resolved unilaterally.
 
-- **Bitcoin**: High PDI (home miners distributed), high JDI (no corporate concentration), medium IHI (mining pools)
-- **Ethereum**: Medium PDI (US/EU clustered), medium JDI, low IHI (AWS heavy)
-- **Centralized testnet**: Low across all dimensions
-
-### Sensitivity Testing
-
-1. **Robustness**: Remove top 10% of nodes → GDI should not change drastically
-2. **Additive**: Add 100 nodes in new country → should increase JDI proportionally
-3. **Simulation**: Model AWS outage → quantify GDI drop
-4. **Cross-validation**: Compare with qualitative assessments of network decentralization
+They require community critique, data contributions, and methodological challenge. The index design is therefore explicitly provisional and open to revision as the research community engages with the framework.
 
 ---
 
-## Academic Foundation
+## 6. Collaborative Methodology and Next Steps
 
-### Spatial Statistics
+The GDI is intentionally open. The methodology, data sources, and scoring choices should be transparent and subject to public review. The intention is to:
 
-- **Moran, P.A.P.** (1948). "The Interpretation of Statistical Maps". *Journal of the Royal Statistical Society*. Foundations of spatial autocorrelation.
-- **Anselin, L.** (1995). "Local Indicators of Spatial Association—LISA". *Geographical Analysis*. Local clustering detection.
-- **Getis, A. & Ord, J.K.** (1992). "Analysis of Spatial Association". Spatial pattern analysis.
-- **O'Sullivan & Unwin** (2010). *Geographic Information Analysis*. Comprehensive GIS statistics textbook.
+* Publish the full methodology in the open
+* Incorporate community feedback
+* Iterate on versions (v0, v1, v2)
+* Encourage independent replication
+* Ultimately converge on a shared standard for geographic decentralization assessment
 
-### Diversity Indices
+The initial version will be deliberately conservative, prioritizing interpretability and methodological honesty over false precision.
 
-- **Shannon, C.E.** (1948). "A Mathematical Theory of Communication". *Bell System Technical Journal*. Entropy and information theory.
-- **Hill, M.O.** (1973). "Diversity and Evenness". *Ecology*. Effective number interpretation of entropy.
-- **Jost, L.** (2006). "Entropy and diversity". *Oikos*. Modern synthesis of diversity measures.
-
-### Economic Concentration
-
-- **Herfindahl, O.C.** (1950). "Concentration in the Steel Industry". HHI origins.
-- **US DOJ/FTC** (2010). "Horizontal Merger Guidelines". HHI thresholds for antitrust analysis.
-- **Rhoades, S.A.** (1993). "The Herfindahl-Hirschman Index". *Federal Reserve Bulletin*. Market concentration measurement.
-
-### Blockchain Decentralization
-
-- **Kwon, Y. et al.** (2019). "Decentralization in Bitcoin and Ethereum Networks". *Financial Cryptography*. Prior work on measuring decentralization.
-- **Gencer, A.E. et al.** (2018). "Decentralization in Bitcoin and Ethereum Networks". *Cornell Tech*. Geographic distribution analysis.
-- **Stifter, N. et al.** (2021). "A Holistic Approach to Measuring Blockchain Decentralization". Survey of methodology.
+For now, we'll coordinate the discussion about methodology, data sources etc here on Github ([github.com/DecentralizedGeo/geobeat](https://github.com/DecentralizedGeo/geobeat)), and in our [Telegram group](https://t.me/+PeM33inLfaM2OThk).
 
 ---
 
-## Future Enhancements
+## 7. Summary
 
-### Version 1.1
-- **Time-series tracking**: Monitor GDI trends over time, detect centralization events
-- **LISA hotspot mapping**: Visualize specific clustering regions with statistical significance
-- **Network size adjustment**: Incorporate absolute node count (1000 nodes vs 10 more resilient)
+The Geographic Decentralization Index is proposed as a synthesis framework that integrates the strongest elements of the existing research landscape into a minimal, comprehensible structure focused on three essential dimensions: physical distribution, jurisdictional diversity, and infrastructure heterogeneity. It is constrained by the realities of geolocation uncertainty and heterogeneous network visibility, and it is intentionally open to community shaping.
 
-### Version 2.0
-- **Scenario analysis**: "What if AWS bans crypto?" impact modeling
-- **Cross-chain comparison**: Standardized benchmarking across all major networks
-- **Regulatory overlay**: Map jurisdiction risk scores (Freedom House indices, regulatory hostility)
-- **Economic security**: Model attack cost based on node distribution
-- **Network simulation**: Agent-based models of node distribution evolution
+This is not the final structure, but a starting point for a collaborative, transparent, and evolving methodology.
 
 ---
 
-## Conclusion
+## References and Prior Work
 
-This proposed methodology provides a **rigorous, defensible, multi-dimensional** approach to measuring geographic decentralization with:
+### Academic Research
+- Moran, P.A.P. (1948). "The Interpretation of Statistical Maps"
+- Shannon, C.E. (1948). "A Mathematical Theory of Communication"
+- Anselin, L. (1995). "Local Indicators of Spatial Association—LISA"
+- Kwon, Y. et al. (2019). "Decentralization in Bitcoin and Ethereum Networks"
+- Gencer, A.E. et al. (2018). "Decentralization in Bitcoin and Ethereum Networks" (Cornell Tech)
 
-✅ **Statistical rigor**: Peer-reviewed spatial statistics (Moran's I, Shannon entropy)
-✅ **Economic grounding**: Established market concentration metrics (HHI)
-✅ **Geographic awareness**: All three indices incorporate spatial considerations
-✅ **Practical implementation**: Uses readily available IP geolocation data
-✅ **Interpretability**: Clear 0-100 scale with component breakdowns
-✅ **Academic defensibility**: Citations to foundational papers and regulatory standards
+### Industry Research
+- Flashbots: Geographic risk analysis and MEV infrastructure
+- Cambridge Centre for Alternative Finance (CCAF): Bitcoin mining distribution studies
+- CoinMetrics: Network decentralization reports
+- Lido: Validator geographic diversity working groups
 
-The composite GDI score captures what we intuitively mean by "geographic decentralization" while being mathematically precise enough to defend in academic, regulatory, or grant proposal contexts.
+### Internet Topology & Infrastructure
+- CAIDA: AS relationship datasets, BGP topology
+- RIPE Atlas: Active measurement platform
+- MaxMind GeoIP: IP geolocation databases
+- Uber H3: Hexagonal hierarchical spatial indexing
+
+### Network-Specific Telemetry
+- Bitnodes: Bitcoin node crawler
+- Ethernodes: Ethereum node distribution
+- Solana Beach: Solana validator maps
+- Filecoin: Storage provider geographic data
 
 ---
 
-**For implementation details and demo version**, see [DEMO_IMPLEMENTATION.md](DEMO_IMPLEMENTATION.md).
+**For the current demo implementation**, see [DEMO_IMPLEMENTATION.md](DEMO_IMPLEMENTATION.md).
