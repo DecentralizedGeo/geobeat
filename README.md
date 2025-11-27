@@ -53,15 +53,41 @@ geobeat/
 ### Getting Started
 
 ```bash
-# Clone the repository
-git clone <repository-url>
+# Clone the repository with submodules
+git clone --recurse-submodules <repository-url>
 cd geobeat
+
+# If already cloned without --recurse-submodules, initialize submodules
+git submodule update --init --recursive
 
 # Install dependencies (includes Husky setup)
 npm install
 
 # For Python development
 pip install -r requirements.txt
+```
+
+### Working with Submodules
+
+This project uses git submodules for external tools like the armiarma Ethereum crawler.
+
+**Update submodules to latest:**
+```bash
+git supdate  # alias for: git submodule update --remote --merge
+```
+
+**When making changes in a submodule:**
+```bash
+cd data-sources/tools/armiarma
+git checkout ethglobal-ba-2025
+# Make changes, commit
+git push
+
+# Return to parent repo and update reference
+cd ../../..
+git add data-sources/tools/armiarma
+git commit -m "chore(armiarma): update submodule to latest version"
+git spush  # alias for: git push --recurse-submodules=on-demand
 ```
 
 ## Commit Guidelines

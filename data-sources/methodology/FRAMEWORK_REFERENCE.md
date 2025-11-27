@@ -396,6 +396,35 @@ Uses carefully crafted FIND_NODE messages to fetch entire remote peer table cont
 - Focused specifically on Ethereum CL
 - Research tool (not production-grade API)
 
+#### GeoBeat Integration
+
+**Status:** Integrated as git submodule
+**Location:** `data-sources/tools/armiarma/`
+**Branch:** `ethglobal-ba-2025` (DecentralizedGeo fork)
+
+**Data Flow:**
+```
+armiarma crawler → PostgreSQL → JSON export → GeoIP (MaxMind GeoLite2) →
+src/analysis/data_ingestion.py → GDI metrics calculation → frontend visualization
+```
+
+**Setup:**
+```bash
+# Submodule is initialized during clone
+git submodule update --init --recursive
+
+# Update to latest
+git supdate
+
+# Run armiarma (via Docker)
+cd data-sources/tools/armiarma
+docker-compose up --env-file .env
+```
+
+**Output Location:** `data/raw/ethereum-cl/`
+
+**Purpose in GeoBeat:** Provides real-time Ethereum Consensus Layer node IP addresses for geographic decentralization analysis.
+
 ---
 
 ### 3.3 libp2p Framework
