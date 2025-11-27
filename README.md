@@ -1,10 +1,10 @@
-# GeoBeat
+# GEOBEAT
 
 A geographic decentralization index and dashboard for analyzing the distribution and concentration of blockchain networks, communities, and digital ecosystems.
 
 ## Overview
 
-GeoBeat provides insights into the geographic distribution of decentralized networks, helping identify centralization risks, geographic dependencies, and regional trends.
+GEOBEAT provides insights into the geographic distribution of decentralized networks, helping identify centralization risks, geographic dependencies, and regional trends.
 
 ## Project Status
 
