@@ -6,6 +6,48 @@ Geographic Decentralization Index (GDI) - Physical Distribution Index (PDI) impl
 
 This module implements spatial statistics for analyzing the geographic distribution of blockchain nodes. It provides quantitative metrics to measure decentralization across physical space.
 
+## GDI Implementations - Which One To Use?
+
+**TL;DR: Use `gdi_standalone.py` for production. It generates the frontend data.**
+
+This directory contains **three** different GDI calculation implementations:
+
+### 1. `gdi_standalone.py` (16K, 500 lines) - ✅ **PRIMARY / PRODUCTION**
+- **Purpose**: Generate `gdi_results.json` for frontend dashboard
+- **Approach**: Self-contained with manual Moran's I, HHI, ENL implementations
+- **Dependencies**: NumPy, SciPy, GeoPandas, H3 (no PySAL)
+- **Output Format**: `Network[]` TypeScript interface compatible
+- **Use when**: Building production dashboard, need reproducible results
+- **Advantages**: Fully transparent algorithm, easy to audit, no heavy dependencies
+
+### 2. `gdi.py` (9.3K, 299 lines) - 📚 **REFERENCE / LIBRARY-BASED**
+- **Purpose**: Demonstrate proper PySAL integration
+- **Approach**: Uses `spatial_metrics.py` / PySAL library for calculations
+- **Dependencies**: + PySAL (peer-reviewed spatial analysis library)
+- **Output Format**: Dict format (different from standalone)
+- **Use when**: Academic research requiring library citations, validating standalone implementation
+- **Advantages**: Academically rigorous (PySAL algorithms widely cited), more modular
+
+### 3. `simple_metrics.py` (7.4K, 266 lines) - 🎓 **EDUCATIONAL / DEMO**
+- **Purpose**: Simplest defensible GDI implementation for learning
+- **Approach**: Minimal calculation (no Moran's I, just Spatial HHI for PDI)
+- **Dependencies**: NumPy, Pandas, H3 (minimal)
+- **Output Format**: Terminal output / Dict
+- **Use when**: Teaching GDI concepts, quick prototyping, demos
+- **Used by**: `calculate_all.py` for batch processing
+- **Advantages**: Easiest to understand, fast execution
+
+### Why Keep All Three?
+
+1. **Production needs** (`gdi_standalone.py`) - Actually generates frontend data
+2. **Research validation** (`gdi.py`) - Cross-reference with peer-reviewed PySAL
+3. **Education** (`simple_metrics.py`) - Explain concepts without overwhelming complexity
+
+### Recommendation for v1.0
+- **Keep** `gdi_standalone.py` as canonical production implementation
+- **Keep** `gdi.py` for PySAL cross-validation and academic citations
+- **Move** `simple_metrics.py` to `/examples` directory (educational resource)
+
 ## Metrics Implemented
 
 ### 1. Moran's I - Spatial Autocorrelation
