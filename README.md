@@ -1,5 +1,11 @@
 # GEOBEAT
 
+[![CI](https://github.com/DecentralizedGeo/geobeat/actions/workflows/ci.yml/badge.svg)](https://github.com/DecentralizedGeo/geobeat/actions/workflows/ci.yml)
+[![Next.js](https://img.shields.io/badge/Next.js-16.0-black?logo=next.js)](https://nextjs.org/)
+[![Python](https://img.shields.io/badge/Python-3.11+-blue?logo=python)](https://www.python.org/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.x-blue?logo=typescript)](https://www.typescriptlang.org/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+
 A geographic decentralization index and dashboard for analyzing the distribution and concentration of blockchain networks, communities, and digital ecosystems.
 
 ## Overview
