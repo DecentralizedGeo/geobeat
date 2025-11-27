@@ -139,31 +139,13 @@ export function HeroGeofunnel() {
     const viewportHeight = window.innerHeight
     const scale = Math.min(width / dpr, viewportHeight) * 0.7
 
-    // Draw throat
-    const centerZ = depthAt(WELL_CENTER_X, WELL_CENTER_Y, t)
-    const [throatX, throatY] = project(WELL_CENTER_X, WELL_CENTER_Y, centerZ, width / dpr, viewportHeight)
+    // Throat visualization removed - grid warping is the main effect
 
-    const throatRadius = scale * 0.15 * t
-    if (throatRadius > 0) {
-      // Dark ellipse
-      ctx.fillStyle = "rgba(20, 20, 30, 0.95)"
-      ctx.beginPath()
-      ctx.ellipse(throatX * dpr, throatY * dpr, throatRadius * dpr, throatRadius * 0.7 * dpr, 0, 0, Math.PI * 2)
-      ctx.fill()
-
-      // Vertical shaft extending all the way down
-      ctx.strokeStyle = "rgba(40, 40, 50, 0.8)"
-      ctx.lineWidth = 3 * dpr
-      ctx.beginPath()
-      ctx.moveTo(throatX * dpr, (throatY + throatRadius * 0.7) * dpr)
-      ctx.lineTo(throatX * dpr, height * 2) // Extend beyond canvas
-      ctx.stroke()
-    }
-
-    // Draw grid lines - theme-aware color with scroll-based fade-in
+    // Draw grid lines - theme-aware color with fast fade-in
     const isDark = document.body.classList.contains("dark")
     const baseOpacity = isDark ? 0.7 : 0.9
-    const opacity = baseOpacity * (0.2 + 0.8 * t) // Fade from 20% to 100% as user scrolls
+    // Faster fade-in: starts at 15%, reaches full opacity much sooner
+    const opacity = baseOpacity * Math.min(1, 0.15 + 1.7 * t)
     ctx.strokeStyle = isDark ? `rgba(160, 170, 190, ${opacity})` : `rgba(120, 130, 150, ${opacity})`
     ctx.lineWidth = 1 * dpr
 
@@ -204,11 +186,11 @@ export function HeroGeofunnel() {
 
       targetTRef.current = t
 
-      // Calculate canvas upward movement based on total page scroll
-      // Move up 60% of viewport height over the full page to keep black hole in frame longer
+      // Calculate canvas upward movement throughout entire scroll
+      // Move up more aggressively (1.5x viewport height) to show center/bottom parts sooner
       const maxScroll = document.documentElement.scrollHeight - window.innerHeight
       const scrollProgress = window.scrollY / Math.max(1, maxScroll)
-      const translateY = -scrollProgress * vh * 0.6
+      const translateY = -scrollProgress * vh * 1.5
       setCanvasTranslateY(translateY)
     }
 
