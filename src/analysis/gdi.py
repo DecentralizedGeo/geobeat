@@ -294,6 +294,6 @@ if __name__ == '__main__':
     # Save results
     if results:
         import json
-        with open('../../data/gdi_v0_final.json', 'w') as f:
+        with open('../../data/gdi_results.json', 'w') as f:
             json.dump(results, f, indent=2)
-        print(f"\n✅ Results saved to data/gdi_v0_final.json\n")
+        print(f"\n✅ Results saved to data/gdi_results.json\n")
