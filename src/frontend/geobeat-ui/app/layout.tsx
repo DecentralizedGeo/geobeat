@@ -2,6 +2,7 @@ import type React from "react"
 import type { Metadata } from "next"
 import { Geist, Geist_Mono, Averia_Serif_Libre } from "next/font/google"
 import "./globals.css"
+import { DemoBanner } from "@/components/demo-banner"
 
 const _geist = Geist({ subsets: ["latin"] })
 const _geistMono = Geist_Mono({ subsets: ["latin"] })
@@ -42,7 +43,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`font-sans antialiased ${averiaSerifLibre.variable}`}>{children}</body>
+      <body className={`font-sans antialiased ${averiaSerifLibre.variable}`}>
+        <DemoBanner />
+        {children}
+      </body>
     </html>
   )
 }
