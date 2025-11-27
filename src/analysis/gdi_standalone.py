@@ -486,13 +486,13 @@ if __name__ == "__main__":
         networks_array = transform_to_network_format(results)
 
         # Save to data directory
-        data_path = "../../data/gdi_v0_final.json"
+        data_path = "../../data/gdi_results.json"
         with open(data_path, "w") as f:
             json.dump(networks_array, f, indent=2)
         print(f"\n✅ Saved to {data_path} (Network[] format)")
 
         # Also copy to frontend location for direct import
-        frontend_path = "../../src/frontend/v0-geobeat-ui/lib/data/gdi_v0_final.json"
+        frontend_path = "../../src/frontend/geobeat-ui/lib/data/gdi_results.json"
         import os
 
         os.makedirs(os.path.dirname(frontend_path), exist_ok=True)
