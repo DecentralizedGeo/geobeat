@@ -15,12 +15,11 @@ const POINTS_PER_LINE = 64
 // Well configuration
 const WELL_CENTER_X = 0
 const WELL_CENTER_Y = 0.6
-const WELL_RADIUS = 0.8
 const WELL_DEPTH_MAX = 2.5
 
 // Projection parameters
-const TILT_X = 0.25
-const TILT_Y = 1.2
+const TILT_X = 0.5
+const TILT_Y = 2.2
 const FORESHORTEN = 0.6
 
 type Point2D = [number, number]
@@ -72,17 +71,18 @@ export function HeroGeofunnel() {
     setGridData({ verticalLines, horizontalLines })
   }, [])
 
-  // Depth function
+  // Depth function - smooth Gaussian falloff for realistic spacetime curvature
   const depthAt = (x: number, y: number, t: number): number => {
     const dx = x - WELL_CENTER_X
     const dy = y - WELL_CENTER_Y
     const r = Math.sqrt(dx * dx + dy * dy)
 
-    if (r >= WELL_RADIUS) return 0
+    // Gaussian falloff - no hard boundaries, smooth everywhere
+    // Sigma controls the "width" of the gravitational well
+    const sigma = 0.5
+    const gaussian = Math.exp(-(r * r) / (2 * sigma * sigma))
 
-    const u = r / WELL_RADIUS
-    const shape = 1 - u * u
-
+    // Time-based depth scaling for scroll animation
     let depthScale: number
     if (t < 0.33) {
       depthScale = WELL_DEPTH_MAX * (t / 0.33) * 0.4
@@ -92,7 +92,7 @@ export function HeroGeofunnel() {
       depthScale = WELL_DEPTH_MAX * (0.8 + 0.2 * ((t - 0.66) / 0.34))
     }
 
-    return -depthScale * shape
+    return -depthScale * gaussian
   }
 
   // Projection function
@@ -139,30 +139,14 @@ export function HeroGeofunnel() {
     const viewportHeight = window.innerHeight
     const scale = Math.min(width / dpr, viewportHeight) * 0.7
 
-    // Draw throat
-    const centerZ = depthAt(WELL_CENTER_X, WELL_CENTER_Y, t)
-    const [throatX, throatY] = project(WELL_CENTER_X, WELL_CENTER_Y, centerZ, width / dpr, viewportHeight)
+    // Throat visualization removed - grid warping is the main effect
 
-    const throatRadius = scale * 0.15 * t
-    if (throatRadius > 0) {
-      // Dark ellipse
-      ctx.fillStyle = "rgba(20, 20, 30, 0.95)"
-      ctx.beginPath()
-      ctx.ellipse(throatX * dpr, throatY * dpr, throatRadius * dpr, throatRadius * 0.7 * dpr, 0, 0, Math.PI * 2)
-      ctx.fill()
-
-      // Vertical shaft extending all the way down
-      ctx.strokeStyle = "rgba(40, 40, 50, 0.8)"
-      ctx.lineWidth = 3 * dpr
-      ctx.beginPath()
-      ctx.moveTo(throatX * dpr, (throatY + throatRadius * 0.7) * dpr)
-      ctx.lineTo(throatX * dpr, height * 2) // Extend beyond canvas
-      ctx.stroke()
-    }
-
-    // Draw grid lines - theme-aware color
+    // Draw grid lines - theme-aware color with fast fade-in
     const isDark = document.body.classList.contains("dark")
-    ctx.strokeStyle = isDark ? "rgba(160, 170, 190, 0.7)" : "rgba(120, 130, 150, 0.9)"
+    const baseOpacity = isDark ? 0.7 : 0.9
+    // Faster fade-in: starts at 15%, reaches full opacity much sooner
+    const opacity = baseOpacity * Math.min(1, 0.15 + 1.7 * t)
+    ctx.strokeStyle = isDark ? `rgba(160, 170, 190, ${opacity})` : `rgba(120, 130, 150, ${opacity})`
     ctx.lineWidth = 1 * dpr
 
     const drawLine = (line: Line) => {
@@ -202,11 +186,11 @@ export function HeroGeofunnel() {
 
       targetTRef.current = t
 
-      // Calculate canvas upward movement based on total page scroll
-      // Move up 30% of viewport height over the full page
+      // Calculate canvas upward movement throughout entire scroll
+      // Move up more aggressively (1.5x viewport height) to show center/bottom parts sooner
       const maxScroll = document.documentElement.scrollHeight - window.innerHeight
       const scrollProgress = window.scrollY / Math.max(1, maxScroll)
-      const translateY = -scrollProgress * vh * 0.3
+      const translateY = -scrollProgress * vh * 1.5
       setCanvasTranslateY(translateY)
     }
 
@@ -279,7 +263,7 @@ export function HeroGeofunnel() {
 
       <section
         ref={sectionRef}
-        className="relative w-full flex items-center justify-start px-6 md:px-12"
+        className="relative w-full flex items-start justify-start px-6 md:px-12 pt-32"
         style={{ height: "150vh" }}
       >
 
@@ -287,16 +271,15 @@ export function HeroGeofunnel() {
       <div className="relative z-10 max-w-2xl">
         <h1 className="font-serif text-4xl md:text-6xl tracking-tight leading-[1.15] mb-6 text-foreground">
           Most "decentralized" networks aren't{" "}
-          <span className="font-semibold">geographically decentralized.</span>
+          <span className="font-bold">geographically decentralized.</span>
         </h1>
-        <p className="text-lg md:text-xl text-foreground/75 leading-relaxed mb-8 max-w-xl">
-          <span className="font-semibold">GEOBEAT</span> measures where networks <em>actually</em> run — through
-          physical, jurisdictional, and infrastructural lenses.
+        <p className="text-xlg md:text-xl text-foreground/75 leading-relaxed mb-8 max-w-xl">
+          <span className="font-semibold">GEOBEAT</span> is a real-time geographic observatory<br /> for decentralized networks.
         </p>
         <Link href="/dashboard">
-          <Button size="lg" className="rounded-sm group border-2 border-foreground">
+          <Button size="lg" className="rounded-sm group bg-foreground text-background hover:bg-foreground/90 border-2 border-foreground text-lg px-8 py-6 h-auto">
             Explore the Index
-            <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+            <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
           </Button>
         </Link>
       </div>

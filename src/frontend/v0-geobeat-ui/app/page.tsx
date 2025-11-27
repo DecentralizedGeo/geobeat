@@ -160,7 +160,7 @@ export default function LandingPage() {
             </div>
 
             <Link href="/dashboard">
-              <Button size="lg" className="rounded-sm group border-2 border-foreground">
+              <Button size="lg" className="rounded-sm group bg-foreground text-background hover:bg-foreground/90 border-2 border-foreground">
                 Open Dashboard
                 <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
               </Button>
