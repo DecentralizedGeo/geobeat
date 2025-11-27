@@ -33,7 +33,7 @@ interface GridData {
 export function HeroGeofunnel() {
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const sectionRef = useRef<HTMLDivElement>(null)
-  const animationFrameRef = useRef<number>()
+  const animationFrameRef = useRef<number>(0)
 
   const currentTRef = useRef(0)
   const targetTRef = useRef(0)

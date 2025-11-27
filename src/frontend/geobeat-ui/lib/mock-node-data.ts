@@ -129,7 +129,7 @@ export function generateMockNodeData(networkId: string): NetworkGeoJSON {
       type: "Feature" as const,
       geometry: {
         type: "Point" as const,
-        coordinates: [city.lon + lonOffset, city.lat + latOffset]
+        coordinates: [city.lon + lonOffset, city.lat + latOffset] as [number, number]
       },
       properties: {
         node_id: `${networkId}-node-${i.toString().padStart(4, '0')}`,
