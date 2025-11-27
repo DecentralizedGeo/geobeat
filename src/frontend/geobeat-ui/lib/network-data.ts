@@ -21,7 +21,7 @@ export interface Network {
 }
 
 // Import GDI data calculated by gdi_standalone.py
-import gdiResults from "./data/gdi_v0_final.json"
+import gdiResults from "./data/gdi_results.json"
 
 // Type assertion to ensure the imported data matches Network[]
 export const networks: Network[] = gdiResults as Network[]
