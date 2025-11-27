@@ -11,11 +11,11 @@ export function Header() {
               <Image
                 src="/images/black-hole copy.png"
                 alt="GEOBEAT"
-                width={40}
-                height={40}
-                className="w-10 h-10"
+                width={60}
+                height={60}
+                className="w-15 h-15"
               />
-              <span className="font-semibold text-base" style={{ fontFamily: "var(--font-averia-serif)" }}>GEOBEAT</span>
+              <span className="font-semibold text-lg" style={{ fontFamily: "var(--font-averia-serif)" }}>GEOBEAT</span>
             </Link>
             <nav className="hidden md:flex items-center gap-7">
               <Link href="/" className="text-[13px] font-normal hover:text-foreground/80 transition-colors">
