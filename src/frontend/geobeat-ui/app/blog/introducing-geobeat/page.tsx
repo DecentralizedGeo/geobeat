@@ -65,15 +65,16 @@ export default function IntroducingGeobeat() {
               is a clear view of the <strong>physical and legal footprint</strong> these networks depend on.
             </p>
             <p className="text-[17px] leading-[1.7] text-foreground/85 mb-5">
-              Flashbots' post on geographical decentralization made this pretty plain:{" "}
+              Flashbots'{" "}
               <a
                 href="https://collective.flashbots.net/t/decentralized-crypto-needs-you-to-be-a-geographical-decentralization-maxi/1385"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-foreground underline hover:text-foreground/80"
               >
-                https://collective.flashbots.net/t/decentralized-crypto-needs-you-to-be-a-geographical-decentralization-maxi/1385
-              </a>
+                post on geographical decentralization
+              </a>{" "}
+              made this pretty plain.
             </p>
             <p className="text-[17px] leading-[1.7] text-foreground/85 mb-5">
               Once you start paying attention, you notice how little visibility there is into where nodes actually run,
@@ -114,15 +115,16 @@ export default function IntroducingGeobeat() {
             </div>
 
             <p className="text-[17px] leading-[1.7] text-foreground/85 mb-5">
-              The methods and assumptions are written down so people can critique them or propose changes:{" "}
+              The methods and assumptions are{" "}
               <a
                 href="https://github.com/DecentralizedGeo/geobeat/blob/main/docs/PROPOSED_METHODOLOGY.md"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-foreground underline hover:text-foreground/80"
               >
-                https://github.com/DecentralizedGeo/geobeat/blob/main/docs/PROPOSED_METHODOLOGY.md
-              </a>
+                written down
+              </a>{" "}
+              so people can critique them or propose changes.
             </p>
             <p className="text-[17px] leading-[1.7] text-foreground/85 mb-5">
               The point is to give the community a common starting place rather than a finished verdict.
@@ -130,15 +132,16 @@ export default function IntroducingGeobeat() {
 
             <h2 className="font-serif text-3xl font-semibold mt-12 mb-6">The Tool</h2>
             <p className="text-[17px] leading-[1.7] text-foreground/85 mb-5">
-              The dashboard at <strong>GEOBEAT.xyz</strong> turns all of this into something you can inspect directly:{" "}
+              The{" "}
               <a
                 href="https://geobeat.xyz/dashboard"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-foreground underline hover:text-foreground/80"
               >
-                https://geobeat.xyz/dashboard
-              </a>
+                dashboard at GEOBEAT.xyz
+              </a>{" "}
+              turns all of this into something you can inspect directly.
             </p>
             <p className="text-[17px] leading-[1.7] text-foreground/85 mb-5">
               It shows where nodes cluster, which jurisdictions dominate, and how infrastructure choices differ across
@@ -198,7 +201,7 @@ export default function IntroducingGeobeat() {
                     rel="noopener noreferrer"
                     className="text-foreground underline hover:text-foreground/80"
                   >
-                    https://collective.flashbots.net/t/towards-stronger-location-proofs/5323
+                    Towards Stronger Location Proofs
                   </a>
                 </p>
               </div>
