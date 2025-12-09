@@ -3,12 +3,14 @@ import { NetworkList } from "@/components/network-list"
 import { IndexPill } from "@/components/index-pill"
 import { ScrollToTop } from "@/components/scroll-to-top"
 import { StatsCards } from "@/components/stats-cards"
+import { DemoDisclaimer } from "@/components/demo-disclaimer"
 
 export default function DashboardPage() {
   return (
     <div className="min-h-screen flex flex-col bg-white">
       <ScrollToTop />
       <Header />
+      <DemoDisclaimer />
       <main className="flex-1 container mx-auto px-4 py-4 max-w-7xl">
         <div className="space-y-8">
           <div className="flex flex-col gap-6">
