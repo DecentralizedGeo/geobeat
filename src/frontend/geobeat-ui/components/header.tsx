@@ -39,7 +39,7 @@ export function Header() {
               rel="noopener noreferrer"
               className="px-4 py-2 bg-foreground text-background hover:bg-foreground/90 border-2 border-foreground rounded-sm text-[13px] font-medium transition-colors"
             >
-              Connect
+              Join Community
             </Link>
           </div>
         </div>

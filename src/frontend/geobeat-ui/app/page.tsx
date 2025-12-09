@@ -15,8 +15,7 @@ export default function LandingPage() {
       <section id="what-we-measure" className="relative z-10 min-h-screen flex items-center justify-center px-6 py-20">
         <div className="max-w-5xl mx-auto">
           <div className="border-2 border-foreground rounded-sm p-12 bg-white">
-            <DemoDisclaimer variant="landing" />
-            <h2 className="font-serif text-4xl font-normal mb-10 mt-8">What GEOBEAT Measures</h2>
+            <h2 className="font-serif text-4xl font-normal mb-10">What GEOBEAT Measures</h2>
 
             <div className="grid md:grid-cols-2 gap-12">
               {/* Left column - Description */}
@@ -61,6 +60,10 @@ export default function LandingPage() {
                   </p>
                 </div>
               </div>
+            </div>
+
+            <div className="mt-8">
+              <DemoDisclaimer variant="landing" />
             </div>
           </div>
         </div>
