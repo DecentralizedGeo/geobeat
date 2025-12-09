@@ -269,12 +269,12 @@ export function HeroGeofunnel() {
 
       {/* Text overlay */}
       <div className="relative z-10 max-w-2xl">
-        <h1 className="font-serif text-4xl md:text-6xl tracking-tight leading-[1.15] mb-6 text-foreground">
+        <h1 className="font-serif text-7xl md:text-7xl tracking-tight leading-[1.15] mb-6 text-foreground">
           Most "decentralized" networks aren't{" "}
           <span className="font-bold">geographically decentralized.</span>
         </h1>
         <p className="text-xlg md:text-xl text-foreground/75 leading-relaxed mb-8 max-w-xl">
-          <span className="font-semibold">GEOBEAT</span> is a real-time geographic observatory<br /> for decentralized networks.
+          <span className="font-semibold">GEOBEAT</span> is a Geographic Decentralization Index and real-time geographic observatory for decentralized networks.
         </p>
         <Link href="/dashboard">
           <Button size="lg" className="rounded-sm group bg-foreground text-background hover:bg-foreground/90 border-2 border-foreground text-lg px-8 py-6 h-auto">
