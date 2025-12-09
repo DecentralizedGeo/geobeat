@@ -18,11 +18,14 @@ export function Header() {
               <span className="font-semibold text-base" style={{ fontFamily: "var(--font-averia-serif)" }}>GEOBEAT</span>
             </Link>
             <nav className="hidden md:flex items-center gap-7">
-              <Link href="/" className="text-[13px] font-normal hover:text-foreground/80 transition-colors">
+              <Link href="/dashboard" className="text-[13px] font-normal hover:text-foreground/80 transition-colors">
                 Dashboard
               </Link>
+              <Link href="/blog" className="text-[13px] font-normal hover:text-foreground/80 transition-colors">
+                Blog
+              </Link>
               <Link
-                href="https://github.com/DecentralizedGeo/geobeat/blob/main/docs/docs/methodology.md"
+                href="https://github.com/DecentralizedGeo/geobeat/blob/main/docs/PROPOSED_METHODOLOGY.md"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-[13px] font-normal text-muted-foreground hover:text-foreground/80 transition-colors"
