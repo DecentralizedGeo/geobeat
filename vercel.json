@@ -1,8 +1,0 @@
-{
-  "$schema": "https://openapi.vercel.sh/vercel.json",
-  "buildCommand": "cd src/frontend/geobeat-ui && npm ci && npm run build",
-  "devCommand": "cd src/frontend/geobeat-ui && npm run dev",
-  "installCommand": "cd src/frontend/geobeat-ui && npm ci",
-  "framework": null,
-  "outputDirectory": "src/frontend/geobeat-ui/.next"
-}
