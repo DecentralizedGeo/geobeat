@@ -62,6 +62,9 @@ htmlcov/
 
 # Node
 node_modules/
+.next/
+*.tsbuildinfo
+pnpm-lock.yaml
 
 # Research (keep private/in-progress research out of commits)
 private/
