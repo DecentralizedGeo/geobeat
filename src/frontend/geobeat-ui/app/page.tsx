@@ -146,22 +146,31 @@ export default function LandingPage() {
           <div className="border-2 border-foreground rounded-sm p-12 bg-white">
             <h2 className="font-serif text-4xl font-normal mb-10">Explore the Data</h2>
 
-            <div className="flex flex-wrap justify-center gap-4 mb-10">
-              <Link href="/dashboard">
-                <Button variant="outline" size="lg" className="rounded-sm bg-white border-2 border-foreground">
-                  Ethereum
+            <div className="flex flex-col items-center gap-6 mb-10">
+              <Link href="/blog/introducing-geobeat">
+                <Button size="lg" className="rounded-sm bg-white border-2 border-foreground text-foreground hover:bg-foreground/5">
+                  Introducing GEOBEAT
+                  <ArrowRight className="ml-2 h-4 w-4" />
                 </Button>
               </Link>
-              <Link href="/dashboard">
-                <Button variant="outline" size="lg" className="rounded-sm bg-white border-2 border-foreground">
-                  Polygon
-                </Button>
-              </Link>
-              <Link href="/dashboard">
-                <Button variant="outline" size="lg" className="rounded-sm bg-white border-2 border-foreground">
-                  Filecoin
-                </Button>
-              </Link>
+
+              <div className="flex flex-wrap justify-center gap-4">
+                <Link href="/dashboard">
+                  <Button variant="outline" size="lg" className="rounded-sm bg-white border-2 border-foreground">
+                    Ethereum
+                  </Button>
+                </Link>
+                <Link href="/dashboard">
+                  <Button variant="outline" size="lg" className="rounded-sm bg-white border-2 border-foreground">
+                    Polygon
+                  </Button>
+                </Link>
+                <Link href="/dashboard">
+                  <Button variant="outline" size="lg" className="rounded-sm bg-white border-2 border-foreground">
+                    Filecoin
+                  </Button>
+                </Link>
+              </div>
             </div>
 
             <Link href="/dashboard">

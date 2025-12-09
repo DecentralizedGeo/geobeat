@@ -12,27 +12,33 @@ const averiaSerifLibre = Averia_Serif_Libre({
   variable: "--font-averia-serif"
 })
 
-// Updated metadata for GeoBeat
+// Updated metadata for GEOBEAT
 export const metadata: Metadata = {
-  title: "GeoBeat - Blockchain Network Analysis",
+  title: "GEOBEAT - Measuring Network Geography",
   description: "Evidence-based analysis of blockchain network health across PDI, JDI, and IHI dimensions",
   generator: "v0.app",
   icons: {
     icon: [
       {
-        url: "/icon-light-32x32.png",
-        media: "(prefers-color-scheme: light)",
+        url: "/favicon.ico",
+        sizes: "any",
       },
       {
-        url: "/icon-dark-32x32.png",
-        media: "(prefers-color-scheme: dark)",
+        url: "/favicon-16x16.png",
+        sizes: "16x16",
+        type: "image/png",
+      },
+      {
+        url: "/favicon-32x32.png",
+        sizes: "32x32",
+        type: "image/png",
       },
       {
         url: "/icon.svg",
         type: "image/svg+xml",
       },
     ],
-    apple: "/apple-icon.png",
+    apple: "/apple-touch-icon.png",
   },
 }
 
