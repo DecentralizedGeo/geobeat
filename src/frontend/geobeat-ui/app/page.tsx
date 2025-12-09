@@ -3,6 +3,7 @@ import { ArrowRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { IndexPill } from "@/components/index-pill"
 import { HeroGeofunnel } from "@/components/hero-geofunnel"
+import { DemoDisclaimer } from "@/components/demo-disclaimer"
 
 export default function LandingPage() {
   return (
@@ -14,7 +15,8 @@ export default function LandingPage() {
       <section id="what-we-measure" className="relative z-10 min-h-screen flex items-center justify-center px-6 py-20">
         <div className="max-w-5xl mx-auto">
           <div className="border-2 border-foreground rounded-sm p-12 bg-white">
-            <h2 className="font-serif text-4xl font-normal mb-10">What GEOBEAT Measures</h2>
+            <DemoDisclaimer variant="landing" />
+            <h2 className="font-serif text-4xl font-normal mb-10 mt-8">What GEOBEAT Measures</h2>
 
             <div className="grid md:grid-cols-2 gap-12">
               {/* Left column - Description */}
