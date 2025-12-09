@@ -25,7 +25,7 @@ export function Header() {
                 Blog
               </Link>
               <Link
-                href="https://github.com/DecentralizedGeo/geobeat/blob/main/docs/docs/methodology.md"
+                href="https://github.com/DecentralizedGeo/geobeat/blob/main/docs/PROPOSED_METHODOLOGY.md"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-[13px] font-normal text-muted-foreground hover:text-foreground/80 transition-colors"
