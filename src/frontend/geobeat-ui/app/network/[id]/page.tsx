@@ -6,6 +6,7 @@ import { networks } from "@/lib/network-data";
 import { NetworkMap } from "@/components/network-map";
 import { ScrollToTop } from "@/components/scroll-to-top";
 import { IndexTooltip } from "@/components/index-tooltip";
+import { DemoDisclaimer } from "@/components/demo-disclaimer";
 import { generateMockNodeData } from "@/lib/mock-node-data";
 import { calculateOrgBreakdown, calculateCountryBreakdown, calculateIspBreakdown } from "@/lib/breakdown-utils";
 
@@ -72,6 +73,7 @@ export default async function NetworkDetailPage({
   return (
     <div className="min-h-screen bg-white">
       <ScrollToTop />
+      <DemoDisclaimer />
       <div className="max-w-7xl mx-auto px-6 py-8">
         {/* Back button */}
         <Link
