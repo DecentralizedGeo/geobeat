@@ -35,25 +35,6 @@ export default function IntroducingGeobeat() {
               <span>•</span>
               <span>Built by Astral</span>
             </div>
-            <div className="flex flex-wrap gap-2 text-[14px]">
-              <Link
-                href="https://geobeat.xyz/dashboard"
-                className="text-foreground hover:underline"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Dashboard →
-              </Link>
-              <span className="text-muted-foreground/50">|</span>
-              <Link
-                href="https://github.com/DecentralizedGeo/geobeat/blob/main/docs/PROPOSED_METHODOLOGY.md"
-                className="text-foreground hover:underline"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Methodology →
-              </Link>
-            </div>
           </header>
 
           {/* Content */}
