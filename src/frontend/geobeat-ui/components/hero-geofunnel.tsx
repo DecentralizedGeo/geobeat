@@ -276,12 +276,20 @@ export function HeroGeofunnel() {
         <p className="text-xlg md:text-xl text-foreground/75 leading-relaxed mb-8 max-w-xl">
           <span className="font-semibold">GEOBEAT</span> is a Geographic Decentralization Index and real-time geographic observatory for decentralized networks.
         </p>
-        <Link href="/dashboard">
-          <Button size="lg" className="rounded-sm group bg-foreground text-background hover:bg-foreground/90 border-2 border-foreground text-lg px-8 py-6 h-auto">
-            Explore the Index
-            <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
-          </Button>
-        </Link>
+        <div className="flex gap-4 flex-wrap">
+          <Link href="/blog/introducing-geobeat">
+            <Button size="lg" variant="outline" className="rounded-sm bg-white border-2 border-foreground text-foreground hover:bg-foreground/5 text-lg px-8 py-6 h-auto">
+              Introducing GEOBEAT
+              <ArrowRight className="ml-2 h-5 w-5" />
+            </Button>
+          </Link>
+          <Link href="/dashboard">
+            <Button size="lg" className="rounded-sm group bg-foreground text-background hover:bg-foreground/90 border-2 border-foreground text-lg px-8 py-6 h-auto">
+              Explore the Index
+              <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+            </Button>
+          </Link>
+        </div>
       </div>
       </section>
     </>
