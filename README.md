@@ -6,44 +6,43 @@
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.x-blue?logo=typescript)](https://www.typescriptlang.org/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
-**Geographic analytics platform for decentralized networks** - Visualize and analyze the geographic distribution of blockchain nodes to measure true decentralization.
+Geographic analytics for decentralized networks. Measure network distribution through continuous node monitoring and geospatial analysis.
 
-🌍 [Live Demo](https://geobeat.xyz) | 📖 [Documentation](docs/) | 🏗️ [Architecture](docs/ARCHITECTURE.md)
+[Live Dashboard](https://geobeat.xyz) | [Documentation](docs/) | [Architecture](docs/ARCHITECTURE.md)
 
-## Overview
+## What It Does
 
-GEOBEAT provides real-time insights into the geographic distribution of decentralized networks, helping identify centralization risks, geographic dependencies, and regional trends.
+GEOBEAT monitors blockchain networks to identify geographic centralization risks. The platform collects node location data, calculates distribution metrics, and presents results through interactive visualizations.
 
-### Key Features
+## Key Capabilities
 
-- 📊 **Geographic Decentralization Index (GDI)** - Quantitative metrics for network distribution
-- 🗺️ **Interactive Visualizations** - 3D globe, heatmaps, and geospatial funnel charts
-- 🔄 **Continuous Data Collection** - Live monitoring via armiarma network crawlers
-- 📈 **Time-Series Analysis** - Track geographic centralization trends over time
-- 🌐 **Multi-Network Support** - Ethereum, Polygon, Filecoin, Bitcoin, and more
+- **Geographic Decentralization Index (GDI)** - Quantitative measurement of network distribution using H3 hexagonal hierarchical spatial indexing
+- **Continuous monitoring** - Automated data collection from Ethereum, Polygon, and Filecoin networks via libp2p crawlers
+- **Time-series analysis** - Track distribution changes over weeks and months
+- **Interactive visualizations** - 3D globe rendering, heatmaps, and geospatial funnel charts
 
-### Current Status
+## Current Status
 
-✅ **Phase 1 Complete** - Data collection infrastructure deployed
-🚧 **Phase 2 In Progress** - Building REST API layer
-📅 **Phase 3 Planned** - Live dashboard integration
+Phase 1 complete: Data collection infrastructure deployed and collecting peer data from Ethereum, Polygon, and Filecoin networks.
+
+Phase 2 in progress: Building REST API layer for dashboard integration.
 
 ## Quick Start
 
 ### Prerequisites
 
-- **Node.js** 18+ (for frontend)
-- **Python** 3.11+ (for analysis)
-- **Git** with submodules support
+- Node.js 18+
+- Python 3.11+
+- Git with submodules support
 
 ### Installation
 
 ```bash
-# Clone with submodules
+# Clone repository with submodules
 git clone --recurse-submodules https://github.com/DecentralizedGeo/geobeat.git
 cd geobeat
 
-# Install root dependencies (includes Husky git hooks)
+# Install dependencies
 npm install
 
 # Frontend setup
@@ -51,161 +50,141 @@ cd src/frontend/geobeat-ui
 npm install
 npm run dev
 
-# Python analysis setup
+# Python environment
 cd ../../..
 python -m venv .venv-analysis
-source .venv-analysis/bin/activate  # On Windows: .venv-analysis\Scripts\activate
+source .venv-analysis/bin/activate
 pip install -r requirements.txt
 ```
 
-### Quick Commands
+### Running Components
 
 ```bash
-# Run frontend dashboard
+# Frontend dashboard
 cd src/frontend/geobeat-ui && npm run dev
 
-# Run Python analysis
+# Python GDI calculation
 cd src/analysis && python gdi.py
 
-# Update armiarma crawler submodule
+# Update network crawler
 git submodule update --remote --merge
-
-# Run tests
-npm test  # Frontend
-pytest    # Python
 ```
 
 ## Architecture
 
-GEOBEAT is built with a modular architecture:
+GEOBEAT uses a three-layer architecture:
 
 ```
-┌─────────────────────────────────────────┐
-│       Frontend (app.geobeat.xyz)        │
-│         Next.js 16 + TypeScript         │
-└───────────────┬─────────────────────────┘
-                │ REST API
-┌───────────────▼─────────────────────────┐
-│        API Layer (api.geobeat.xyz)      │
-│         Express + PostgreSQL            │
-└───────────────┬─────────────────────────┘
-                │
-┌───────────────▼─────────────────────────┐
-│      Data Collection Infrastructure     │
-│  Armiarma Crawlers + Time-Series DB    │
-└─────────────────────────────────────────┘
+Frontend (app.geobeat.xyz)
+    ↓ REST API
+API Layer (api.geobeat.xyz)
+    ↓ PostgreSQL
+Data Collection (Hetzner)
 ```
 
-See [ARCHITECTURE.md](docs/ARCHITECTURE.md) for detailed system design.
+**Data Collection Layer**: Armiarma crawlers run on a dedicated server, discovering peers via DHT protocols and storing IP addresses with timestamps in PostgreSQL.
+
+**Processing Layer**: Python scripts enrich IP data with MaxMind GeoLite2 geolocation, calculate GDI metrics using H3 hexagonal grids, and generate time-series aggregates.
+
+**Application Layer**: REST API serves processed data to the Next.js dashboard. Frontend renders interactive visualizations using Deck.gl and Mapbox GL.
+
+See [ARCHITECTURE.md](docs/ARCHITECTURE.md) for complete system design.
 
 ## Repository Structure
 
 ```
 geobeat/
-├── .beads/                 # Beads issue tracking (bd CLI)
+├── .beads/                 # Issue tracking (bd CLI)
 ├── data/                   # Network data and analysis outputs
-│   ├── raw/               # Raw node IP data (CSV)
+│   ├── raw/               # Node IP addresses (CSV)
 │   ├── analysis_outputs/  # GDI calculation results
-│   └── timeseries/        # Historical trend data
-├── data-sources/          # Data source documentation
-│   ├── tools/armiarma/   # Network crawler (git submodule)
-│   └── INVENTORY.md      # Comprehensive data source catalog
-├── docs/                  # Project documentation
-│   ├── ARCHITECTURE.md   # System architecture
-│   ├── DEPLOYMENT_CREDENTIALS.md  # Server access (not in git)
-│   └── README.md         # Documentation index
-├── research/              # Academic papers and methodology
-├── src/                   # Source code
-│   ├── analysis/         # Python GDI calculation engine
-│   └── frontend/         # Next.js dashboard (geobeat-ui)
-└── submission/            # ETHGlobal Buenos Aires 2025 materials
+│   └── timeseries/        # Historical trends
+├── data-sources/
+│   ├── tools/armiarma/   # Network crawler (submodule)
+│   └── INVENTORY.md      # Data source catalog
+├── docs/                  # Documentation
+├── src/
+│   ├── analysis/         # Python GDI engine
+│   └── frontend/         # Next.js dashboard
+└── research/              # Methodology papers
 ```
 
 ## Data Collection
 
-GEOBEAT collects blockchain node data using:
+The platform collects node data through:
 
-- **Armiarma** - libp2p network crawler (Ethereum, Polygon, Filecoin)
-- **Bitnodes API** - Bitcoin node data (planned)
-- **Etherscan API** - Ethereum node statistics (planned)
+- **Armiarma**: libp2p crawler for Ethereum, Polygon, and Filecoin networks
+- **Bitnodes API**: Bitcoin node data (planned)
+- **Etherscan API**: Ethereum statistics (planned)
 
-Data is enriched with geolocation (MaxMind GeoLite2) and stored in PostgreSQL for time-series analysis.
+Node IP addresses are geolocated using MaxMind GeoLite2 (city-level precision) and stored in PostgreSQL for time-series analysis.
 
-## Development Workflow
+## Development
 
-### Using Beads (bd) for Task Tracking
+### Task Tracking
 
-This project uses [Beads](https://github.com/steveyegge/beads) for issue tracking:
+This project uses [Beads](https://github.com/steveyegge/beads) for issue management:
 
 ```bash
-# Check available work
+# View available work
 bd ready
 
-# Create a task
-bd create "Implement API endpoint" --type=feature --priority=1
+# Create task
+bd create "Add network selector" --type=feature --priority=1
 
-# Start working
+# Start work
 bd update <issue-id> --status=in_progress
 
-# Complete and sync
+# Complete
 bd close <issue-id>
 bd sync
 ```
 
-See [AGENTS.md](AGENTS.md) for AI agent workflow instructions.
+### Commit Format
 
-### Commit Guidelines
-
-This project follows [Conventional Commits](https://www.conventionalcommits.org/):
+Commits follow [Conventional Commits](https://www.conventionalcommits.org/):
 
 ```
 feat(dashboard): add network selector dropdown
-fix(gdi): correct H3 hexagon area calculation
-docs(api): update endpoint documentation
-chore(deps): upgrade Next.js to 16.1
+fix(gdi): correct hexagon area calculation
+docs(api): document rate limiting
+chore(deps): update Next.js to 16.1
 ```
 
-Git hooks via Husky enforce commit message format automatically.
+Husky git hooks enforce this format automatically.
 
-### Working with Submodules
+### Submodule Updates
 
-The `armiarma` crawler is tracked as a git submodule:
+The armiarma crawler is tracked as a git submodule:
 
 ```bash
-# Update to latest version
+# Update to latest
 git submodule update --remote --merge
 
-# Make changes in submodule
+# Modify submodule
 cd data-sources/tools/armiarma
 git checkout ethglobal-ba-2025
-# ... make changes ...
+# make changes
 git push
 
-# Update parent repo reference
+# Update parent reference
 cd ../../..
 git add data-sources/tools/armiarma
 git commit -m "chore(armiarma): update submodule"
 ```
 
-## Contributing
-
-We welcome contributions! Please see [CONTRIBUTING.md](CONTRIBUTING.md) for:
-
-- Code of conduct
-- Development setup
-- Pull request process
-- Testing requirements
-
 ## Testing
 
-### Frontend Tests
+### Frontend
+
 ```bash
 cd src/frontend/geobeat-ui
 npm test
 npm run test:coverage
 ```
 
-### Python Tests
+### Python
+
 ```bash
 cd src/analysis
 pytest
@@ -216,63 +195,64 @@ See [TESTING.md](TESTING.md) for comprehensive testing guidelines.
 
 ## Deployment
 
-### Frontend (Vercel)
-The dashboard is deployed to Vercel with automatic CI/CD:
-- **Production**: https://geobeat.xyz
-- **Preview**: Auto-deployed for every PR
+### Frontend
 
-### Data Collection Server (Hetzner)
+The dashboard deploys to Vercel with automatic CI/CD:
+- Production: https://geobeat.xyz
+- Preview deployments for every pull request
+
+### Data Collection
+
 Armiarma crawlers run on a Hetzner CX42 server:
-- **Location**: Helsinki, Finland
-- **Specs**: 8 vCPU, 16GB RAM, 320GB SSD
-- **Cost**: €29.90/month
+- Location: Helsinki, Finland
+- Specs: 8 vCPU, 16GB RAM, 320GB SSD
+- Monthly cost: €29.90
 
-See [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) for deployment details.
+See [ARCHITECTURE.md](docs/ARCHITECTURE.md) for deployment procedures.
 
 ## Data & Privacy
 
-- **Node IP Data**: Collected via public DHT/P2P protocols
-- **Geolocation**: MaxMind GeoLite2 database (city-level)
-- **Privacy**: No personal data collected, only network topology
-- **Data Retention**: 30-day rolling window for raw data
+Network topology data is collected via public DHT and P2P protocols. The platform stores only IP addresses and derived geolocation (city-level). No personal information is collected. Raw peer data uses a 30-day rolling retention window.
 
 See [SECURITY.md](SECURITY.md) for security policies.
 
 ## Research
 
-GEOBEAT was developed as part of academic research on blockchain decentralization:
+GEOBEAT was developed through academic research on blockchain decentralization:
 
-- [Proposed Methodology](docs/PROPOSED_METHODOLOGY.md)
+- [Methodology](docs/PROPOSED_METHODOLOGY.md)
 - [Data Source Inventory](data-sources/INVENTORY.md)
-- [ETHGlobal Buenos Aires 2025 Submission](submission/)
+- [ETHGlobal Buenos Aires Submission](submission/)
 
 ## Roadmap
 
-- [x] **Q4 2024**: Initial research and prototype
-- [x] **Q1 2025**: ETHGlobal Buenos Aires demo
-- [x] **Q1 2025**: Deploy data collection infrastructure
-- [ ] **Q2 2025**: Launch public API (beta)
-- [ ] **Q2 2025**: Real-time dashboard updates
-- [ ] **Q3 2025**: Premium API tier with historical data
-- [ ] **Q4 2025**: Multi-network GDI comparisons
+**Q4 2024**: Research and prototype development
+
+**Q1 2025**: ETHGlobal Buenos Aires demo, infrastructure deployment complete
+
+**Q2 2025**: Public API beta launch, real-time dashboard updates
+
+**Q3 2025**: Premium API tier with historical data access
+
+**Q4 2025**: Multi-network GDI comparisons, additional network support
+
+## Contributing
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for development guidelines, code review process, and testing requirements.
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+MIT License - see [LICENSE](LICENSE) for details.
 
 ## Acknowledgments
 
-- **Armiarma** - Network crawler by [Miga Labs](https://github.com/migalabs/armiarma)
-- **MaxMind GeoLite2** - Geolocation database
-- **ETHGlobal** - Buenos Aires 2025 hackathon support
-- **Beads** - Issue tracking by [Steve Yegge](https://github.com/steveyegge/beads)
+- Armiarma network crawler by [Miga Labs](https://github.com/migalabs/armiarma)
+- MaxMind GeoLite2 geolocation database
+- ETHGlobal Buenos Aires 2025 program
+- Beads issue tracking by [Steve Yegge](https://github.com/steveyegge/beads)
 
 ## Contact
 
-- **Website**: https://geobeat.xyz
-- **GitHub**: https://github.com/DecentralizedGeo/geobeat
-- **Issues**: Use `bd create` for task tracking or GitHub Issues for bugs
-
----
-
-**Built with ❤️ for the decentralized web**
+- Website: https://geobeat.xyz
+- Repository: https://github.com/DecentralizedGeo/geobeat
+- Issues: Use `bd create` for feature requests or GitHub Issues for bugs
