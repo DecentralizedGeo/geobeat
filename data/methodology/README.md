@@ -137,6 +137,5 @@ These guides were created to support [Issue #1](https://github.com/Decentralized
 
 ## Questions?
 
-- See [../README.md](../README.md) for data-sources directory overview
-- See [../../research/README.md](../../research/README.md) for academic research on decentralization metrics
+- See [../README.md](../README.md) for data directory overview
 - See [Issue #1](https://github.com/DecentralizedGeo/geobeat/issues/1) for current data source reconnaissance task

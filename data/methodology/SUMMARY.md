@@ -26,7 +26,7 @@ This research compiled industry best practices, academic standards, and real-wor
 ## Key Deliverables Created
 
 ### 1. Comprehensive Best Practices Guide
-**Location**: `/Users/x25bd/Code/astral/geobeat/research/DATA_SOURCE_BEST_PRACTICES.md`
+**Location**: `EVALUATION_GUIDE.md` in this directory
 
 60+ page comprehensive guide covering:
 - Complete dataset inventory structure with required/recommended fields
@@ -40,7 +40,7 @@ This research compiled industry best practices, academic standards, and real-wor
 - 9 well-documented examples from leading projects
 
 ### 2. Quick Reference Guide
-**Location**: `/Users/x25bd/Code/astral/geobeat/research/QUICK_REFERENCE.md`
+**Location**: `QUICK_REFERENCE.md` in this directory
 
 Condensed reference with:
 - Essential vs recommended inventory fields
@@ -386,17 +386,16 @@ Based on academic consensus from recent peer-reviewed research:
 All research and templates are in the Geobeat repository:
 
 ### Research Documentation
-- `/Users/x25bd/Code/astral/geobeat/research/DATA_SOURCE_BEST_PRACTICES.md` - Comprehensive guide (60+ pages)
-- `/Users/x25bd/Code/astral/geobeat/research/QUICK_REFERENCE.md` - Quick reference
-- `/Users/x25bd/Code/astral/geobeat/research/RESOURCES.md` - Bibliography (existing)
-- `/Users/x25bd/Code/astral/geobeat/research/SUMMARY.md` - This file
+- `EVALUATION_GUIDE.md` - Comprehensive guide (60+ pages)
+- `QUICK_REFERENCE.md` - Quick reference
+- `FRAMEWORK_REFERENCE.md` - Framework and API documentation
+- `SUMMARY.md` - This file
 
 ### Templates and Structure
-- `/Users/x25bd/Code/astral/geobeat/data/templates/source_template.json` - Source inventory template
-- `/Users/x25bd/Code/astral/geobeat/data/templates/assessment_template.md` - Quality assessment template
-- `/Users/x25bd/Code/astral/geobeat/data/README.md` - Updated data directory guide
-- `/Users/x25bd/Code/astral/geobeat/data/inventory/` - For source catalog
-- `/Users/x25bd/Code/astral/geobeat/data/assessments/` - For quality reports
+- `templates/source_template.json` - Source inventory template
+- `templates/assessment_template.md` - Quality assessment template
+- `../README.md` - Data directory guide
+- `../INVENTORY.md` - Source catalog
 
 ---
 

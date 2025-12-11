@@ -359,10 +359,10 @@ Create `data/assessments/[source-id]/` with:
 
 ## Quick Links
 
-- **Full Best Practices**: `/research/DATA_SOURCE_BEST_PRACTICES.md`
-- **Resource Library**: `/research/RESOURCES.md`
-- **Data Inventory Template**: `/data/templates/source_template.json` (to be created)
-- **Assessment Template**: `/data/templates/assessment_template.md` (to be created)
+- **Full Best Practices**: See EVALUATION_GUIDE.md in this directory
+- **Framework Reference**: See FRAMEWORK_REFERENCE.md in this directory
+- **Data Inventory Template**: See templates/source_template.json in this directory
+- **Assessment Template**: See templates/assessment_template.md in this directory
 
 ---
 
