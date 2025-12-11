@@ -17,6 +17,7 @@ The platform monitors Ethereum, Polygon, and Filecoin networks, tracking how nod
 ## Quick Links
 
 - [Live Dashboard](https://geobeat.xyz) - Interactive visualizations of current network distribution
+- [Introducing GEOBEAT](https://www.geobeat.xyz/blog/introducing-geobeat) - Blog post outlining our motivation and vision
 - [Methodology](docs/METHODOLOGY.md) - GDI calculation details and research approach
 
 ## Current Implementation
