@@ -70,3 +70,7 @@ pnpm-lock.yaml
 private/
 .worktrees
 docs/DEPLOYMENT_CREDENTIALS.md
+.venv/
+*.pyc
+__pycache__/
+.ipynb_checkpoints/

@@ -1,0 +1,35 @@
+[tool.poetry]
+name = "geobeat"
+version = "0.1.0"
+description = "Geographic Decentralization Index Analysis"
+authors = ["GEOBEAT <noreply@geobeat.xyz>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+pandas = "^2.3.3"
+numpy = "^2.3.5"
+matplotlib = "^3.10.8"
+seaborn = "^0.13.2"
+geopandas = "^1.1.1"
+shapely = "^2.1.2"
+h3 = "^4.3.1"
+pysal = "^25.7"
+esda = "^2.8.0"
+libpysal = "^4.13.0"
+scikit-learn = "^1.8.0"
+scipy = "^1.16.3"
+plotly = "^6.5.0"
+requests = "^2.32.5"
+python-dotenv = "^1.2.1"
+pydantic = "^2.12.5"
+
+
+[tool.poetry.group.dev.dependencies]
+jupyter = "^1.1.1"
+ipykernel = "^7.1.0"
+ipython = "^9.8.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
