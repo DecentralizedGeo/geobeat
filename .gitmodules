@@ -1,4 +1,0 @@
-[submodule "data/tools/armiarma"]
-	path = data/tools/armiarma
-	url = https://github.com/DecentralizedGeo/armiarma
-	branch = ethglobal-ba-2025
