@@ -46,7 +46,7 @@ npm run lint
 ### Verify imports
 ```bash
 cd src/analysis
-python -c "import gdi_standalone; import spatial_metrics; import models; import data_ingestion"
+python -c "import gdi_standalone; import models; import data_ingestion"
 ```
 
 **Expected**: No import errors

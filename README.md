@@ -64,7 +64,7 @@ pip install -r requirements.txt
 cd src/frontend/geobeat-ui && npm run dev
 
 # Python GDI calculation
-cd src/analysis && python gdi.py
+cd src/analysis && python gdi_standalone.py
 
 # Update network crawler
 git submodule update --remote --merge
