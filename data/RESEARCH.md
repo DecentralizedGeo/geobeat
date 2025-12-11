@@ -172,13 +172,13 @@ Stay focused on **finding, reading, and evaluating data sources**. Do not design
 **You have extensive scaffolding to help you:**
 
 ### Quick Start
-1. **Checklist:** `/Users/x25bd/Code/astral/geobeat/data-sources/CHECKLIST.md` - Step-by-step evaluation process
-2. **Template:** `/Users/x25bd/Code/astral/geobeat/data-sources/methodology/templates/source_template.json` - Document each source
-3. **Quick ref:** `/Users/x25bd/Code/astral/geobeat/data-sources/methodology/QUICK_REFERENCE.md` - Key criteria
+1. **Checklist:** `methodology/CHECKLIST.md` - Step-by-step evaluation process
+2. **Template:** `methodology/templates/source_template.json` - Document each source
+3. **Quick ref:** `methodology/QUICK_REFERENCE.md` - Key criteria
 
 ### Deep References
-- **Evaluation guide:** `/Users/x25bd/Code/astral/geobeat/data-sources/methodology/EVALUATION_GUIDE.md` (60+ pages on best practices)
-- **Framework docs:** `/Users/x25bd/Code/astral/geobeat/data-sources/methodology/FRAMEWORK_REFERENCE.md` (GeoIP databases, APIs)
+- **Evaluation guide:** `methodology/EVALUATION_GUIDE.md` (60+ pages on best practices)
+- **Framework docs:** `methodology/FRAMEWORK_REFERENCE.md` (GeoIP databases, APIs)
 
 ### Key Insights to Remember
 - **GeoIP accuracy:** Country 99.8%, City ~66% (MaxMind GeoLite2)
@@ -191,7 +191,7 @@ Stay focused on **finding, reading, and evaluating data sources**. Do not design
 
 ## Output Location
 
-**Create:** `/Users/x25bd/Code/astral/geobeat/data-sources/INVENTORY.md`
+**Create:** `INVENTORY.md`
 
 **Structure:**
 ```markdown

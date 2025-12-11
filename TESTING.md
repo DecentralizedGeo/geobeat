@@ -46,7 +46,7 @@ npm run lint
 ### Verify imports
 ```bash
 cd src/analysis
-python -c "import gdi_standalone; import spatial_metrics; import models; import data_ingestion"
+python -c "import gdi_standalone; import models; import data_ingestion"
 ```
 
 **Expected**: No import errors
@@ -108,10 +108,7 @@ ls docs/
 
 **Expected**:
 ```
-DASHBOARD_UI_BEST_PRACTICES.md
-DEMO_IMPLEMENTATION.md
-PROPOSED_METHODOLOGY.md
-README.md
+METHODOLOGY.md
 ```
 
 ### Verify no old files
@@ -263,10 +260,7 @@ cd src/frontend/geobeat-ui && npx tsc --noEmit && cd ../../..
 cd src/analysis && python -c "import gdi_standalone" && cd ../..
 
 # 3. Docs exist
-ls docs/PROPOSED_METHODOLOGY.md docs/DEMO_IMPLEMENTATION.md
-
-# 4. Architecture doc exists
-ls ARCHITECTURE.md
+ls docs/METHODOLOGY.md docs/ARCHITECTURE.md
 
 # 5. CI workflow exists
 ls .github/workflows/ci.yml

@@ -4,7 +4,7 @@ This directory contains node IP address data collected from armiarma crawler.
 
 ## Data Source
 - Tool: armiarma (https://github.com/DecentralizedGeo/armiarma)
-- Location: data-sources/tools/armiarma/
+- Location: data/tools/armiarma/
 - Collection method: libp2p DHT crawling
 
 ## Data Format

@@ -22,7 +22,7 @@ Essential data for GEOBEAT geographic decentralization analysis.
 
 ## Data Sources
 
-See `/data-sources/` directory for comprehensive source inventory and methodology.
+See `INVENTORY.md` and `methodology/` in this directory for comprehensive source inventory and methodology.
 
 ## Quick Stats
 
@@ -41,5 +41,5 @@ See `/data-sources/` directory for comprehensive source inventory and methodolog
 ## Privacy
 
 - IP addresses analyzed are publicly available on blockchain networks
-- All data sources documented in `/data-sources/INVENTORY.md`
+- All data sources documented in `INVENTORY.md`
 - Follow applicable data protection regulations
