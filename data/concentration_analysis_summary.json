@@ -1,0 +1,253 @@
+{
+  "analysis_date": "2025-12-11",
+  "networks_analyzed": [
+    "ethereum",
+    "polygon",
+    "filecoin"
+  ],
+  "concentration_summary": {
+    "ethereum": {
+      "country_metrics": {
+        "network": "ethereum",
+        "total_nodes": 17356,
+        "num_countries": 103,
+        "top_1_country": "United States",
+        "top_1_pct": 30.53,
+        "top_2_pct": 44.730000000000004,
+        "top_3_pct": 50.1,
+        "top_5_pct": 59.96,
+        "top_10_pct": 76.92,
+        "country_hhi": 0.12944783297279472,
+        "top_countries": {
+          "United States": 30.53,
+          "Germany": 14.2,
+          "Finland": 5.37,
+          "United Kingdom": 4.97,
+          "France": 4.89,
+          "Singapore": 4.77,
+          "Japan": 3.61,
+          "Canada": 3.28,
+          "South Korea": 2.94,
+          "The Netherlands": 2.36
+        }
+      },
+      "org_metrics": {
+        "network": "ethereum",
+        "total_nodes": 17356,
+        "nodes_with_org": 16086,
+        "num_orgs": 2274,
+        "top_1_org": "Hetzner",
+        "top_1_pct": 6.36,
+        "top_2_pct": 11.73,
+        "top_3_pct": 15.98,
+        "top_5_pct": 20.94,
+        "top_10_pct": 30.24,
+        "org_hhi": 0.013958130753297366,
+        "top_orgs": {
+          "Hetzner": 6.36,
+          "AWS EC2 (us-east-1)": 5.37,
+          "Hetzner Online GmbH": 4.25,
+          "AWS EC2 (ap-southeast-1)": 2.68,
+          "OVH": 2.28,
+          "AWS EC2 (ap-northeast-1)": 2.11,
+          "AWS EC2 (ap-northeast-2)": 1.9,
+          "AWS EC2 (eu-west-1)": 1.86,
+          "OVH US LLC": 1.81,
+          "Spectrum": 1.62
+        }
+      },
+      "critical_flags": {
+        "single_country_critical": "False",
+        "top2_countries_critical": "False",
+        "top3_countries_critical": "False",
+        "single_org_critical": "False",
+        "top3_orgs_critical": "False"
+      }
+    },
+    "polygon": {
+      "country_metrics": {
+        "network": "polygon",
+        "total_nodes": 11242,
+        "num_countries": 82,
+        "top_1_country": "United States",
+        "top_1_pct": 30.63,
+        "top_2_pct": 46.849999999999994,
+        "top_3_pct": 57.23,
+        "top_5_pct": 65.74,
+        "top_10_pct": 82.22999999999999,
+        "country_hhi": 0.14179074575508693,
+        "top_countries": {
+          "United States": 30.63,
+          "Germany": 16.22,
+          "China": 10.38,
+          "Finland": 4.37,
+          "France": 4.14,
+          "Singapore": 3.92,
+          "United Kingdom": 3.74,
+          "Japan": 3.22,
+          "Lithuania": 3.12,
+          "Canada": 2.49
+        }
+      },
+      "org_metrics": {
+        "network": "polygon",
+        "total_nodes": 11242,
+        "nodes_with_org": 9688,
+        "num_orgs": 1346,
+        "top_1_org": "Hetzner",
+        "top_1_pct": 5.08,
+        "top_2_pct": 9.27,
+        "top_3_pct": 12.76,
+        "top_5_pct": 19.45,
+        "top_10_pct": 29.04,
+        "org_hhi": 0.012345627043933056,
+        "top_orgs": {
+          "Hetzner": 5.08,
+          "AWS EC2 (us-east-1)": 4.19,
+          "Hetzner Online GmbH": 3.49,
+          "Tencent cloud computing (Beijing) Co., Ltd.": 3.38,
+          "Tencent Cloud Computing (Beijing) Co., Ltd": 3.31,
+          "EGIHosting": 2.99,
+          "Contabo GmbH": 1.69,
+          "OVH US LLC": 1.69,
+          "AWS EC2 (eu-west-1)": 1.64,
+          "RCS Technologies FZE LLC": 1.58
+        }
+      },
+      "critical_flags": {
+        "single_country_critical": "False",
+        "top2_countries_critical": "False",
+        "top3_countries_critical": "False",
+        "single_org_critical": "False",
+        "top3_orgs_critical": "False"
+      }
+    },
+    "filecoin": {
+      "country_metrics": {
+        "network": "filecoin",
+        "total_nodes": 256,
+        "num_countries": 25,
+        "top_1_country": "China",
+        "top_1_pct": 23.05,
+        "top_2_pct": 45.32,
+        "top_3_pct": 58.99,
+        "top_5_pct": 73.45,
+        "top_10_pct": 86.32000000000001,
+        "country_hhi": 0.137786865234375,
+        "top_countries": {
+          "China": 23.05,
+          "South Korea": 22.27,
+          "Hong Kong": 13.67,
+          "United States": 9.38,
+          "Germany": 5.08,
+          "Singapore": 3.12,
+          "Japan": 2.73,
+          "Canada": 2.34,
+          "France": 2.34,
+          "The Netherlands": 2.34
+        }
+      },
+      "org_metrics": {
+        "network": "filecoin",
+        "total_nodes": 256,
+        "nodes_with_org": 223,
+        "num_orgs": 116,
+        "top_1_org": "Chinanet GD",
+        "top_1_pct": 6.64,
+        "top_2_pct": 12.89,
+        "top_3_pct": 18.36,
+        "top_5_pct": 23.83,
+        "top_10_pct": 32.410000000000004,
+        "org_hhi": 0.0179901123046875,
+        "top_orgs": {
+          "Chinanet GD": 6.64,
+          "Korea Telecom": 6.25,
+          "Kornet": 5.47,
+          "Boranet": 3.52,
+          "XUN HONG KONG LIMITED": 1.95,
+          "Chinanet JS": 1.95,
+          "Speedium": 1.95,
+          "Hetzner": 1.56,
+          "Chinanet HN": 1.56,
+          "Hetzner Online GmbH": 1.56
+        }
+      },
+      "critical_flags": {
+        "single_country_critical": "False",
+        "top2_countries_critical": "False",
+        "top3_countries_critical": "False",
+        "single_org_critical": "False",
+        "top3_orgs_critical": "False"
+      }
+    }
+  },
+  "proposed_thresholds": {
+    "single_country_critical": 33,
+    "top2_countries_critical": 50,
+    "top3_countries_critical": 66,
+    "single_org_critical": 25,
+    "top3_orgs_critical": 50
+  },
+  "current_gdi_scores": [
+    {
+      "id": "ethereum",
+      "name": "Ethereum",
+      "symbol": "ETH",
+      "logoUrl": "https://cryptologos.cc/logos/ethereum-eth-logo.svg",
+      "type": "L1",
+      "pdi": 62.5,
+      "jdi": 42.9,
+      "ihi": 55.1,
+      "trend": "neutral",
+      "trendValue": "N/A",
+      "nodeCount": 16086,
+      "moransI": 0.25,
+      "spatialHHI": 0.021,
+      "enl": 207.6,
+      "countryHHI": 0.143,
+      "numCountries": 95,
+      "orgHHI": 0.016,
+      "numOrgs": 2274
+    },
+    {
+      "id": "polygon",
+      "name": "Polygon",
+      "symbol": "MATIC",
+      "logoUrl": "https://cryptologos.cc/logos/polygon-matic-logo.svg",
+      "type": "L2",
+      "pdi": 59.3,
+      "jdi": 42.7,
+      "ihi": 54.8,
+      "trend": "neutral",
+      "trendValue": "N/A",
+      "nodeCount": 9688,
+      "moransI": 0.29,
+      "spatialHHI": 0.026,
+      "enl": 112.4,
+      "countryHHI": 0.145,
+      "numCountries": 76,
+      "orgHHI": 0.017,
+      "numOrgs": 1346
+    },
+    {
+      "id": "filecoin",
+      "name": "Filecoin",
+      "symbol": "FIL",
+      "logoUrl": "https://cryptologos.cc/logos/filecoin-fil-logo.svg",
+      "type": "L1",
+      "pdi": 58.2,
+      "jdi": 40.8,
+      "ihi": 40.4,
+      "trend": "neutral",
+      "trendValue": "N/A",
+      "nodeCount": 223,
+      "moransI": 0.3,
+      "spatialHHI": 0.025,
+      "enl": 61.6,
+      "countryHHI": 0.137,
+      "numCountries": 24,
+      "orgHHI": 0.024,
+      "numOrgs": 116
+    }
+  ]
+}
