@@ -219,9 +219,8 @@ See [SECURITY.md](SECURITY.md) for security policies.
 
 GEOBEAT was developed through academic research on blockchain decentralization:
 
-- [Methodology](docs/PROPOSED_METHODOLOGY.md)
+- [Methodology](docs/METHODOLOGY.md)
 - [Data Source Inventory](data/INVENTORY.md)
-- [ETHGlobal Buenos Aires Submission](submission/)
 
 ## Roadmap
 
