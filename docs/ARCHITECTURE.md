@@ -453,7 +453,7 @@ GET /v1/networks/:network/history?range=custom&start=...&end=...
 
 ## References
 
-- Armiarma Documentation: `data-sources/tools/armiarma/doc/`
+- Armiarma Documentation: `data/tools/armiarma/doc/`
 - Deployment Plan: GitHub Issue #8
 - Frontend Repository: `src/frontend/geobeat-ui/`
 - Credentials: `docs/DEPLOYMENT_CREDENTIALS.md` (not in git)

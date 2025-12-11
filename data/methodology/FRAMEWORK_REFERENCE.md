@@ -399,7 +399,7 @@ Uses carefully crafted FIND_NODE messages to fetch entire remote peer table cont
 #### GeoBeat Integration
 
 **Status:** Integrated as git submodule
-**Location:** `data-sources/tools/armiarma/`
+**Location:** `data/tools/armiarma/`
 **Branch:** `ethglobal-ba-2025` (DecentralizedGeo fork)
 
 **Data Flow:**
@@ -417,7 +417,7 @@ git submodule update --init --recursive
 git supdate
 
 # Run armiarma (via Docker)
-cd data-sources/tools/armiarma
+cd data/tools/armiarma
 docker-compose up --env-file .env
 ```
 

@@ -18,7 +18,7 @@ We will respond to security reports within 48 hours and work with you to underst
 
 GEOBEAT analyzes publicly available blockchain node data (IP addresses and geographic locations).
 
-- All data sources are documented in `/data-sources/INVENTORY.md`
+- All data sources are documented in `/data/INVENTORY.md`
 - IP addresses analyzed are already publicly visible on blockchain networks
 - GeoIP lookups use third-party services (MaxMind GeoLite2)
 - No personal data beyond publicly available node information is collected

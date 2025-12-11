@@ -15,7 +15,7 @@ Document the research process, insights, and decision-making that informs the pr
 **None yet** - See [Issue #1](https://github.com/DecentralizedGeo/geobeat/issues/1) for current task.
 
 **To be created:**
-- `../data-sources/INVENTORY.md` - Catalog of blockchain node geographic datasets/APIs for 6 priority networks
+- `../data/INVENTORY.md` - Catalog of blockchain node geographic datasets/APIs for 6 priority networks
 
 ### Background Research (Completed)
 
@@ -55,7 +55,7 @@ Organize research by topic or theme. Consider using:
 ## Quick Navigation
 
 **Looking for blockchain node data sources?**
-- See [../data-sources/](../data-sources/) directory for catalog and evaluation methodology
+- See [../data/](../data/) directory for catalog and evaluation methodology
 
 **Want to understand decentralization metrics?**
 - Read `METRICS.md` for formulas and explanations (HHI, Gini, Shannon entropy)

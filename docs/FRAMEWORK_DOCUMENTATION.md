@@ -1606,7 +1606,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 ### Armiarma Crawler (Blockchain Network Discovery)
 
 **Overview:**
-Go-based Ethereum/Polygon/Filecoin/Celo network crawler. Located as git submodule in `/data-sources/tools/armiarma/`.
+Go-based Ethereum/Polygon/Filecoin/Celo network crawler. Located as git submodule in `/data/tools/armiarma/`.
 
 **Supported Networks:**
 - Ethereum (execution + consensus layers)
@@ -1928,7 +1928,7 @@ hcloud server create --name server01 \
 │       ├── app/                     # Next.js App Router
 │       ├── components/              # React components
 │       └── package.json             # Node dependencies
-├── data-sources/tools/armiarma/     # Crawler (submodule)
+├── data/tools/armiarma/             # Crawler (submodule)
 ├── docs/
 │   ├── ARCHITECTURE.md              # System architecture
 │   ├── DEPLOYMENT_CREDENTIALS.md    # Server credentials

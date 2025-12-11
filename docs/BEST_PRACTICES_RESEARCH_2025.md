@@ -518,7 +518,7 @@ PartOf=docker.service  # Stop/restart propagation
 Type=simple
 User=armiarma
 Group=docker
-WorkingDirectory=/home/armiarma/geobeat/data-sources/tools/armiarma
+WorkingDirectory=/home/armiarma/geobeat/data/tools/armiarma
 ExecStartPre=/usr/bin/docker compose pull --quiet
 ExecStart=/usr/bin/docker compose up --no-build
 ExecStop=/usr/bin/docker compose down
@@ -1910,7 +1910,7 @@ jobs:
       - name: Build and push
         uses: docker/build-push-action@v5
         with:
-          context: ./data-sources/tools/armiarma
+          context: ./data/tools/armiarma
           push: true
           tags: username/armiarma:latest,username/armiarma:${{ github.sha }}
           cache-from: type=gha

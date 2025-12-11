@@ -98,8 +98,7 @@ geobeat/
 ├── data/                   # Network data and analysis outputs
 │   ├── raw/               # Node IP addresses (CSV)
 │   ├── analysis_outputs/  # GDI calculation results
-│   └── timeseries/        # Historical trends
-├── data-sources/
+│   ├── timeseries/        # Historical trends
 │   ├── tools/armiarma/   # Network crawler (submodule)
 │   └── INVENTORY.md      # Data source catalog
 ├── docs/                  # Documentation
@@ -162,14 +161,14 @@ The armiarma crawler is tracked as a git submodule:
 git submodule update --remote --merge
 
 # Modify submodule
-cd data-sources/tools/armiarma
+cd data/tools/armiarma
 git checkout ethglobal-ba-2025
 # make changes
 git push
 
 # Update parent reference
 cd ../../..
-git add data-sources/tools/armiarma
+git add data/tools/armiarma
 git commit -m "chore(armiarma): update submodule"
 ```
 
@@ -221,7 +220,7 @@ See [SECURITY.md](SECURITY.md) for security policies.
 GEOBEAT was developed through academic research on blockchain decentralization:
 
 - [Methodology](docs/PROPOSED_METHODOLOGY.md)
-- [Data Source Inventory](data-sources/INVENTORY.md)
+- [Data Source Inventory](data/INVENTORY.md)
 - [ETHGlobal Buenos Aires Submission](submission/)
 
 ## Roadmap
