@@ -10,24 +10,22 @@ GEOBEAT measures geographic distribution across blockchain networks using node l
 
 ## Vision
 
-Blockchain networks claim to be decentralized, but geographic distribution matters for censorship resistance, regulatory risk, and infrastructure resilience. GEOBEAT quantifies this distribution through the Geographic Decentralization Index (GDI), which combines node counts with spatial spread using H3 hexagonal grids and minimum spanning tree analysis.
+Blockchain networks claim to be decentralized, but geographic distribution matters for censorship resistance, regulatory risk, and infrastructure resilience. GEOBEAT quantifies this distribution through the Geographic Decentralization Index (GDI), a synthesis framework that integrates physical distribution, jurisdictional diversity, and infrastructure heterogeneity into a minimal, comprehensible structure.
 
-The platform monitors Ethereum, Polygon, Filecoin, and Celo networks, tracking how node geography evolves over time.
+The platform monitors Ethereum, Polygon, and Filecoin networks, tracking how node geography evolves over time.
 
 ## Quick Links
 
 - [Live Dashboard](https://geobeat.xyz) - Interactive visualizations of current network distribution
 - [Methodology](docs/METHODOLOGY.md) - GDI calculation details and research approach
-- [Architecture](docs/ARCHITECTURE.md) - System design and deployment
-- [Data Sources](data/INVENTORY.md) - Network data collection methods
 
 ## Current Implementation
 
-**Data Collection**: Armiarma crawler runs continuously, discovering blockchain nodes through DHT and P2P protocols. Node IP addresses are collected and stored with timestamps.
+**Data Collection**: Armiarma crawler collected a snapshot of blockchain nodes through DHT and P2P protocols during ETHGlobal Buenos Aires (November 22, 2025). Continuous crawler deployment to Hetzner VPS is in progress.
 
-**Analysis**: Python scripts enrich IP data with MaxMind GeoLite2 geolocation, calculate GDI metrics using H3 hexagonal spatial indexing, and generate time-series trends.
+**Analysis**: Python scripts enrich IP data with MaxMind GeoLite2 geolocation, calculate GDI metrics, and generate time-series trends.
 
-**Dashboard**: Next.js application renders interactive 3D globe visualizations, heatmaps, and geospatial charts using Deck.gl and Mapbox GL.
+**Dashboard**: Next.js application renders interactive heatmaps and geospatial charts using Deck.gl and Mapbox GL.
 
 **Status**: Demo deployed at geobeat.xyz. Hetzner VPS provisioned for continuous crawler deployment.
 
@@ -41,10 +39,8 @@ geobeat/
 │   ├── analysis_outputs/  # GDI calculation results
 │   ├── timeseries/        # Historical trends
 │   ├── tools/armiarma/   # Network crawler (submodule)
-│   ├── methodology/      # Data source evaluation framework
-│   └── INVENTORY.md      # Data source catalog
+│   └── methodology/      # Data source evaluation framework
 ├── docs/                  # Documentation
-│   ├── ARCHITECTURE.md   # System design
 │   └── METHODOLOGY.md    # GDI research approach
 ├── src/
 │   ├── analysis/         # Python GDI calculation engine
