@@ -1,5 +1,5 @@
 """
-GDI v0 Final - Standalone implementation
+Geographic Decentralization Index (GDI) v0.1.0
 All metrics 0-100, higher = more decentralized
 """
 
@@ -162,11 +162,12 @@ def _calculate_enl(df: pd.DataFrame, resolution: int, num_cells: int) -> float:
 
 def calculate_jdi(df: pd.DataFrame) -> Dict:
     """
-    Jurisdictional Diversity Index - Country HHI + Absolute Diversity
+    Jurisdictional Diversity Index - Country concentration with consensus-theory thresholds.
 
-    Formula: JDI = 100 × [0.7×(1-Country_HHI) + 0.3×min(1, log10(num_countries)/2)]
-
-    Rewards both even distribution AND absolute diversity
+    Thresholds (from METHODOLOGY.md):
+    - Top 1 country > 33%: Finality risk - penalty ramps from 25%, hard cap at 40
+    - Top 1 country > 50%: Majority control - hard cap at 25
+    - Top 2 countries > 50%: Regulatory capture risk - hard cap at 45
     """
     country_counts = df["country"].value_counts()
     total_nodes = len(df)
@@ -175,25 +176,49 @@ def calculate_jdi(df: pd.DataFrame) -> Dict:
     shares = country_counts / total_nodes
     country_hhi = (shares**2).sum()
 
+    # Top country and top-2 shares
+    top_country_share = shares.iloc[0] if len(shares) > 0 else 0
+    top_2_share = shares.iloc[:2].sum() if len(shares) >= 2 else top_country_share
+
+    # === BASE COMPONENTS ===
+
     # HHI component (30%)
-    hhi_component = 0.3 * (1 - country_hhi)
+    hhi_component = 0.30 * (1 - country_hhi)
 
-    # Absolute diversity bonus (35%) - reward networks with more countries
-    # log10(200) = 2.30, so this maxes out at 200+ countries (extreme threshold)
-    # Changed from /2.5 to /2.0 for better differentiation between networks
-    diversity_bonus = 0.35 * min(1.0, np.log10(num_countries) / 2.0)
+    # Absolute diversity bonus (35%) - log scale with diminishing returns
+    # log10(200) ≈ 2.3, so ~200 countries for max bonus
+    diversity_bonus = 0.35 * min(1.0, np.log10(max(1, num_countries)) / 2.0)
 
-    # Top concentration penalty (35%)
-    # Penalize if top country has > 15% of nodes
-    top_country_share = (
-        country_counts.iloc[0] / total_nodes if len(country_counts) > 0 else 0
-    )
-    concentration_penalty = 0.35 * max(
-        0, (top_country_share - 0.15) / 0.35
-    )  # Linear from 15% to 50%
+    # Start with base score
+    base_score = 100 * (hhi_component + diversity_bonus)
 
-    jdi = 100 * (hhi_component + diversity_bonus - concentration_penalty)
+    # === GRADUATED CONCENTRATION PENALTIES ===
 
+    # Determine effective cap based on top country concentration
+    if top_country_share > 0.50:
+        effective_cap = 25
+    elif top_country_share > 0.33:
+        # Ramp from cap 40 at 33% down to cap 25 at 50%
+        effective_cap = 40 - ((top_country_share - 0.33) / 0.17) * 15
+    else:
+        effective_cap = 100  # No hard cap from top country
+
+    # Warning zone penalty (25% to 33%) - gradual degradation before threshold
+    if 0.25 < top_country_share <= 0.33:
+        warning_penalty = ((top_country_share - 0.25) / 0.08) * 15
+        base_score -= warning_penalty
+
+    # Top-2 countries check (regulatory capture risk)
+    if top_2_share > 0.50:
+        effective_cap = min(effective_cap, 45)
+    elif top_2_share > 0.40:
+        # Warning zone for top-2: 40% to 50%
+        warning_penalty = ((top_2_share - 0.40) / 0.10) * 10
+        base_score -= warning_penalty
+
+    jdi = min(max(0, base_score), effective_cap)
+
+    # Top 3 for reporting
     top_3 = {
         k: {"count": v, "share": round(v / total_nodes * 100, 1)}
         for k, v in country_counts.head(3).items()
@@ -203,8 +228,14 @@ def calculate_jdi(df: pd.DataFrame) -> Dict:
         "jdi": round(jdi, 1),
         "country_hhi": round(country_hhi, 3),
         "num_countries": num_countries,
+        "top_country_share": round(top_country_share * 100, 1),
+        "top_2_share": round(top_2_share * 100, 1),
         "top_3_countries": top_3,
         "interpretation": _interpret_hhi_based(jdi),
+        "flags": {
+            "single_jurisdiction_dominant": bool(top_country_share > 0.33),
+            "regulatory_capture_risk": bool(top_2_share > 0.50),
+        },
         "components": {
             "hhi_contribution": round(hhi_component * 100, 1),
             "diversity_contribution": round(diversity_bonus * 100, 1),
@@ -214,11 +245,11 @@ def calculate_jdi(df: pd.DataFrame) -> Dict:
 
 def calculate_ihi(df: pd.DataFrame) -> Dict:
     """
-    Infrastructure Heterogeneity Index - Org HHI + Absolute Diversity
+    Infrastructure Heterogeneity Index - Provider concentration.
 
-    Formula: IHI = 100 × [0.7×(1-Org_HHI) + 0.3×min(1, log10(num_orgs)/3)]
-
-    Rewards both even distribution AND absolute diversity
+    Thresholds (from METHODOLOGY.md):
+    - Top 1 provider > 25%: Single point of failure - penalty ramps from 15%, hard cap at 45
+    - Top 3 providers > 50%: Infrastructure capture - hard cap at 50
     """
     org_counts = df["org"].value_counts()
     total_nodes = len(df)
@@ -227,23 +258,49 @@ def calculate_ihi(df: pd.DataFrame) -> Dict:
     shares = org_counts / total_nodes
     org_hhi = (shares**2).sum()
 
+    # Top provider and top-3 shares
+    top_org_share = shares.iloc[0] if len(shares) > 0 else 0
+    top_3_share = shares.iloc[:3].sum() if len(shares) >= 3 else shares.sum()
+
+    # === BASE COMPONENTS ===
+
     # HHI component (30%)
-    hhi_component = 0.3 * (1 - org_hhi)
+    hhi_component = 0.30 * (1 - org_hhi)
 
-    # Absolute diversity bonus (35%) - reward networks with more orgs
-    # log10(10000) = 4.0, so this maxes out at 10000+ orgs (extreme threshold)
-    # Changed from /4.5 to /3.5 for better differentiation between networks
-    diversity_bonus = 0.35 * min(1.0, np.log10(num_orgs) / 3.5)
+    # Absolute diversity bonus (35%) - log scale
+    # log10(10000) = 4, so ~10000 orgs for max bonus
+    diversity_bonus = 0.35 * min(1.0, np.log10(max(1, num_orgs)) / 3.5)
 
-    # Top concentration penalty (35%)
-    # Penalize if top org has > 3% of nodes
-    top_org_share = org_counts.iloc[0] / total_nodes if len(org_counts) > 0 else 0
-    concentration_penalty = 0.35 * max(
-        0, (top_org_share - 0.03) / 0.17
-    )  # Linear from 3% to 20%
+    # Start with base score
+    base_score = 100 * (hhi_component + diversity_bonus)
 
-    ihi = 100 * (hhi_component + diversity_bonus - concentration_penalty)
+    # === GRADUATED CONCENTRATION PENALTIES ===
 
+    # Determine effective cap based on top provider concentration
+    if top_org_share > 0.25:
+        # Hard cap at 45 when top provider > 25%
+        # Additional degradation as concentration increases toward 50%
+        effective_cap = 45 - ((top_org_share - 0.25) / 0.25) * 15
+        effective_cap = max(30, effective_cap)  # Floor the cap at 30
+    else:
+        effective_cap = 100  # No hard cap from top provider
+
+    # Warning zone penalty (15% to 25%) - gradual degradation before threshold
+    if 0.15 < top_org_share <= 0.25:
+        warning_penalty = ((top_org_share - 0.15) / 0.10) * 15
+        base_score -= warning_penalty
+
+    # Top-3 providers check (infrastructure capture)
+    if top_3_share > 0.50:
+        effective_cap = min(effective_cap, 50)
+    elif top_3_share > 0.35:
+        # Warning zone for top-3: 35% to 50%
+        warning_penalty = ((top_3_share - 0.35) / 0.15) * 10
+        base_score -= warning_penalty
+
+    ihi = min(max(0, base_score), effective_cap)
+
+    # Top 3 for reporting
     top_3 = {
         k: {"count": v, "share": round(v / total_nodes * 100, 1)}
         for k, v in org_counts.head(3).items()
@@ -253,8 +310,14 @@ def calculate_ihi(df: pd.DataFrame) -> Dict:
         "ihi": round(ihi, 1),
         "org_hhi": round(org_hhi, 3),
         "num_orgs": num_orgs,
+        "top_org_share": round(top_org_share * 100, 1),
+        "top_3_share": round(top_3_share * 100, 1),
         "top_3_orgs": top_3,
         "interpretation": _interpret_hhi_based(ihi),
+        "flags": {
+            "infrastructure_spof": bool(top_org_share > 0.25),
+            "infrastructure_capture": bool(top_3_share > 0.50),
+        },
         "components": {
             "hhi_contribution": round(hhi_component * 100, 1),
             "diversity_contribution": round(diversity_bonus * 100, 1),
@@ -313,6 +376,22 @@ def calculate_gdi(df: pd.DataFrame) -> Dict:
     gdi = min(gdi_base, effective_cap)
     floor_applied = bool(gdi < gdi_base)
 
+    # Aggregate critical flags from sub-indices
+    critical_flags = {
+        "single_jurisdiction_dominant": jdi_result.get("flags", {}).get(
+            "single_jurisdiction_dominant", False
+        ),
+        "regulatory_capture_risk": jdi_result.get("flags", {}).get(
+            "regulatory_capture_risk", False
+        ),
+        "infrastructure_spof": ihi_result.get("flags", {}).get(
+            "infrastructure_spof", False
+        ),
+        "infrastructure_capture": ihi_result.get("flags", {}).get(
+            "infrastructure_capture", False
+        ),
+    }
+
     return {
         "gdi": round(gdi, 1),
         "gdi_base": round(gdi_base, 1),
@@ -324,6 +403,7 @@ def calculate_gdi(df: pd.DataFrame) -> Dict:
         "ihi": ihi_result,
         "interpretation": _interpret_gdi(gdi),
         "total_nodes": len(df),
+        "critical_flags": critical_flags,
     }
 
 
@@ -445,6 +525,13 @@ def transform_to_network_format(results: Dict) -> list:
             "numCountries": jdi_data["num_countries"],
             "orgHHI": ihi_data["org_hhi"],
             "numOrgs": ihi_data["num_orgs"],
+            # Concentration metrics
+            "topCountryShare": jdi_data.get("top_country_share", 0),
+            "top2CountryShare": jdi_data.get("top_2_share", 0),
+            "topOrgShare": ihi_data.get("top_org_share", 0),
+            "top3OrgShare": ihi_data.get("top_3_share", 0),
+            # Critical flags
+            "criticalFlags": result.get("critical_flags", {}),
         }
 
         networks_array.append(network)
