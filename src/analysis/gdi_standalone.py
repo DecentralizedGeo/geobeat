@@ -262,35 +262,66 @@ def calculate_ihi(df: pd.DataFrame) -> Dict:
     }
 
 
-def calculate_gdi(df: pd.DataFrame, weights: tuple = (0.35, 0.2, 0.1, 0.35)) -> Dict:
-    """Composite GDI score with network size bonus (35% weight)"""
+def calculate_gdi(df: pd.DataFrame) -> Dict:
+    """
+    Composite GDI score using equal-weighted sub-indices with graduated floor caps.
+
+    Formula:
+        GDI_base = (PDI + JDI + IHI) / 3
+        GDI_final = min(GDI_base, effective_cap)
+
+    Graduated floor caps based on minimum sub-index:
+        - min_index >= 50: no cap
+        - min_index 40-50: cap ramps from 50 to 100
+        - min_index 30-40: cap ramps from 40 to 50
+        - min_index 20-30: cap ramps from 30 to 40
+        - min_index < 20: hard cap at 30
+
+    Network size is reported but does not affect the score.
+    """
     df = df.dropna(subset=["lat", "lon", "country", "org"])
 
     pdi_result = calculate_pdi(df)
     jdi_result = calculate_jdi(df)
     ihi_result = calculate_ihi(df)
 
-    # Network size score - rewards absolute node count
-    # Uses sqrt scaling: sqrt(nodes / 50000) capped at 1.0
-    # This gives large networks a boost while preventing runaway scores
-    total_nodes = len(df)
-    network_size_score = 100 * min(1.0, (total_nodes / 50000) ** 0.5)
+    pdi = pdi_result["pdi"]
+    jdi = jdi_result["jdi"]
+    ihi = ihi_result["ihi"]
 
-    w_pdi, w_jdi, w_ihi, w_size = weights
-    gdi = (
-        w_pdi * pdi_result["pdi"]
-        + w_jdi * jdi_result["jdi"]
-        + w_ihi * ihi_result["ihi"]
-        + w_size * network_size_score
-    )
+    # Step 1: Equal-weighted base average
+    gdi_base = (pdi + jdi + ihi) / 3
+
+    # Step 2: Graduated floor caps based on minimum sub-index
+    min_index = min(pdi, jdi, ihi)
+
+    if min_index >= 50:
+        effective_cap = 100  # No cap
+    elif min_index >= 40:
+        # Danger zone: ramp from cap 50 at min_index=40 to cap 100 at min_index=50
+        effective_cap = 50 + (min_index - 40) * 5
+    elif min_index >= 30:
+        # Danger zone: ramp from cap 40 at min_index=30 to cap 50 at min_index=40
+        effective_cap = 40 + (min_index - 30)
+    elif min_index >= 20:
+        # Danger zone: ramp from cap 30 at min_index=20 to cap 40 at min_index=30
+        effective_cap = 30 + (min_index - 20)
+    else:
+        # Hard floor at 30
+        effective_cap = 30
+
+    gdi = min(gdi_base, effective_cap)
+    floor_applied = bool(gdi < gdi_base)
 
     return {
         "gdi": round(gdi, 1),
+        "gdi_base": round(gdi_base, 1),
+        "floor_applied": floor_applied,
+        "effective_cap": round(effective_cap, 1) if floor_applied else None,
+        "min_index": round(min_index, 1),
         "pdi": pdi_result,
         "jdi": jdi_result,
         "ihi": ihi_result,
-        "network_size_score": round(network_size_score, 1),
-        "weights": {"pdi": w_pdi, "jdi": w_jdi, "ihi": w_ihi, "size": w_size},
         "interpretation": _interpret_gdi(gdi),
         "total_nodes": len(df),
     }
@@ -317,14 +348,15 @@ def _interpret_hhi_based(score: float) -> str:
 
 
 def _interpret_gdi(gdi: float) -> str:
-    if gdi >= 80:
-        return "Highly decentralized"
-    elif gdi >= 60:
-        return "Moderately decentralized"
-    elif gdi >= 40:
-        return "Weakly decentralized"
+    """Interpret GDI score per METHODOLOGY.md Section 7."""
+    if gdi >= 70:
+        return "Well decentralized"
+    elif gdi >= 50:
+        return "Moderately concentrated"
+    elif gdi >= 35:
+        return "Concentrated"
     else:
-        return "Centralized"
+        return "Highly concentrated"
 
 
 def transform_to_network_format(results: Dict) -> list:
@@ -391,6 +423,12 @@ def transform_to_network_format(results: Dict) -> list:
             "symbol": metadata["symbol"],
             "logoUrl": metadata["logoUrl"],
             "type": metadata["type"],
+            # Composite GDI score
+            "gdi": result["gdi"],
+            "gdiBase": result["gdi_base"],
+            "floorApplied": result["floor_applied"],
+            "effectiveCap": result["effective_cap"],
+            "interpretation": result["interpretation"],
             # Flatten nested scores
             "pdi": pdi_data["pdi"],
             "jdi": jdi_data["jdi"],
