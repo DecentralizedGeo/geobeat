@@ -327,19 +327,12 @@ def calculate_ihi(df: pd.DataFrame) -> Dict:
 
 def calculate_gdi(df: pd.DataFrame) -> Dict:
     """
-    Composite GDI score using equal-weighted sub-indices with graduated floor caps.
+    Composite GDI = simple average of sub-indices.
 
-    Formula:
-        GDI_base = (PDI + JDI + IHI) / 3
-        GDI_final = min(GDI_base, effective_cap)
+    Formula: GDI = (PDI + JDI + IHI) / 3
 
-    Graduated floor caps based on minimum sub-index:
-        - min_index >= 50: no cap
-        - min_index 40-50: cap ramps from 50 to 100
-        - min_index 30-40: cap ramps from 40 to 50
-        - min_index 20-30: cap ramps from 30 to 40
-        - min_index < 20: hard cap at 30
-
+    No floor cap applied - sub-index penalties already capture concentration risk.
+    Critical flags surface specific vulnerabilities.
     Network size is reported but does not affect the score.
     """
     df = df.dropna(subset=["lat", "lon", "country", "org"])
@@ -352,29 +345,8 @@ def calculate_gdi(df: pd.DataFrame) -> Dict:
     jdi = jdi_result["jdi"]
     ihi = ihi_result["ihi"]
 
-    # Step 1: Equal-weighted base average
-    gdi_base = (pdi + jdi + ihi) / 3
-
-    # Step 2: Graduated floor caps based on minimum sub-index
-    min_index = min(pdi, jdi, ihi)
-
-    if min_index >= 50:
-        effective_cap = 100  # No cap
-    elif min_index >= 40:
-        # Danger zone: ramp from cap 50 at min_index=40 to cap 100 at min_index=50
-        effective_cap = 50 + (min_index - 40) * 5
-    elif min_index >= 30:
-        # Danger zone: ramp from cap 40 at min_index=30 to cap 50 at min_index=40
-        effective_cap = 40 + (min_index - 30)
-    elif min_index >= 20:
-        # Danger zone: ramp from cap 30 at min_index=20 to cap 40 at min_index=30
-        effective_cap = 30 + (min_index - 20)
-    else:
-        # Hard floor at 30
-        effective_cap = 30
-
-    gdi = min(gdi_base, effective_cap)
-    floor_applied = bool(gdi < gdi_base)
+    # Simple average - no floor cap
+    gdi = (pdi + jdi + ihi) / 3
 
     # Aggregate critical flags from sub-indices
     critical_flags = {
@@ -394,16 +366,13 @@ def calculate_gdi(df: pd.DataFrame) -> Dict:
 
     return {
         "gdi": round(gdi, 1),
-        "gdi_base": round(gdi_base, 1),
-        "floor_applied": floor_applied,
-        "effective_cap": round(effective_cap, 1) if floor_applied else None,
-        "min_index": round(min_index, 1),
         "pdi": pdi_result,
         "jdi": jdi_result,
         "ihi": ihi_result,
         "interpretation": _interpret_gdi(gdi),
         "total_nodes": len(df),
         "critical_flags": critical_flags,
+        "any_critical_flag": any(critical_flags.values()),
     }
 
 
@@ -505,10 +474,8 @@ def transform_to_network_format(results: Dict) -> list:
             "type": metadata["type"],
             # Composite GDI score
             "gdi": result["gdi"],
-            "gdiBase": result["gdi_base"],
-            "floorApplied": result["floor_applied"],
-            "effectiveCap": result["effective_cap"],
             "interpretation": result["interpretation"],
+            "anyCriticalFlag": result.get("any_critical_flag", False),
             # Flatten nested scores
             "pdi": pdi_data["pdi"],
             "jdi": jdi_data["jdi"],
