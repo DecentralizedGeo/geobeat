@@ -120,31 +120,21 @@ A more sophisticated JDI would incorporate:
 
 ## 3. Composite Score
 
-The composite GDI is calculated in two steps:
-
-### Step 1: Base Average
+The composite GDI is a simple average of the three sub-indices:
 
 ```
-GDI_base = (PDI + JDI + IHI) / 3
+GDI = (PDI + JDI + IHI) / 3
 ```
 
 V0 weights all three dimensions equally. Future versions may adjust weights based on threat model or data quality (e.g., weighting JDI lower given its measurement limitations).
 
-### Step 2: Hard Floor
+**Why no floor cap?** Earlier versions considered capping the composite score when any sub-index fell below critical thresholds. This was removed because:
 
-A network's overall resilience is bounded by its weakest dimension. If any sub-index falls below critical thresholds, the composite is capped regardless of the base average:
+1. **Sub-index penalties already capture risk** — A network with critical concentration will have a low sub-index score, which mathematically pulls down the average.
+2. **Simplicity is defensible** — "GDI = average of three sub-indices" is easy to explain and audit.
+3. **Critical flags surface vulnerabilities directly** — Boolean flags (see Section 6) explicitly indicate when thresholds like 33% single-country concentration are crossed.
 
-| Condition | GDI Cap |
-|-----------|---------|
-| Any sub-index < 20 | GDI ≤ 30 |
-| Any sub-index < 30 | GDI ≤ 40 |
-| Any sub-index < 40 | GDI ≤ 50 |
-
-The final GDI is the **minimum** of the base average and any applicable cap.
-
-**Example:** A network with PDI=70, JDI=25, IHI=60 would have a base average of 51.7, but because JDI < 30, the final GDI is capped at 40.
-
-**Rationale:** Strength in two areas cannot compensate for critical vulnerability in the third. A network that is physically distributed and uses diverse providers but is concentrated in one or two countries still has a critical regulatory vulnerability.
+**Example:** A network with PDI=62.5, JDI=39.1, IHI=63.1 has GDI = 54.9. The low JDI (due to 32% concentration in one country approaching finality risk) already pulls down the average, and the `single_jurisdiction_dominant` flag would trigger if the threshold is crossed.
 
 ---
 
@@ -268,15 +258,13 @@ The following questions remain open and would benefit from community input:
 
 5. **Weighting:** Should future versions weight PDI/JDI/IHI differently based on data quality or threat model? What evidence would justify non-equal weights?
 
-6. **Floor calibration:** Are the current hard floor thresholds appropriately calibrated? Should they differ by sub-index?
-
 ---
 
 ## 10. Versioning
 
 This methodology is explicitly versioned:
 
-- **v0 (current):** Equal-weighted sub-indices, hard floors, IP-based inference only, JDI measures hardware location as proxy
+- **v0 (current):** Equal-weighted sub-indices with graduated concentration penalties, critical flags, IP-based inference only, JDI measures hardware location as proxy
 - **v1 (planned):** Refined thresholds based on community feedback, potentially confidence-weighted measurements, improved org normalization
 - **v2+:** Operator jurisdiction data, regulatory bloc modeling, location proofs, simulation capabilities
 
