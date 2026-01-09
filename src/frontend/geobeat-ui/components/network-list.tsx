@@ -43,8 +43,8 @@ export function NetworkList() {
 
   const networksWithGDI = networks.map((network) => ({
     ...network,
-    // GDI calculation - composite score
-    gdi: Math.round(0.4 * network.pdi + 0.35 * network.jdi + 0.25 * network.ihi),
+    // GDI calculation - simple average per methodology
+    gdi: Math.round((network.pdi + network.jdi + network.ihi) / 3),
   }))
 
   const sortedNetworks = [...networksWithGDI].sort((a, b) => {
@@ -209,8 +209,8 @@ function NetworkRow({
           <TrendIcon className={cn("w-3.5 h-3.5", trendColor)} />
         </div>
 
-        {/* PDI with horizontal bar */}
-        <IndexTooltip type="pdi" breakdown={orgBreakdown} score={network.pdi}>
+        {/* PDI with horizontal bar - uses country breakdown for geographic distribution */}
+        <IndexTooltip type="pdi" breakdown={countryBreakdown} score={network.pdi}>
           <span className={cn("font-semibold text-[15px] w-7", isLowScore(network.pdi) && "text-red-500/90")}>
             {Math.round(network.pdi)}
           </span>
@@ -281,7 +281,7 @@ function NetworkRow({
                   Pillar Breakdown
                 </div>
 
-                {/* PDI Details */}
+                {/* PDI Details - Physical Distribution */}
                 <div className="space-y-2">
                   <div className="flex items-center justify-between">
                     <span className="text-base font-semibold">PDI: {Math.round(network.pdi)}</span>
@@ -296,13 +296,12 @@ function NetworkRow({
                     </div>
                   </div>
                   <div className="text-[13px] text-muted-foreground/80 space-y-1 pl-1">
-                    <div>• Moran's I: {network.moransI?.toFixed(3) || 'N/A'}</div>
-                    <div>• ENL: {network.enl?.toFixed(1) || 'N/A'}</div>
-                    <div>• Spatial HHI: {network.spatialHHI?.toFixed(3) || 'N/A'}</div>
+                    <div>• {Math.round(network.top2CountryShare || 0)}% of nodes in top 2 countries</div>
+                    <div>• Spread across {network.numCountries || 'N/A'} countries</div>
                   </div>
                 </div>
 
-                {/* JDI Details */}
+                {/* JDI Details - Jurisdictional Diversity */}
                 <div className="space-y-2">
                   <div className="flex items-center justify-between">
                     <span className="text-base font-semibold">JDI: {Math.round(network.jdi)}</span>
@@ -317,12 +316,12 @@ function NetworkRow({
                     </div>
                   </div>
                   <div className="text-[13px] text-muted-foreground/80 space-y-1 pl-1">
-                    <div>• Country HHI: {network.countryHHI?.toFixed(3) || 'N/A'}</div>
-                    <div>• Total countries: {network.numCountries || 'N/A'}</div>
+                    <div>• {Math.round(network.topCountryShare || 0)}% in largest jurisdiction</div>
+                    <div>• {network.numCountries || 'N/A'} jurisdictions represented</div>
                   </div>
                 </div>
 
-                {/* IHI Details */}
+                {/* IHI Details - Infrastructure Heterogeneity */}
                 <div className="space-y-2">
                   <div className="flex items-center justify-between">
                     <span className="text-base font-semibold">IHI: {Math.round(network.ihi)}</span>
@@ -337,15 +336,15 @@ function NetworkRow({
                     </div>
                   </div>
                   <div className="text-[13px] text-muted-foreground/80 space-y-1 pl-1">
-                    <div>• Org HHI: {network.orgHHI?.toFixed(3) || 'N/A'}</div>
-                    <div>• Total orgs: {network.numOrgs?.toLocaleString() || 'N/A'}</div>
+                    <div>• {Math.round(network.top3OrgShare || 0)}% hosted by top 3 providers</div>
+                    <div>• {network.numOrgs?.toLocaleString() || 'N/A'} hosting providers</div>
                   </div>
                 </div>
 
                 {/* Metadata */}
                 <div className="pt-3 border-t border-border/40 space-y-2">
                   <div className="text-[11px] text-muted-foreground/70">
-                    {network.nodeCount?.toLocaleString()} nodes analyzed • Confidence: 87% • Last updated: 2h ago
+                    {network.nodeCount?.toLocaleString()} nodes analyzed • Data from November 2025
                   </div>
                   <Link
                     href={`/network/${network.id}`}

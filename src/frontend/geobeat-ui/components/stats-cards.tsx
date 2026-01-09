@@ -12,7 +12,7 @@ export function StatsCards() {
   // Calculate GDI for each network (composite score)
   const networksWithGDI = networks.map((network) => ({
     ...network,
-    gdi: Math.round(0.4 * network.pdi + 0.35 * network.jdi + 0.25 * network.ihi),
+    gdi: Math.round((network.pdi + network.jdi + network.ihi) / 3),
   }))
 
   const avgGDI = Math.round(

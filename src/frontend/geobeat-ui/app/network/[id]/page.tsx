@@ -28,35 +28,11 @@ export default async function NetworkDetailPage({
     notFound();
   }
 
-  // GDI calculation - composite score
-  const gdi = Math.round(0.4 * network.pdi + 0.35 * network.jdi + 0.25 * network.ihi);
+  // GDI calculation - simple average per methodology
+  const gdi = Math.round((network.pdi + network.jdi + network.ihi) / 3);
 
-  // Mock detailed data
-  const detailData = {
-    spatialEntropy: 3.45,
-    effectiveRegions: 12,
-    clusterIntensity: "Moderate clustering",
-    footprintRadius: "2,450 km",
-    effectiveJurisdictions: 9,
-    topJurisdictions: [
-      { name: "United States", share: 41 },
-      { name: "Germany", share: 12 },
-      { name: "United Kingdom", share: 8 },
-      { name: "France", share: 7 },
-      { name: "Netherlands", share: 6 },
-    ],
-    providerHHI: 1850,
-    effectiveProviders: 8,
-    bareMetalShare: 18,
-    providers: [
-      { name: "AWS", share: 55 },
-      { name: "Google Cloud", share: 22 },
-      { name: "Hetzner", share: 15 },
-      { name: "Other", share: 8 },
-    ],
-    lastMeasurement: "2024-01-15 14:32 UTC",
-    confidence: 87,
-  };
+  // Analysis metadata
+  const analysisDate = "November 2025";
 
   const getBandLabel = (score: number): string => {
     if (score >= 80) return "High dispersion";
@@ -130,7 +106,7 @@ export default async function NetworkDetailPage({
               <div className="text-[12px] font-bold text-muted-foreground uppercase tracking-wide">
                 PDI
               </div>
-              <IndexTooltip type="pdi" breakdown={orgBreakdown} score={network.pdi}>
+              <IndexTooltip type="pdi" breakdown={countryBreakdown} score={network.pdi}>
                 <div className="flex items-center gap-2.5">
                   <span className="text-xl font-bold w-10 text-muted-foreground">
                     {Math.round(network.pdi)}
@@ -396,9 +372,10 @@ export default async function NetworkDetailPage({
                 Measurement Details
               </div>
               <ul className="space-y-1.5 list-disc list-inside">
-                <li>Last measurement: {detailData.lastMeasurement}</li>
+                <li>Data snapshot: {analysisDate}</li>
                 <li>Sample size: {network.nodeCount.toLocaleString()} nodes</li>
-                <li>Overall confidence: {detailData.confidence}%</li>
+                <li>Jurisdictions: {network.numCountries} countries</li>
+                <li>Providers: {network.numOrgs?.toLocaleString()} organizations</li>
               </ul>
             </div>
 
