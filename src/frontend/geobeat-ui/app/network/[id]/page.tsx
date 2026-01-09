@@ -211,38 +211,38 @@ export default async function NetworkDetailPage({
             {/* Right: Component Metrics - aligned with map */}
             <div className="flex flex-col gap-4 h-full">
               <div className="border-2 border-foreground rounded-sm bg-white p-5 flex-1">
-                <div className="text-[11px] font-bold text-foreground uppercase tracking-wide mb-2">
+                <div className="text-[13px] font-bold text-foreground uppercase tracking-wide mb-2">
                   Moran&apos;s I
                 </div>
                 <div className="text-3xl font-bold mb-2">
-                  {network.moransI?.toFixed(3) || "N/A"}
+                  {network.moransI?.toFixed(2) || "N/A"}
                 </div>
-                <div className="text-[13px] text-foreground/70 font-medium">
-                  Measures spatial autocorrelation
+                <div className="text-[15px] text-foreground/80 leading-snug">
+                  Measures if nearby nodes cluster together. 0 = randomly scattered, 1 = tightly clustered in hotspots.
                 </div>
               </div>
 
               <div className="border-2 border-foreground rounded-sm bg-white p-5 flex-1">
-                <div className="text-[11px] font-bold text-foreground uppercase tracking-wide mb-2">
+                <div className="text-[13px] font-bold text-foreground uppercase tracking-wide mb-2">
                   Spatial HHI
                 </div>
                 <div className="text-3xl font-bold mb-2">
                   {network.spatialHHI?.toFixed(3) || "N/A"}
                 </div>
-                <div className="text-[13px] text-foreground/70 font-medium">
-                  Geographic concentration index
+                <div className="text-[15px] text-foreground/80 leading-snug">
+                  Geographic concentration. Lower is better—0.01 means no single region dominates, 1.0 means all nodes in one place.
                 </div>
               </div>
 
               <div className="border-2 border-foreground rounded-sm bg-white p-5 flex-1">
-                <div className="text-[11px] font-bold text-foreground uppercase tracking-wide mb-2">
-                  ENL
+                <div className="text-[13px] font-bold text-foreground uppercase tracking-wide mb-2">
+                  Effective # of Locations
                 </div>
                 <div className="text-3xl font-bold mb-2">
-                  {network.enl || "N/A"}
+                  {network.enl ? Math.round(network.enl) : "N/A"}
                 </div>
-                <div className="text-[13px] text-foreground/70 font-medium">
-                  Effective number of locations
+                <div className="text-[15px] text-foreground/80 leading-snug">
+                  If you removed concentration bias, the network would behave like {network.enl ? Math.round(network.enl) : "N/A"} locations with equal node counts. Higher = more balanced spread.
                 </div>
               </div>
             </div>
@@ -271,26 +271,26 @@ export default async function NetworkDetailPage({
             </div>
 
             <div className="border-2 border-foreground rounded-sm bg-white p-5">
-              <div className="text-[11px] font-bold text-foreground uppercase tracking-wide mb-2">
+              <div className="text-[13px] font-bold text-foreground uppercase tracking-wide mb-2">
                 Country HHI
               </div>
               <div className="text-3xl font-bold mb-2">
                 {network.countryHHI?.toFixed(3) || "N/A"}
               </div>
-              <div className="text-[13px] text-foreground/70 font-medium">
-                Concentration index
+              <div className="text-[15px] text-foreground/80 leading-snug">
+                Jurisdictional concentration. Lower is better—0.1 means spread across many countries, 0.5+ means one country dominates.
               </div>
             </div>
 
             <div className="border-2 border-foreground rounded-sm bg-white p-5">
-              <div className="text-[11px] font-bold text-foreground uppercase tracking-wide mb-2">
-                Total Countries
+              <div className="text-[13px] font-bold text-foreground uppercase tracking-wide mb-2">
+                Countries
               </div>
               <div className="text-3xl font-bold mb-2">
                 {network.numCountries || "N/A"}
               </div>
-              <div className="text-[13px] text-foreground/70 font-medium">
-                Jurisdictions covered
+              <div className="text-[15px] text-foreground/80 leading-snug">
+                Unique jurisdictions with at least one node. The largest country has {Math.round(network.topCountryShare || 0)}% of all nodes.
               </div>
             </div>
           </div>
@@ -318,26 +318,26 @@ export default async function NetworkDetailPage({
             </div>
 
             <div className="border-2 border-foreground rounded-sm bg-white p-5">
-              <div className="text-[11px] font-bold text-foreground uppercase tracking-wide mb-2">
+              <div className="text-[13px] font-bold text-foreground uppercase tracking-wide mb-2">
                 Org HHI
               </div>
               <div className="text-3xl font-bold mb-2">
                 {network.orgHHI?.toFixed(3) || "N/A"}
               </div>
-              <div className="text-[13px] text-foreground/70 font-medium">
-                Provider concentration
+              <div className="text-[15px] text-foreground/80 leading-snug">
+                Provider concentration. Lower is better—0.01 means many small providers, 0.3+ means a few large ones control most nodes.
               </div>
             </div>
 
             <div className="border-2 border-foreground rounded-sm bg-white p-5">
-              <div className="text-[11px] font-bold text-foreground uppercase tracking-wide mb-2">
-                Total Organizations
+              <div className="text-[13px] font-bold text-foreground uppercase tracking-wide mb-2">
+                Hosting Providers
               </div>
               <div className="text-3xl font-bold mb-2">
                 {network.numOrgs?.toLocaleString() || "N/A"}
               </div>
-              <div className="text-[13px] text-foreground/70 font-medium">
-                Hosting providers
+              <div className="text-[15px] text-foreground/80 leading-snug">
+                Unique organizations running nodes. The top 3 providers host {Math.round(network.top3OrgShare || 0)}% of all nodes.
               </div>
             </div>
           </div>
