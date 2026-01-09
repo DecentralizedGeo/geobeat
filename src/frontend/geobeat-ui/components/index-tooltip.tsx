@@ -21,7 +21,7 @@ const indexConfig = {
   pdi: {
     color: "oklch(0.60 0.18 240)",
     label: "Physical Distribution",
-    breakdownLabel: "Organization Distribution"
+    breakdownLabel: "Geographic Distribution"
   },
   jdi: {
     color: "oklch(0.65 0.15 150)",
