@@ -18,6 +18,10 @@ export interface Network {
   numCountries: number
   orgHHI: number
   numOrgs: number
+  // Concentration metrics
+  topCountryShare: number
+  top2CountryShare: number
+  top3OrgShare: number
 }
 
 // Import GDI data calculated by gdi_standalone.py
