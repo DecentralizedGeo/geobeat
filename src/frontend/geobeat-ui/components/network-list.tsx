@@ -281,63 +281,63 @@ function NetworkRow({
                   Pillar Breakdown
                 </div>
 
-                {/* PDI Details - Physical Distribution */}
-                <div className="space-y-2">
-                  <div className="flex items-center justify-between">
-                    <span className="text-base font-semibold">PDI: {Math.round(network.pdi)}</span>
-                    <div className="flex-1 mx-3 h-1.5 bg-muted rounded-full overflow-hidden">
-                      <div
-                        className="h-full rounded-full"
-                        style={{
-                          width: `${network.pdi}%`,
-                          background: "oklch(0.60 0.14 240)",
-                        }}
-                      />
-                    </div>
+                {/* PDI - Physical Distribution */}
+                <div className="rounded-md border-l-4 bg-slate-50 p-4" style={{ borderLeftColor: "oklch(0.60 0.14 240)" }}>
+                  <div className="flex items-center justify-between mb-3">
+                    <span className="text-[15px] font-bold text-foreground">Physical Distribution</span>
+                    <span className="text-xl font-bold" style={{ color: "oklch(0.60 0.14 240)" }}>{Math.round(network.pdi)}</span>
                   </div>
-                  <div className="text-[13px] text-muted-foreground/80 space-y-1 pl-1">
-                    <div>• {Math.round(network.top2CountryShare || 0)}% of nodes in top 2 countries</div>
-                    <div>• Spread across {network.numCountries || 'N/A'} countries</div>
+                  <div className="space-y-2">
+                    <div className={cn(
+                      "text-[15px]",
+                      (network.top2CountryShare || 0) > 50 ? "text-amber-700 font-semibold" : "text-foreground/80"
+                    )}>
+                      <span className="font-bold text-[17px]">{Math.round(network.top2CountryShare || 0)}%</span> of nodes in top 2 countries
+                      {(network.top2CountryShare || 0) > 50 && <span className="ml-2 text-[12px] bg-amber-100 text-amber-800 px-2 py-1 rounded font-semibold">High concentration</span>}
+                    </div>
+                    <div className="text-[15px] text-foreground/70">
+                      Spread across <span className="font-bold">{network.numCountries || 'N/A'}</span> countries
+                    </div>
                   </div>
                 </div>
 
-                {/* JDI Details - Jurisdictional Diversity */}
-                <div className="space-y-2">
-                  <div className="flex items-center justify-between">
-                    <span className="text-base font-semibold">JDI: {Math.round(network.jdi)}</span>
-                    <div className="flex-1 mx-3 h-1.5 bg-muted rounded-full overflow-hidden">
-                      <div
-                        className="h-full rounded-full"
-                        style={{
-                          width: `${network.jdi}%`,
-                          background: "oklch(0.65 0.12 150)",
-                        }}
-                      />
-                    </div>
+                {/* JDI - Jurisdictional Diversity */}
+                <div className="rounded-md border-l-4 bg-slate-50 p-4" style={{ borderLeftColor: "oklch(0.65 0.12 150)" }}>
+                  <div className="flex items-center justify-between mb-3">
+                    <span className="text-[15px] font-bold text-foreground">Jurisdictional Diversity</span>
+                    <span className="text-xl font-bold" style={{ color: "oklch(0.65 0.12 150)" }}>{Math.round(network.jdi)}</span>
                   </div>
-                  <div className="text-[13px] text-muted-foreground/80 space-y-1 pl-1">
-                    <div>• {Math.round(network.topCountryShare || 0)}% in largest jurisdiction</div>
-                    <div>• {network.numCountries || 'N/A'} jurisdictions represented</div>
+                  <div className="space-y-2">
+                    <div className={cn(
+                      "text-[15px]",
+                      (network.topCountryShare || 0) > 40 ? "text-amber-700 font-semibold" : "text-foreground/80"
+                    )}>
+                      <span className="font-bold text-[17px]">{Math.round(network.topCountryShare || 0)}%</span> in largest jurisdiction
+                      {(network.topCountryShare || 0) > 40 && <span className="ml-2 text-[12px] bg-amber-100 text-amber-800 px-2 py-1 rounded font-semibold">Single-country risk</span>}
+                    </div>
+                    <div className="text-[15px] text-foreground/70">
+                      <span className="font-bold">{network.numCountries || 'N/A'}</span> jurisdictions represented
+                    </div>
                   </div>
                 </div>
 
-                {/* IHI Details - Infrastructure Heterogeneity */}
-                <div className="space-y-2">
-                  <div className="flex items-center justify-between">
-                    <span className="text-base font-semibold">IHI: {Math.round(network.ihi)}</span>
-                    <div className="flex-1 mx-3 h-1.5 bg-muted rounded-full overflow-hidden">
-                      <div
-                        className="h-full rounded-full"
-                        style={{
-                          width: `${network.ihi}%`,
-                          background: "oklch(0.63 0.15 290)",
-                        }}
-                      />
-                    </div>
+                {/* IHI - Infrastructure Heterogeneity */}
+                <div className="rounded-md border-l-4 bg-slate-50 p-4" style={{ borderLeftColor: "oklch(0.63 0.15 290)" }}>
+                  <div className="flex items-center justify-between mb-3">
+                    <span className="text-[15px] font-bold text-foreground">Infrastructure Diversity</span>
+                    <span className="text-xl font-bold" style={{ color: "oklch(0.63 0.15 290)" }}>{Math.round(network.ihi)}</span>
                   </div>
-                  <div className="text-[13px] text-muted-foreground/80 space-y-1 pl-1">
-                    <div>• {Math.round(network.top3OrgShare || 0)}% hosted by top 3 providers</div>
-                    <div>• {network.numOrgs?.toLocaleString() || 'N/A'} hosting providers</div>
+                  <div className="space-y-2">
+                    <div className={cn(
+                      "text-[15px]",
+                      (network.top3OrgShare || 0) > 50 ? "text-amber-700 font-semibold" : "text-foreground/80"
+                    )}>
+                      <span className="font-bold text-[17px]">{Math.round(network.top3OrgShare || 0)}%</span> hosted by top 3 providers
+                      {(network.top3OrgShare || 0) > 50 && <span className="ml-2 text-[12px] bg-amber-100 text-amber-800 px-2 py-1 rounded font-semibold">Provider concentration</span>}
+                    </div>
+                    <div className="text-[15px] text-foreground/70">
+                      <span className="font-bold">{network.numOrgs?.toLocaleString() || 'N/A'}</span> hosting providers
+                    </div>
                   </div>
                 </div>
 

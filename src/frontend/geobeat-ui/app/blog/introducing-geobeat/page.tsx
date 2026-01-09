@@ -98,14 +98,22 @@ export default function IntroducingGeobeat() {
             <p className="text-[17px] leading-[1.7] text-foreground/85 mb-5">
               The methods and assumptions are{" "}
               <a
-                href="https://github.com/DecentralizedGeo/geobeat/blob/main/docs/PROPOSED_METHODOLOGY.md"
+                href="https://github.com/DecentralizedGeo/geobeat/blob/main/docs/METHODOLOGY.md"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-foreground underline hover:text-foreground/80"
               >
-                written down
+                documented in the methodology
               </a>{" "}
-              so people can critique them or propose changes.
+              so people can critique them or propose changes. For a deeper dive into the data, explore the{" "}
+              <a
+                href="https://github.com/DecentralizedGeo/geobeat/blob/main/data/notebooks/network_analysis_eda.ipynb"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-foreground underline hover:text-foreground/80"
+              >
+                analysis notebook
+              </a>.
             </p>
             <p className="text-[17px] leading-[1.7] text-foreground/85 mb-5">
               The point is to give the community a common starting place rather than a finished verdict.
