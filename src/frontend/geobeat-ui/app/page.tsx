@@ -59,6 +59,10 @@ export default function LandingPage() {
                     provider dependencies.
                   </p>
                 </div>
+
+                <p className="text-xs text-muted-foreground/60 pt-4 border-t border-foreground/10">
+                  v0 methodology. Thresholds and parameters are documented starting points for community refinement.
+                </p>
               </div>
             </div>
 
@@ -130,7 +134,8 @@ export default function LandingPage() {
                   <div>
                     <h3 className="font-medium text-lg mb-2">Network Resilience</h3>
                     <p className="text-sm text-muted-foreground/90 leading-relaxed">
-                      Geographic spread improves liveness, fault tolerance, and attack resistance
+                      Understanding geographic distribution helps identify resilience risks—the first step toward
+                      addressing them
                     </p>
                   </div>
                 </div>

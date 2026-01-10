@@ -64,7 +64,9 @@ export default function IntroducingGeobeat() {
               sense of.
             </p>
             <p className="text-[17px] leading-[1.7] text-foreground/85 mb-5">
-              GEOBEAT is meant to give that structure some shape.
+              GEOBEAT is meant to give that structure some shape. The goal is network resilience. Each dimension of the
+              index maps to a form of fragility that geography creates—physical clustering, jurisdictional
+              concentration, and infrastructure dependency.
             </p>
 
             <h2 className="font-serif text-3xl font-semibold mt-12 mb-6">The Index</h2>
@@ -116,7 +118,9 @@ export default function IntroducingGeobeat() {
               </a>.
             </p>
             <p className="text-[17px] leading-[1.7] text-foreground/85 mb-5">
-              The point is to give the community a common starting place rather than a finished verdict.
+              The point is to give the community a common starting place rather than a finished verdict. This is v0 of
+              the methodology. Technical choices—thresholds, weights, normalization—are starting points, not settled
+              science. The methodology is documented so the community can critique and improve it.
             </p>
 
             <h2 className="font-serif text-3xl font-semibold mt-12 mb-6">The Tool</h2>
@@ -135,7 +139,8 @@ export default function IntroducingGeobeat() {
             <p className="text-[17px] leading-[1.7] text-foreground/85 mb-5">
               It shows where nodes cluster, which jurisdictions dominate, and how infrastructure choices differ across
               networks. You can flip between networks, look at sub-index scores, and get a sense of patterns that aren't
-              visible from protocol-level data alone.
+              visible from protocol-level data alone. The dashboard currently displays snapshot data from network
+              crawls. Continuous monitoring is in development.
             </p>
             <p className="text-[17px] leading-[1.7] text-foreground/85 mb-5">
               Think of it as basic geographic literacy for decentralized systems.

@@ -1,8 +1,22 @@
 # Geographic Decentralization Index (GDI): Methodology Proposal
 
-This document proposes a framework for measuring geographic decentralization across decentralized networks. It synthesizes a fragmented research landscape—Flashbots' geographic risk work, academic measurement techniques, Internet topology datasets, and ecosystem telemetry—into three interpretable dimensions.
+This document proposes a framework for measuring geographic decentralization across decentralized networks. It draws on Flashbots' geographic risk work, academic measurement techniques, Internet topology datasets, and ecosystem telemetry. The goal is to synthesize these approaches into a unified methodology for understanding geographic concentration risks—this v0 is the first step toward that more comprehensive index.
 
 This is a proposal, not a finished standard. It is designed to evolve through community review and iterative refinement.
+
+---
+
+## 0. Why This Matters: Network Resilience
+
+**The goal is network resilience.** Geographic concentration creates fragility. Understanding where that fragility exists is the first step toward addressing it.
+
+Each of the three sub-indices maps to a distinct form of geographic fragility:
+
+- **Physical Distribution (PDI)** → Correlated failures: Regional outages, natural disasters, or network partitions that take out geographically clustered nodes simultaneously
+- **Jurisdictional Diversity (JDI)** → Coordinated coercion: Government action compelling validators to censor, comply, or shut down
+- **Infrastructure Heterogeneity (IHI)** → Provider dependency: A single cloud provider's policy change or outage affecting a disproportionate share of the network
+
+Decentralization across all three dimensions is necessary (though not sufficient) for resilient networks. A network can be physically distributed but legally concentrated, or jurisdictionally diverse but infrastructure-dependent. The GDI attempts to measure all three.
 
 ---
 
@@ -36,13 +50,15 @@ The index comprises three sub-indices, each scored 0-100 (higher = more decentra
 **What it measures:** How spread out infrastructure is across physical geography—whether nodes cluster in a few physical locations or spread globally.
 
 **Components:**
-- Spatial clustering detection (Moran's I)
+- Spatial clustering detection (Moran's I statistic)
 - Effective number of locations (entropy-based)
 - Geographic concentration (spatial HHI across H3 grid cells)
 
+**V0 implementation notes:** Moran's I uses a 500km neighbor threshold; H3 uses resolution 5 (~1220 km² cells); ENL is normalized against a cap of 2000 locations. These are starting points for detecting regional-scale clustering. Sensitivity analysis across different thresholds is needed for future versions.
+
 **Data source:** Latitude/longitude from IP geolocation
 
-**Data quality:** Moderate. IP geolocation is imperfect but provides reasonable spatial signal for most nodes.
+**Data quality:** Moderate. IP geolocation is imperfect but provides usable spatial signal for most nodes.
 
 ---
 
@@ -72,9 +88,11 @@ These layers can diverge significantly. A validator could be:
 
 Each layer has different jurisdictional exposure.
 
-#### V0 Limitations
+#### ⚠️ V0 Limitations — Important Caveat
 
 **We can only measure layer 1 (hardware location) from IP data.** This is a meaningful signal—hardware can be seized, local data center laws apply—but it's an incomplete picture of jurisdictional risk.
+
+The JDI in v0 should be understood as measuring **hardware location diversity**, not true jurisdictional exposure. The name "Jurisdictional Diversity Index" reflects the goal, not the current measurement capability.
 
 **What we cannot measure without additional data:**
 - Operator entity incorporation jurisdiction
@@ -138,6 +156,20 @@ V0 weights all three dimensions equally. Future versions may adjust weights base
 
 ---
 
+## 3.1 V0 Parameter Choices
+
+The following table summarizes key parameters in the v0 implementation. These are starting points, not empirically calibrated values. Future work should include parameter sweeps and sensitivity analysis to validate or refine these choices.
+
+| Parameter | Value | Rationale | Future Work |
+|-----------|-------|-----------|-------------|
+| Neighbor distance (Moran's I) | 500km | Regional correlation scale for physical clustering | Sensitivity analysis across distance thresholds |
+| H3 resolution | 5 (~1220 km² cells) | Balance between granularity and sparsity | Test resolutions 6-7 for finer patterns |
+| ENL normalization cap | 2000 locations | Prevent score compression at high diversity | Empirical calibration against network sizes |
+| Sub-index weights | Equal (1:1:1) | Simple, defensible default | Weight by data quality or threat model |
+| Concentration thresholds | 33%/50% | BFT consensus theory | Network-specific threshold tuning |
+
+---
+
 ## 4. Concentration Thresholds
 
 Sub-index scores incorporate penalties when concentration approaches or exceeds thresholds derived from consensus theory and operational risk.
@@ -166,6 +198,8 @@ For example, a network where one country hosts 30% of nodes will already see JDI
 ### Why These Numbers?
 
 The 33% and 67% thresholds derive from proof-of-stake consensus mechanics, where 33% of stake can halt finality and 67% is required for finalization. While not all networks use identical consensus rules, these thresholds represent meaningful concentrations of influence in most Byzantine fault-tolerant systems.
+
+**V0 note:** These BFT-derived thresholds are applied as starting points across networks with different consensus models. Future versions may calibrate thresholds per-network based on their specific consensus mechanics. For v0, the BFT thresholds serve as a theory-grounded starting point.
 
 The infrastructure thresholds (25% for single provider, 50% for top 3) reflect operational risk: a single provider controlling a quarter of the network represents a significant single point of failure.
 
@@ -214,7 +248,9 @@ These thresholds are calibrated so that **most current networks score in the "co
 
 ---
 
-## 8. Limitations and Future Work
+## 8. Limitations and Research Roadmap
+
+This section describes what v0 cannot measure and what research is needed to improve future versions. V0 is a starting point, not a destination.
 
 ### Measurement Limitations
 
@@ -230,7 +266,16 @@ These thresholds are calibrated so that **most current networks score in the "co
 
 Confidence bounds are **not yet incorporated** into scores. A node geolocated with high confidence is currently weighted the same as one with uncertain attribution.
 
-### Future Work
+### Validation Needed
+
+Before this methodology can be considered mature, the following research is needed:
+
+- **Parameter sensitivity analysis:** How do scores change with different distance thresholds, H3 resolutions, or normalization caps?
+- **Cross-methodology validation:** How do GDI scores compare to other decentralization metrics (Nakamoto coefficient, Cambridge mining studies, Lido diversity reports)?
+- **Confidence bounds:** Can we quantify uncertainty in scores based on geolocation accuracy and measurement completeness?
+- **Network-specific calibration:** Should thresholds differ for PoW vs. PoS, or for networks with different BFT assumptions?
+
+### Future Capabilities
 
 **Location proofs:** We are developing infrastructure for multi-factor location proofs combining IP geolocation, network latency triangulation, cryptographic attestations, and hardware-based location claims. These would allow confidence-weighted scoring.
 
