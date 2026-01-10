@@ -74,3 +74,6 @@ docs/DEPLOYMENT_CREDENTIALS.md
 *.pyc
 __pycache__/
 .ipynb_checkpoints/
+
+# Playwright MCP screenshots
+.playwright-mcp/
