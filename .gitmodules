@@ -1,0 +1,3 @@
+[submodule "src/backend/armiarma"]
+	path = src/backend/armiarma
+	url = https://github.com/DecentralizedGeo/armiarma.git
